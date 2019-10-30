@@ -10,9 +10,10 @@ namespace IriOnCocktailService.Data.Entities
         public string Id { get; set; }
         public string Name { get; set; }
         public string Pic { get; set; }
-        public ICollection<Ingredient> Ingredients { get; set; }
+
+        public ICollection<CocktailIngredient> CocktailIngredients{ get; set; }
         public ICollection<Bar> Bars { get; set; }
-        public ICollection<CocktailRating> CocktailRatings { get; set; }
-        public ICollection<CocktailComment> CocktailComments { get; set; }
+        public ICollection<Rating> Ratings { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }

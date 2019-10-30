@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IriOnCocktailService.Data.Entities
+﻿namespace IriOnCocktailService.Data.Entities
 {
-    public class CocktailRating
+    public class Comment
     {
         public string Id { get; set; }
-        public decimal Rating { get; set; }
+        public string Description { get; set; }
 
         public string CocktailId { get; set; }
         public Cocktail Cocktail { get; set; }
+
+        public string BarId { get; set; }
+        public Bar Bar { get; set; }
 
         public string UserId { get; set; }
         public User User { get; set; }

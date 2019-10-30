@@ -7,8 +7,9 @@ namespace IriOnCocktailService.Data.Entities
         public string Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+
         public ICollection<Cocktail> Cocktails { get; set; }
-        public ICollection<BarRating> BarRatings { get; set; }
-        public ICollection<BarComment> BarComments { get; set; } 
+        public ICollection<Rating> Ratings { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }
