@@ -14,6 +14,7 @@ using IriOnCocktailService.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using IriOnCocktailService.Data.Entities;
+using IriOnCocktailService.App.Infrasturcture.Extensions;
 
 namespace IriOnCocktailService.App
 {
@@ -40,16 +41,36 @@ namespace IriOnCocktailService.App
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<IriOnCocktailServiceDbContext>()
-                .AddDefaultTokenProviders();
+            services.AddDefaultIdentity<User>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 5;
+            })
+                .AddRoles<IdentityRole>()
+                .AddDefaultUI(UIFramework.Bootstrap4)
+                .AddEntityFrameworkStores<IriOnCocktailServiceDbContext>();
+
+            //services.AddIdentity<User, IdentityRole>()
+            //    .AddEntityFrameworkStores<IriOnCocktailServiceDbContext>()
+            //    .AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Magician", policy => policy.RequireClaim("Magician"));
+            });
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UpdateDatabase();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -70,6 +91,10 @@ namespace IriOnCocktailService.App
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "area",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
