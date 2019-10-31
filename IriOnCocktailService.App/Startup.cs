@@ -15,6 +15,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using IriOnCocktailService.Data.Entities;
 using IriOnCocktailService.App.Infrasturcture.Extensions;
+using IriOnCocktailService.App.Infrasturcture.Mappers.Registration;
+using IriOnCocktailService.ServiceLayer.DTOMappers.Registration;
+using IriOnCocktailService.ServiceLayer.Services;
+using IriOnCocktailService.ServiceLayer.Services.Contracts;
 
 namespace IriOnCocktailService.App
 {
@@ -63,6 +67,10 @@ namespace IriOnCocktailService.App
             {
                 options.AddPolicy("Magician", policy => policy.RequireClaim("Magician"));
             });
+
+            services.AddVMCustomMapper();
+            services.AddCustomDTOMappers();
+            services.AddScoped<IBarService, BarService>();
         }
 
 

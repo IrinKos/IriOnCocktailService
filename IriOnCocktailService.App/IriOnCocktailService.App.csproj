@@ -19,10 +19,4 @@
     <ProjectReference Include="..\IriOnCocktailService.ServiceLayer\IriOnCocktailService.ServiceLayer.csproj" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="Areas\Magician\Data\" />
-    <Folder Include="Areas\Magician\Models\" />
-  </ItemGroup>
-
 </Project>

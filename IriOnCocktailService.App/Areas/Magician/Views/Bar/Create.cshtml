@@ -1,0 +1,39 @@
+﻿@model IriOnCocktailService.App.Areas.Magician.Models.CreateBarViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<div class="col-md-4">
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <b><label asp-for="BarName" class="control-label"></label></b>
+            <input asp-for="BarName" class="form-control" />
+            <span asp-validation-for="BarName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <b><label asp-for="BarAddress" class="control-label"></label></b>
+            <input asp-for="BarAddress" class="form-control" />
+            <span asp-validation-for="BarAddress" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <b><label asp-for="BarPhoneNumber" class="control-label"></label></b>
+            <input asp-for="BarPhoneNumber" class="form-control" />
+            <span asp-validation-for="BarPhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <b><label asp-for="BarPicUrl" class="control-label"></label></b>
+            <input asp-for="BarPicUrl" class="form-control" />
+            <span asp-validation-for="BarPicUrl" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-secondary bg-white border-0 float-md-left ">
+            <img class="d-flex ml-1" src="~/lib/images/CreateNewGreenTrans.png" alt="CreateNew" width="100">
+        </button>
+        <a asp-action="Index">
+            <img src="~/lib/images/BackToListRedTrans.png" alt="BackToList" width="100">
+        </a>
+    </form>
+</div>
+
