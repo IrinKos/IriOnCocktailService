@@ -54,6 +54,7 @@ namespace IriOnCocktailService.App
                 options.Password.RequiredLength = 5;
             })
                 .AddRoles<IdentityRole>()
+                .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<IriOnCocktailServiceDbContext>();
 
@@ -71,6 +72,7 @@ namespace IriOnCocktailService.App
             services.AddVMCustomMapper();
             services.AddCustomDTOMappers();
             services.AddScoped<IBarService, BarService>();
+            services.AddScoped<IRoleService, RoleService>();
         }
 
 
