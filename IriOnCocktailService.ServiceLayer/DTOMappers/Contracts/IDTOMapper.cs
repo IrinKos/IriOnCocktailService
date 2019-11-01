@@ -7,5 +7,7 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers.Contracts
     public interface IDTOMapper<TEntity,TDTO>
     {
         TDTO MapFrom(TEntity entity);
+
+        //TODO Map to DTO
     }
 }
