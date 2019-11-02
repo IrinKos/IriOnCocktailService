@@ -8,6 +8,7 @@ namespace IriOnCocktailService.Data.Entities
     {
         public string Id { get; set; }
         public decimal Rate { get; set; }
+        public bool IsDeleted { get; set; } 
 
         public string BarId { get; set; }
         public Bar Bar { get; set; }

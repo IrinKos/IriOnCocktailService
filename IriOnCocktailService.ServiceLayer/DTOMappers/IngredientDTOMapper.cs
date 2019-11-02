@@ -15,7 +15,7 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                CocktailIngredients = entity.CocktailIngredients
+                IsDeleted = entity.IsDeleted
             };
         }
     }

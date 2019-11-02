@@ -57,7 +57,8 @@ namespace IriOnCocktailService.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false)
+                    Name = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -192,8 +193,8 @@ namespace IriOnCocktailService.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -237,8 +238,8 @@ namespace IriOnCocktailService.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    Name = table.Column<string>(maxLength: 128, nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -258,6 +259,7 @@ namespace IriOnCocktailService.Data.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     CocktailId = table.Column<string>(nullable: true),
                     BarId = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
@@ -291,6 +293,7 @@ namespace IriOnCocktailService.Data.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     Rate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     BarId = table.Column<string>(nullable: true),
                     CocktailId = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)

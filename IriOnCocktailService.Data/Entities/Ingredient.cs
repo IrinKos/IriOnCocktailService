@@ -6,6 +6,7 @@ namespace IriOnCocktailService.Data.Entities
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public bool IsDeleted { get; set; } 
 
         public ICollection<CocktailIngredient> CocktailIngredients { get; set; }
     }

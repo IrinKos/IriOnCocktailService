@@ -39,11 +39,11 @@ namespace IriOnCocktailService.ServiceLayer.Services
         }
         public async Task<BarDTO> GetBar(string barId)
         {
-            var bar = await context.Bars
+            var bar = await this.context.Bars
                 .Include(b => b.Ratings)
                 .Include(b => b.Comments)
                 .Include(b => b.CocktailBars)
-                .FirstOrDefaultAsync(b => b.Id == barId);
+                .SingleOrDefaultAsync(b => b.Id == barId);
 
             if (bar == null)
             {

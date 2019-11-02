@@ -9,7 +9,6 @@ namespace IriOnCocktailService.ServiceLayer.DTOS
     {
         public string Id { get; set; }
         public string Name { get; set; }
-
-        public ICollection<CocktailIngredient> CocktailIngredients { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

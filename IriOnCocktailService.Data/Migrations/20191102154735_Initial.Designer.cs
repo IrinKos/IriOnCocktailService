@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IriOnCocktailService.Data.Migrations
 {
     [DbContext(typeof(IriOnCocktailServiceDbContext))]
-    [Migration("20191030102023_Initial")]
+    [Migration("20191102154735_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,6 +101,8 @@ namespace IriOnCocktailService.Data.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
@@ -119,6 +121,8 @@ namespace IriOnCocktailService.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<string>("Name")
                         .IsRequired();
 
@@ -135,6 +139,8 @@ namespace IriOnCocktailService.Data.Migrations
                     b.Property<string>("BarId");
 
                     b.Property<string>("CocktailId");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<decimal>("Rate")
                         .HasColumnType("decimal(18,2)");
@@ -273,9 +279,11 @@ namespace IriOnCocktailService.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.Property<string>("ProviderKey");
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -306,9 +314,11 @@ namespace IriOnCocktailService.Data.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value");
 

@@ -14,6 +14,8 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers.Registration
         public static IServiceCollection AddVMCustomMapper(this IServiceCollection services)
         {
             services.AddSingleton < IViewModelMapper<BarDTO, CreateBarViewModel>, CreateBarViewModelMapper>();
+            services.AddSingleton < IViewModelMapper<IngredientDTO, CreateIngredientViewModel>, CreateIngredientViewModelMapper>();
+                                    
             services.AddSingleton < IViewModelMapper<BarDTO, DeleteBarViewModel>, DeleteBarViewModelMapper>();
 
             services.AddSingleton < IDTOMapper<CreateBarViewModel, BarDTO>, CreateBarViewModelMapper>();
