@@ -4,7 +4,7 @@ using IriOnCocktailService.ServiceLayer.DTOS;
 
 namespace IriOnCocktailService.ServiceLayer.DTOMappers
 {
-    public class BarDTOMapper : IDTOMapper<Bar, BarDTO>
+    public class BarDTOMapper : IDTOServiceMapper<Bar, BarDTO>
     {
         public BarDTO MapFrom(Bar entity)
         {

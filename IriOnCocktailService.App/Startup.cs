@@ -73,6 +73,8 @@ namespace IriOnCocktailService.App
             services.AddCustomDTOMappers();
             services.AddScoped<IBarService, BarService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IIngredientService, IngredientService>();
+
         }
 
 

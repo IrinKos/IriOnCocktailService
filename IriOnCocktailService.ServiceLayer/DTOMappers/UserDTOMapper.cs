@@ -7,7 +7,7 @@ using System.Text;
 
 namespace IriOnCocktailService.ServiceLayer.DTOMappers
 {
-    public class UserDTOMapper : IDTOMapper<User, UserDTO>
+    public class UserDTOMapper : IDTOServiceMapper<User, UserDTO>
     {
         public UserDTO MapFrom(User entity)
         {

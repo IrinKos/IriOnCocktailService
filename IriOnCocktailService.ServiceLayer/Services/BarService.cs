@@ -14,9 +14,9 @@ namespace IriOnCocktailService.ServiceLayer.Services
     public class BarService : IBarService
     {
         private readonly IriOnCocktailServiceDbContext context;
-        private readonly IDTOMapper<Bar, BarDTO> mapper;
+        private readonly IDTOServiceMapper<Bar, BarDTO> mapper;
 
-        public BarService(IriOnCocktailServiceDbContext context, IDTOMapper<Bar, BarDTO> mapper)
+        public BarService(IriOnCocktailServiceDbContext context, IDTOServiceMapper<Bar, BarDTO> mapper)
         {
             this.context = context;
             this.mapper = mapper;

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace IriOnCocktailService.ServiceLayer.DTOMappers
 {
-    public class IngredientDTOMapper : IDTOMapper<Ingredient, IngredientDTO>
+    public class IngredientDTOMapper : IDTOServiceMapper<Ingredient, IngredientDTO>
     {
         public IngredientDTO MapFrom(Ingredient entity)
         {

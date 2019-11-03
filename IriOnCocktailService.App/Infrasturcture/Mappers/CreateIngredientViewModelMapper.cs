@@ -11,19 +11,23 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
     public class CreateIngredientViewModelMapper : IViewModelMapper<IngredientDTO, CreateIngredientViewModel>,
                                                IDTOMapper<CreateIngredientViewModel, IngredientDTO>
     {
-        public CreateIngredientViewModel MapFrom(IngredientDTO ingredientDTO)
+        public CreateIngredientViewModel MapFromDTO(IngredientDTO ingredientDTO)
         {
             return new CreateIngredientViewModel
             {
-                Name = ingredientDTO.Name
+                Id = ingredientDTO.Id,
+                Name = ingredientDTO.Name,
+                IsDeleted = ingredientDTO.IsDeleted
             };
         }
 
-        public IngredientDTO MapFrom(CreateIngredientViewModel viewModel)
+        public IngredientDTO MapFromViewModel(CreateIngredientViewModel viewModel)
         {
             return new IngredientDTO
             {
-                Name = viewModel.Name
+                Id = viewModel.Id,
+                Name = viewModel.Name,
+                IsDeleted = viewModel.IsDeleted
             };
         }
     }

@@ -10,7 +10,7 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
 {
     public class DeleteBarViewModelMapper : IViewModelMapper<BarDTO, DeleteBarViewModel>
     {
-        public DeleteBarViewModel MapFrom(BarDTO dto)
+        public DeleteBarViewModel MapFromDTO(BarDTO dto)
         {
             return new DeleteBarViewModel()
             {

@@ -20,7 +20,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         private readonly IViewModelMapper<BarDTO, DeleteBarViewModel> deleteBarViewModelMapper;
 
         public BarController(IBarService barService,
-                             //IViewModelMapper<BarDTO,DeleteBarViewModel> deleteBarViewModelMapper,
+                             IViewModelMapper<BarDTO,DeleteBarViewModel> deleteBarViewModelMapper,
                              IDTOMapper<CreateBarViewModel,BarDTO> barDTOMapper)
         {
             this.barService = barService;
@@ -36,7 +36,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateBarViewModel viewModel)
         {
-            var barDTO = this.barDTOMapper.MapFrom(viewModel);
+            var barDTO = this.barDTOMapper.MapFromViewModel(viewModel);
 
             await this.barService.CreateBar(barDTO);
 

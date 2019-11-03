@@ -7,6 +7,6 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers.Contracts
 {
     public interface IDTOMapper<TViewModel,TDTO>
     {
-        TDTO MapFrom(TViewModel viewModel);
+        TDTO MapFromViewModel(TViewModel viewModel);
     }
 }
