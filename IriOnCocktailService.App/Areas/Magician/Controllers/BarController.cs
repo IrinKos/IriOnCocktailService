@@ -17,15 +17,29 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
     {
         private readonly IBarService barService;
         private readonly IDTOMapper<CreateBarViewModel, BarDTO> barDTOMapper;
-        private readonly IViewModelMapper<BarDTO, DeleteBarViewModel> deleteBarViewModelMapper;
+        private readonly IViewModelMapper<BarDTO, CreateBarViewModel> createBarViewModelMapper;
+        private readonly IViewModelMapper<CollectionDTO, CollectionViewModel> collectionMapper;
+        //private readonly IViewModelMapper<BarDTO, DeleteBarViewModel> deleteBarViewModelMapper;
 
         public BarController(IBarService barService,
-                             IViewModelMapper<BarDTO,DeleteBarViewModel> deleteBarViewModelMapper,
-                             IDTOMapper<CreateBarViewModel,BarDTO> barDTOMapper)
+                             IDTOMapper<CreateBarViewModel,BarDTO> barDTOMapper,
+                             IViewModelMapper<BarDTO, CreateBarViewModel> createBarViewModelMapper,
+                             IViewModelMapper<CollectionDTO, CollectionViewModel> collectionMapper)
+                            // IViewModelMapper<BarDTO,DeleteBarViewModel> deleteBarViewModelMapper,
         {
             this.barService = barService;
             this.barDTOMapper = barDTOMapper;
-            this.deleteBarViewModelMapper = deleteBarViewModelMapper;
+            this.createBarViewModelMapper = createBarViewModelMapper;
+            this.collectionMapper = collectionMapper;
+          //  this.deleteBarViewModelMapper = deleteBarViewModelMapper;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var dto = await this.barService.GetBarsAsync();
+            var viewModel = this.collectionMapper.MapFromDTO(dto);
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -33,32 +47,17 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(CreateBarViewModel viewModel)
         {
             var barDTO = this.barDTOMapper.MapFromViewModel(viewModel);
 
-            await this.barService.CreateBar(barDTO);
+            await this.barService.CreateBarAsync(barDTO);
 
             return Ok(barDTO);
         }
-        //public async Task<IActionResult> Delete(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    var book = await _context.Books
-        //        .Include(b => b.Status)
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (book == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(book);
-        //}
         [HttpGet]
         public async Task<IActionResult> Delete(string Id)
         {
@@ -66,8 +65,28 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             {
                 return NotFound();
             }
-            var barDTO = await this.barService.GetBar(Id);
-           // var barViewModel = barDTOMapper.MapFrom();
+
+            await this.barService.DeleteBarAsync(Id);
+
+            //TODO remove ok
+            return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string Id)
+        {
+            var barDTO = await this.barService.GetBarAsync(Id);
+            var barVM = this.createBarViewModelMapper.MapFromDTO(barDTO);
+
+            return View(barVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(CreateBarViewModel viewModel)
+        {
+            var barDTO = this.barDTOMapper.MapFromViewModel(viewModel);
+            await barService.EditBarAsync(barDTO);
+
             return Ok();
         }
     }

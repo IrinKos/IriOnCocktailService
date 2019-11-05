@@ -1,5 +1,6 @@
 ﻿using IriOnCocktailService.Data;
 using IriOnCocktailService.Data.Entities;
+using IriOnCocktailService.ServiceLayer.DTOS;
 using IriOnCocktailService.ServiceLayer.Services.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -29,12 +30,12 @@ namespace IriOnCocktailService.ServiceLayer.Services
 
             return allRoles;
         }
-        public async Task<User> ChangeRole(string id, string previousRole, string newRole)
+        public async Task<User> ChangeRole(UserDTO dto)
         {
-            var user = await userManager.FindByIdAsync(id);
+            var user = await userManager.FindByIdAsync(dto.Id);
 
-            await userManager.RemoveFromRoleAsync(user, previousRole);
-            await userManager.AddToRoleAsync(user, newRole);
+            await userManager.RemoveFromRoleAsync(user, dto.CurrentRole);
+            await userManager.AddToRoleAsync(user, dto.NewRole);
 
             return user;
         }
