@@ -19,8 +19,8 @@
             </div>
 
             @*<input asp-for="@item.Ingredient" type="text" class="form-control" />
-            <input asp-for="@item.Quantity" type="text" class="form-control" />
-            <input asp-for="@item.Unit" type="text" class="form-control" />*@
+                <input asp-for="@item.Quantity" type="text" class="form-control" />
+                <input asp-for="@item.Unit" type="text" class="form-control" />*@
 
 
             <div class="form-group">
@@ -30,7 +30,25 @@
     </div>
 </div>
 
+<div id="stefan"></div>
+<button id="test">Click me</button>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
+
+<script>
+
+    document.getElementById('test').onclick = () => {
+
+        var divtest = document.createElement("div");
+        divtest.innerHTML = `<div class="form-group">
+                <label asp-for="CocktailName" class="control-label"></label>
+                <input asp-for="CocktailName" class="form-control" />
+                <span asp-validation-for="CocktailName" class="text-danger"></span>
+            </div>`
+
+        document.getElementById('stefan').appendChild(divtest) 
+
+    }
+</script>

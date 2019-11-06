@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IriOnCocktailService.App.Areas.Magician.Controllers
 {
-    [Area("CocktailMagician")]
+    [Area("Magician")]
     public class CocktailController : Controller
     {
         public IActionResult Index()
