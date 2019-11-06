@@ -37,8 +37,8 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var dto = await this.barService.GetBarsAsync();
-            var viewModel = this.collectionMapper.MapFromDTO(dto);
+            var barsDto = await this.barService.GetBarsAsync();
+            var viewModel = this.collectionMapper.MapFromDTO(barsDto);
             return View(viewModel);
         }
 
@@ -55,6 +55,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
 
             await this.barService.CreateBarAsync(barDTO);
 
+            //TODO remove ok
             return Ok(barDTO);
         }
 
@@ -87,6 +88,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             var barDTO = this.barDTOMapper.MapFromViewModel(viewModel);
             await barService.EditBarAsync(barDTO);
 
+            //TODO remove ok
             return Ok();
         }
     }

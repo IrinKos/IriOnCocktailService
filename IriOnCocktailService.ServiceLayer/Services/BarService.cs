@@ -36,13 +36,6 @@ namespace IriOnCocktailService.ServiceLayer.Services
         public async Task<BarDTO> CreateBarAsync(BarDTO barDTO)
         {
             var bar = mapperFromEntity.MapFrom(barDTO);
-            //var bar = new Bar
-            //{
-            //    Name = barDTO.BarName,
-            //    Address=barDTO.BarAddress,
-            //    PhoneNumber=barDTO.BarPhoneNumber,
-            //    PicUrl=barDTO.BarPicUrl
-            //};
 
             await this.context.Bars.AddAsync(bar);
             await this.context.SaveChangesAsync();
@@ -93,19 +86,19 @@ namespace IriOnCocktailService.ServiceLayer.Services
             this.context.Bars.Update(bar);
             await this.context.SaveChangesAsync();
         }
-        public async Task<BarDTO> EditBarAsync(BarDTO dto)
+        public async Task<BarDTO> EditBarAsync(BarDTO barDto)
         {
-            var bar = await GetBar(dto.BarId);
+            var bar = await GetBar(barDto.BarId);
 
-            bar.Name = dto.BarName;
-            bar.PhoneNumber = dto.BarPhoneNumber;
-            bar.PicUrl = dto.BarPicUrl;
-            bar.Address = dto.BarAddress;
+            bar.Name = barDto.BarName;
+            bar.PhoneNumber = barDto.BarPhoneNumber;
+            bar.PicUrl = barDto.BarPicUrl;
+            bar.Address = barDto.BarAddress;
 
             this.context.Bars.Update(bar);
             await this.context.SaveChangesAsync();
 
-            return dto;
+            return barDto;
         }
     }
 }
