@@ -26,11 +26,22 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit
+                    <a asp-action="Edit" asp-route-id="@item.Id">
+                        Edit
                         @*<img class="d-flex ml-3" src="~/lib/images/EditGreenTrans.png" alt="Edit" width="100">*@
                     </a>
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    <a asp-action="Delete" asp-route-id="@item.Id">
+                        DELETE
+                        @*<img class="d-flex ml-3" src="~/lib/images/EditGreenTrans.png" alt="Edit" width="100">*@
+                    </a>
+
+                    
+                    <a data-toggle="modal" data-target="#exampleModal" asp-route-id="@item.Id">
+                        Delete
+                        @*<img class="d-flex ml-3" src="~/lib/images/EditGreenTrans.png" alt="Edit" width="100">*@
+                    </a>
+
+                    
                 </td>
             </tr>
         }

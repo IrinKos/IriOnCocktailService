@@ -68,7 +68,27 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(CreateIngredientViewModel ingredientVM) 
         {
-            var ingredient = await this.ingredientService.UpdateIngredient(ingredientVM.Id, ingredientVM.Name);
+            await this.ingredientService.UpdateIngredient(ingredientVM.Id, ingredientVM.Name);
+
+            return RedirectToAction("Index", "Ingredient");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id) // <-- ingredient Id
+        {
+            if (id == null)
+                return NotFound();
+
+            var ingredientDTO = await this.ingredientService.GetIngredientDTO(id);
+            var ingredientVM = this.ingredientToVMMapper.MapFromDTO(ingredientDTO);
+
+            return View(ingredientVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(CreateIngredientViewModel ingredientVM) 
+        {
+            await this.ingredientService.DeleteIngredient(ingredientVM.Id);
 
             return RedirectToAction("Index", "Ingredient");
         }

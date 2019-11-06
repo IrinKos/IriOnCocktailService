@@ -17,6 +17,7 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers.Registration
             services.AddScoped<IDTOServiceMapper<ICollection<Bar>, CollectionDTO>,CollectionDTOMapper>();
 
             services.AddScoped<IDTOServiceMapper<Ingredient, IngredientDTO>, IngredientDTOMapper>();
+            services.AddScoped<IDTOServiceMapper<Cocktail, CocktailDTO>, CocktailDTOMapper>();
             
             return services;
         }
