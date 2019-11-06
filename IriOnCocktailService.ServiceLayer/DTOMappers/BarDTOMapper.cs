@@ -1,10 +1,14 @@
 ﻿using IriOnCocktailService.Data.Entities;
 using IriOnCocktailService.ServiceLayer.DTOMappers.Contracts;
 using IriOnCocktailService.ServiceLayer.DTOS;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace IriOnCocktailService.ServiceLayer.DTOMappers
 {
-    public class BarDTOMapper : IDTOMapper<Bar, BarDTO>
+    public class BarDTOMapper : IDTOServiceMapper<Bar, BarDTO>,
+                                IDTOServiceMapper<BarDTO,Bar>
     {
         public BarDTO MapFrom(Bar entity)
         {
@@ -16,6 +20,19 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
                 BarPhoneNumber = entity.PhoneNumber,
                 BarPicUrl = entity.PicUrl,
                 BarNotAvailable = entity.NotAvailable
+            };
+        }
+
+        public Bar MapFrom(BarDTO barDTO)
+        {
+            return new Bar()
+            {
+                Id=barDTO.BarId,
+                Address=barDTO.BarAddress,
+                Name=barDTO.BarName,
+                PhoneNumber=barDTO.BarPhoneNumber,
+                PicUrl=barDTO.BarPicUrl,
+                NotAvailable=barDTO.BarNotAvailable
             };
         }
     }

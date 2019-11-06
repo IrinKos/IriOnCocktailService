@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IriOnCocktailService.App.Areas.Magician.Models;
+using IriOnCocktailService.App.Infrasturcture.Mappers.Contracts;
 using IriOnCocktailService.Data.Entities;
+using IriOnCocktailService.ServiceLayer.DTOS;
 using IriOnCocktailService.ServiceLayer.Services.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,17 +18,22 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly IRoleService roleService;
+        private readonly IDTOMapper<ChangeRoleViewModel, UserDTO> changerRoleMapper;
 
-        public UserController(UserManager<User> userManager, IRoleService roleService)
+        public UserController(UserManager<User> userManager, 
+                              IRoleService roleService,
+                              IDTOMapper<ChangeRoleViewModel, UserDTO> changerRoleMapper)
         {
             this.userManager = userManager;
             this.roleService = roleService;
+            this.changerRoleMapper = changerRoleMapper;
         }
         [HttpGet]
         public async Task<IActionResult> Promote(string Id)
         {
             var user = await this.userManager.FindByIdAsync(Id);
             var roles = (await this.roleService.GetAllRoles()).Select(r=> new SelectListItem(r,r)).ToList();
+
             var viewModel = new ChangeRoleViewModel
             {
                 Id=Id,
@@ -39,7 +46,8 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         [HttpPost]
         public async Task<IActionResult> Promote(ChangeRoleViewModel viewModel)
         {
-            var user = await this.roleService.ChangeRole(viewModel.Id, viewModel.currentRole, viewModel.newRole);
+            var userDTO = changerRoleMapper.MapFromViewModel(viewModel);
+            var user = await this.roleService.ChangeRole(userDTO);
 
             //TODO remove Ok()
             return Ok(user);

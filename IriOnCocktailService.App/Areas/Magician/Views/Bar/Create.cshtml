@@ -1,4 +1,5 @@
 ﻿@model IriOnCocktailService.App.Areas.Magician.Models.CreateBarViewModel
+
 @{
     ViewData["Title"] = "Create";
 }
@@ -27,6 +28,16 @@
             <b><label asp-for="BarPicUrl" class="control-label"></label></b>
             <input asp-for="BarPicUrl" class="form-control" />
             <span asp-validation-for="BarPicUrl" class="text-danger"></span>
+        </div>
+        <div>
+
+            @using (Html.BeginForm("FileUpload", "Home", FormMethod.Post,
+                              new { enctype = "multipart/form-data" }))
+            {
+                <label for="file">Upload Image:</label>
+                <input type="file" name="file" id="file" style="width: 100%;" />
+                <input type="submit" value="Upload" class="submit" />
+            }
         </div>
         <button type="submit" class="btn btn-secondary bg-white border-0 float-md-left ">
             <img class="d-flex ml-1" src="~/lib/images/CreateNewGreenTrans.png" alt="CreateNew" width="100">

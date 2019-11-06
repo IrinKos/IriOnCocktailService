@@ -1,0 +1,49 @@
+﻿@model IEnumerable<IriOnCocktailService.App.Areas.Magician.Models.CreateIngredientViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">
+                        Edit
+                        @*<img class="d-flex ml-3" src="~/lib/images/EditGreenTrans.png" alt="Edit" width="100">*@
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">
+                        DELETE
+                        @*<img class="d-flex ml-3" src="~/lib/images/EditGreenTrans.png" alt="Edit" width="100">*@
+                    </a>
+
+                    
+                    <a data-toggle="modal" data-target="#exampleModal" asp-route-id="@item.Id">
+                        Delete
+                        @*<img class="d-flex ml-3" src="~/lib/images/EditGreenTrans.png" alt="Edit" width="100">*@
+                    </a>
+
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

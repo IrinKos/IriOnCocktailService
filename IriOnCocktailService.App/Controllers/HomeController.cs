@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using IriOnCocktailService.App.Models;
+using System.Security.Claims;
 
 namespace IriOnCocktailService.App.Controllers
 {
@@ -12,6 +13,12 @@ namespace IriOnCocktailService.App.Controllers
     {
         public IActionResult Index()
         {
+            if (User.IsInRole("BarCrawler"))
+                return Redirect("~/Crawler/Home/Index");
+
+            else if (User.IsInRole("CocktailMagician"))
+                return Redirect("~/Magician/Home/Index");
+
             return View();
         }
 

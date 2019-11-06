@@ -2,6 +2,7 @@
 using IriOnCocktailService.Data.Entities;
 using IriOnCocktailService.ServiceLayer.DTOMappers.Contracts;
 using IriOnCocktailService.ServiceLayer.DTOS;
+using IriOnCocktailService.ServiceLayer.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace IriOnCocktailService.ServiceLayer.Services
 {
-    public class IngredientService
+    public class IngredientService : IIngredientService
     {
         private readonly IriOnCocktailServiceDbContext context;
-        private readonly IDTOMapper<Ingredient, IngredientDTO> mapper;
+        private readonly IDTOServiceMapper<Ingredient, IngredientDTO> mapper;
 
-        public IngredientService(IriOnCocktailServiceDbContext context, IDTOMapper<Ingredient, IngredientDTO> mapper)
+        public IngredientService(IriOnCocktailServiceDbContext context, IDTOServiceMapper<Ingredient, IngredientDTO> mapper)
         {
             this.context = context;
             this.mapper = mapper;
@@ -24,10 +25,10 @@ namespace IriOnCocktailService.ServiceLayer.Services
 
         public async Task<IngredientDTO> CreateIngredient(IngredientDTO ingredientDTO)
         {
-            if (this.GetIngredientDTO(ingredientDTO.Id) != null)
-                throw new ArgumentException(GlobalConstants.ExistedIngredient);
-
             var ingredient = new Ingredient { Id = ingredientDTO.Id, Name = ingredientDTO.Name };
+
+            //if (this.GetIngredientDTO(ingredientDTO.Name) != null)
+            //    throw new ArgumentException(GlobalConstants.ExistedIngredient);
 
             await this.context.Ingredients.AddAsync(ingredient);
             await this.context.SaveChangesAsync();
@@ -69,7 +70,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
         {
             var ingredients = await this.context.Ingredients
                 .Where(i => i.IsDeleted == false)
-                .Select(i => new IngredientDTO{ Id = i.Id, Name = i.Name })
+                .Select(i => new IngredientDTO { Id = i.Id, Name = i.Name })
                 .ToListAsync();
 
             return ingredients;
@@ -78,13 +79,27 @@ namespace IriOnCocktailService.ServiceLayer.Services
         //TODO Why cannot update DTO
         public async Task<Ingredient> UpdateIngredient(string id, string newName)
         {
-            var ingredient = await this.GetIngredient(id); 
+            var ingredient = await this.GetIngredient(id);
             ingredient.Name = newName;
 
             this.context.Ingredients.Update(ingredient);
             await this.context.SaveChangesAsync();
 
             return ingredient;
+        }
+
+
+        public async Task DeleteIngredient(string id)
+        {
+            var ingredient = await this.GetIngredient(id);
+
+            if (ingredient.CocktailIngredients.Any(ci => ci.CocktailId != null))
+                throw new ArgumentException(GlobalConstants.ContainedIngredient);
+
+            ingredient.IsDeleted = true;
+
+            this.context.Ingredients.Update(ingredient);
+            await this.context.SaveChangesAsync();
         }
     }
 }

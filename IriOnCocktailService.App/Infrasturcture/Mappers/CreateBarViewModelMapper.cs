@@ -11,7 +11,7 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
     public class CreateBarViewModelMapper : IViewModelMapper<BarDTO, CreateBarViewModel>,
                                             IDTOMapper<CreateBarViewModel,BarDTO>
     {
-        public CreateBarViewModel MapFrom(BarDTO dto)
+        public CreateBarViewModel MapFromDTO(BarDTO dto)
         {
             return new CreateBarViewModel()
             {
@@ -24,7 +24,7 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
             };
         }
 
-        public BarDTO MapFrom(CreateBarViewModel viewModel)
+        public BarDTO MapFromViewModel(CreateBarViewModel viewModel)
         {
             return new BarDTO()
             {

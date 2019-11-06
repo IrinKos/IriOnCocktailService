@@ -1,0 +1,14 @@
+﻿@model MagicianErrorViewModel
+
+<div class="bg-dark">
+    <hr class="bg-info" />
+    <h1 class="text-center text-danger bg-dark font-weight-bolder" id="hello">@Model.ErrorDescription</h1>
+    <div class="text-center text-info font-italic" id="home-page-text">
+        <hr class="bg-info" />
+    </div>
+</div>
+@*<h2>@Model.ErrorDescription</h2>*@
+<button type"button" class="btn btn-success bg-transparent border-0" onclick="history.go(-1);">
+    <img class="d-flex ml-3" src="~/lib/images/BackToListGreenTrans.png" alt="Read" width="100">
+</button>
+

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace IriOnCocktailService.ServiceLayer.DTOMappers.Contracts
 {
-    public interface IDTOMapper<TEntity,TDTO>
+    public interface IDTOServiceMapper<TEntity,TDTO>
     {
         TDTO MapFrom(TEntity entity);
 
