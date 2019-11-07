@@ -17,15 +17,15 @@ namespace IriOnCocktailService.ServiceLayer.Services
         private readonly IDTOServiceMapper<Bar, BarDTO> mapper;
         private readonly IDTOServiceMapper<BarDTO, Bar> mapperFromEntity;
         private readonly IDTOServiceMapper<ICollection<Bar>, CollectionDTO> collectionMapper;
-        private readonly IDTOServiceMapper<BarCommentDTO, BarComment> barCommentMapper;
-        private readonly IDTOServiceMapper<BarRatingDTO, BarRating> barRatingMapper;
+        private readonly IDTOServiceMapper<CommentDTO, BarComment> barCommentMapper;
+        private readonly IDTOServiceMapper<RatingDTO, BarRating> barRatingMapper;
 
         public BarService(IriOnCocktailServiceDbContext context, 
                          IDTOServiceMapper<Bar, BarDTO> mapper,
                          IDTOServiceMapper<BarDTO, Bar> mapperFromEntity,
                          IDTOServiceMapper<ICollection<Bar>, CollectionDTO> collectionMapper,
-                         IDTOServiceMapper<BarCommentDTO, BarComment> barCommentMapper,
-                         IDTOServiceMapper<BarRatingDTO, BarRating> barRatingMapper)
+                         IDTOServiceMapper<CommentDTO, BarComment> barCommentMapper,
+                         IDTOServiceMapper<RatingDTO, BarRating> barRatingMapper)
         {
             this.context = context;
             this.mapper = mapper;
@@ -107,7 +107,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
             return barDto;
         }
 
-        public async Task<BarCommentDTO> BarCommentAsync(BarCommentDTO barCommentDTO)
+        public async Task<CommentDTO> BarCommentAsync(CommentDTO barCommentDTO)
         {
             var barComment = this.barCommentMapper.MapFrom(barCommentDTO);
 
@@ -116,11 +116,11 @@ namespace IriOnCocktailService.ServiceLayer.Services
 
             return barCommentDTO;
         }
-        public async Task<BarRatingDTO> BarRatingAsync(BarRatingDTO barRatingDTO)
+        public async Task<RatingDTO> BarRatingAsync(RatingDTO barRatingDTO)
         {
             var barComment = this.barRatingMapper.MapFrom(barRatingDTO);
 
-            await this.context.BarRating.AddAsync(barComment);
+            await this.context.BarRatings.AddAsync(barComment);
             await this.context.SaveChangesAsync();
 
             return barRatingDTO;

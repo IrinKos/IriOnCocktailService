@@ -7,23 +7,16 @@ using System.Text;
 
 namespace IriOnCocktailService.ServiceLayer.DTOMappers
 {
-    public class BarCommentDTOMapper : IDTOServiceMapper<BarComment, CommentDTO>,
-                                       IDTOServiceMapper< CommentDTO, BarComment>
+    public class CocktailCommentDTOMapper : IDTOServiceMapper<CommentDTO, CocktailComment>
     {
-        public BarComment MapFrom(CommentDTO barCommentDTO)
+        public CocktailComment MapFrom(CommentDTO barCommentDTO)
         {
-            return new BarComment()
+            return new CocktailComment()
             {
-                BarId = barCommentDTO.BarId,
+                CocktailId = barCommentDTO.BarId,
                 Description = barCommentDTO.Comment,
                 UserId = barCommentDTO.UserId,
             };
         }
-
-        public CommentDTO MapFrom(BarComment entity)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

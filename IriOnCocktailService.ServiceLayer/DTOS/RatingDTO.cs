@@ -5,9 +5,9 @@ using System.Text;
 
 namespace IriOnCocktailService.ServiceLayer.DTOS
 {
-    public class BarRatingDTO
+    public class RatingDTO
     {
-        public string BarId { get; set; } //barId
+        public string BarId { get; set; } //barId/cocktailId
         public string UserId { get; set; }
         [Range(0, 5)]
         public decimal Rate { get; set; }

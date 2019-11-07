@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using IriOnCocktailService.App.Areas.Crawler.Models;
 using IriOnCocktailService.App.Areas.Magician.Models;
@@ -15,13 +16,13 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
     {
         private readonly IBarService barService;
         private readonly IViewModelMapper<CollectionDTO, CollectionViewModel> collectionMapper;
-        private readonly IDTOMapper<BarCommentViewModel, BarCommentDTO> barCommentMapper;
-        private readonly IDTOMapper<BarRatingViewModel, BarRatingDTO> barRatingMapper;
+        private readonly IDTOMapper<CommentViewModel, CommentDTO> barCommentMapper;
+        private readonly IDTOMapper<RatingViewModel, RatingDTO> barRatingMapper;
 
         public BarController(IBarService barService,
                              IViewModelMapper<CollectionDTO, CollectionViewModel> collectionMapper,
-                             IDTOMapper<BarCommentViewModel, BarCommentDTO> barCommentMapper,
-                             IDTOMapper<BarRatingViewModel, BarRatingDTO> barRatingMapper)
+                             IDTOMapper<CommentViewModel, CommentDTO> barCommentMapper,
+                             IDTOMapper<RatingViewModel, RatingDTO> barRatingMapper)
         {
             this.barService = barService;
             this.collectionMapper = collectionMapper;
@@ -32,25 +33,31 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            //var barsDto = await this.barService.GetBarsAsync();
-            //var viewModel = this.collectionMapper.MapFromDTO(barsDto);
-            return View(/*viewModel*/);
+            return View();
         }
         [HttpGet]
-        public async Task<IActionResult> Comment()
+        public IActionResult Comment()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Comment(BarCommentViewModel barCommentViewModel)
+        public async Task<IActionResult> Comment(CommentViewModel barCommentViewModel)
         {
             var barCommentDTO = this.barCommentMapper.MapFromViewModel(barCommentViewModel);
             await this.barService.BarCommentAsync(barCommentDTO);
 
             return Ok();
         }
-        public async Task<IActionResult> Rating(BarRatingViewModel barRatingViewModel)
+        [HttpGet]
+        public IActionResult Rating()
         {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Rating(RatingViewModel barRatingViewModel)
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            barRatingViewModel.UserId = userId;
             var barRatingDTO = this.barRatingMapper.MapFromViewModel(barRatingViewModel);
             await this.barService.BarRatingAsync(barRatingDTO);
 

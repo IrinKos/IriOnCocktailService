@@ -15,7 +15,7 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers.Registration
         public static IServiceCollection AddVMCustomMapper(this IServiceCollection services)
         {
             //BarComment VM to DTO
-            services.AddSingleton <IDTOMapper<BarCommentViewModel, BarCommentDTO>, BarCommentViewModelMapper>();
+            services.AddSingleton <IDTOMapper<CommentViewModel, CommentDTO>, BarCommentViewModelMapper>();
 
             //Collection DTO to VM
             services.AddSingleton < IViewModelMapper<CollectionDTO, CollectionViewModel>, CollectionViewModelMapper>();

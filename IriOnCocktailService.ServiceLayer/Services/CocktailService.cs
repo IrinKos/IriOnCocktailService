@@ -2,6 +2,7 @@
 using IriOnCocktailService.Data.Entities;
 using IriOnCocktailService.ServiceLayer.DTOMappers.Contracts;
 using IriOnCocktailService.ServiceLayer.DTOS;
+using IriOnCocktailService.ServiceLayer.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,22 @@ using System.Threading.Tasks;
 
 namespace IriOnCocktailService.ServiceLayer.Services
 {
-    public class CocktailService
+    public class CocktailService : ICocktailService
     {
         private readonly IriOnCocktailServiceDbContext context;
         private readonly IDTOServiceMapper<Cocktail, CocktailDTO> mapper;
+        private readonly IDTOServiceMapper<CommentDTO, CocktailComment> cocktailCommentMapper;
+        private readonly IDTOServiceMapper<RatingDTO, CocktailRating> cocktailRatingMapper;
 
-        public CocktailService(IriOnCocktailServiceDbContext context, IDTOServiceMapper<Cocktail, CocktailDTO> mapper)
+        public CocktailService(IriOnCocktailServiceDbContext context,
+                               IDTOServiceMapper<Cocktail, CocktailDTO> mapper,
+                               IDTOServiceMapper<CommentDTO, CocktailComment> cocktailCommentMapper,
+                               IDTOServiceMapper<RatingDTO, CocktailRating> cocktailRatingMapper)
         {
             this.context = context;
             this.mapper = mapper;
+            this.cocktailCommentMapper = cocktailCommentMapper;
+            this.cocktailRatingMapper = cocktailRatingMapper;
         }
 
         public async Task<CocktailDTO> CreateCocktail(CocktailDTO cocktailDTO)
@@ -84,6 +92,25 @@ namespace IriOnCocktailService.ServiceLayer.Services
                 .ToListAsync();
 
             return cocktails;
+        }
+
+        public async Task<CommentDTO> CocktailCommentAsync(CommentDTO barCommentDTO)
+        {
+            var barComment = this.cocktailCommentMapper.MapFrom(barCommentDTO);
+
+            await this.context.CocktailComments.AddAsync(barComment);
+            await this.context.SaveChangesAsync();
+
+            return barCommentDTO;
+        }
+        public async Task<RatingDTO> CocktailRatingAsync(RatingDTO barRatingDTO)
+        {
+            var cocktailRating = this.cocktailRatingMapper.MapFrom(barRatingDTO);
+
+            await this.context.CocktailRatings.AddAsync(cocktailRating);
+            await this.context.SaveChangesAsync();
+
+            return barRatingDTO;
         }
     }
 }

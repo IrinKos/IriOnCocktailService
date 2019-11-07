@@ -7,17 +7,16 @@ using System.Text;
 
 namespace IriOnCocktailService.ServiceLayer.DTOMappers
 {
-    public class BarRatingDTOMapper : IDTOServiceMapper<RatingDTO, BarRating>
+    class CocktailRatingMapper : IDTOServiceMapper<RatingDTO, CocktailRating>
     {
-        public BarRating MapFrom(RatingDTO barRatingDTO)
+        public CocktailRating MapFrom(RatingDTO cocktailRatingDTO)
         {
-            return new BarRating()
+            return new CocktailRating()
             {
-                BarId=barRatingDTO.BarId,
-                Rate = barRatingDTO.Rate,
-                UserId=barRatingDTO.UserId,
+                CocktailId = cocktailRatingDTO.BarId,
+                Rate = cocktailRatingDTO.Rate,
+                UserId = cocktailRatingDTO.UserId,
             };
         }
-
     }
 }

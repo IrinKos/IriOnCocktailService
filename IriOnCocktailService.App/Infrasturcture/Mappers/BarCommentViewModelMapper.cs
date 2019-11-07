@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace IriOnCocktailService.App.Infrasturcture.Mappers
 {
-    public class BarCommentViewModelMapper : IDTOMapper<BarCommentViewModel, BarCommentDTO>
+    public class BarCommentViewModelMapper : IDTOMapper<CommentViewModel, CommentDTO>
     {
-        public BarCommentDTO MapFromViewModel(BarCommentViewModel viewModel)
+        public CommentDTO MapFromViewModel(CommentViewModel viewModel)
         {
-            return new BarCommentDTO()
+            return new CommentDTO()
             {
                 BarId=viewModel.Id,
                 UserId=viewModel.UserId,

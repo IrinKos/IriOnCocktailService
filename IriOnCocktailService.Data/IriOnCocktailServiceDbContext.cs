@@ -13,7 +13,10 @@ namespace IriOnCocktailService.Data
     public class IriOnCocktailServiceDbContext : IdentityDbContext<User, IdentityRole, string>
     {
         public DbSet<BarComment> BarComments { get; set; }
-        public DbSet<BarRating> BarRating { get; set; }
+        public DbSet<BarRating> BarRatings { get; set; }
+        public DbSet<CocktailComment> CocktailComments { get; set; }
+        public DbSet<CocktailRating> CocktailRatings { get; set; }
+        
         public DbSet<Bar> Bars { get; set; }
         public DbSet<Cocktail> Cocktails { get; set; }
         public DbSet<CocktailBar> CocktailBars { get; set; }

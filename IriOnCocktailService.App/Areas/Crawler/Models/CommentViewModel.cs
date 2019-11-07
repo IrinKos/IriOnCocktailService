@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace IriOnCocktailService.App.Areas.Crawler.Models
 {
-    public class BarRatingViewModel
+    public class CommentViewModel
     {
-        public string Id { get; set; } //barId
+        public string Id { get; set; } //barId //cocktailId
         public string UserId { get; set; }
-        [Range(0,5)]
-        public decimal Rate { get; set; }
+        public string Comment { get; set; }
     }
 }
