@@ -11,8 +11,8 @@ namespace IriOnCocktailService.Data.Entities
         public string PicUrl { get; set; }
         public bool NotAvailable { get; set; } 
 
-        public ICollection<Comment> Comments { get; set; }
-        public ICollection<Rating> Ratings { get; set; }
+        public ICollection<BarComment> BarComments { get; set; }
+        public ICollection<BarRating> BarRatings { get; set; }
         public ICollection<CocktailBar> CocktailBars { get; set; }
     }
 }

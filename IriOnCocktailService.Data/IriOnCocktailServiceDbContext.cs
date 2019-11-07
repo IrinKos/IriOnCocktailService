@@ -12,13 +12,15 @@ namespace IriOnCocktailService.Data
 {
     public class IriOnCocktailServiceDbContext : IdentityDbContext<User, IdentityRole, string>
     {
+        public DbSet<BarComment> BarComments { get; set; }
+        public DbSet<BarRating> BarRating { get; set; }
         public DbSet<Bar> Bars { get; set; }
         public DbSet<Cocktail> Cocktails { get; set; }
         public DbSet<CocktailBar> CocktailBars { get; set; }
         public DbSet<CocktailIngredient> CocktailIngredients { get; set; }
-        public DbSet<Comment> Comments { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
-        public DbSet<Rating> Ratings { get; set; }
+        //public DbSet<Comment> Comments { get; set; }
+        //public DbSet<Rating> Ratings { get; set; }
 
         public IriOnCocktailServiceDbContext(DbContextOptions<IriOnCocktailServiceDbContext> options)
             : base(options)
@@ -34,11 +36,11 @@ namespace IriOnCocktailService.Data
                 .HasKey(user => user.Id);
 
             builder.Entity<User>()
-                .HasMany(user => user.Comments)
+                .HasMany(user => user.BarComments)
                 .WithOne(comment => comment.User);
 
             builder.Entity<User>()
-                .HasMany(user => user.Ratings)
+                .HasMany(user => user.BarRatings)
                 .WithOne(rating => rating.User);
 
             // Bar
@@ -55,14 +57,14 @@ namespace IriOnCocktailService.Data
                 .IsRequired();
 
             builder.Entity<Bar>()
-                .HasMany(bar => bar.Comments)
+                .HasMany(bar => bar.BarComments)
                 .WithOne(comment => comment.Bar)
                 .HasForeignKey(comment => comment.BarId);
 
-            builder.Entity<Bar>()
-                .HasMany(bar => bar.Ratings)
-                .WithOne(rating => rating.Bar)
-                .HasForeignKey(rating => rating.BarId);
+            //builder.Entity<Bar>()
+            //    .HasMany(bar => bar.BarRatings)
+            //    .WithOne(rating => rating.Bar)
+            //    .HasForeignKey(rating => rating.BarId);
 
             // Cocktail
             builder.Entity<Cocktail>()

@@ -10,7 +10,7 @@ namespace IriOnCocktailService.Data.Entities
     public class User : IdentityUser
     {
         public IdentityRole Role { get; set; }
-        public ICollection<Comment> Comments { get; set; }
-        public ICollection<Rating> Ratings { get; set; }
+        public ICollection<BarComment> BarComments { get; set; }
+        public ICollection<BarRating> BarRatings { get; set; }
     }
 }

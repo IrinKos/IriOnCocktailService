@@ -17,16 +17,22 @@ namespace IriOnCocktailService.ServiceLayer.Services
         private readonly IDTOServiceMapper<Bar, BarDTO> mapper;
         private readonly IDTOServiceMapper<BarDTO, Bar> mapperFromEntity;
         private readonly IDTOServiceMapper<ICollection<Bar>, CollectionDTO> collectionMapper;
+        private readonly IDTOServiceMapper<BarCommentDTO, BarComment> barCommentMapper;
+        private readonly IDTOServiceMapper<BarRatingDTO, BarRating> barRatingMapper;
 
         public BarService(IriOnCocktailServiceDbContext context, 
                          IDTOServiceMapper<Bar, BarDTO> mapper,
                          IDTOServiceMapper<BarDTO, Bar> mapperFromEntity,
-                         IDTOServiceMapper<ICollection<Bar>, CollectionDTO> collectionMapper)
+                         IDTOServiceMapper<ICollection<Bar>, CollectionDTO> collectionMapper,
+                         IDTOServiceMapper<BarCommentDTO, BarComment> barCommentMapper,
+                         IDTOServiceMapper<BarRatingDTO, BarRating> barRatingMapper)
         {
             this.context = context;
             this.mapper = mapper;
             this.mapperFromEntity = mapperFromEntity;
             this.collectionMapper = collectionMapper;
+            this.barCommentMapper = barCommentMapper;
+            this.barRatingMapper = barRatingMapper;
         }
 
         private async Task<Bar> GetBar(string barId)
@@ -45,8 +51,8 @@ namespace IriOnCocktailService.ServiceLayer.Services
         public async Task<BarDTO> GetBarAsync(string barId)
         {
             var bar = await this.context.Bars
-                .Include(b => b.Ratings)
-                .Include(b => b.Comments)
+                .Include(b => b.BarRatings)
+                .Include(b => b.BarComments)
                 .Include(b => b.CocktailBars)
                 .SingleOrDefaultAsync(b => b.Id == barId);
 
@@ -64,8 +70,8 @@ namespace IriOnCocktailService.ServiceLayer.Services
         public async Task<CollectionDTO> GetBarsAsync()
         {
             var bars = await this.context.Bars
-                .Include(b => b.Ratings)
-                .Include(b => b.Comments)
+                .Include(b => b.BarRatings)
+                .Include(b => b.BarComments)
                 .Include(b => b.CocktailBars)
                 .ToListAsync();
             var barsDTOs = this.collectionMapper.MapFrom(bars);
@@ -76,8 +82,8 @@ namespace IriOnCocktailService.ServiceLayer.Services
         public async Task DeleteBarAsync(string barId)
         {
             var bar = await this.context.Bars
-                .Include(b => b.Ratings)
-                .Include(b => b.Comments)
+                .Include(b => b.BarRatings)
+                .Include(b => b.BarComments)
                 .Include(b => b.CocktailBars)
                 .SingleOrDefaultAsync(b => b.Id == barId);
 
@@ -99,6 +105,25 @@ namespace IriOnCocktailService.ServiceLayer.Services
             await this.context.SaveChangesAsync();
 
             return barDto;
+        }
+
+        public async Task<BarCommentDTO> BarCommentAsync(BarCommentDTO barCommentDTO)
+        {
+            var barComment = this.barCommentMapper.MapFrom(barCommentDTO);
+
+            await this.context.BarComments.AddAsync(barComment);
+            await this.context.SaveChangesAsync();
+
+            return barCommentDTO;
+        }
+        public async Task<BarRatingDTO> BarRatingAsync(BarRatingDTO barRatingDTO)
+        {
+            var barComment = this.barRatingMapper.MapFrom(barRatingDTO);
+
+            await this.context.BarRating.AddAsync(barComment);
+            await this.context.SaveChangesAsync();
+
+            return barRatingDTO;
         }
     }
 }

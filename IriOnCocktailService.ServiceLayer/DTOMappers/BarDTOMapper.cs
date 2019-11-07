@@ -19,7 +19,9 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
                 BarAddress = entity.Address,
                 BarPhoneNumber = entity.PhoneNumber,
                 BarPicUrl = entity.PicUrl,
-                BarNotAvailable = entity.NotAvailable
+                BarNotAvailable = entity.NotAvailable,
+                BarRatings = entity.BarRatings.Where(bc=>bc.BarId==entity.Id).ToList(),
+                BarComments = entity.BarComments.Where(bc=>bc.BarId==entity.Id).ToList()
             };
         }
 

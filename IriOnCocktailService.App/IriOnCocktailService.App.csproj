@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Crawler\Data\" />
-    <Folder Include="Areas\Crawler\Models\" />
     <Folder Include="Areas\Magician\Views\Home\" />
   </ItemGroup>
 

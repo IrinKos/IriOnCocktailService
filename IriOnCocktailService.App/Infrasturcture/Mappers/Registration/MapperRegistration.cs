@@ -1,4 +1,5 @@
-﻿using IriOnCocktailService.App.Areas.Magician.Models;
+﻿using IriOnCocktailService.App.Areas.Crawler.Models;
+using IriOnCocktailService.App.Areas.Magician.Models;
 using IriOnCocktailService.App.Infrasturcture.Mappers.Contracts;
 using IriOnCocktailService.ServiceLayer.DTOS;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,9 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers.Registration
     {
         public static IServiceCollection AddVMCustomMapper(this IServiceCollection services)
         {
+            //BarComment VM to DTO
+            services.AddSingleton <IDTOMapper<BarCommentViewModel, BarCommentDTO>, BarCommentViewModelMapper>();
+
             //Collection DTO to VM
             services.AddSingleton < IViewModelMapper<CollectionDTO, CollectionViewModel>, CollectionViewModelMapper>();
 
