@@ -88,7 +88,6 @@ namespace IriOnCocktailService.ServiceLayer.Services
             return ingredient;
         }
 
-
         public async Task DeleteIngredient(string id)
         {
             var ingredient = await this.GetIngredient(id);
