@@ -118,9 +118,9 @@ namespace IriOnCocktailService.ServiceLayer.Services
         }
         public async Task<RatingDTO> BarRatingAsync(RatingDTO barRatingDTO)
         {
-            var barComment = this.barRatingMapper.MapFrom(barRatingDTO);
+            var barRating = this.barRatingMapper.MapFrom(barRatingDTO);
 
-            await this.context.BarRatings.AddAsync(barComment);
+            await this.context.BarRatings.AddAsync(barRating);
             await this.context.SaveChangesAsync();
 
             return barRatingDTO;

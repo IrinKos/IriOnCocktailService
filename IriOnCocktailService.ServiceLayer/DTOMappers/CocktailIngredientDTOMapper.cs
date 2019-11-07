@@ -7,7 +7,8 @@ using System.Text;
 
 namespace IriOnCocktailService.ServiceLayer.DTOMappers
 {
-    public class CocktailIngredientDTOMapper : IDTOServiceMapper<CocktailIngredient, CocktailIngredientDTO>
+    public class CocktailIngredientDTOMapper : IDTOServiceMapper<CocktailIngredient, CocktailIngredientDTO>,
+                                               IDTOServiceMapper<CocktailIngredientDTO, CocktailIngredient>
     {
         public CocktailIngredientDTO MapFrom(CocktailIngredient entity)
         {
@@ -19,6 +20,17 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
                 UnitType = entity.UnitType.ToString()
             };
 
+        }
+
+        public CocktailIngredient MapFrom(CocktailIngredientDTO cocktailIngredientDTO)
+        {
+            return new CocktailIngredient
+            {
+                CocktailId = cocktailIngredientDTO.CocktailId,
+                IngredientId = cocktailIngredientDTO.IngredientId,
+                Quantity = cocktailIngredientDTO.Quantity,
+                UnitType = (Unit)Enum.Parse(typeof(Unit), cocktailIngredientDTO.UnitType)
+            };
         }
     }
 }
