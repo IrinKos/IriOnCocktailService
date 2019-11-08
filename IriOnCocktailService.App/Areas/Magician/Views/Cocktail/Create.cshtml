@@ -17,12 +17,12 @@
                 <input asp-for="CocktailName" class="form-control" />
                 <span asp-validation-for="CocktailName" class="text-danger"></span>
             </div>
-            <div>
-                <input type="type" name="name"/>
-                <input type="type" name="name"/>
-                <input type="type" name="name"/>
-                @{ Model.SpecificIngredient.Add(new AddIngredientToCocktailViewModel() { Ingredient = name }); }
+            <div class="form-group" id="add-here">
+                @*<label asp-for="SpecificIngredient[0].Ingredient" class="control-label"></label>*@
+
+
             </div>
+
 
             @*<input asp-for="@item.Ingredient" type="text" class="form-control" />
                 <input asp-for="@item.Quantity" type="text" class="form-control" />
@@ -43,25 +43,21 @@
 </div>
 
 
-<script>
+@section Scripts {
 
-    let counter = 0;
-    document.getElementById('test').onclick = () => {
-        counter++;
-        var divtest = document.createElement("div");
-        divtest.innerHTML = `<div class="form-group">
-                <label name="CocktailName" class="control-label"></label>
-                <input name="Quantity" class="form-control" />
-            </div><div class="form-group">
-                <label name="Quantity" class="control-label"></label>
-                <input name="Quantity" class="form-control" />
-            </div><div class="form-group">
-                <label name="
-" class="control-label"></label>
-                <input name="SpecifigIngredient[counter].Ingredient" class="form-control" />
-            </div>`
+    <script>
+        $(function () {
+            let current = 0;
+            $('#test').click(function () {
+                const inputs = `<div>Ingredient ${current + 1}</div>
+                        <input name="specificIngredients[${current}].ingredient" placeholder="Name..." type="text" class="form-control" />
+                        <input name="specificIngredients[${current}].quantity" placeholder="Quantity..." type="text" class="form-control" />
+                        <input name="specificIngredients[${current}].unit" placeholder="Item..." type="text" class="form-control" />
+                        <hr>`
 
-        document.getElementById('stefan').appendChild(divtest)
-
-    }
-</script>
+                current++;
+                $('#add-here').append(inputs);
+            })
+        })
+    </script>
+}

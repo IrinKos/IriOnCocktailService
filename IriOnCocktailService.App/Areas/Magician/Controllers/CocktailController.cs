@@ -18,14 +18,17 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         {
             var viewModel = new CreateCocktailViewModel
             {
-                SpecificIngredient = new List<AddIngredientToCocktailViewModel>()
+                SpecificIngredients = new List<AddIngredientToCocktailViewModel>()
 
             };
             return View(viewModel);
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(CreateCocktailViewModel viewModel)
         {
+            await Task.Delay(0);
+            
             return Ok();
         }
     }

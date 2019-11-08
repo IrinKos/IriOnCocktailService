@@ -10,6 +10,6 @@ namespace IriOnCocktailService.App.Areas.Magician.Models
     {
         public string Id { get; set; } //Cocktail
         public string CocktailName { get; set; }
-        public List<AddIngredientToCocktailViewModel> SpecificIngredient { get; set; }
+        public List<AddIngredientToCocktailViewModel> SpecificIngredients { get; set; }
     }
 }
