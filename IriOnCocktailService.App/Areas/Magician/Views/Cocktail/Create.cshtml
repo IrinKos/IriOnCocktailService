@@ -18,18 +18,13 @@
                 <span asp-validation-for="CocktailName" class="text-danger"></span>
             </div>
             <div class="form-group" id="add-here">
-                @*<label asp-for="SpecificIngredient[0].Ingredient" class="control-label"></label>*@
-
-
+                <datalist id="ingr">
+                    @foreach (var item in Model.AllIngredients)
+                    {
+                        <option class="hidenvalue" value-hidden="@item.Value">@item.Text</option>
+                    }
+                </datalist>
             </div>
-
-
-            @*<input asp-for="@item.Ingredient" type="text" class="form-control" />
-                <input asp-for="@item.Quantity" type="text" class="form-control" />
-                <input asp-for="@item.Unit" type="text" class="form-control" />*@
-            <div id="stefan"></div>
-
-
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -42,19 +37,22 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-
 @section Scripts {
 
     <script>
-        $(function () {
-            let current = 0;
-            $('#test').click(function () {
-                const inputs = `<div>Ingredient ${current + 1}</div>
-                        <input name="specificIngredients[${current}].ingredient" placeholder="Name..." type="text" class="form-control" />
-                        <input name="specificIngredients[${current}].quantity" placeholder="Quantity..." type="text" class="form-control" />
-                        <input name="specificIngredients[${current}].unit" placeholder="Item..." type="text" class="form-control" />
-                        <hr>`
 
+        $(() => {
+            let current = 0;
+            $('#test').click(() => {
+                let a = document.getElementsByClassName("hidenvalue").value;
+                console.log(a);
+                
+                console.log($('.hidenvalue').val());
+                const inputs = `<div>Ingredient ${current + 1}</div>
+                                <input list="ingr" name="specificIngredients[${current}].IngredientId" placeholder="Select Ingredient..." type="" class="form-control"/>
+                                <input name="specificIngredients[${current}].quantity" placeholder="Quantity..." type="text" class="form-control" />
+                                <input name="specificIngredients[${current}].unit" placeholder="Item..." type="text" class="form-control" />
+                                <hr>`
                 current++;
                 $('#add-here').append(inputs);
             })

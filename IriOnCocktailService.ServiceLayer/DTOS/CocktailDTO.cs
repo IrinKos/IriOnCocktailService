@@ -9,6 +9,7 @@ namespace IriOnCocktailService.ServiceLayer.DTOS
         public string Id { get; set; }
         public string Name { get; set; }
         public string PicUrl { get; set; }
+        public List<CocktailIngredientDTO> Ingredients { get; set; }
         public bool NotAvailable { get; set; }
     }
 }

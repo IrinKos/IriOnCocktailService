@@ -7,7 +7,8 @@ namespace IriOnCocktailService.App.Areas.Magician.Models
 {
     public class AddIngredientToCocktailViewModel
     {
-        public string Ingredient { get; set; }
+        public string CocktailId { get; set; }
+        public string IngredientId { get; set; }
         public string Quantity { get; set; }
         public string Unit { get; set; }
     }

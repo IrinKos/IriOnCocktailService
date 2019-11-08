@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace IriOnCocktailService.App.Areas.Magician.Models
 {
-    public class CreateCocktailViewModel
+    public class CreateCocktailViewModel 
     {
         public string Id { get; set; } //Cocktail
         public string CocktailName { get; set; }
+        public List<SelectListItem> AllIngredients { get; set; }
         public List<AddIngredientToCocktailViewModel> SpecificIngredients { get; set; }
     }
 }

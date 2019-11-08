@@ -9,7 +9,7 @@ namespace IriOnCocktailService.ServiceLayer.DTOS
         public string CocktailId { get; set; }
         public string IngredientId { get; set; }
 
-        public int Quantity { get; set; }
+        public string Quantity { get; set; }
         public string UnitType { get; set; }
     }
 }

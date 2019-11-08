@@ -17,7 +17,8 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers.Registration
             services.AddScoped<IDTOServiceMapper<Bar, BarDTO>, BarDTOMapper>();
             services.AddScoped<IDTOServiceMapper<BarDTO, Bar>, BarDTOMapper>();
             services.AddScoped<IDTOServiceMapper<CommentDTO, BarComment>, BarCommentDTOMapper>();
-            services.AddScoped<IDTOServiceMapper<RatingDTO, BarRating>, BarRatingDTOMapper>();
+            services.AddScoped<IDTOServiceMapper<CommentDTO, CocktailComment>, CocktailCommentDTOMapper>();
+            services.AddScoped<IDTOServiceMapper<RatingDTO, CocktailRating>, CocktailRatingDTOMapper>();
 
             services.AddScoped<IDTOServiceMapper<ICollection<Bar>, CollectionDTO>,CollectionDTOMapper>();
 
