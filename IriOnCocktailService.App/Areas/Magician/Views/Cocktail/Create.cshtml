@@ -17,10 +17,17 @@
                 <input asp-for="CocktailName" class="form-control" />
                 <span asp-validation-for="CocktailName" class="text-danger"></span>
             </div>
+            <div>
+                <input type="type" name="name"/>
+                <input type="type" name="name"/>
+                <input type="type" name="name"/>
+                @{ Model.SpecificIngredient.Add(new AddIngredientToCocktailViewModel() { Ingredient = name }); }
+            </div>
 
             @*<input asp-for="@item.Ingredient" type="text" class="form-control" />
                 <input asp-for="@item.Quantity" type="text" class="form-control" />
                 <input asp-for="@item.Unit" type="text" class="form-control" />*@
+            <div id="stefan"></div>
 
 
             <div class="form-group">
@@ -30,7 +37,6 @@
     </div>
 </div>
 
-<div id="stefan"></div>
 <button id="test">Click me</button>
 <div>
     <a asp-action="Index">Back to List</a>
@@ -39,16 +45,23 @@
 
 <script>
 
+    let counter = 0;
     document.getElementById('test').onclick = () => {
-
+        counter++;
         var divtest = document.createElement("div");
         divtest.innerHTML = `<div class="form-group">
-                <label asp-for="CocktailName" class="control-label"></label>
-                <input asp-for="CocktailName" class="form-control" />
-                <span asp-validation-for="CocktailName" class="text-danger"></span>
+                <label name="CocktailName" class="control-label"></label>
+                <input name="Quantity" class="form-control" />
+            </div><div class="form-group">
+                <label name="Quantity" class="control-label"></label>
+                <input name="Quantity" class="form-control" />
+            </div><div class="form-group">
+                <label name="
+" class="control-label"></label>
+                <input name="SpecifigIngredient[counter].Ingredient" class="form-control" />
             </div>`
 
-        document.getElementById('stefan').appendChild(divtest) 
+        document.getElementById('stefan').appendChild(divtest)
 
     }
 </script>

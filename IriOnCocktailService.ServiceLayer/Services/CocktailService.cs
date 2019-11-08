@@ -15,16 +15,19 @@ namespace IriOnCocktailService.ServiceLayer.Services
     public class CocktailService : ICocktailService
     {
         private readonly IriOnCocktailServiceDbContext context;
+        private readonly ICocktailIngredientService cocktailIngredientService;
         private readonly IDTOServiceMapper<Cocktail, CocktailDTO> mapper;
         private readonly IDTOServiceMapper<CommentDTO, CocktailComment> cocktailCommentMapper;
         private readonly IDTOServiceMapper<RatingDTO, CocktailRating> cocktailRatingMapper;
 
         public CocktailService(IriOnCocktailServiceDbContext context,
+                               ICocktailIngredientService cocktailIngredientService,
                                IDTOServiceMapper<Cocktail, CocktailDTO> mapper,
                                IDTOServiceMapper<CommentDTO, CocktailComment> cocktailCommentMapper,
                                IDTOServiceMapper<RatingDTO, CocktailRating> cocktailRatingMapper)
         {
             this.context = context;
+            this.cocktailIngredientService = cocktailIngredientService;
             this.mapper = mapper;
             this.cocktailCommentMapper = cocktailCommentMapper;
             this.cocktailRatingMapper = cocktailRatingMapper;
@@ -42,6 +45,8 @@ namespace IriOnCocktailService.ServiceLayer.Services
 
             await this.context.Cocktails.AddAsync(cocktail);
             await this.context.SaveChangesAsync();
+
+          //  cocktailIngredientService.CreateCocktailIngredient(cocktailDTO./*Collection of ingredients*/);
 
             return cocktailDTO;
         }

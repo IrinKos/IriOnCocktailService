@@ -2,6 +2,7 @@
 using IriOnCocktailService.Data.Entities;
 using IriOnCocktailService.ServiceLayer.DTOMappers.Contracts;
 using IriOnCocktailService.ServiceLayer.DTOS;
+using IriOnCocktailService.ServiceLayer.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace IriOnCocktailService.ServiceLayer.Services
 {
-    public class CocktailIngredientService
+    public class CocktailIngredientService : ICocktailIngredientService
     {
         private readonly IriOnCocktailServiceDbContext context;
         private readonly IDTOServiceMapper<CocktailIngredientDTO, CocktailIngredient> cocktailIngredientMapper;
@@ -20,14 +21,17 @@ namespace IriOnCocktailService.ServiceLayer.Services
             this.cocktailIngredientMapper = cocktailIngredientMapper;
         }
 
-        public async Task<CocktailIngredientDTO> CreateCocktailIngredient(CocktailIngredientDTO cocktailIngredientDTO)
+        public async Task<List<CocktailIngredientDTO>> CreateCocktailIngredient(List<CocktailIngredientDTO> cocktailIngredientDTOs)
         {
-            var cocktailIngredient = this.cocktailIngredientMapper.MapFrom(cocktailIngredientDTO);
+            foreach (var cocktailIngredientDTO in cocktailIngredientDTOs)
+            {
+                var cocktailIngredient = this.cocktailIngredientMapper.MapFrom(cocktailIngredientDTO);
 
-            await this.context.CocktailIngredients.AddAsync(cocktailIngredient);
+                await this.context.CocktailIngredients.AddAsync(cocktailIngredient);
+            }
             await this.context.SaveChangesAsync();
 
-            return cocktailIngredientDTO;
+            return cocktailIngredientDTOs;
         }
 
     }

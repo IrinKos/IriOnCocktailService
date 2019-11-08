@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IriOnCocktailService.App.Areas.Magician.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IriOnCocktailService.App.Areas.Magician.Controllers
@@ -15,7 +16,17 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         }
         public IActionResult Create()
         {
-            return View();
+            var viewModel = new CreateCocktailViewModel
+            {
+                SpecificIngredient = new List<AddIngredientToCocktailViewModel>()
+
+            };
+            return View(viewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateCocktailViewModel viewModel)
+        {
+            return Ok();
         }
     }
 }
