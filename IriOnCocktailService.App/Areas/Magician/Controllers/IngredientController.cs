@@ -1,11 +1,14 @@
 ﻿using IriOnCocktailService.App.Areas.Magician.Models;
 using IriOnCocktailService.App.Infrasturcture.Mappers.Contracts;
+using IriOnCocktailService.Data.Entities;
 using IriOnCocktailService.ServiceLayer.DTOS;
 using IriOnCocktailService.ServiceLayer.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace IriOnCocktailService.App.Areas.Magician.Controllers
@@ -41,6 +44,12 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            //var viewModel = new CreateIngredientViewModel
+            //{
+            //    AllUnitTypes = (await this.ingredientService.GetAllIngredients()).Select(i => new SelectListItem(i.UnitType, i.UnitType)).ToList(),
+            //};
+           
+            //return View(viewModel);
             return View();
         }
 

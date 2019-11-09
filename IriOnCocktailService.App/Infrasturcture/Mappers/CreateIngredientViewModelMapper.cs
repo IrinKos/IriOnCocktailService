@@ -17,6 +17,7 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
             {
                 Id = ingredientDTO.Id,
                 Name = ingredientDTO.Name,
+                UnitType = ingredientDTO.UnitType,
                 IsDeleted = ingredientDTO.IsDeleted
             };
         }
@@ -27,6 +28,7 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
             {
                 Id = viewModel.Id,
                 Name = viewModel.Name,
+                UnitType = viewModel.UnitType,
                 IsDeleted = viewModel.IsDeleted
             };
         }

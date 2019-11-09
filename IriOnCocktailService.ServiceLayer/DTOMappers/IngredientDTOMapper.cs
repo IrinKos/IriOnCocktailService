@@ -15,7 +15,19 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
             {
                 Id = entity.Id,
                 Name = entity.Name,
+                UnitType = entity.UnitType.ToString(),
                 IsDeleted = entity.IsDeleted
+            };
+        }
+
+        public Ingredient MapFrom(IngredientDTO ingredientDTO)
+        {
+            return new Ingredient
+            {
+                Id = ingredientDTO.Id,
+                Name = ingredientDTO.Name,
+                UnitType = (Unit)Enum.Parse(typeof(Unit), ingredientDTO.UnitType),
+                IsDeleted = ingredientDTO.IsDeleted
             };
         }
     }

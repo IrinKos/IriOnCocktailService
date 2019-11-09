@@ -18,14 +18,17 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         private readonly ICocktailService cocktailService;
         private readonly IIngredientService ingredientService;
         private readonly IDTOMapper<CreateCocktailViewModel, CocktailDTO> createCocktailMapper;
+        private readonly IViewModelMapper<IngredientDTO, CreateIngredientViewModel> ingredientMapper;
 
         public CocktailController(ICocktailService cocktailService,
                                   IIngredientService ingredientService,
-                                  IDTOMapper<CreateCocktailViewModel, CocktailDTO> createCocktailMapper)
+                                  IDTOMapper<CreateCocktailViewModel, CocktailDTO> createCocktailMapper,
+                                  IViewModelMapper<IngredientDTO, CreateIngredientViewModel> ingredientMapper)
         {
             this.cocktailService = cocktailService;
             this.ingredientService = ingredientService;
             this.createCocktailMapper = createCocktailMapper;
+            this.ingredientMapper = ingredientMapper;
         }
         public IActionResult Index()
         {
@@ -34,11 +37,13 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         public async Task<IActionResult> Create()
         {
             var allIngredients = (await ingredientService.GetAllIngredients()).Select(i => new SelectListItem(i.Name,i.Id)).ToList();
-
+            var unitTypes = (await ingredientService.GetAllIngredients()).Select(i => new SelectListItem(i.UnitType, i.Id)).ToList();
             var viewModel = new CreateCocktailViewModel
             {
                 SpecificIngredients = new List<AddIngredientToCocktailViewModel>(),
-                AllIngredients=allIngredients
+                AllIngredients=allIngredients,
+                AllUnitTypes=unitTypes,
+                AllAllIngredients= (await ingredientService.GetAllIngredients()).Select(i=>this.ingredientMapper.MapFromDTO(i)).ToList()
             };
             return View(viewModel);
         }

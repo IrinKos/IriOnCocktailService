@@ -15,7 +15,6 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
             return new CocktailIngredientDTO()
             {
                 Quantity=viewModel.Quantity,
-                UnitType=viewModel.Unit,
                 IngredientId=viewModel.IngredientId
             };
         }

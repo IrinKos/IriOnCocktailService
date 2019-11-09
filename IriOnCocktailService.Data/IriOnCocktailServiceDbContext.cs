@@ -22,6 +22,7 @@ namespace IriOnCocktailService.Data
         public DbSet<CocktailBar> CocktailBars { get; set; }
         public DbSet<CocktailIngredient> CocktailIngredients { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
+
         //public DbSet<Comment> Comments { get; set; }
         //public DbSet<Rating> Ratings { get; set; }
 
@@ -112,10 +113,6 @@ namespace IriOnCocktailService.Data
                 .IsRequired();
 
             builder.Entity<CocktailIngredient>()
-                .Property(cocktailIngredient => cocktailIngredient.UnitType)
-                .IsRequired();
-
-            builder.Entity<CocktailIngredient>()
                 .HasOne(cocktailIngredient => cocktailIngredient.Cocktail)
                 .WithMany(cocktail => cocktail.CocktailIngredients)
                 .HasForeignKey(cocktailIngredient => cocktailIngredient.CocktailId)
@@ -133,6 +130,10 @@ namespace IriOnCocktailService.Data
 
             builder.Entity<Ingredient>()
                 .Property(ingredient => ingredient.Name)
+                .IsRequired();
+
+            builder.Entity<Ingredient>()
+                .Property(ingredient => ingredient.UnitType)
                 .IsRequired();
 
             // Rating

@@ -10,6 +10,5 @@ namespace IriOnCocktailService.ServiceLayer.DTOS
         public string IngredientId { get; set; }
 
         public string Quantity { get; set; }
-        public string UnitType { get; set; }
     }
 }

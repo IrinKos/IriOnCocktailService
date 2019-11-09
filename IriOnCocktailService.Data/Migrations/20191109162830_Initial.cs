@@ -58,6 +58,7 @@ namespace IriOnCocktailService.Data.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
+                    UnitType = table.Column<int>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -148,8 +149,7 @@ namespace IriOnCocktailService.Data.Migrations
                 {
                     CocktailId = table.Column<string>(nullable: false),
                     IngredientId = table.Column<string>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false),
-                    UnitType = table.Column<int>(nullable: false)
+                    Quantity = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -254,7 +254,115 @@ namespace IriOnCocktailService.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
+                name: "BarComments",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    BarId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BarComments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BarComments_Bars_BarId",
+                        column: x => x.BarId,
+                        principalTable: "Bars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BarComments_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BarRatings",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Rate = table.Column<decimal>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    BarId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BarRatings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BarRatings_Bars_BarId",
+                        column: x => x.BarId,
+                        principalTable: "Bars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BarRatings_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CocktailComments",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    CocktailId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CocktailComments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CocktailComments_Cocktails_CocktailId",
+                        column: x => x.CocktailId,
+                        principalTable: "Cocktails",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CocktailComments_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CocktailRatings",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Rate = table.Column<decimal>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    CocktailId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CocktailRatings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CocktailRatings_Cocktails_CocktailId",
+                        column: x => x.CocktailId,
+                        principalTable: "Cocktails",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CocktailRatings_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comment",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -266,21 +374,21 @@ namespace IriOnCocktailService.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.PrimaryKey("PK_Comment", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_Bars_BarId",
+                        name: "FK_Comment_Bars_BarId",
                         column: x => x.BarId,
                         principalTable: "Bars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Comments_Cocktails_CocktailId",
+                        name: "FK_Comment_Cocktails_CocktailId",
                         column: x => x.CocktailId,
                         principalTable: "Cocktails",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Comments_AspNetUsers_UserId",
+                        name: "FK_Comment_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -288,7 +396,7 @@ namespace IriOnCocktailService.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ratings",
+                name: "Rating",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -300,21 +408,21 @@ namespace IriOnCocktailService.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ratings", x => x.Id);
+                    table.PrimaryKey("PK_Rating", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Ratings_Bars_BarId",
+                        name: "FK_Rating_Bars_BarId",
                         column: x => x.BarId,
                         principalTable: "Bars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Ratings_Cocktails_CocktailId",
+                        name: "FK_Rating_Cocktails_CocktailId",
                         column: x => x.CocktailId,
                         principalTable: "Cocktails",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Ratings_AspNetUsers_UserId",
+                        name: "FK_Rating_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -366,9 +474,39 @@ namespace IriOnCocktailService.Data.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BarComments_BarId",
+                table: "BarComments",
+                column: "BarId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BarComments_UserId",
+                table: "BarComments",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BarRatings_BarId",
+                table: "BarRatings",
+                column: "BarId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BarRatings_UserId",
+                table: "BarRatings",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CocktailBars_BarId",
                 table: "CocktailBars",
                 column: "BarId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CocktailComments_CocktailId",
+                table: "CocktailComments",
+                column: "CocktailId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CocktailComments_UserId",
+                table: "CocktailComments",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CocktailIngredients_IngredientId",
@@ -376,33 +514,43 @@ namespace IriOnCocktailService.Data.Migrations
                 column: "IngredientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_BarId",
-                table: "Comments",
-                column: "BarId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_CocktailId",
-                table: "Comments",
+                name: "IX_CocktailRatings_CocktailId",
+                table: "CocktailRatings",
                 column: "CocktailId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_UserId",
-                table: "Comments",
+                name: "IX_CocktailRatings_UserId",
+                table: "CocktailRatings",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ratings_BarId",
-                table: "Ratings",
+                name: "IX_Comment_BarId",
+                table: "Comment",
                 column: "BarId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ratings_CocktailId",
-                table: "Ratings",
+                name: "IX_Comment_CocktailId",
+                table: "Comment",
                 column: "CocktailId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ratings_UserId",
-                table: "Ratings",
+                name: "IX_Comment_UserId",
+                table: "Comment",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rating_BarId",
+                table: "Rating",
+                column: "BarId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rating_CocktailId",
+                table: "Rating",
+                column: "CocktailId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rating_UserId",
+                table: "Rating",
                 column: "UserId");
         }
 
@@ -424,16 +572,28 @@ namespace IriOnCocktailService.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "BarComments");
+
+            migrationBuilder.DropTable(
+                name: "BarRatings");
+
+            migrationBuilder.DropTable(
                 name: "CocktailBars");
+
+            migrationBuilder.DropTable(
+                name: "CocktailComments");
 
             migrationBuilder.DropTable(
                 name: "CocktailIngredients");
 
             migrationBuilder.DropTable(
-                name: "Comments");
+                name: "CocktailRatings");
 
             migrationBuilder.DropTable(
-                name: "Ratings");
+                name: "Comment");
+
+            migrationBuilder.DropTable(
+                name: "Rating");
 
             migrationBuilder.DropTable(
                 name: "Ingredients");

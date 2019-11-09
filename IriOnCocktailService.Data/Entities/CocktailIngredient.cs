@@ -3,7 +3,6 @@
     public class CocktailIngredient
     {
         public string Quantity { get; set; }
-        public Unit UnitType { get; set; }
 
         public string CocktailId { get; set; }
         public Cocktail Cocktail { get; set; }

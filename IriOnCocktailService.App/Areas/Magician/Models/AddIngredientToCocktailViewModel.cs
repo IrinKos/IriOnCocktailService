@@ -9,7 +9,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Models
     {
         public string CocktailId { get; set; }
         public string IngredientId { get; set; }
-        public string Quantity { get; set; }
         public string Unit { get; set; }
+        public string Quantity { get; set; }
     }
 }

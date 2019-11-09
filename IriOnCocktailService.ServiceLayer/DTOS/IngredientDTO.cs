@@ -9,8 +9,7 @@ namespace IriOnCocktailService.ServiceLayer.DTOS
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public string UnitType { get; set; }
         public bool IsDeleted { get; set; }
-
-        public virtual ICollection<CocktailIngredientDTO> CocktailIngredients { get; set; } = new List<CocktailIngredientDTO>();
     }
 }

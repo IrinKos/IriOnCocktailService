@@ -16,8 +16,7 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
             {
                 CocktailId = entity.CocktailId,
                 IngredientId = entity.IngredientId,
-                Quantity = entity.Quantity,
-                UnitType = entity.UnitType.ToString()
+                Quantity = entity.Quantity
             };
 
         }
@@ -28,8 +27,7 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
             {
                 CocktailId = cocktailIngredientDTO.CocktailId,
                 IngredientId = cocktailIngredientDTO.IngredientId,
-                Quantity = cocktailIngredientDTO.Quantity,
-                UnitType = (Unit)Enum.Parse(typeof(Unit), cocktailIngredientDTO.UnitType)
+                Quantity = cocktailIngredientDTO.Quantity
             };
         }
     }

@@ -41,6 +41,50 @@ namespace IriOnCocktailService.Data.Migrations
                     b.ToTable("Bars");
                 });
 
+            modelBuilder.Entity("IriOnCocktailService.Data.Entities.BarComment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BarId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BarId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("BarComments");
+                });
+
+            modelBuilder.Entity("IriOnCocktailService.Data.Entities.BarRating", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BarId");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<decimal>("Rate");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BarId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("BarRatings");
+                });
+
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.Cocktail", b =>
                 {
                     b.Property<string>("Id")
@@ -71,21 +115,64 @@ namespace IriOnCocktailService.Data.Migrations
                     b.ToTable("CocktailBars");
                 });
 
+            modelBuilder.Entity("IriOnCocktailService.Data.Entities.CocktailComment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CocktailId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CocktailId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CocktailComments");
+                });
+
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.CocktailIngredient", b =>
                 {
                     b.Property<string>("CocktailId");
 
                     b.Property<string>("IngredientId");
 
-                    b.Property<int>("Quantity");
-
-                    b.Property<int>("UnitType");
+                    b.Property<string>("Quantity")
+                        .IsRequired();
 
                     b.HasKey("CocktailId", "IngredientId");
 
                     b.HasIndex("IngredientId");
 
                     b.ToTable("CocktailIngredients");
+                });
+
+            modelBuilder.Entity("IriOnCocktailService.Data.Entities.CocktailRating", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CocktailId");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<decimal>("Rate");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CocktailId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CocktailRatings");
                 });
 
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.Comment", b =>
@@ -111,7 +198,7 @@ namespace IriOnCocktailService.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comment");
                 });
 
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.Ingredient", b =>
@@ -123,6 +210,8 @@ namespace IriOnCocktailService.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired();
+
+                    b.Property<int>("UnitType");
 
                     b.HasKey("Id");
 
@@ -153,7 +242,7 @@ namespace IriOnCocktailService.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Ratings");
+                    b.ToTable("Rating");
                 });
 
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.User", b =>
@@ -325,6 +414,28 @@ namespace IriOnCocktailService.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("IriOnCocktailService.Data.Entities.BarComment", b =>
+                {
+                    b.HasOne("IriOnCocktailService.Data.Entities.Bar", "Bar")
+                        .WithMany("BarComments")
+                        .HasForeignKey("BarId");
+
+                    b.HasOne("IriOnCocktailService.Data.Entities.User", "User")
+                        .WithMany("BarComments")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("IriOnCocktailService.Data.Entities.BarRating", b =>
+                {
+                    b.HasOne("IriOnCocktailService.Data.Entities.Bar", "Bar")
+                        .WithMany("BarRatings")
+                        .HasForeignKey("BarId");
+
+                    b.HasOne("IriOnCocktailService.Data.Entities.User", "User")
+                        .WithMany("BarRatings")
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.CocktailBar", b =>
                 {
                     b.HasOne("IriOnCocktailService.Data.Entities.Bar", "Bar")
@@ -336,6 +447,17 @@ namespace IriOnCocktailService.Data.Migrations
                         .WithMany("CocktailBars")
                         .HasForeignKey("CocktailId")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("IriOnCocktailService.Data.Entities.CocktailComment", b =>
+                {
+                    b.HasOne("IriOnCocktailService.Data.Entities.Cocktail", "Cocktail")
+                        .WithMany()
+                        .HasForeignKey("CocktailId");
+
+                    b.HasOne("IriOnCocktailService.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.CocktailIngredient", b =>
@@ -351,10 +473,21 @@ namespace IriOnCocktailService.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("IriOnCocktailService.Data.Entities.CocktailRating", b =>
+                {
+                    b.HasOne("IriOnCocktailService.Data.Entities.Cocktail", "Cocktail")
+                        .WithMany()
+                        .HasForeignKey("CocktailId");
+
+                    b.HasOne("IriOnCocktailService.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.Comment", b =>
                 {
                     b.HasOne("IriOnCocktailService.Data.Entities.Bar", "Bar")
-                        .WithMany("Comments")
+                        .WithMany()
                         .HasForeignKey("BarId");
 
                     b.HasOne("IriOnCocktailService.Data.Entities.Cocktail", "Cocktail")
@@ -362,14 +495,14 @@ namespace IriOnCocktailService.Data.Migrations
                         .HasForeignKey("CocktailId");
 
                     b.HasOne("IriOnCocktailService.Data.Entities.User", "User")
-                        .WithMany("Comments")
+                        .WithMany()
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.Rating", b =>
                 {
                     b.HasOne("IriOnCocktailService.Data.Entities.Bar", "Bar")
-                        .WithMany("Ratings")
+                        .WithMany()
                         .HasForeignKey("BarId");
 
                     b.HasOne("IriOnCocktailService.Data.Entities.Cocktail", "Cocktail")
@@ -377,7 +510,7 @@ namespace IriOnCocktailService.Data.Migrations
                         .HasForeignKey("CocktailId");
 
                     b.HasOne("IriOnCocktailService.Data.Entities.User", "User")
-                        .WithMany("Ratings")
+                        .WithMany()
                         .HasForeignKey("UserId");
                 });
 
