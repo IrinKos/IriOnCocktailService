@@ -37,16 +37,17 @@ namespace IriOnCocktailService.ServiceLayer.Services
         {
             var cocktail = new Cocktail
             {
-                Id = cocktailDTO.Id,
                 Name = cocktailDTO.Name,
-                PicUrl = cocktailDTO.PicUrl,
-                NotAvailable = cocktailDTO.NotAvailable
             };
 
             await this.context.Cocktails.AddAsync(cocktail);
             await this.context.SaveChangesAsync();
-
-          //  cocktailIngredientService.CreateCocktailIngredient(cocktailDTO./*Collection of ingredients*/);
+            //cocktailDTO.Ingredients.Select(cdto => cdto.CocktailId = cocktail.Id);
+            foreach (var item in cocktailDTO.Ingredients)
+            {
+                item.CocktailId = cocktail.Id;
+            }
+            await cocktailIngredientService.CreateCocktailIngredient(cocktailDTO.Ingredients);
 
             return cocktailDTO;
         }

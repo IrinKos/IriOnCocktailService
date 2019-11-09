@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IriOnCocktailService.App.Areas.Magician.Models;
+using IriOnCocktailService.App.Infrasturcture.Mappers.Contracts;
+using IriOnCocktailService.ServiceLayer.DTOS;
 using IriOnCocktailService.ServiceLayer.Services;
 using IriOnCocktailService.ServiceLayer.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
@@ -15,12 +17,15 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
     {
         private readonly ICocktailService cocktailService;
         private readonly IIngredientService ingredientService;
+        private readonly IDTOMapper<CreateCocktailViewModel, CocktailDTO> createCocktailMapper;
 
         public CocktailController(ICocktailService cocktailService,
-                                  IIngredientService ingredientService)
+                                  IIngredientService ingredientService,
+                                  IDTOMapper<CreateCocktailViewModel, CocktailDTO> createCocktailMapper)
         {
             this.cocktailService = cocktailService;
             this.ingredientService = ingredientService;
+            this.createCocktailMapper = createCocktailMapper;
         }
         public IActionResult Index()
         {
@@ -41,8 +46,9 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateCocktailViewModel viewModel)
         {
+            var dto = this.createCocktailMapper.MapFromViewModel(viewModel);
+            await this.cocktailService.CreateCocktail(dto);
 
-            await Task.Delay(0);
            // cocktailService.CreateCocktail()
             return Ok();
         }

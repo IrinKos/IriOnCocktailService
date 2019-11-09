@@ -8,6 +8,6 @@ namespace IriOnCocktailService.Data.Entities
     {
         Millilitres = 1,
         Quantity = 2,
-        Grams,
+        Grams=3
     }
 }

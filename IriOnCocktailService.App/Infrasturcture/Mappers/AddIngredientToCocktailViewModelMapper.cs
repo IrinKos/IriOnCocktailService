@@ -16,7 +16,7 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
             {
                 Quantity=viewModel.Quantity,
                 UnitType=viewModel.Unit,
-                IngredientId=viewModel.IngredientId                
+                IngredientId=viewModel.IngredientId
             };
         }
     }

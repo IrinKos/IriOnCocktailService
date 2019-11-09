@@ -10,12 +10,18 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
 {
     public class CreateCocktailViewModelMapper : IDTOMapper<CreateCocktailViewModel, CocktailDTO>
     {
+        private readonly IDTOMapper<AddIngredientToCocktailViewModel, CocktailIngredientDTO> mapper;
+
+        public CreateCocktailViewModelMapper(IDTOMapper<AddIngredientToCocktailViewModel, CocktailIngredientDTO> mapper)
+        {
+            this.mapper = mapper;
+        }
         public CocktailDTO MapFromViewModel(CreateCocktailViewModel viewModel)
         {
             return new CocktailDTO
             {
                 Name = viewModel.CocktailName,
-                //Ingredients = viewModel.SpecificIngredients
+                Ingredients = viewModel.SpecificIngredients.Select(x => mapper.MapFromViewModel(x)).ToList(),
             };
         }
     }

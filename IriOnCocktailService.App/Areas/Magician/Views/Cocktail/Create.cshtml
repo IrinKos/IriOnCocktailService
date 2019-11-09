@@ -21,7 +21,7 @@
                 <datalist id="ingr">
                     @foreach (var item in Model.AllIngredients)
                     {
-                        <option class="hidenvalue" value-hidden="@item.Value">@item.Text</option>
+                        <option value="@item.Value">@item.Text</option>
                     }
                 </datalist>
             </div>
@@ -40,16 +40,11 @@
 @section Scripts {
 
     <script>
-
         $(() => {
             let current = 0;
             $('#test').click(() => {
-                let a = document.getElementsByClassName("hidenvalue").value;
-                console.log(a);
-                
-                console.log($('.hidenvalue').val());
                 const inputs = `<div>Ingredient ${current + 1}</div>
-                                <input list="ingr" name="specificIngredients[${current}].IngredientId" placeholder="Select Ingredient..." type="" class="form-control"/>
+                                <input list="ingr" name="specificIngredients[${current}].IngredientId" placeholder="Select Ingredient..." type="" class="form-control">
                                 <input name="specificIngredients[${current}].quantity" placeholder="Quantity..." type="text" class="form-control" />
                                 <input name="specificIngredients[${current}].unit" placeholder="Item..." type="text" class="form-control" />
                                 <hr>`
