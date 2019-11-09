@@ -17,13 +17,16 @@
                 <input asp-for="CocktailName" class="form-control" />
                 <span asp-validation-for="CocktailName" class="text-danger"></span>
             </div>
+            <input style="display:none" id="qwe" />
             <div class="form-group" id="add-here">
-                <datalist id="ingr">
+                <select id="ingr">
+                    <option selected disabled value="">Select ingredient</option>
                     @foreach (var item in Model.AllIngredients)
                     {
-                        <option value="@item.Value">@item.Text</option>
+                        //<div class="neshto" value="@item.Text" id="@item.Value"></div>
+                        <option data-name ="@item.Text" id="@item.Value" value="@item.Value">@item.Text</option>
                     }
-                </datalist>
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -31,26 +34,58 @@
         </form>
     </div>
 </div>
-
+<button id="addingredient" style="display:none">butonchence</button>
 <button id="test">Click me</button>
 <div>
     <a asp-action="Index">Back to List</a>
+</div>
+<div>
+    <ol id="selectedIngredients">
+        <li></li>
+    </ol>
 </div>
 
 @section Scripts {
 
     <script>
+        let ingredients = new Array();
+        //$(() => {
+        //    let current = 0;
+        //    $('#test').click(() => {
+        //        const inputs = `<div>Ingredient ${current + 1}</div>
+        //                        <input list="ingr" name="specificIngredients[${current}].IngredientId" placeholder="Select Ingredient..." type="" class="form-control">
+        //                        <input name="specificIngredients[${current}].quantity" placeholder="Quantity..." type="text" class="form-control" />
+        //                        <input name="specificIngredients[${current}].unit" placeholder="Item..." type="text" class="form-control" />
+        //                        <hr>`
+        //        current++;
+        //        $('#add-here').append(inputs);
+        //    })
+        //})
+
         $(() => {
-            let current = 0;
-            $('#test').click(() => {
-                const inputs = `<div>Ingredient ${current + 1}</div>
-                                <input list="ingr" name="specificIngredients[${current}].IngredientId" placeholder="Select Ingredient..." type="" class="form-control">
-                                <input name="specificIngredients[${current}].quantity" placeholder="Quantity..." type="text" class="form-control" />
-                                <input name="specificIngredients[${current}].unit" placeholder="Item..." type="text" class="form-control" />
-                                <hr>`
-                current++;
-                $('#add-here').append(inputs);
+            $('#ingr').on("change", () => {
+                $("#qwe").show();
+                $("#addingredient").show();
             })
+        })
+
+        $("#addingredient").on("click", () => {
+            const ing = $("#ingr").val();
+            const quant = $("#qwe").val();
+            const name = $(`#${ing}`).attr("data-name");
+            console.log(name);
+            const input = `<li  name="specificIngredients[${0}].IngredientId"class="form-control">${name}</li>
+                            <li  name="specificIngredients[${0}].IngredientId"class="form-control">${quant}</li>`
+            ingredients.push({ id: ing, quantity: quant, name :  name});
+            console.log(ingredients);
+            $("#" + ing).hide();
+
+            $("#qwe").val("");
+            $("#qwe").hide();
+            $("#addigredient").hide();
+            $('#selectedIngredients').append(input);
         })
     </script>
 }
+
+"#" + ing = #ing
