@@ -16,17 +16,19 @@ namespace IriOnCocktailService.ServiceLayer.Services
     {
         private readonly IriOnCocktailServiceDbContext context;
         private readonly IDTOServiceMapper<Ingredient, IngredientDTO> mapper;
+        private readonly IDTOServiceMapper<IngredientDTO, Ingredient> mapToEntity;
 
-        public IngredientService(IriOnCocktailServiceDbContext context, IDTOServiceMapper<Ingredient, IngredientDTO> mapper)
+        public IngredientService(IriOnCocktailServiceDbContext context, IDTOServiceMapper<Ingredient, IngredientDTO> mapper,
+            IDTOServiceMapper<IngredientDTO, Ingredient> mapToEntity)
         {
             this.context = context;
             this.mapper = mapper;
+            this.mapToEntity = mapToEntity;
         }
 
         public async Task<IngredientDTO> CreateIngredient(IngredientDTO ingredientDTO)
         {
-            var ingredient = new Ingredient { Id = ingredientDTO.Id, Name = ingredientDTO.Name };
-
+            var ingredient = this.mapToEntity.MapFrom(ingredientDTO);
             //if (this.GetIngredientDTO(ingredientDTO.Name) != null)
             //    throw new ArgumentException(GlobalConstants.ExistedIngredient);
 
@@ -70,7 +72,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
         {
             var ingredients = await this.context.Ingredients
                 .Where(i => i.IsDeleted == false)
-                .Select(i => new IngredientDTO { Id = i.Id, Name = i.Name })
+                .Select(i => this.mapper.MapFrom(i))
                 .ToListAsync();
 
             return ingredients;

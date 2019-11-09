@@ -38,12 +38,13 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         {
             var allIngredients = (await ingredientService.GetAllIngredients()).Select(i => new SelectListItem(i.Name,i.Id)).ToList();
             var unitTypes = (await ingredientService.GetAllIngredients()).Select(i => new SelectListItem(i.UnitType, i.Id)).ToList();
+            var a = (await ingredientService.GetAllIngredients()).Select(i => this.ingredientMapper.MapFromDTO(i)).ToList();
             var viewModel = new CreateCocktailViewModel
             {
                 SpecificIngredients = new List<AddIngredientToCocktailViewModel>(),
                 AllIngredients=allIngredients,
                 AllUnitTypes=unitTypes,
-                AllAllIngredients= (await ingredientService.GetAllIngredients()).Select(i=>this.ingredientMapper.MapFromDTO(i)).ToList()
+                AllAllIngredients= a
             };
             return View(viewModel);
         }

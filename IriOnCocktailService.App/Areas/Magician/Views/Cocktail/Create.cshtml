@@ -55,13 +55,18 @@
             //let unitType = $($("#ingr").val()).attr("data-unit");
             //console.log($("#ingr"));
             //console.log(unitType);
-            const name = $($("#ingr").val()).attr("data-unit");
-            console.log($("#ingr").children());
+            const ing = $("#ingr");
+            console.log(ing);
+            const name = $("#ingr").children("option");
+            console.log(name);
+            let asd = $(name).attr("data-unit");
+            console.log(asd);
+            console.log($("#ingr").children(name).attr("data-unit"));
             $('#test').click(() => {
                 const inputs = `<div>Ingredient ${current + 1}</div>
                                 <input list = "ingr" name="specificIngredients[${current}].IngredientId" placeholder="Select Ingredient..." type="" class="form-control">
                                 <input name="specificIngredients[${current}].quantity" placeholder="Quantity..." type="text" class="form-control" />
-                                <input  disabled placeholder="Unit type.." type="text" class="form-control" />
+                                <input value = "" disabled placeholder="Unit type.." type="text" class="form-control" />
                                 <hr>`
                 current++;
                 $('#add-here').append(inputs);
