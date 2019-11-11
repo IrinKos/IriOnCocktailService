@@ -14,9 +14,11 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
         {
             var viewModel =  new DisplayBarsViewModel
             {
+                Id=dto.BarId,
                 Name = dto.BarName,
                 Address=dto.BarAddress,
-                PictureURL=dto.BarPicUrl
+                PictureURL=dto.BarPicUrl,
+                PhoneNumber=dto.BarPhoneNumber,
             };
             if (dto.BarRatings.Where(br => br.BarId == dto.BarId).Any())
             {

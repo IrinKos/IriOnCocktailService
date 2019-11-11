@@ -9,8 +9,8 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
 {
     public class BarDTOMapper : IDTOServiceMapper<Bar, BarDTO>,
                                 IDTOServiceMapper<BarDTO, Bar>,
-                                IDTOServiceMapper<ICollection<BarDTO>,ICollection<Bar>>,
-                                IDTOServiceMapper<ICollection<Bar>,ICollection<BarDTO>>
+                                IDTOServiceMapper<ICollection<BarDTO>, ICollection<Bar>>,
+                                IDTOServiceMapper<ICollection<Bar>, ICollection<BarDTO>>
     {
         public BarDTO MapFrom(Bar entity)
         {
