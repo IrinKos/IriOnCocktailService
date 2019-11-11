@@ -16,6 +16,14 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
         {
             this.mapper = mapper;
         }
+
+        public CreateCocktailViewModel MapFromDTO(CocktailDTO cocktailDTO)
+        {
+            return new CreateCocktailViewModel
+            {
+                
+            };
+        }
         public CocktailDTO MapFromViewModel(CreateCocktailViewModel viewModel)
         {
             return new CocktailDTO

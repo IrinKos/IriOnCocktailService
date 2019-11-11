@@ -30,10 +30,17 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             this.createCocktailMapper = createCocktailMapper;
             this.ingredientMapper = ingredientMapper;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+        //public async Task<IActionResult> Index()
+        //{
+        //    var cocktails = await this.cocktailService.GetAllCocktailsDTO();
+        //    var cocktailsViewModel = new List<CreateCocktailViewModel>();
+
+        //    foreach (var cocktailsVM in cocktails)
+        //    {
+        //        cocktailsViewModel.Add(this.createCocktailMapper.)
+        //    }
+        //    return View();
+        //}
         public async Task<IActionResult> Create()
         {
             var allIngredients = (await ingredientService.GetAllIngredients()).Select(i => new SelectListItem(i.Name,i.Id)).ToList();
