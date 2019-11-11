@@ -8,7 +8,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Models
 {
     public class CollectionViewModel
     {
-        public ICollection<BarDTO> Bars { get; set; }
+        public ICollection<DisplayBarsViewModel> Bars { get; set; }
 
         public int? PreviousPage { get; set; }
 

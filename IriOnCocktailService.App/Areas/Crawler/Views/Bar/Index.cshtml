@@ -1,4 +1,4 @@
-﻿@model CollectionViewModel
+﻿@model IriOnCocktailService.App.Areas.Magician.Models.CollectionViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -24,6 +24,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Bars.First().PictureURL)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bars.First().Rating)
+            </th>
             @*<th>
                     @Html.DisplayNameFor(model => model.NotAvailable)
                 </th>*@
@@ -46,15 +49,17 @@
                         @Html.DisplayFor(modelItem => item.PhoneNumber)
                     </td>
                     <td>
-                        <img height="400" width="400" src="@Html.DisplayFor(modelItem => item.PictureURL)"/>
+                        <img height="400" width="400" src="@Html.DisplayFor(modelItem => item.PictureURL)" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rating)
                     </td>
                     @*<td>
                             @Html.DisplayFor(modelItem => item.NotAvailable)
                         </td>*@
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a asp-action="Details" asp-route-Id="@item.Id">Details</a>
+                        <a asp-action="Rating" asp-route-id="@item.Id">Rate</a>
                     </td>
                 </tr>
             }
