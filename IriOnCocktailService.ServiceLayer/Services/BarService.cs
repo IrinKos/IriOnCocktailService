@@ -16,21 +16,21 @@ namespace IriOnCocktailService.ServiceLayer.Services
         private readonly IriOnCocktailServiceDbContext context;
         private readonly IDTOServiceMapper<Bar, BarDTO> mapper;
         private readonly IDTOServiceMapper<BarDTO, Bar> mapperFromEntity;
-        private readonly IDTOServiceMapper<ICollection<Bar>, CollectionDTO> collectionMapper;
+        private readonly IDTOServiceMapper<ICollection<Bar>,ICollection<BarDTO>> barsMapper;
         private readonly IDTOServiceMapper<CommentDTO, BarComment> barCommentMapper;
         private readonly IDTOServiceMapper<RatingDTO, BarRating> barRatingMapper;
 
         public BarService(IriOnCocktailServiceDbContext context, 
                          IDTOServiceMapper<Bar, BarDTO> mapper,
                          IDTOServiceMapper<BarDTO, Bar> mapperFromEntity,
-                         IDTOServiceMapper<ICollection<Bar>, CollectionDTO> collectionMapper,
+                         IDTOServiceMapper<ICollection<Bar>, ICollection<BarDTO>> barsMapper,
                          IDTOServiceMapper<CommentDTO, BarComment> barCommentMapper,
                          IDTOServiceMapper<RatingDTO, BarRating> barRatingMapper)
         {
             this.context = context;
             this.mapper = mapper;
             this.mapperFromEntity = mapperFromEntity;
-            this.collectionMapper = collectionMapper;
+            this.barsMapper = barsMapper;
             this.barCommentMapper = barCommentMapper;
             this.barRatingMapper = barRatingMapper;
         }
@@ -67,14 +67,14 @@ namespace IriOnCocktailService.ServiceLayer.Services
             return barDTO;
         }
 
-        public async Task<CollectionDTO> GetBarsAsync()
+        public async Task<ICollection<BarDTO>> GetBarsAsync()
         {
             var bars = await this.context.Bars
                 .Include(b => b.BarRatings)
                 .Include(b => b.BarComments)
                 .Include(b => b.CocktailBars)
                 .ToListAsync();
-            var barsDTOs = this.collectionMapper.MapFrom(bars);
+            var barsDTOs = this.barsMapper.MapFrom(bars);
 
             return barsDTOs;
         }

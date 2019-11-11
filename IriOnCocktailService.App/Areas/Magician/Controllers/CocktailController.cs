@@ -58,5 +58,11 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
            // cocktailService.CreateCocktail()
             return Ok();
         }
+        [HttpPost]
+        public async Task<string> SetIngredientUnit(string id)
+        {
+            //TODO find the fucking unity // credits : iwaka
+            return "Milliliters";
+        }
     }
 }

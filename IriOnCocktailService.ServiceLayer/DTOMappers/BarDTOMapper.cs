@@ -8,7 +8,9 @@ using System.Linq;
 namespace IriOnCocktailService.ServiceLayer.DTOMappers
 {
     public class BarDTOMapper : IDTOServiceMapper<Bar, BarDTO>,
-                                IDTOServiceMapper<BarDTO,Bar>
+                                IDTOServiceMapper<BarDTO, Bar>,
+                                IDTOServiceMapper<ICollection<BarDTO>,ICollection<Bar>>,
+                                IDTOServiceMapper<ICollection<Bar>,ICollection<BarDTO>>
     {
         public BarDTO MapFrom(Bar entity)
         {
@@ -20,8 +22,8 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
                 BarPhoneNumber = entity.PhoneNumber,
                 BarPicUrl = entity.PicUrl,
                 BarNotAvailable = entity.NotAvailable,
-                BarRatings = entity.BarRatings.Where(br=>br.BarId==entity.Id).ToList(),
-                BarComments = entity.BarComments.Where(bc=>bc.BarId==entity.Id).ToList()
+                BarRatings = entity.BarRatings.Where(br => br.BarId == entity.Id).ToList(),
+                BarComments = entity.BarComments.Where(bc => bc.BarId == entity.Id).ToList()
             };
         }
 
@@ -29,13 +31,22 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
         {
             return new Bar()
             {
-                Id=barDTO.BarId,
-                Address=barDTO.BarAddress,
-                Name=barDTO.BarName,
-                PhoneNumber=barDTO.BarPhoneNumber,
-                PicUrl=barDTO.BarPicUrl,
-                NotAvailable=barDTO.BarNotAvailable
+                Id = barDTO.BarId,
+                Address = barDTO.BarAddress,
+                Name = barDTO.BarName,
+                PhoneNumber = barDTO.BarPhoneNumber,
+                PicUrl = barDTO.BarPicUrl,
+                NotAvailable = barDTO.BarNotAvailable
             };
+        }
+
+        public ICollection<Bar> MapFrom(ICollection<BarDTO> bar)
+        {
+            return bar.Select(this.MapFrom).ToList();
+        }
+        public ICollection<BarDTO> MapFrom(ICollection<Bar> bar)
+        {
+            return bar.Select(this.MapFrom).ToList();
         }
     }
 }

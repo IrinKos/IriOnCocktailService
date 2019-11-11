@@ -9,5 +9,6 @@ namespace IriOnCocktailService.ServiceLayer.DTOS
     public class CollectionDTO
     {
         public ICollection<BarDTO> Bars { get; set; }
+        public ICollection<CocktailDTO> Cocktails { get; set; }
     }
 }

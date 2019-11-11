@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using IriOnCocktailService.ServiceLayer.DTOS;
 
 namespace IriOnCocktailService.ServiceLayer.Services.Contracts
@@ -9,7 +10,7 @@ namespace IriOnCocktailService.ServiceLayer.Services.Contracts
         Task DeleteBarAsync(string barId);
         Task<BarDTO> EditBarAsync(BarDTO barDTO);
         Task<BarDTO> GetBarAsync(string barId);
-        Task<CollectionDTO> GetBarsAsync();
+        Task<ICollection<BarDTO>> GetBarsAsync();
         Task<CommentDTO> BarCommentAsync(CommentDTO barCommentDTO);
         Task<RatingDTO> BarRatingAsync(RatingDTO barRatingDTO);
     }

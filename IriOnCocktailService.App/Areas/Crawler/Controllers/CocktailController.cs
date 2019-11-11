@@ -68,5 +68,6 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
 
             return Ok();
         }
+        
     }
 }
