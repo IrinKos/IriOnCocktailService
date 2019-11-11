@@ -9,33 +9,49 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table bg-white text-white">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitType)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnitType)
-                </td>
-                <td>
-                    
-                        <a class="myButtonEdit" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a class="myButtonDelete" asp-action="Delete" asp-route-id="@item.Id">Delete!</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<section>
+    <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnitType)
+                    </th>
+                    <th>
+                        Edit
+                    </th>
+                    <th>
+                        Delete
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="~/lib/images/dropper.png" alt="BackToList" width="30">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitType)
+                        </td>
+                        <td>
+                            <a class="myButtonEdit" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        </td>
+                        <td>
+                            <a class="myButtonDelete" asp-action="Delete" asp-route-id="@item.Id">Delete!</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
