@@ -87,14 +87,10 @@ namespace IriOnCocktailService.ServiceLayer.Services
         public async Task<ICollection<CocktailDTO>> GetAllCocktailsDTO()
         {
             var cocktails = await this.context.Cocktails
+                .Include(c=>c.CocktailIngredients)
+                    .ThenInclude(ci=>ci.Ingredient)
                 .Where(c => c.NotAvailable == false)
-                .Select(c => new CocktailDTO
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    PicUrl = c.PicUrl,
-                    NotAvailable = c.NotAvailable
-                })
+                .Select(c => this.mapper.MapFrom(c))
                 .ToListAsync();
 
             return cocktails;

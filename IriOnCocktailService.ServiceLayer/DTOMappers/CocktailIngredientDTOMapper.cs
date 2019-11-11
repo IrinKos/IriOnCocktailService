@@ -14,6 +14,8 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
         {
             return new CocktailIngredientDTO
             {
+                Name=entity.Ingredient.Name,
+                Type=entity.Ingredient.UnitType.ToString(),
                 CocktailId = entity.CocktailId,
                 IngredientId = entity.IngredientId,
                 Quantity = entity.Quantity

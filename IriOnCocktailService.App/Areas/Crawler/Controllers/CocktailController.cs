@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using IriOnCocktailService.App.Areas.Crawler.Models;
+using IriOnCocktailService.App.Areas.Magician.Models;
 using IriOnCocktailService.App.Infrasturcture.Mappers.Contracts;
 using IriOnCocktailService.ServiceLayer.DTOS;
 using IriOnCocktailService.ServiceLayer.Services.Contracts;
@@ -11,20 +12,22 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IriOnCocktailService.App.Areas.Crawler.Controllers
 {
+    [Area("Crawler")]
     public class CocktailController : Controller
     {
         private readonly ICocktailService cocktailService;
-        //private readonly IViewModelMapper<CollectionDTO, CollectionViewModel> collectionMapper;
+        private readonly IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel> collectionMapper;
         private readonly IDTOMapper<CommentViewModel, CommentDTO> cocktailCommentMapper;
         private readonly IDTOMapper<RatingViewModel, RatingDTO> cocktailRatingMapper;
 
         public CocktailController(ICocktailService cocktailService,
-                             //IViewModelMapper<CollectionDTO, CollectionViewModel> collectionMapper,
+                             IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel> collectionMapper,
                              IDTOMapper<CommentViewModel, CommentDTO> cocktailCommentMapper,
                              IDTOMapper<RatingViewModel, RatingDTO> cocktailRatingMapper
                              )
         {
             this.cocktailService = cocktailService;
+            this.collectionMapper = collectionMapper;
             this.cocktailCommentMapper = cocktailCommentMapper;
             this.cocktailRatingMapper = cocktailRatingMapper;
         }
@@ -32,9 +35,10 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            //var barsDto = await this.barService.GetBarsAsync();
-            //var viewModel = this.collectionMapper.MapFromDTO(barsDto);
-            return View(/*viewModel*/);
+            var barsDto = await this.cocktailService.GetAllCocktailsDTO();
+            var viewModel = this.collectionMapper.MapFromDTO(barsDto);
+
+            return View(viewModel);
         }
         [HttpGet]
         public IActionResult Comment()

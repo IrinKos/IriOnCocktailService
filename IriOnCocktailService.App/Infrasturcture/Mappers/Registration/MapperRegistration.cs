@@ -16,6 +16,8 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers.Registration
         {
             //
             services.AddSingleton <IViewModelMapper<BarDTO, DisplayBarsViewModel>, DisplayBarsViewModelMapper> ();
+            services.AddSingleton <IViewModelMapper<CocktailDTO, DisplayCocktailViewModel>, DisplayCocktailViewModelMapper> ();
+            services.AddSingleton <IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel>, CollectionViewModelMapper> ();
 
 
             //

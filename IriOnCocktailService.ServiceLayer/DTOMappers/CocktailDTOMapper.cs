@@ -3,21 +3,38 @@ using IriOnCocktailService.ServiceLayer.DTOMappers.Contracts;
 using IriOnCocktailService.ServiceLayer.DTOS;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace IriOnCocktailService.ServiceLayer.DTOMappers
 {
     public class CocktailDTOMapper : IDTOServiceMapper<Cocktail, CocktailDTO>
     {
+        private readonly IDTOServiceMapper<CocktailIngredient, CocktailIngredientDTO> mapper;
+
+        public CocktailDTOMapper(IDTOServiceMapper<CocktailIngredient, CocktailIngredientDTO> mapper)
+        {
+            this.mapper = mapper;
+        }
         public CocktailDTO MapFrom(Cocktail entity)
         {
-            return new CocktailDTO
+            var dto = new CocktailDTO
             {
                 Id = entity.Id,
                 Name = entity.Name,
                 PicUrl = entity.PicUrl,
-                NotAvailable = entity.NotAvailable
+                NotAvailable = entity.NotAvailable,
+                Ingredients = entity.CocktailIngredients.Where(ingr => ingr.CocktailId == entity.Id).Select(x=> this.mapper.MapFrom(x)).ToList(),
+                Rating=entity.Ratings.Where(r=>r.CocktailId==entity.Id).Average(r=>r.Rate)
             };
+            if (entity.Ratings.Where(br => br.CocktailId == entity.Id).Any())
+            {
+                dto.Rating = entity.Ratings.Where(br => br.CocktailId == entity.Id).Average(g => g.Rate);
+            }
+            else
+                dto.Rating = 0;
+
+            return dto;
         }
     }
 }
