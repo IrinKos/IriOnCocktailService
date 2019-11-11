@@ -15,35 +15,26 @@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitType)
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">
-                        Edit
-                        @*<img class="d-flex ml-3" src="~/lib/images/EditGreenTrans.png" alt="Edit" width="100">*@
-                    </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">
-                        DELETE
-                        @*<img class="d-flex ml-3" src="~/lib/images/EditGreenTrans.png" alt="Edit" width="100">*@
-                    </a>
-
-                    
-                    <a data-toggle="modal" data-target="#exampleModal" asp-route-id="@item.Id">
-                        Delete
-                        @*<img class="d-flex ml-3" src="~/lib/images/EditGreenTrans.png" alt="Edit" width="100">*@
-                    </a>
-
-                    
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitType)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">DELETE</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
