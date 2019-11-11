@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IriOnCocktailService.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -362,40 +362,6 @@ namespace IriOnCocktailService.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comment",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    CocktailId = table.Column<string>(nullable: true),
-                    BarId = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comment", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Comment_Bars_BarId",
-                        column: x => x.BarId,
-                        principalTable: "Bars",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Comment_Cocktails_CocktailId",
-                        column: x => x.CocktailId,
-                        principalTable: "Cocktails",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Comment_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Rating",
                 columns: table => new
                 {
@@ -524,21 +490,6 @@ namespace IriOnCocktailService.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comment_BarId",
-                table: "Comment",
-                column: "BarId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comment_CocktailId",
-                table: "Comment",
-                column: "CocktailId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comment_UserId",
-                table: "Comment",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Rating_BarId",
                 table: "Rating",
                 column: "BarId");
@@ -588,9 +539,6 @@ namespace IriOnCocktailService.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "CocktailRatings");
-
-            migrationBuilder.DropTable(
-                name: "Comment");
 
             migrationBuilder.DropTable(
                 name: "Rating");
