@@ -9,6 +9,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Models
     public class CollectionViewModel
     {
         public ICollection<DisplayBarsViewModel> Bars { get; set; }
+        public ICollection<DisplayCocktailViewModel> Cocktails { get; set; }
 
         public int? PreviousPage { get; set; }
 

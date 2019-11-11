@@ -1,0 +1,53 @@
+﻿@model IriOnCocktailService.App.Areas.Magician.Models.CollectionViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cocktails.First().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cocktails.First().PictureURL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cocktails.First().Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cocktails.First().NotAvailable)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Cocktails) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PictureURL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NotAvailable)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", item.Id) |
+                @Html.ActionLink("Rate", "Rating", item.Id) |
+                @Html.ActionLink("Comment", "Comment", item.Id)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
