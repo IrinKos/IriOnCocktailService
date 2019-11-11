@@ -42,11 +42,11 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-  /*background-image: url(../lib/images/fairy_background_magic_stick_icons_glittering_bokeh_decor_6834556.jpg);
-  background-position: center;
-  color: white;*/
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-image: url(../lib/images/302987.jpg);
+    background-position: bottom;
+    color: white;
 }
 .footer {
   position: absolute;
