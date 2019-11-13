@@ -31,9 +31,9 @@
                 @Html.DisplayFor(modelItem => item.CocktailName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", item.Id) |
+                @Html.ActionLink("Details", "Details", item.Id) |
+                @Html.ActionLink("Delete", "Delete", item.Id)
             </td>
         </tr>
 }

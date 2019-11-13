@@ -12,22 +12,15 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
     {
         public DisplayBarsViewModel MapFromDTO(BarDTO dto)
         {
-            var viewModel =  new DisplayBarsViewModel
+            return new DisplayBarsViewModel
             {
-                Id=dto.BarId,
+                Id = dto.BarId,
                 Name = dto.BarName,
-                Address=dto.BarAddress,
-                PictureURL=dto.BarPicUrl,
-                PhoneNumber=dto.BarPhoneNumber,
+                Address = dto.BarAddress,
+                PictureURL = dto.BarPicUrl,
+                PhoneNumber = dto.BarPhoneNumber,
+                Rating = dto.BarRatings.Any(br => br.BarId == dto.BarId) ? dto.BarRatings.Where(br => br.BarId == dto.BarId).Average(g => g.Rate) : 0,
             };
-            if (dto.BarRatings.Where(br => br.BarId == dto.BarId).Any())
-            {
-                viewModel.Rating = dto.BarRatings.Where(br => br.BarId == dto.BarId).Average(g => g.Rate);
-            }
-            else
-                viewModel.Rating = 0;
-
-            return viewModel;
         }
     }
 }
