@@ -190,6 +190,113 @@ namespace IriOnCocktailService.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Ingredients");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "dcb14d4d-6329-4641-bdd1-b02b7174ddcf",
+                            IsDeleted = false,
+                            Name = "Vodka",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "2a34f05b-192a-46be-986a-3f23afa66a65",
+                            IsDeleted = false,
+                            Name = "Tequila",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "cf9db0c7-b266-4238-9b14-2e0b89cda8ef",
+                            IsDeleted = false,
+                            Name = "Gin",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "9dc9533e-6aa5-4483-8613-e7160a17547d",
+                            IsDeleted = false,
+                            Name = "Tonik",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "f99c65e7-fb0b-4723-a3d5-8ac05a8ba1e4",
+                            IsDeleted = false,
+                            Name = "CocaCola",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "a69c54ff-8e93-4181-8998-b4de42304075",
+                            IsDeleted = false,
+                            Name = "Soda",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "6fe3620d-87be-4773-90c1-d0a072f0c838",
+                            IsDeleted = false,
+                            Name = "Wiskey",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "b96ae8b3-7fad-406c-97d2-bc5e6dcc0d8c",
+                            IsDeleted = false,
+                            Name = "Red Bull",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "07ee6b8c-8986-4886-bbfd-cdca6e52a5df",
+                            IsDeleted = false,
+                            Name = "Water",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "d82e5701-27e5-45a2-955d-01d1071fce02",
+                            IsDeleted = false,
+                            Name = "Banana Juice",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "44ebac14-88ca-404f-87e6-ee0f3d3c180e",
+                            IsDeleted = false,
+                            Name = "Orange Juice",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "3fea7311-64e6-4325-af27-28cb41a5cf2c",
+                            IsDeleted = false,
+                            Name = "Salt",
+                            UnitType = 3
+                        },
+                        new
+                        {
+                            Id = "6852531d-f7ca-4c05-8b02-019a3ac53737",
+                            IsDeleted = false,
+                            Name = "Cinnamon",
+                            UnitType = 3
+                        },
+                        new
+                        {
+                            Id = "00b7970b-96e4-49ee-97c0-896871d4bd9f",
+                            IsDeleted = false,
+                            Name = "Ice",
+                            UnitType = 2
+                        },
+                        new
+                        {
+                            Id = "6e3634b2-518f-40e2-ac20-1bf56297364a",
+                            IsDeleted = false,
+                            Name = "Olive",
+                            UnitType = 2
+                        });
                 });
 
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.Rating", b =>

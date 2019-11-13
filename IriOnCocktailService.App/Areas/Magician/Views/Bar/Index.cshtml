@@ -9,55 +9,80 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Bars.First().Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bars.First().Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bars.First().PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bars.First().PictureURL)
-            </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.NotAvailable)
-                </th>*@
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Bars)
-        {
-            if (item.NotAvailable == false)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PhoneNumber)
-                    </td>
-                    <td>
-                        <img height="400" width="400" src="@Html.DisplayFor(modelItem => item.PictureURL)"/>
-                    </td>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.NotAvailable)
-                        </td>*@
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
+<section>
+    <div class="tbl-header">
+        @*<table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Bars.First().PictureURL)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Bars.First().Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Bars.First().Address)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Bars.First().PhoneNumber)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>*@
+    </div>
+    <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+                @foreach (var item in Model.Bars)
+                {
+                    if (item.NotAvailable == false)
+                    {
+                        <tr>
+                            <td>
+                                @*<img height="100" width="100" src="@Html.DisplayFor(modelItem => item.PictureURL)" />*@
+
+
+                                <div class="media">
+                                    <img height="100" width="100" class="d-flex align-self-start mr-3" src="@Html.DisplayFor(modelItem => item.PictureURL)" alt="Generic placeholder image">
+                                    <div class="media-body">
+                                        <h5 class="mt-0">
+                                            <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
+                                        </h5>
+                                        @for (int i = 0; i < @item.Rating; i++)
+                                        {
+                                            @*<span class="fa fa-star checked">pesho</span>*@
+                                            <img src="~/lib/images/christmas_star.png" alt="BackToList" width="20">
+                                        }
+
+                                        @for (int i = (int)item.Rating; i < 5; i++)
+                                        {
+                                            <span class="fa fa-star"></span>
+                                        }
+
+                                        <div><strong>Address: </strong>@Html.DisplayFor(modelItem => item.Address)</div>
+                                        <div><strong>Phone number: </strong>@Html.DisplayFor(modelItem => item.PhoneNumber)</div>
+                                    </div>
+                                </div>
+                            </td>
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                </td>*@
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IriOnCocktailService.Data.Migrations
 {
-    public partial class init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -393,6 +393,28 @@ namespace IriOnCocktailService.Data.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Ingredients",
+                columns: new[] { "Id", "IsDeleted", "Name", "UnitType" },
+                values: new object[,]
+                {
+                    { "dcb14d4d-6329-4641-bdd1-b02b7174ddcf", false, "Vodka", 1 },
+                    { "2a34f05b-192a-46be-986a-3f23afa66a65", false, "Tequila", 1 },
+                    { "cf9db0c7-b266-4238-9b14-2e0b89cda8ef", false, "Gin", 1 },
+                    { "9dc9533e-6aa5-4483-8613-e7160a17547d", false, "Tonik", 1 },
+                    { "f99c65e7-fb0b-4723-a3d5-8ac05a8ba1e4", false, "CocaCola", 1 },
+                    { "a69c54ff-8e93-4181-8998-b4de42304075", false, "Soda", 1 },
+                    { "6fe3620d-87be-4773-90c1-d0a072f0c838", false, "Wiskey", 1 },
+                    { "b96ae8b3-7fad-406c-97d2-bc5e6dcc0d8c", false, "Red Bull", 1 },
+                    { "07ee6b8c-8986-4886-bbfd-cdca6e52a5df", false, "Water", 1 },
+                    { "d82e5701-27e5-45a2-955d-01d1071fce02", false, "Banana Juice", 1 },
+                    { "44ebac14-88ca-404f-87e6-ee0f3d3c180e", false, "Orange Juice", 1 },
+                    { "3fea7311-64e6-4325-af27-28cb41a5cf2c", false, "Salt", 3 },
+                    { "6852531d-f7ca-4c05-8b02-019a3ac53737", false, "Cinnamon", 3 },
+                    { "00b7970b-96e4-49ee-97c0-896871d4bd9f", false, "Ice", 2 },
+                    { "6e3634b2-518f-40e2-ac20-1bf56297364a", false, "Olive", 2 }
                 });
 
             migrationBuilder.CreateIndex(

@@ -58,7 +58,8 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             await this.barService.CreateBarAsync(barDTO);
 
             //TODO remove ok
-            return Ok(barDTO);
+            //return Ok(barDTO);
+            return RedirectToAction("Index", "Bar");
         }
 
         [HttpGet]
