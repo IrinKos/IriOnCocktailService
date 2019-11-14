@@ -18,29 +18,36 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         private readonly ICocktailService cocktailService;
         private readonly IIngredientService ingredientService;
         private readonly IDTOMapper<CreateCocktailViewModel, CocktailDTO> createCocktailMapper;
+        private readonly IViewModelMapper<CocktailDTO, DisplayCocktailViewModel> displayCocktailMapper;
+        private readonly IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel> collectionMapper;
         private readonly IViewModelMapper<IngredientDTO, CreateIngredientViewModel> ingredientMapper;
 
         public CocktailController(ICocktailService cocktailService,
                                   IIngredientService ingredientService,
                                   IDTOMapper<CreateCocktailViewModel, CocktailDTO> createCocktailMapper,
+                                  IViewModelMapper<CocktailDTO, DisplayCocktailViewModel> displayCocktailMapper,
+                                  IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel> collectionMapper,
                                   IViewModelMapper<IngredientDTO, CreateIngredientViewModel> ingredientMapper)
         {
             this.cocktailService = cocktailService;
             this.ingredientService = ingredientService;
             this.createCocktailMapper = createCocktailMapper;
+            this.displayCocktailMapper = displayCocktailMapper;
+            this.collectionMapper = collectionMapper;
             this.ingredientMapper = ingredientMapper;
         }
-        //public async Task<IActionResult> Index()
-        //{
-        //    var cocktails = await this.cocktailService.GetAllCocktailsDTO();
-        //    var cocktailsViewModel = new List<CreateCocktailViewModel>();
+        public async Task<IActionResult> Index()
+        {
+            var cocktails = await this.cocktailService.GetAllCocktailsDTO();
+            var cocktailsViewModel = collectionMapper.MapFromDTO(cocktails);
+            ////new List<DisplayCocktailViewModel>();
 
-        //    foreach (var cocktailsVM in cocktails)
-        //    {
-        //        cocktailsViewModel.Add(this.createCocktailMapper.)
-        //    }
-        //    return View();
-        //}
+            //foreach (var cocktailsVM in cocktails)
+            //{
+            //    cocktailsViewModel.Add(displayCocktailMapper.MapFromDTO(cocktailsVM));
+            //}
+            return View(cocktailsViewModel);
+        }
         public async Task<IActionResult> Create()
         {
             var allIngredients = (await ingredientService.GetAllIngredients()).Select(i => new SelectListItem(i.Name,i.Id)).ToList();

@@ -140,10 +140,6 @@
                     IngredientId: e.options[e.selectedIndex].id,
                     Quantity: quantity.val(),
                     name: selectedItem[0].value,
-                    //            public string CocktailId { get; set; }
-                    //public string IngredientId { get; set; }
-                    //public string Unit { get; set; }
-                    //public string Quantity { get; set; }
                 };
                 $('#selectedIngredients').append(`
                                  <li>${ingrClass.name} - ${quantity.val()} (${ingrUnit.val()}) <button id = "${ingrClass.name}" >Remove</button></li>
@@ -156,7 +152,11 @@
                 console.log(specificIngredients);
             });
             $('#sub').on("click", () => {
-                $('specIng').append(`<input  value = "${specificIngredients}" name="specificIngredients"  class="form-control">`)
+                for (var i = 0; i < specificIngredients.length; i++) {
+                    var a = `<input name="specificIngredients[${i}].quantity" value = "${specificIngredients[i].Quantity}" class="form-control">
+                        <input  name="specificIngredients[${i}].IngredientId" value = "${specificIngredients[i].IngredientId}" class="form-control">`;
+                    $('#specIng').append(a);
+                }
             })
         })
 
