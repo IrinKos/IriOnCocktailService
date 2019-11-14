@@ -16,8 +16,8 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/navbar.css" />
-    <link rel="stylesheet" href="~/css/buttons.css" />
+    <link rel="stylesheet" href="~/css/navbarMagician.css" />
+    <link rel="stylesheet" href="~/css/barButtons.css" />
     <link rel="stylesheet" href="~/css/tables.css" />
     <link rel="stylesheet" href="~/css/create-form.css" />
 
@@ -51,41 +51,17 @@
                     </ol>
                 </li>
                 <li class="menu-item"><a href="#0">Contact</a></li>
-                <li class="menu-item"><a href="#0">User<partial name="_LoginPartial" /></a></li>
-
-
+                <li class="menu-item">
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button id="logout" type="submit" class="bg-black" >Logout</button>
+                    </form>
+                </li>
             </ol>
         </nav>
 
         <!-- This is not part of Pen -->
         <a class="me" href="https://codepen.io/uzcho_/pens/popular/?grid_type=list" target="_blank" style="color:#000"></a>
 
-        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div class="container">
-                    <a class="navbar-brand" asp-area="Magician" asp-controller="Home" asp-action="Index">IriOnCocktailService.App</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <partial name="_LoginPartial" />
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Magician" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Magician" asp-controller="Bar" asp-action="Create">Create Bar</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Magician" asp-controller="Ingredient" asp-action="Index">Ingredients</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Magician" asp-controller="Cocktail" asp-action="Create">Create Cocktail</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>*@
     </header>
     <div class="container">
         <partial name="_CookieConsentPartial" />

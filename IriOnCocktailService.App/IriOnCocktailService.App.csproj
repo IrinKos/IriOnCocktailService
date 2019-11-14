@@ -6,6 +6,13 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Areas\Crawler\Data\**" />
+    <Content Remove="Areas\Crawler\Data\**" />
+    <EmbeddedResource Remove="Areas\Crawler\Data\**" />
+    <None Remove="Areas\Crawler\Data\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -21,7 +28,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Areas\Crawler\Data\" />
     <Folder Include="Areas\Magician\Views\Home\" />
   </ItemGroup>
 

@@ -2,27 +2,16 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
-<ol class="sub-menu">
+<ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-
-        <li class="menu-item">
-            <a class="text-danger" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+        <li class="nav-item text-white font-italic">
+            Hello @User.Identity.Name!
         </li>
-        <li class="menu-item">
-            <a asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                Logout
-            </a>
-        </li>
-    }
-    else
-    {
-        <li class="menu-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-        </li>
-        <li class="menu-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-white font-italic">Logout</button>
+            </form>
         </li>
     }
-
-</ol>
+</ul>

@@ -39,6 +39,98 @@ namespace IriOnCocktailService.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Bars");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "56d9e733-b150-45c4-8b87-f5a5e31bc23b",
+                            Address = "Neofit Rilski 70 str.",
+                            Name = "Camino Piano Bar",
+                            NotAvailable = false,
+                            PhoneNumber = "0899 121 219",
+                            PicUrl = "https://www.bar.bg/img/entities/391/1460717100_200_piano-bar-Camino-sofia-215-x-130.jpg"
+                        },
+                        new
+                        {
+                            Id = "cdb2058c-0600-497d-b48d-f89d8cb4aaed",
+                            Address = "Aksakov 18 str.",
+                            Name = "Motto",
+                            NotAvailable = false,
+                            PhoneNumber = "02 987 27 23",
+                            PicUrl = "https://www.bar.bg/img/entities/344/image344_thumb.jpg"
+                        },
+                        new
+                        {
+                            Id = "6e1ce019-108e-4ded-b308-486831d19e08",
+                            Address = "Lege 8 str.",
+                            Name = "Magnito",
+                            NotAvailable = false,
+                            PhoneNumber = "0888 144 777",
+                            PicUrl = "https://www.bar.bg/img/entities/334/1505111472_200_magnito-sofia-215-x-130.png"
+                        },
+                        new
+                        {
+                            Id = "d886baac-17e6-49dd-93ec-b5ecadc14e06",
+                            Address = "Moskovska 6A str.",
+                            Name = "Tobacco Garden Bar",
+                            NotAvailable = false,
+                            PhoneNumber = "0884 600 044",
+                            PicUrl = "https://www.bar.bg/img/entities/399/1465626692_200_Tobacco-garden-bar-sofia-215-x-130.png"
+                        },
+                        new
+                        {
+                            Id = "648ba3bd-70ae-4277-aa40-2da5ab120fa9",
+                            Address = "Nikola Vaptsarov 35 bul",
+                            Name = "The Corner",
+                            NotAvailable = false,
+                            PhoneNumber = "0884 555 444",
+                            PicUrl = "https://www.bar.bg/img/entities/301/1509363711_200_LOGO_The-Corner-Sofia-2017---215-x-130.jpg"
+                        },
+                        new
+                        {
+                            Id = "0086952e-e33e-4daa-a678-d715afb9ce92",
+                            Address = "Malko Tarnovo 1 str.",
+                            Name = "After Five",
+                            NotAvailable = false,
+                            PhoneNumber = "0889 044 124",
+                            PicUrl = "https://www.bar.bg/img/entities/514/1542282680_200_1-after%20five%20drink%20bar%20sofia%20215-x-130.jpg"
+                        },
+                        new
+                        {
+                            Id = "2600172c-9d3e-4143-850e-aeb80e2a1276",
+                            Address = "Bitolya 2 str.",
+                            Name = "Ginger",
+                            NotAvailable = false,
+                            PhoneNumber = "087 733 7337",
+                            PicUrl = "https://www.bar.bg/img/entities/309/1542618320_200_1-ginger%20sofia%20215-x-130%20logo.png"
+                        },
+                        new
+                        {
+                            Id = "b14aaaf8-5cf8-4c3d-b082-e18afa02f563",
+                            Address = "Vitosha 16 str.",
+                            Name = "Sinatra",
+                            NotAvailable = false,
+                            PhoneNumber = "087 676 7647",
+                            PicUrl = "https://www.bar.bg/img/entities/445/1495540391_200_Social-cafe-sofia-logo-215-x-130-jpeg.jpg"
+                        },
+                        new
+                        {
+                            Id = "5182e54c-ed6f-487f-b205-75649ef9ea2e",
+                            Address = "Arsenalski 2 bul.",
+                            Name = "Cache",
+                            NotAvailable = false,
+                            PhoneNumber = "089 446 4169",
+                            PicUrl = "https://www.bar.bg/img/entities/392/1460818909_200_cache---215-x-130.jpg"
+                        },
+                        new
+                        {
+                            Id = "091bf67e-532c-498e-9a40-5f625ccee2e2",
+                            Address = "Angel Kanchev 1 str.",
+                            Name = "Public Bar",
+                            NotAvailable = false,
+                            PhoneNumber = "088 433 3781",
+                            PicUrl = "https://www.bar.bg/img/entities/443/1495046748_200_public-bar-sofia--215-x-130.png"
+                        });
                 });
 
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.BarComment", b =>
@@ -72,7 +164,8 @@ namespace IriOnCocktailService.Data.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<decimal>("Rate");
+                    b.Property<decimal>("Rate")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserId");
 
@@ -162,7 +255,8 @@ namespace IriOnCocktailService.Data.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<decimal>("Rate");
+                    b.Property<decimal>("Rate")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserId");
 
