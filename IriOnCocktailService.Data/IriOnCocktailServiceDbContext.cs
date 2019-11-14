@@ -31,19 +31,19 @@ namespace IriOnCocktailService.Data
             new Ingredient() {Id = "6e3634b2-518f-40e2-ac20-1bf56297364a", IsDeleted = false, UnitType = Unit.Quantity, Name = "Olive" }
         };
 
-        //private List<Bar> barSeader = new List<Bar>()
-        //{
-        //    new Bar() {Id = "56d9e733-b150-45c4-8b87-f5a5e31bc23b", Name = "Camino Piano Bar", Address = "Neofit Rilski 70 str.", PhoneNumber = "089 912 1219", PicUrl = "https://www.bar.bg/img/entities/391/1460717100_200_piano-bar-Camino-sofia-215-x-130.jpg" },
-        //    new Bar() {Id = "cdb2058c-0600-497d-b48d-f89d8cb4aaed", Name = "Motto", Address = "Aksakov 18 str.", PhoneNumber = "029872723", PicUrl = "https://www.bar.bg/img/entities/344/image344_thumb.jpg"},
-        //    new Bar() {Id = "6e1ce019-108e-4ded-b308-486831d19e08", Name = "Magnito", },
-        //    new Bar() {Id = "d886baac-17e6-49dd-93ec-b5ecadc14e06", Name = "Tobacco Garden Bar", },
-        //    new Bar() {Id = "648ba3bd-70ae-4277-aa40-2da5ab120fa9", Name = "The Corner", },
-        //    new Bar() {Id = "0086952e-e33e-4daa-a678-d715afb9ce92", Name = "After Five", },
-        //    new Bar() {Id = "2600172c-9d3e-4143-850e-aeb80e2a1276", Name = "Ginger", },
-        //    new Bar() {Id = "b14aaaf8-5cf8-4c3d-b082-e18afa02f563", Name = "Sinatra", },
-        //    new Bar() {Id = "5182e54c-ed6f-487f-b205-75649ef9ea2e", Name = "Cache", },
-        //    new Bar() {Id = "091bf67e-532c-498e-9a40-5f625ccee2e2", Name = "Public Bar", }
-        //};
+        private List<Bar> barSeader = new List<Bar>()
+        {
+            new Bar() {Id = "56d9e733-b150-45c4-8b87-f5a5e31bc23b", Name = "Camino Piano Bar", Address = "Neofit Rilski 70 str.", PhoneNumber = "0899 121 219", PicUrl = "https://www.bar.bg/img/entities/391/1460717100_200_piano-bar-Camino-sofia-215-x-130.jpg" },
+            new Bar() {Id = "cdb2058c-0600-497d-b48d-f89d8cb4aaed", Name = "Motto", Address = "Aksakov 18 str.", PhoneNumber = "02 987 27 23", PicUrl = "https://www.bar.bg/img/entities/344/image344_thumb.jpg"},
+            new Bar() {Id = "6e1ce019-108e-4ded-b308-486831d19e08", Name = "Magnito", Address = "Lege 8 str.", PhoneNumber = "0888 144 777",PicUrl = "https://www.bar.bg/img/entities/334/1505111472_200_magnito-sofia-215-x-130.png" },
+            new Bar() {Id = "d886baac-17e6-49dd-93ec-b5ecadc14e06", Name = "Tobacco Garden Bar", Address = "Moskovska 6A str.", PhoneNumber = "0884 600 044", PicUrl = "https://www.bar.bg/img/entities/399/1465626692_200_Tobacco-garden-bar-sofia-215-x-130.png"},
+            new Bar() {Id = "648ba3bd-70ae-4277-aa40-2da5ab120fa9", Name = "The Corner", Address = "Nikola Vaptsarov 35 bul", PhoneNumber = "0884 555 444", PicUrl = "https://www.bar.bg/img/entities/301/1509363711_200_LOGO_The-Corner-Sofia-2017---215-x-130.jpg"},
+            new Bar() {Id = "0086952e-e33e-4daa-a678-d715afb9ce92", Name = "After Five", Address = "Malko Tarnovo 1 str.", PhoneNumber = "0889 044 124", PicUrl = "https://www.bar.bg/img/entities/514/1542282680_200_1-after%20five%20drink%20bar%20sofia%20215-x-130.jpg"},
+            new Bar() {Id = "2600172c-9d3e-4143-850e-aeb80e2a1276", Name = "Ginger", Address = "Bitolya 2 str.", PhoneNumber = "087 733 7337", PicUrl = "https://www.bar.bg/img/entities/309/1542618320_200_1-ginger%20sofia%20215-x-130%20logo.png"},
+            new Bar() {Id = "b14aaaf8-5cf8-4c3d-b082-e18afa02f563", Name = "Sinatra", Address = "Vitosha 16 str.", PhoneNumber = "087 676 7647", PicUrl = "https://www.bar.bg/img/entities/445/1495540391_200_Social-cafe-sofia-logo-215-x-130-jpeg.jpg"},
+            new Bar() {Id = "5182e54c-ed6f-487f-b205-75649ef9ea2e", Name = "Cache", Address = "Arsenalski 2 bul.", PhoneNumber = "089 446 4169", PicUrl = "https://www.bar.bg/img/entities/392/1460818909_200_cache---215-x-130.jpg"},
+            new Bar() {Id = "091bf67e-532c-498e-9a40-5f625ccee2e2", Name = "Public Bar", Address = "Angel Kanchev 1 str.", PhoneNumber = "088 433 3781", PicUrl = "https://www.bar.bg/img/entities/443/1495046748_200_public-bar-sofia--215-x-130.png"}
+        };
 
         public DbSet<BarComment> BarComments { get; set; }
         public DbSet<BarRating> BarRatings { get; set; }
@@ -81,6 +81,9 @@ namespace IriOnCocktailService.Data
                 .WithOne(rating => rating.User);
 
             // Bar
+            builder.Entity<Bar>()
+                .HasData(barSeader);
+
             builder.Entity<Bar>()
                 .HasKey(bar => bar.Id);
 
@@ -175,6 +178,16 @@ namespace IriOnCocktailService.Data
             // Rating
             builder.Entity<Rating>()
                 .Property(rating => rating.Rate)
+                .HasColumnType("decimal(18,2)");
+
+            // BarRating
+            builder.Entity<BarRating>()
+                .Property(br => br.Rate)
+                .HasColumnType("decimal(18,2)");
+
+            // CocktailRating
+            builder.Entity<CocktailRating>()
+                .Property(cr => cr.Rate)
                 .HasColumnType("decimal(18,2)");
         }
     }

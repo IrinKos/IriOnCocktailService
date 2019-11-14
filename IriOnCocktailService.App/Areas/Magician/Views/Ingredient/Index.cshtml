@@ -10,7 +10,7 @@
     <a asp-action="Create">Create New</a>
 </p>
 <section>
-    <div class="tbl-header">
+    @*<div class="tbl-header">
         <table cellpadding="0" cellspacing="0" border="0">
             <thead>
                 <tr>
@@ -29,27 +29,35 @@
                 </tr>
             </thead>
         </table>
-    </div>
+    </div>*@
     <div class="tbl-content">
-        <table cellpadding="0" cellspacing="0" border="0">
+        <table cellpadding="0" cellspacing="0" border="0" class="table-hover">
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
+                        <td class="font-weight-bold">
                             <img src="~/lib/images/dropper.png" alt="BackToList" width="30">
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
-                        <td>
+                        <td class="font-weight-bold">
                             @Html.DisplayFor(modelItem => item.UnitType)
                         </td>
                         <td>
-                            <a class="myButtonEdit" asp-action="Edit" asp-route-id="@item.Id"> 
-                            <img src="~/lib/images/YellowFlask.png" alt="BackToList" width="20"> Edit</a>
+                            <a id="bar-buttonD" asp-action="Edit" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                                <span data-title="Edit!">
+                                    <img src="~/lib/images/YellowFlask.png" alt="BackToList" width="20"> Edit!
+                                    <img src="~/lib/images/YellowFlask.png" alt="BackToList" width="20"> 
+                                </span>
+                            </a>
                         </td>
                         <td>
-                            <a class="myButtonDelete" asp-action="Delete" asp-route-id="@item.Id">
-                            <img src="~/lib/images/RedFlask.png" alt="BackToList" width="20"> Delete!</a>
+                            <a id="bar-buttonE" asp-action="Delete" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                                <span data-title="Delete!">
+                                    <img src="~/lib/images/RedFlask.png" alt="BackToList" width="20"> Delete!
+                                    <img src="~/lib/images/RedFlask.png" alt="BackToList" width="20">
+                                </span>
+                            </a>
                         </td>
                     </tr>
                 }
