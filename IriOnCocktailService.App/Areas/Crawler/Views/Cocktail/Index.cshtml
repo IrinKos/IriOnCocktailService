@@ -43,9 +43,12 @@
                 @Html.DisplayFor(modelItem => item.NotAvailable)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", item.Id) |
+                <a asp-action="Details" asp-route-Id="@item.Id">Details</a>
+                <a asp-action="Rating" asp-route-id="@item.Id">Rate</a>
+                <a asp-action="Comment" asp-route-id="@item.Id">Comment</a>
+                @*@Html.ActionLink("Details", "Details", item.Id) |
                 @Html.ActionLink("Rate", "Rating", item.Id) |
-                @Html.ActionLink("Comment", "Comment", item.Id)
+                @Html.ActionLink("Comment", "Comment", item.Id)*@
             </td>
         </tr>
 }

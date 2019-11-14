@@ -59,6 +59,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
                 .Include(c => c.CocktailBars)
                 .Include(c => c.Comments)
                 .Include(c => c.Ratings)
+                    .ThenInclude(r => r.Rate)
                 .SingleOrDefaultAsync(c => c.Id == id && c.NotAvailable == false);
 
             if (cocktail == null || cocktail.NotAvailable == true)
@@ -89,6 +90,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
             var cocktails = await this.context.Cocktails
                 .Include(c=>c.CocktailIngredients)
                     .ThenInclude(ci=>ci.Ingredient)
+                .Include(c=>c.Ratings)
                 .Where(c => c.NotAvailable == false)
                 .Select(c => this.mapper.MapFrom(c))
                 .ToListAsync();
@@ -105,14 +107,14 @@ namespace IriOnCocktailService.ServiceLayer.Services
 
             return barCommentDTO;
         }
-        public async Task<RatingDTO> CocktailRatingAsync(RatingDTO barRatingDTO)
+        public async Task<RatingDTO> CocktailRatingAsync(RatingDTO cocktailRatingDTO)
         {
-            var cocktailRating = this.cocktailRatingMapper.MapFrom(barRatingDTO);
+            var cocktailRating = this.cocktailRatingMapper.MapFrom(cocktailRatingDTO);
 
             await this.context.CocktailRatings.AddAsync(cocktailRating);
             await this.context.SaveChangesAsync();
 
-            return barRatingDTO;
+            return cocktailRatingDTO;
         }
     }
 }

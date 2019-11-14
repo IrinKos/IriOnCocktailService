@@ -20,13 +20,12 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
         {
             var dto = new CocktailDTO
             {
-                Id = entity.Id,
-                Name = entity.Name,
-                PicUrl = entity.PicUrl,
-                NotAvailable = entity.NotAvailable,
-                Ingredients = entity.CocktailIngredients.Where(ingr => ingr.CocktailId == entity.Id).Select(x=> this.mapper.MapFrom(x)).ToList(),
-                Rating=entity.Ratings.Where(r=>r.CocktailId==entity.Id).Average(r=>r.Rate)
             };
+            dto.Id = entity.Id;
+            dto.Name = entity.Name;
+            dto.PicUrl = entity.PicUrl;
+            dto.NotAvailable = entity.NotAvailable;
+            dto.Ingredients = entity.CocktailIngredients.Where(ingr => ingr.CocktailId == entity.Id).Select(x => this.mapper.MapFrom(x)).ToList();
             if (entity.Ratings.Where(br => br.CocktailId == entity.Id).Any())
             {
                 dto.Rating = entity.Ratings.Where(br => br.CocktailId == entity.Id).Average(g => g.Rate);
