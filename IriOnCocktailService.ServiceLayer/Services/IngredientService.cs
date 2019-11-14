@@ -102,5 +102,12 @@ namespace IriOnCocktailService.ServiceLayer.Services
             this.context.Ingredients.Update(ingredient);
             await this.context.SaveChangesAsync();
         }
+
+        public async Task<string> GetUnitType(string id)
+        {
+
+                var a =(await this.context.Ingredients.SingleOrDefaultAsync(i => i.Id == id)).UnitType.ToString();
+            return a;
+        }
     }
 }

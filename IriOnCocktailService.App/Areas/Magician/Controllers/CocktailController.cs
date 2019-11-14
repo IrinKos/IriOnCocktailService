@@ -62,14 +62,13 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             var dto = this.createCocktailMapper.MapFromViewModel(viewModel);
             await this.cocktailService.CreateCocktail(dto);
 
-           // cocktailService.CreateCocktail()
             return Ok();
         }
         [HttpPost]
         public async Task<string> SetIngredientUnit(string id)
         {
-            //TODO find the fucking unity // credits : iwaka
-            return "Milliliters";
+            
+            return await this.ingredientService.GetUnitType(id);
         }
     }
 }

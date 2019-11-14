@@ -19,55 +19,66 @@
             </div>
             <div class="form-group" id="add-here">
                 <input style="display:none" id="qwe" />
-                <datalist id="ingr">
-                    <option selected disabled value="">Select ingredient</option>
+                @*<datalist id="ingr">
+                        <option selected disabled value="">Select ingredient</option>
+                        @foreach (var item in Model.AllAllIngredients)
+                        {
+                            //<div class="neshto" value="@item.Text" id="@item.Value"></div>
+                            <option data-unit="@item.UnitType" data-name="@item.Name" id="@item.Id" onclick="Find(this.id)" value="@item.Id">@item.Name</option>
+                        }
+                    </datalist>*@
+                <select id="myList" asp-for="CocktailName">
+                    <option value="Select ingredient" disabled="disabled" selected="selected"></option>
                     @foreach (var item in Model.AllAllIngredients)
                     {
-                        //<div class="neshto" value="@item.Text" id="@item.Value"></div>
-                        <option data-unit="@item.UnitType" data-name="@item.Name" id="@item.Id" onclick="Find(this.id)" value="@item.Id">@item.Name</option>
+                        <option data-unit="@item.UnitType" value="@item.Name" id="@item.Id">@item.Name</option>
                     }
-                </datalist>
+                </select>
+                <input id="quantityField" style="display:none" name="Quantity" value="" placeholder="Insert quantity value here..." />
+                <input id="unitOfIngredient" disabled="disabled" style="display:none" name="Unit type" value="" />
+                <input id="specIng" asp-for="SpecificIngredients" type="hidden" name="name" value="" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input id="sub" type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+            <ul id="selectedIngredients" name="Ingredients"></ul>
+        <button id="addingredient" style="display:none">butonchence</button>
     </div>
 </div>
-<button type="submit" id="addingredient" style="display:none">butonchence</button>
 <button id="test">Click me</button>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 <div>
-    <ul id="selectedIngredients">
-        <li>Ingredients</li>
-    </ul>
 </div>
 
 @section Scripts {
 
     <script>
         let current = 0;
-            let counter = 0;
+        let counter = 0;
         function Find(idd) {
             obj = {
                 id: idd
             },
-            console.log(idd);
+                console.log(idd);
             $.ajax({
                 type: 'POST',
                 url: 'SetIngredientUnit',
                 data: obj,
                 success: (result) => {
                     console.log(result);
-                    $(`#testInputValue${counter}`).val(result);
+                    let customId = 'testInputValue' + current;
+                    document.getElementById(customId).value = `${result}`
+                    //$(`#testInputValue${counter}`).value=result;
                     counter++;
                     console.log(counter);
                 }
             })
         }
-        let specificIngredients = new Array();
+        let ingrClass;
+        let specificIngredients = [];
         $(() => {
             //////let ing = $("#ingr").val();
             ////let unitType = $($("#ingr").val()).attr("data-unit");
@@ -94,57 +105,96 @@
             ////})
             $('#test').click(() => {
                 const inputs = `<div>Ingredient ${current + 1}</div>
-                                        <input id="pesho" list = "ingr" onchange="Find(this.value)" name="specificIngredients[${current}].IngredientId" placeholder="Select Ingredient..." type="" class="form-control">
-                                        <input name="specificIngredients[${current}].quantity" placeholder="Quantity..." type="text" class="form-control" />
-                                        <input value = "" disabled placeholder="Unit type.." type="text" class="form-control" id="testInputValue${counter}" />
-                                        <hr>`
+                                                                                <input id="pesho${counter}" list = "ingr" onchange="Find(this.value)" name="specificIngredients[${current}].IngredientId" placeholder="Select Ingredient..." type="" class="form-control">
+                                                                                <input name="specificIngredients[${current}].quantity" placeholder="Quantity..." type="text" class="form-control" />
+                                                                                <input value = "" disabled placeholder="Unit type.." type="text" class="form-control" id="testInputValue${counter}" />
+                                                                                <hr>`
                 current++;
                 $('#add-here').append(inputs);
             })
         })
 
         $(() => {
-            $('#pesho').on("change", () => {
-                $("#qwe").show();
+            let counter = 0;
+            let selectedItem = $("#myList");
+            let quantity = $('#quantityField');
+            let ingrUnit = $('#unitOfIngredient');
+            var e = document.getElementById("myList");
+            $('#myList').on("change", (idd) => {
+
+                var strUser = e.options[e.selectedIndex].value;
+                let ab = $("#myList option:selected");
+                ab.hide();
+                selectedItem.attr("disabled", true);
+                let quantity = $('#quantityField');
+                quantity.show();
                 $("#addingredient").show();
-            }).val()
+
+                ingrUnit.show();
+                console.log(selectedItem);
+                ingrUnit.val(e[e.selectedIndex].dataset.unit);
+            });
+
+            $('#addingredient').on("click", () => {
+                ingrClass = {
+                    IngredientId: e.options[e.selectedIndex].id,
+                    Quantity: quantity.val(),
+                    name: selectedItem[0].value,
+                    //            public string CocktailId { get; set; }
+                    //public string IngredientId { get; set; }
+                    //public string Unit { get; set; }
+                    //public string Quantity { get; set; }
+                };
+                $('#selectedIngredients').append(`
+                                 <li>${ingrClass.name} - ${quantity.val()} (${ingrUnit.val()}) <button id = "${ingrClass.name}" >Remove</button></li>
+                                                                             `);
+                selectedItem.attr("disabled", false);
+                e.selectedIndex = "0";
+                specificIngredients.push(ingrClass);
+                quantity.val("");
+                ingrUnit.val("");
+                console.log(specificIngredients);
+            });
+            $('#sub').on("click", () => {
+                $('specIng').append(`<input  value = "${specificIngredients}" name="specificIngredients"  class="form-control">`)
+            })
         })
 
-                //$(() => {
-                //    $('#ingr').on("change", () => {
-                //        $("#qwe").show();
-                //        $("#addingredient").show();
-                //    }).val()
-                //})
+                                                        //$(() => {
+                                                        //    $('#ingr').on("change", () => {
+                                                        //        $("#qwe").show();
+                                                        //        $("#addingredient").show();
+                                                        //    }).val()
+                                                        //})
 
-                //$(() => {
-                //    $('#ingr').on("change", () => {
-                //        $("#qwe").show();
-                //        $("#addingredient").show();
-                //    })
-                //})
-                //$("#addingredient").on("click", () => {
-                //    let current = 0;
-                    //const ing = $("#ingr").val();
-                    //const quant = $("#qwe").val();
-                    //const name = $(`#${ing}`).attr("data-name");
-                    //console.log(name);
-                //    const input = `
-                //                        <input  value = "${ing}" name="specificIngredients[${current}].IngredientId"  class="form-control">
-                //                        <li name="specificIngredients[${current}].Quantity" class="form-control">${quant}</li>
-                //                        <li  name="specificIngredients[${current}].IngredientId" class="form-control">${name}</li>
-                //                        <hr>
-                //                        `
-                //    specificIngredients.push({ ingredientid: ing, quantity: quant, name: name });
-                //    console.log(specificIngredients);
-                //    $("#" + ing).hide();
+                                                        //$(() => {
+                                                        //    $('#ingr').on("change", () => {
+                                                        //        $("#qwe").show();
+                                                        //        $("#addingredient").show();
+                                                        //    })
+                                                        //})
+                                                        //$("#addingredient").on("click", () => {
+                                                        //    let current = 0;
+                                                            //const ing = $("#ingr").val();
+                                                            //const quant = $("#qwe").val();
+                                                            //const name = $(`#${ing}`).attr("data-name");
+                                                            //console.log(name);
+                                                        //    const input = `
+                                                        //                        <input  value = "${ing}" name="specificIngredients[${current}].IngredientId"  class="form-control">
+                                                        //                        <li name="specificIngredients[${current}].Quantity" class="form-control">${quant}</li>
+                                                        //                        <li  name="specificIngredients[${current}].IngredientId" class="form-control">${name}</li>
+                                                        //                        <hr>
+                                                        //                        `
+                                                        //    specificIngredients.push({ ingredientid: ing, quantity: quant, name: name });
+                                                        //    console.log(specificIngredients);
+                                                        //    $("#" + ing).hide();
 
-                //    $("#qwe").val("");
-                //    $("#qwe").hide();
-                //    $("#addigredient").hide();
-                //    $('#selectedIngredients').append(input);
-                //    current++;
-                //})
+                                                        //    $("#qwe").val("");
+                                                        //    $("#qwe").hide();
+                                                        //    $("#addigredient").hide();
+                                                        //    $('#selectedIngredients').append(input);
+                                                        //    current++;
+                                                        //})
     </script>
 }
 

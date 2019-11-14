@@ -42,6 +42,11 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
             return View(viewModel);
         }
         [HttpGet]
+        public IActionResult Details(string Id)
+        {
+            return View();
+        }
+        [HttpGet]
         public IActionResult Comment()
         {
             return View();

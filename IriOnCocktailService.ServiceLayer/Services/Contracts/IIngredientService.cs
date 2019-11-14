@@ -12,6 +12,7 @@ namespace IriOnCocktailService.ServiceLayer.Services.Contracts
         Task<ICollection<IngredientDTO>> GetAllIngredients();
         Task<Ingredient> GetIngredient(string ingredientId);
         Task<IngredientDTO> GetIngredientDTO(string ingredientId);
+        Task<string> GetUnitType(string id);
         Task<Ingredient> UpdateIngredient(string id, string newName);
     }
 }
