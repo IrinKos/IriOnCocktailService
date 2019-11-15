@@ -15,6 +15,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Models
         [MinLength(3)]
         [MaxLength(20)]
         public string CocktailName { get; set; }
+        public string PicUrl { get; set; }
         public List<SelectListItem> AllIngredients { get; set; }
         public List<SelectListItem> AllUnitTypes { get; set; }
         public List<CreateIngredientViewModel> AllAllIngredients { get; set; }

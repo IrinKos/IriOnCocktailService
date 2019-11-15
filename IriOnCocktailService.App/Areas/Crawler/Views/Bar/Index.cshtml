@@ -4,65 +4,119 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@*<h1>Index</h1>
 
-<section>
-    <div class="tbl-header">
-    </div>
-    <div class="tbl-content">
-        <table cellpadding="0" cellspacing="0" border="0">
-            <tbody>
-                @foreach (var item in Model.Bars)
-                {
-                    if (item.NotAvailable == false)
+    <section>
+        <div class="tbl-header">
+        </div>
+        <div class="tbl-content">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                    @foreach (var item in Model.Bars)
                     {
-                        <tr>
-                            <td>
-                                <div class="media">
-                                    <img height="100" width="100" class="d-flex align-self-start mr-3" src="@Html.DisplayFor(modelItem => item.PictureURL)" alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <h5 class="mt-0">
-                                            <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
-                                        </h5>
-                                        @for (int i = 0; i < @item.Rating; i++)
-                                        {
-                                            <img src="~/lib/images/christmas_star.png" alt="BackToList" width="20">
-                                        }
+                        if (item.NotAvailable == false)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <img height="100" width="100" class="d-flex align-self-start mr-3" src="@Html.DisplayFor(modelItem => item.PictureURL)" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                            <h5 class="mt-0">
+                                                <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
+                                            </h5>
+                                            @for (int i = 0; i < @item.Rating; i++)
+                                            {
+                                                <img src="~/lib/images/christmas_star.png" alt="BackToList" width="20">
+                                            }
 
-                                        <div class="d-flex justify-content-end"><span class="font-weight-bold">Address: </span>@Html.DisplayFor(modelItem => item.Address)</div>
-                                        <div class="d-flex justify-content-end"><span class="font-weight-bold">Phone number: </span>@Html.DisplayFor(modelItem => item.PhoneNumber)</div>
+                                            <div class="d-flex justify-content-end"><span class="font-weight-bold">Address: </span>@Html.DisplayFor(modelItem => item.Address)</div>
+                                            <div class="d-flex justify-content-end"><span class="font-weight-bold">Phone number: </span>@Html.DisplayFor(modelItem => item.PhoneNumber)</div>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td>
-                                @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
-                            </td>
-                            <td>
-                                <a id="bar-buttonE" asp-action="Rating" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
-                                    <span data-title="Rate it!">
-                                        <img src="~/lib/images/RateIt.png" alt="RateIt" width="20"> Rate it!
-                                        <img src="~/lib/images/RateIt.png" alt="RateIt" width="20">
-                                    </span>
-                                </a>
-                                <p></p>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    <a id="bar-buttonE" asp-action="Rating" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                                        <span data-title="Rate it!">
+                                            <img src="~/lib/images/RateIt.png" alt="RateIt" width="20"> Rate it!
+                                            <img src="~/lib/images/RateIt.png" alt="RateIt" width="20">
+                                        </span>
+                                    </a>
+                                    <p></p>
 
-                                <a id="bar-buttonD" asp-action="Details" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
-                                    <span data-title="Read More Info">
-                                        <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25"> Read More Info!
-                                        <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25">
-                                    </span>
-                                </a>
-                            </td>
-                        </tr>
+                                    <a id="bar-buttonD" asp-action="Details" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                                        <span data-title="Read More Info">
+                                            <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25"> Read More Info!
+                                            <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25">
+                                        </span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
                     }
-                }
-            </tbody>
-        </table>
-    </div>
-</section>
+                </tbody>
+            </table>
+        </div>
+    </section>*@
+<div class="row">
+    @{ var counter = 5; }
+    @foreach (var item in Model.Bars)
+    {
+        if (item.NotAvailable == false)
+        {
+            <div class="col-sm-3">
+                <div class="card-deck">
+                    <div class="card bg-black-only">
+                        <img data-toggle="tooltip" data-placement="top" title="@item.Name" class="card-img-top" src="@Html.DisplayFor(modelItem => item.PictureURL)" alt="Bar Pic">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">
+                                <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
+                                <br />
+                                @for (int i = 0; i < @item.Rating; i++)
+                                {
+                                    <img src="~/lib/images/christmas_star.png" alt="Star" width="20">
+                                }
+                            </h5>
+                            <p class="card-text text-center">
+                                <span class="font-weight-bold text-white">Address: </span>
+                                <br />
+                                <span>@Html.DisplayFor(modelItem => item.Address)</span>
+                                <br />
+                                <br />
+                                <span class="font-weight-bold text-white">Phone number: </span>
+                                <br />
+                                <span>@Html.DisplayFor(modelItem => item.PhoneNumber)</span>
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <a id="bar-buttonE" asp-action="Rating" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                                <span data-title="Rate it!">
+                                    <img src="~/lib/images/RateIt.png" alt="RateIt" width="20"> Rate it!
+                                    <img src="~/lib/images/RateIt.png" alt="RateIt" width="20">
+                                </span>
+                            </a>
+                            <a id="bar-buttonE" asp-action="Details" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                                <span data-title="Read More Info">
+                                    <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25"> Read More Info!
+                                    <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25">
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+            </div>
+            if (counter % 4 == 0)
+            {
+            @:</div><div class="row">
+                counter = 0;
+            }
+            counter++;
 
+        }
+    }
+</div>
 
 
 

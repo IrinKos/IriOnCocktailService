@@ -17,16 +17,21 @@
                 <input asp-for="CocktailName" class="form-control" />
                 <span asp-validation-for="CocktailName" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="PicUrl" class="control-label"></label>
+                <input asp-for="PicUrl" class="form-control" />
+                <span asp-validation-for="PicUrl" class="text-danger"></span>
+            </div>
             <div class="form-group" id="add-here">
                 <input style="display:none" id="qwe" />
                 @*<datalist id="ingr">
-                        <option selected disabled value="">Select ingredient</option>
-                        @foreach (var item in Model.AllAllIngredients)
-                        {
-                            //<div class="neshto" value="@item.Text" id="@item.Value"></div>
-                            <option data-unit="@item.UnitType" data-name="@item.Name" id="@item.Id" onclick="Find(this.id)" value="@item.Id">@item.Name</option>
-                        }
-                    </datalist>*@
+                <option selected disabled value="">Select ingredient</option>
+                @foreach (var item in Model.AllAllIngredients)
+                {
+                    //<div class="neshto" value="@item.Text" id="@item.Value"></div>
+                    <option data-unit="@item.UnitType" data-name="@item.Name" id="@item.Id" onclick="Find(this.id)" value="@item.Id">@item.Name</option>
+                }
+            </datalist>*@
                 <select id="myList" asp-for="CocktailName">
                     <option value="Select ingredient" disabled="disabled" selected="selected"></option>
                     @foreach (var item in Model.AllAllIngredients)

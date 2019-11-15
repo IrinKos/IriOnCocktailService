@@ -29,6 +29,7 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
             return new CocktailDTO
             {
                 Name = viewModel.CocktailName,
+                PicUrl = viewModel.PicUrl,
                 Ingredients = viewModel.SpecificIngredients.Select(x => mapper.MapFromViewModel(x)).ToList(),
             };
         }
