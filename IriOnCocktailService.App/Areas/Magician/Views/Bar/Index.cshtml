@@ -61,60 +61,63 @@
             </table>
         </div>
     </section>*@
-<div class="row p-5">
-    @{ var counter = 1; }
+<div class="row">
+    @{ var counter = 5; }
     @foreach (var item in Model.Bars)
     {
         if (item.NotAvailable == false)
         {
-    <div class="col-sm-3 bg">
-        <div class="card-deck">
-            <div class="card bg-black">
-                <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.PictureURL)" alt="Bar Pic" height="180" , width="215">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
-                        @for (int i = 0; i < @item.Rating; i++)
-                        {
-                            <img src="~/lib/images/christmas_star.png" alt="BackToList" width="20">
-                        }
-                    </h5>
-                    <p class="card-text">
-                        <span class="font-weight-bold text-white">Address: </span>
-                        <br />
-                        <span>@Html.DisplayFor(modelItem => item.Address)</span>
-                        <br />
-                        <br />
-                        <span class="font-weight-bold text-white">Phone number: </span>
-                        <br />
-                        <span>@Html.DisplayFor(modelItem => item.PhoneNumber)</span>
-                    </p>
+            
+            <div class="col-sm-3">
+                <div class="card-deck">
+                    <div class="card bg-black-only">
+                        <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.PictureURL)" alt="Bar Pic">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">
+                                <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
+                                <br />
+                                @for (int i = 0; i < @item.Rating; i++)
+                                {
+                                    <img src="~/lib/images/christmas_star.png" alt="Star" width="20">
+                                }
+                            </h5>
+                            <p class="card-text text-center">
+                                <span class="font-weight-bold text-white">Address: </span>
+                                <br />
+                                <span>@Html.DisplayFor(modelItem => item.Address)</span>
+                                <br />
+                                <br />
+                                <span class="font-weight-bold text-white">Phone number: </span>
+                                <br />
+                                <span>@Html.DisplayFor(modelItem => item.PhoneNumber)</span>
+                            </p>
+                        </div>
+                        <div class="card-footer">
+
+                            @*<small class="text-muted">Last updated 3 mins ago</small>*@
+                            <a id="bar-buttonD" asp-action="Edit" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                                <span data-title="Edit!">
+                                    <img src="~/lib/images/YellowFlask.png" alt="Edit" width="20"> Edit!
+                                    <img src="~/lib/images/YellowFlask.png" alt="Edit" width="20">
+                                </span>
+                            </a>
+                            <a id="bar-buttonE" asp-action="Delete" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                                <span data-title="Delete!">
+                                    <img src="~/lib/images/RedFlask.png" alt="Delete" width="20"> Delete!
+                                    <img src="~/lib/images/RedFlask.png" alt="Delete" width="20">
+                                </span>
+                            </a>
+                            <a id="bar-buttonD" asp-action="Details" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                                <span data-title="Details!">
+                                    <img src="~/lib/images/GreenFlask.png" alt="Details" width="20"> Details!
+                                    <img src="~/lib/images/GreenFlask.png" alt="Details" width="20">
+                                </span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                    <a id="bar-buttonD" asp-action="Edit" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
-                        <span data-title="Edit!">
-                            <img src="~/lib/images/YellowFlask.png" alt="Edit" width="20"> Edit!
-                            <img src="~/lib/images/YellowFlask.png" alt="Edit" width="20">
-                        </span>
-                    </a>
-                    <a id="bar-buttonE" asp-action="Delete" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
-                        <span data-title="Delete!">
-                            <img src="~/lib/images/RedFlask.png" alt="Delete" width="20"> Delete!
-                            <img src="~/lib/images/RedFlask.png" alt="Delete" width="20">
-                        </span>
-                    </a>
-                    <a id="bar-buttonD" asp-action="Details" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
-                        <span data-title="Details!">
-                            <img src="~/lib/images/GreenFlask.png" alt="Details" width="20"> Details!
-                            <img src="~/lib/images/GreenFlask.png" alt="Details" width="20">
-                        </span>
-                    </a>
-                </div>
+                <p></p>
             </div>
-        </div>
-        <p></p>
-    </div>
             if (counter % 4 == 0)
             {
             @:</div><div class="row">

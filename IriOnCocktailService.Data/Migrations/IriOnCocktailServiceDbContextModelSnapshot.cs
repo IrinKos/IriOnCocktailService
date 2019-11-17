@@ -288,6 +288,55 @@ namespace IriOnCocktailService.Data.Migrations
                     b.HasData(
                         new
                         {
+                            Id = "0af163c4-6210-4b51-9032-8cadf025083e",
+                            IsDeleted = false,
+                            Name = "Ground black pepper",
+                            UnitType = 2
+                        },
+                        new
+                        {
+                            Id = "b46b8769-53d2-4aff-b538-f99948962172",
+                            IsDeleted = false,
+                            Name = "Tomato Juice",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "514afb68-79a8-4deb-bd9c-9d9c61afc1cb",
+                            IsDeleted = false,
+                            Name = "Hot sauce",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "7aab7c85-626f-4509-a357-56050fbe66e4",
+                            IsDeleted = false,
+                            Name = "Worcestershire sauce",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "e045e88a-0151-4394-bd23-62622f3335ff",
+                            IsDeleted = false,
+                            Name = "Lemon juice",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "8a26e862-811d-4053-bb2d-59587bb48188",
+                            IsDeleted = false,
+                            Name = "Gin Bombay Sapphire",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "6c9dea74-cb47-4d4a-81ec-c21b1aec70ee",
+                            IsDeleted = false,
+                            Name = "Martini ",
+                            UnitType = 1
+                        },
+                        new
+                        {
                             Id = "dcb14d4d-6329-4641-bdd1-b02b7174ddcf",
                             IsDeleted = false,
                             Name = "Vodka",

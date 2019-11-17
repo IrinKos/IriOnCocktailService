@@ -12,21 +12,46 @@ namespace IriOnCocktailService.Data
 {
     public class IriOnCocktailServiceDbContext : IdentityDbContext<User, IdentityRole, string>
     {
+        //private readonly List<Cocktail> cocktailSeader = new List<Cocktail>()
+        //{
+        //    new Cocktail()
+        //    {
+        //        Id = "26531c92-59cd-4503-86c9-17ab02d0e4c1",
+        //        Name = "Dry Martini",
+        //        PicUrl = "https://cdn.liquor.com/wp-content/uploads/2019/07/15140312/Bombay-Sapphire-Martini-Feature.jpg",
+        //        CocktailIngredients =
+        //            new List<CocktailIngredient>()
+        //                {
+        //                    new CocktailIngredient()
+        //                    { IngredientId = "8a26e862-811d-4053-bb2d-59587bb48188", Quantity = "60" },
+        //                    new CocktailIngredient()
+        //                    { IngredientId = "6c9dea74-cb47-4d4a-81ec-c21b1aec70ee", Quantity = "25" }
+        //                }
+        //    }
+        //};
+
         private readonly List<Ingredient> ingredientSeader = new List<Ingredient>()
         {
-            new Ingredient() {Id = "dcb14d4d-6329-4641-bdd1-b02b7174ddcf", IsDeleted = false, UnitType = Unit.Millilitres, Name = "Vodka"},
-            new Ingredient() {Id = "2a34f05b-192a-46be-986a-3f23afa66a65", IsDeleted = false, UnitType = Unit.Millilitres, Name = "Tequila" },
-            new Ingredient() {Id = "cf9db0c7-b266-4238-9b14-2e0b89cda8ef", IsDeleted = false, UnitType = Unit.Millilitres, Name = "Gin" },
-            new Ingredient() {Id = "9dc9533e-6aa5-4483-8613-e7160a17547d", IsDeleted = false, UnitType = Unit.Millilitres, Name = "Tonik" },
-            new Ingredient() {Id = "f99c65e7-fb0b-4723-a3d5-8ac05a8ba1e4", IsDeleted = false, UnitType = Unit.Millilitres, Name = "CocaCola" },
-            new Ingredient() {Id = "a69c54ff-8e93-4181-8998-b4de42304075", IsDeleted = false, UnitType = Unit.Millilitres, Name = "Soda" },
-            new Ingredient() {Id = "6fe3620d-87be-4773-90c1-d0a072f0c838", IsDeleted = false, UnitType = Unit.Millilitres, Name = "Wiskey" },
-            new Ingredient() {Id = "b96ae8b3-7fad-406c-97d2-bc5e6dcc0d8c", IsDeleted = false, UnitType = Unit.Millilitres, Name = "Red Bull" },
-            new Ingredient() {Id = "07ee6b8c-8986-4886-bbfd-cdca6e52a5df", IsDeleted = false, UnitType = Unit.Millilitres, Name = "Water" },
-            new Ingredient() {Id = "d82e5701-27e5-45a2-955d-01d1071fce02", IsDeleted = false, UnitType = Unit.Millilitres, Name = "Banana Juice" },
-            new Ingredient() {Id = "44ebac14-88ca-404f-87e6-ee0f3d3c180e", IsDeleted = false, UnitType = Unit.Millilitres, Name = "Orange Juice" },
-            new Ingredient() {Id = "3fea7311-64e6-4325-af27-28cb41a5cf2c", IsDeleted = false, UnitType = Unit.Grams, Name = "Salt" },
-            new Ingredient() {Id = "6852531d-f7ca-4c05-8b02-019a3ac53737", IsDeleted = false, UnitType = Unit.Grams, Name = "Cinnamon" },
+            new Ingredient() {Id = "0af163c4-6210-4b51-9032-8cadf025083e", IsDeleted = false, UnitType = Unit.Quantity, Name = "Ground black pepper"},
+            new Ingredient() {Id = "b46b8769-53d2-4aff-b538-f99948962172", IsDeleted = false, UnitType = Unit.Ml, Name = "Tomato Juice"},
+            new Ingredient() {Id = "514afb68-79a8-4deb-bd9c-9d9c61afc1cb", IsDeleted = false, UnitType = Unit.Ml, Name = "Hot sauce"},
+            new Ingredient() {Id = "7aab7c85-626f-4509-a357-56050fbe66e4", IsDeleted = false, UnitType = Unit.Ml, Name = "Worcestershire sauce"},
+            new Ingredient() {Id = "e045e88a-0151-4394-bd23-62622f3335ff", IsDeleted = false, UnitType = Unit.Ml, Name = "Lemon juice"},
+            new Ingredient() {Id = "8a26e862-811d-4053-bb2d-59587bb48188", IsDeleted = false, UnitType = Unit.Ml, Name = "Gin Bombay Sapphire"},
+            new Ingredient() {Id = "6c9dea74-cb47-4d4a-81ec-c21b1aec70ee", IsDeleted = false, UnitType = Unit.Ml, Name = "Martini "},
+            new Ingredient() {Id = "dcb14d4d-6329-4641-bdd1-b02b7174ddcf", IsDeleted = false, UnitType = Unit.Ml, Name = "Vodka"},
+            new Ingredient() {Id = "2a34f05b-192a-46be-986a-3f23afa66a65", IsDeleted = false, UnitType = Unit.Ml, Name = "Tequila" },
+            new Ingredient() {Id = "cf9db0c7-b266-4238-9b14-2e0b89cda8ef", IsDeleted = false, UnitType = Unit.Ml, Name = "Gin" },
+            new Ingredient() {Id = "9dc9533e-6aa5-4483-8613-e7160a17547d", IsDeleted = false, UnitType = Unit.Ml, Name = "Tonik" },
+            new Ingredient() {Id = "f99c65e7-fb0b-4723-a3d5-8ac05a8ba1e4", IsDeleted = false, UnitType = Unit.Ml, Name = "CocaCola" },
+            new Ingredient() {Id = "a69c54ff-8e93-4181-8998-b4de42304075", IsDeleted = false, UnitType = Unit.Ml, Name = "Soda" },
+            new Ingredient() {Id = "6fe3620d-87be-4773-90c1-d0a072f0c838", IsDeleted = false, UnitType = Unit.Ml, Name = "Wiskey" },
+            new Ingredient() {Id = "b96ae8b3-7fad-406c-97d2-bc5e6dcc0d8c", IsDeleted = false, UnitType = Unit.Ml, Name = "Red Bull" },
+            new Ingredient() {Id = "07ee6b8c-8986-4886-bbfd-cdca6e52a5df", IsDeleted = false, UnitType = Unit.Ml, Name = "Water" },
+            new Ingredient() {Id = "d82e5701-27e5-45a2-955d-01d1071fce02", IsDeleted = false, UnitType = Unit.Ml, Name = "Banana Juice" },
+            new Ingredient() {Id = "44ebac14-88ca-404f-87e6-ee0f3d3c180e", IsDeleted = false, UnitType = Unit.Ml, Name = "Orange Juice" },
+            new Ingredient() {Id = "3fea7311-64e6-4325-af27-28cb41a5cf2c", IsDeleted = false, UnitType = Unit.Gr, Name = "Salt" },
+            new Ingredient() {Id = "6852531d-f7ca-4c05-8b02-019a3ac53737", IsDeleted = false, UnitType = Unit.Gr, Name = "Cinnamon" },
             new Ingredient() {Id = "00b7970b-96e4-49ee-97c0-896871d4bd9f", IsDeleted = false, UnitType = Unit.Quantity, Name = "Ice" },
             new Ingredient() {Id = "6e3634b2-518f-40e2-ac20-1bf56297364a", IsDeleted = false, UnitType = Unit.Quantity, Name = "Olive" }
         };

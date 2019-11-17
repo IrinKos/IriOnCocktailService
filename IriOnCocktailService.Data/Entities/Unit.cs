@@ -6,8 +6,8 @@ namespace IriOnCocktailService.Data.Entities
 {
     public enum Unit
     {
-        Millilitres = 1,
+        Ml = 1,
         Quantity = 2,
-        Grams=3
+        Gr=3
     }
 }

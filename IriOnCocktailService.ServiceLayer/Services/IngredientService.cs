@@ -73,6 +73,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
             var ingredients = await this.context.Ingredients
                 .Where(i => i.IsDeleted == false)
                 .Select(i => this.mapper.MapFrom(i))
+                .OrderBy( i => i.Name)
                 .ToListAsync();
 
             return ingredients;
