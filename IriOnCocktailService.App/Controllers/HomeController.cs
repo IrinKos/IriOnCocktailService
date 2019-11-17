@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using IriOnCocktailService.App.Models;
 using Microsoft.AspNetCore.Mvc;
-using IriOnCocktailService.App.Models;
-using System.Security.Claims;
+using System.Diagnostics;
 
 namespace IriOnCocktailService.App.Controllers
 {

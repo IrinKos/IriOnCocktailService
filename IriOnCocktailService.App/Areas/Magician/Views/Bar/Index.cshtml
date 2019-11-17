@@ -4,63 +4,6 @@
     ViewData["Title"] = "Index";
 }
 
-
-
-@*<section>
-        <div class="tbl-header">
-        </div>
-        <div class="tbl-content">
-            <table cellpadding="0" cellspacing="0" border="0">
-                <tbody>
-                    @foreach (var item in Model.Bars)
-                    {
-                        if (item.NotAvailable == false)
-                        {
-                            <tr>
-                                <td>
-                                    <div class="media">
-                                        <img height="100" width="100" class="d-flex align-self-start mr-3" src="@Html.DisplayFor(modelItem => item.PictureURL)" alt="Generic placeholder image">
-                                        <div class="media-body">
-                                            <h5 class="mt-0">
-                                                <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
-                                            </h5>
-                                            @for (int i = 0; i < @item.Rating; i++)
-                                            {
-                                                <img src="~/lib/images/christmas_star.png" alt="BackToList" width="20">
-                                            }
-                                            <div class="d-flex justify-content-end"><span class="font-weight-bold">Address: </span>@Html.DisplayFor(modelItem => item.Address)</div>
-                                            <div class="d-flex justify-content-end"><span class="font-weight-bold">Phone number: </span>@Html.DisplayFor(modelItem => item.PhoneNumber)</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td>
-                                    <a id="bar-buttonD" asp-action="Edit" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
-                                        <span data-title="Edit!">
-                                            <img src="~/lib/images/YellowFlask.png" alt="Edit" width="20"> Edit!
-                                            <img src="~/lib/images/YellowFlask.png" alt="Edit" width="20">
-                                        </span>
-                                    </a>
-                                    <a id="bar-buttonE" asp-action="Delete" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
-                                        <span data-title="Delete!">
-                                            <img src="~/lib/images/RedFlask.png" alt="Delete" width="20"> Delete!
-                                            <img src="~/lib/images/RedFlask.png" alt="Delete" width="20">
-                                        </span>
-                                    </a>
-                                    <a id="bar-buttonD" asp-action="Details" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
-                                        <span data-title="Details!">
-                                            <img src="~/lib/images/GreenFlask.png" alt="Details" width="20"> Details!
-                                            <img src="~/lib/images/GreenFlask.png" alt="Details" width="20">
-                                        </span>
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
-    </section>*@
 <div class="row">
     @{ var counter = 5; }
     @foreach (var item in Model.Bars)
@@ -95,19 +38,19 @@
                         <div class="card-footer">
 
                             @*<small class="text-muted">Last updated 3 mins ago</small>*@
-                            <a id="bar-buttonD" asp-action="Edit" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                            <a id="bar-buttonD" asp-action="Edit" asp-route-id="@item.Id">
                                 <span data-title="Edit!">
                                     <img src="~/lib/images/YellowFlask.png" alt="Edit" width="20"> Edit!
                                     <img src="~/lib/images/YellowFlask.png" alt="Edit" width="20">
                                 </span>
                             </a>
-                            <a id="bar-buttonE" asp-action="Delete" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                            <a id="bar-buttonE" asp-action="Delete" asp-route-id="@item.Id">
                                 <span data-title="Delete!">
                                     <img src="~/lib/images/RedFlask.png" alt="Delete" width="20"> Delete!
                                     <img src="~/lib/images/RedFlask.png" alt="Delete" width="20">
                                 </span>
                             </a>
-                            <a id="bar-buttonD" asp-action="Details" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                            <a id="bar-buttonD" asp-action="Details" asp-route-id="@item.Id">
                                 <span data-title="Details!">
                                     <img src="~/lib/images/GreenFlask.png" alt="Details" width="20"> Details!
                                     <img src="~/lib/images/GreenFlask.png" alt="Details" width="20">

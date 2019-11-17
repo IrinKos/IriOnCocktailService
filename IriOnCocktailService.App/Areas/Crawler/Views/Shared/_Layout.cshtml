@@ -21,11 +21,13 @@
     <link rel="stylesheet" href="~/css/Barbuttons.css" />
     <link rel="stylesheet" href="~/css/tables.css" />
     <link rel="stylesheet" href="~/css/create-form.css" />
+    <link rel="stylesheet" href="~/css/searchBar.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 </head>
 <body>
     <header>
-
+        @*Crawler*@
         <nav class="menu pb-5">
             <ol>
                 <li class="menu-item"><a asp-area="Crawler" asp-controller="Home" asp-action="Index">Home</a></li>
@@ -48,7 +50,12 @@
                         <button id="logout" type="submit" class="bg-black">Logout</button>
                     </form>
                 </li>
-
+                <li>
+                    <form id="search-form" action="">
+                        <input id="search-input" type="search">
+                        <i id="search-fa" class="fa fa-search"></i>
+                    </form>
+                </li>
 
             </ol>
         </nav>
