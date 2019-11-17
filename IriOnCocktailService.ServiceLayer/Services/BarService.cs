@@ -6,6 +6,7 @@ using IriOnCocktailService.ServiceLayer.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -75,7 +76,6 @@ namespace IriOnCocktailService.ServiceLayer.Services
                 .Include(b => b.CocktailBars)
                 .ToListAsync();
             var barsDTOs = this.barsMapper.MapFrom(bars);
-
             return barsDTOs;
         }
 

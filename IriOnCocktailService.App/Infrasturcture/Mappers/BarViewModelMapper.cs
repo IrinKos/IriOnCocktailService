@@ -1,5 +1,5 @@
-﻿using IriOnCocktailService.App.Areas.Magician.Models;
-using IriOnCocktailService.App.Infrasturcture.Mappers.Contracts;
+﻿using IriOnCocktailService.App.Infrasturcture.Mappers.Contracts;
+using IriOnCocktailService.App.Models;
 using IriOnCocktailService.ServiceLayer.DTOS;
 using System;
 using System.Collections.Generic;
@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace IriOnCocktailService.App.Infrasturcture.Mappers
 {
-    public class DisplayBarsViewModelMapper : IViewModelMapper<BarDTO, DisplayBarsViewModel>
-
+    public class BarViewModelMapper : IViewModelMapper<BarDTO, BarViewModel>
     {
-        public DisplayBarsViewModel MapFromDTO(BarDTO dto)
+        public BarViewModel MapFromDTO(BarDTO dto)
         {
-            return new DisplayBarsViewModel
+            return new BarViewModel
             {
                 Id = dto.BarId,
                 Name = dto.BarName,

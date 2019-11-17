@@ -43,6 +43,11 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             var barsDto = await this.barService.GetBarsAsync();
             var viewModel = this.collectionMapper.MapFromDTO(barsDto);
 
+            var barsViewModel = new List<DisplayBarsViewModel>();
+            foreach (var bar in barsDto)
+            {
+                barsViewModel.Add(barViewModelMapper.MapFromDTO(bar));
+            }
             //return View(viewModel);
             return View(viewModel);
         }
