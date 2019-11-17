@@ -32,12 +32,13 @@
                                         {
                                             <img src="~/lib/images/christmas_star.png" alt="BackToList" width="20">
                                         }
-
-                                        @for (int i = 0; i < Model.Cocktails.First().Ingredients.Count; i++)
+                                        @foreach (var ing in item.Ingredients)
                                         {
 
-                                        <div><strong>Ingredients: </strong>@Html.DisplayFor(modelItem => item.Ingredients[i].Name)</div>
+                                            <div><strong>Ingredients: </strong>@Html.DisplayFor(modelItem => ing.Name)</div>
                                         }
+
+
                                     </div>
                                 </div>
                             </td>

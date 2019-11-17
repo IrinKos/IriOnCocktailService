@@ -1,0 +1,111 @@
+﻿@model IriOnCocktailService.App.Areas.Magician.Models.DisplayBarsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+<h1>Details</h1>
+
+<div>
+    <h4>DisplayBarsViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PictureURL)
+        </dt>
+        <dd class="col-sm-10">
+            @*@Html.DisplayFor(model => model.PictureURL)*@
+            <img src="@Html.DisplayFor(model => model.PictureURL)" alt="Alternate Text" />
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rating)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rating)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NotAvailable)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NotAvailable)
+        </dd>
+    </dl>
+    <div id="cocktailsToAdd">
+        <select class="js-example-basic-multiple form-control " multiple="multiple">
+            <option value="value">text</option>
+            <option value="value">2</option>
+            <option value="value">text3</option>
+        </select>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <button id="cocktailToAdd">Add Cocktail</button>
+
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>
+    <script>
+    $("#cocktailToAdd").click(function () {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("CocktailsToAdd", "Cocktail", new { area = "Magician"})',
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                //    $('.teams').html('');
+                //    for (var i = 0; i < response.length; i++) {
+                //        $('.teams').append('<h1 align="left">' + response[i].teamName + '</h1>'
+                //            + '<div class = "line"></div>')
+                //        if (undefined !== response[i].teamPlayers && response[i].teamPlayers.length) {
+                //            for (var y = 0; y < response[i].teamPlayers.length; y++) {
+                //                $('.teams').append('<h4 align="left">' + response[i].teamPlayers[y] + '</h4>')
+                //            }
+                //        } else {
+                //            $('.teams').append('<h4 align="left">' + "No team" + '</h4>')
+                //        };
+                //    };
+                //    //console.log(response);
+                //},
+                //failure: function (response) {
+                //    alert(response.responseText);
+                //},
+                //error: function (response) {
+                //    console.log(response);
+                //    alert(response.responseText);
+
+
+            }
+        });
+    });
+
+    </script>
+}

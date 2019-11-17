@@ -17,18 +17,19 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
     {
         private readonly IBarService barService;
         private readonly IViewModelMapper<ICollection<BarDTO>, CollectionViewModel> collectionMapper;
-        //private readonly IViewModelMapper<CollectionDTO, CollectionViewModel> collectionMapper;
+        private readonly IViewModelMapper<BarDTO, DisplayBarsViewModel> barViewModelMapper;
         private readonly IDTOMapper<CommentViewModel, CommentDTO> barCommentMapper;
         private readonly IDTOMapper<RatingViewModel, RatingDTO> barRatingMapper;
 
         public BarController(IBarService barService,
-                             //IViewModelMapper<CollectionDTO, CollectionViewModel> collectionMapper,
                              IViewModelMapper<ICollection<BarDTO>, CollectionViewModel> collectionMapper,
+                             IViewModelMapper<BarDTO,DisplayBarsViewModel> barViewModelMapper,
                              IDTOMapper<CommentViewModel, CommentDTO> barCommentMapper,
                              IDTOMapper<RatingViewModel, RatingDTO> barRatingMapper)
         {
             this.barService = barService;
             this.collectionMapper = collectionMapper;
+            this.barViewModelMapper = barViewModelMapper;
             this.barCommentMapper = barCommentMapper;
             this.barRatingMapper = barRatingMapper;
         }
@@ -42,9 +43,12 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
             return View(viewModel);
         }
         [HttpGet]
-        public IActionResult Details(string Id)
+        public async Task<IActionResult> Details(string Id)
         {
-            return View();
+            var barDTO = await this.barService.GetBarAsync(Id);
+            var barViewModel = this.barViewModelMapper.MapFromDTO(barDTO);
+
+            return View(barViewModel);
         }
         [HttpGet]
         public IActionResult Comment()

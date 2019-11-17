@@ -74,8 +74,15 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         [HttpPost]
         public async Task<string> SetIngredientUnit(string id)
         {
-            
             return await this.ingredientService.GetUnitType(id);
+        }
+        [HttpGet]
+        public async Task<IActionResult> CocktailsToAdd()
+        {
+            var cocktailsDTO = await this.cocktailService.GetAllCocktailsDTO();
+            var selectListOfCocktails = cocktailsDTO.Select(x => new SelectListItem(x.Name, x.Id));
+
+            return Json(selectListOfCocktails);
         }
     }
 }
