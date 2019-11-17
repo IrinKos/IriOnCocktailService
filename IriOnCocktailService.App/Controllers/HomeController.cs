@@ -40,7 +40,7 @@ namespace IriOnCocktailService.App.Controllers
             var barsViewModel = new List<BarViewModel>();
             foreach (var bar in barsDTO)
             {
-                barsViewModel.Add(barViewModelMapper.MapFromDTO(bar));
+                barsViewModel.Add(this.barViewModelMapper.MapFromDTO(bar));
             }
             barsViewModel = barsViewModel
                 .OrderByDescending(b => b.Rating)
@@ -52,7 +52,7 @@ namespace IriOnCocktailService.App.Controllers
             var cocktailsViewModel = new List<CocktailViewModel>();
             foreach (var cocktail in cocktailsDTO)
             {
-                cocktailsViewModel.Add(cocktailViewModelMapper.MapFromDTO(cocktail));
+                cocktailsViewModel.Add(this.cocktailViewModelMapper.MapFromDTO(cocktail));
             }
             cocktailsViewModel = cocktailsViewModel
                 .OrderByDescending(c => c.Rating)
@@ -67,6 +67,19 @@ namespace IriOnCocktailService.App.Controllers
             return View(viewModel);
         }
 
+        public async Task<IActionResult> Bars([FromQuery] string name)
+        {
+            var bars = await this.barService
+                .GetBarsByNameAsync(name); 
+
+            var barsVM = new List<BarViewModel>();
+            foreach (var bar in bars)
+            {
+                barsVM.Add(this.barViewModelMapper.MapFromDTO(bar));
+            }
+
+            return PartialView("_SearchPartial", barsVM);
+        }
         public IActionResult Privacy()
         {
             return View();

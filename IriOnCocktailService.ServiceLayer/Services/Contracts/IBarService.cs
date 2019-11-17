@@ -10,6 +10,7 @@ namespace IriOnCocktailService.ServiceLayer.Services.Contracts
         Task DeleteBarAsync(string barId);
         Task<BarDTO> EditBarAsync(BarDTO barDTO);
         Task<BarDTO> GetBarAsync(string barId);
+        Task<IReadOnlyCollection<BarDTO>> GetBarsByNameAsync(string name); 
         Task<ICollection<BarDTO>> GetBarsAsync();
         Task<CommentDTO> BarCommentAsync(CommentDTO barCommentDTO);
         Task<RatingDTO> BarRatingAsync(RatingDTO barRatingDTO);

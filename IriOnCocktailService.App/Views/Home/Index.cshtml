@@ -3,12 +3,17 @@
 }
 
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-12">
+            <input type="text" name="name" id="search-text" class="form-control" />
+            <button id="load-button" class="btn btn-primary">Search!</button>
+            <div id="put-the-bars-here"></div>
+        </div>
+        <div class="col-sm-6" id="bar-partial">
             <hr />
             <h1 class="text-center bg-black">Most rated Bars!</h1>
             <partial name="_BarPartial" />
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6" id="cocktail-partial">
             <hr />
             <h1 class="text-center bg-black">Most rated Cocktails!</h1>
             <partial name="_CocktailPartial" />
