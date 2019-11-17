@@ -11,6 +11,8 @@ namespace IriOnCocktailService.ServiceLayer.Services.Contracts
         Task<RatingDTO> CocktailRatingAsync(RatingDTO cocktailRatingDTO);
         Task<CocktailDTO> CreateCocktail(CocktailDTO cocktailDTO);
         Task<ICollection<CocktailDTO>> GetAllCocktailsDTO();
+        Task<ICollection<AddCocktailDTO>> GetAllContainedCocktailsDTO(string barId);
+        Task<ICollection<AddCocktailDTO>> GetAllNotContainedCocktailsDTO(string barId);
         Task<Cocktail> GetCocktail(string id);
         Task<CocktailDTO> GetCocktailDTO(string id);
     }

@@ -8,6 +8,7 @@ using IriOnCocktailService.ServiceLayer.DTOS;
 using IriOnCocktailService.ServiceLayer.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace IriOnCocktailService.App.Areas.Magician.Controllers
 {
@@ -16,23 +17,33 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
     public class BarController : Controller
     {
         private readonly IBarService barService;
+        private readonly ICocktailService cocktailService;
+        private readonly IBarCocktailsService barCockailService;
         private readonly IDTOMapper<CreateBarViewModel, BarDTO> barDTOMapper;
         private readonly IViewModelMapper<BarDTO, CreateBarViewModel> createBarViewModelMapper;
         private readonly IViewModelMapper<BarDTO, DisplayBarsViewModel> barViewModelMapper;
         private readonly IViewModelMapper<ICollection<BarDTO>, CollectionViewModel> collectionMapper;
+        private readonly IViewModelMapper<BarDTO, AddCocktailsToBarViewModel> barCocktailsMapper;
+
         //private readonly IViewModelMapper<BarDTO, DeleteBarViewModel> deleteBarViewModelMapper;
 
         public BarController(IBarService barService,
+                             ICocktailService cocktailService,
+                             IBarCocktailsService barCockailService,
                              IDTOMapper<CreateBarViewModel,BarDTO> barDTOMapper,
                              IViewModelMapper<BarDTO, CreateBarViewModel> createBarViewModelMapper,
                              IViewModelMapper<BarDTO, DisplayBarsViewModel> barViewModelMapper,
+                             IViewModelMapper<BarDTO, AddCocktailsToBarViewModel> barCocktailsMapper,
                              IViewModelMapper<ICollection<BarDTO>, CollectionViewModel> collectionMapper)
                             // IViewModelMapper<BarDTO,DeleteBarViewModel> deleteBarViewModelMapper,
         {
             this.barService = barService;
+            this.cocktailService = cocktailService;
+            this.barCockailService = barCockailService;
             this.barDTOMapper = barDTOMapper;
             this.createBarViewModelMapper = createBarViewModelMapper;
             this.barViewModelMapper = barViewModelMapper;
+            this.barCocktailsMapper = barCocktailsMapper;
             this.collectionMapper = collectionMapper;
           //  this.deleteBarViewModelMapper = deleteBarViewModelMapper;
         }
@@ -103,6 +114,31 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             await barService.EditBarAsync(barDTO);
 
             //TODO remove ok
+            return Ok();
+        }
+        [HttpGet]
+        public async Task<IActionResult> ModifyBarCocktails(string Id)
+        {
+            //var barDTO = await this.barService.GetBarAsync(Id);
+            //var cocktails = await cocktailService.GetAllCocktailsDTO();
+            //var filteredCocktails = cocktails;
+            
+            var barViewModel = new AddCocktailsToBarViewModel
+            {
+                BarId=Id,
+                CocktailsToAdd = (await this.cocktailService.GetAllNotContainedCocktailsDTO(Id)).Select(x=> new SelectListItem(x.Name,x.Id)),
+                CocktailsToRemove = (await this.cocktailService.GetAllContainedCocktailsDTO(Id)).Select(x => new SelectListItem(x.Name, x.Id))
+            };
+
+            //TODO remove ok
+            return View(barViewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ModifyBarCocktails(AddCocktailsToBarViewModel viewModel)
+        {
+            await barCockailService.Add(viewModel.SelectedCocktails, viewModel.BarId);
+            await barCockailService.Remove(viewModel.UnSelectedCocktails, viewModel.BarId);
+            await Task.Delay(0);
             return Ok();
         }
     }
