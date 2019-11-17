@@ -20,4 +20,6 @@ $('#search-text').on('keyup', function () {
 $('#load-button').click(function () {
     const searchText = $('#search-text').val();
     $.get('/Home/Bars?name=' + searchText, serverResponseHandler);
+    $.get('/Home/BarsAddress?address=' + searchText, serverResponseHandler);
+    $.get('/Home/Cocktails?name=' + searchText, serverResponseHandler);
 });

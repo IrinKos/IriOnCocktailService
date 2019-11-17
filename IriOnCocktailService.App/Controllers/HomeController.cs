@@ -80,6 +80,33 @@ namespace IriOnCocktailService.App.Controllers
 
             return PartialView("_SearchPartial", barsVM);
         }
+
+        public async Task<IActionResult> BarsAddress([FromQuery] string address) 
+        {
+            var bars = await this.barService.GetBarsByAddressAsync(address);
+
+            var barsVM = new List<BarViewModel>();
+            foreach (var bar in bars)
+            {
+                barsVM.Add(this.barViewModelMapper.MapFromDTO(bar));
+            }
+
+            return PartialView("_SearchPartial", barsVM);
+        }
+
+        public async Task<IActionResult> Cocktails([FromQuery] string name)
+        {
+            var cocktails = await this.cocktailService
+                .GetAllCocktailsByNameDTO(name);
+
+            var cocktailsVM = new List<CocktailViewModel>();
+            foreach (var cocktail in cocktails)
+            {
+                cocktailsVM.Add(this.cocktailViewModelMapper.MapFromDTO(cocktail));
+            }
+
+            return PartialView("_SearchCoctailPartial", cocktailsVM);
+        }
         public IActionResult Privacy()
         {
             return View();

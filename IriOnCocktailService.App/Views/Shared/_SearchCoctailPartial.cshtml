@@ -1,0 +1,60 @@
+﻿@model IReadOnlyCollection<CocktailViewModel>
+@{
+    ViewData["Title"] = "_SearchCoctailPartial";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <div class="card-deck" style="height: 580px">
+                <div class="card bg-black-only">
+                    <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.PictureURL)">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">
+                            <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
+                            <br />
+                            @for (int i = 0; i < @item.Rating; i++)
+                            {
+                                <img src="~/lib/images/christmas_star.png" alt="Star" width="20">
+                            }
+                        </h5>
+                        <p class="card-text text-center">
+                            @*Igredients*@
+                            @for (int i = 0; i < item.Ingredients.Count; i++)
+                            {
+
+                                @Html.DisplayFor(modelItem => item.Ingredients[i].Name)
+                                if (item.Ingredients.Count - 1 != i)
+                                {
+                                    <span>,</span>
+                                }
+                            }
+                        </p>
+                    </div>
+                    @*<div class="card-footer">
+                            <a id="bar-buttonE" asp-action="Rating" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                                <span data-title="Rate it!">
+                                    <img src="~/lib/images/RateIt.png" alt="RateIt" width="20"> Rate it!
+                                    <img src="~/lib/images/RateIt.png" alt="RateIt" width="20">
+                                </span>
+                            </a>
+                            <a id="bar-buttonE" asp-action="Details" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                                <span data-title="Read More Info">
+                                    <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25"> Read More Info!
+                                    <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25">
+                                </span>
+                            </a>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+        <p></p>
+        @*if (counter % 3 == 0)
+            {
+            @:</div><div class="row">
+                counter = 0;
+            }
+            counter++;*@
+    }
+</div>
