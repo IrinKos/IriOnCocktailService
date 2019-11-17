@@ -10,26 +10,6 @@
     <a asp-action="Create">Create New</a>
 </p>
 <section>
-    @*<div class="tbl-header">
-        <table cellpadding="0" cellspacing="0" border="0">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.UnitType)
-                    </th>
-                    <th>
-                        Edit
-                    </th>
-                    <th>
-                        Delete
-                    </th>
-                </tr>
-            </thead>
-        </table>
-    </div>*@
     <div class="tbl-content">
         <table cellpadding="0" cellspacing="0" border="0" class="table-hover">
             <tbody>
@@ -44,7 +24,7 @@
                             @Html.DisplayFor(modelItem => item.UnitType)
                         </td>
                         <td>
-                            <a id="bar-buttonD" asp-action="Edit" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                            <a id="bar-buttonD" asp-action="Edit" asp-route-id="@item.Id">
                                 <span data-title="Edit!">
                                     <img src="~/lib/images/YellowFlask.png" alt="BackToList" width="20"> Edit!
                                     <img src="~/lib/images/YellowFlask.png" alt="BackToList" width="20"> 
@@ -52,7 +32,7 @@
                             </a>
                         </td>
                         <td>
-                            <a id="bar-buttonE" asp-action="Delete" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                            <a id="bar-buttonE" asp-action="Delete" asp-route-id="@item.Id">
                                 <span data-title="Delete!">
                                     <img src="~/lib/images/RedFlask.png" alt="BackToList" width="20"> Delete!
                                     <img src="~/lib/images/RedFlask.png" alt="BackToList" width="20">
