@@ -107,6 +107,20 @@ namespace IriOnCocktailService.App.Controllers
 
             return PartialView("_SearchCoctailPartial", cocktailsVM);
         }
+        public async Task<IActionResult> CocktailsIngredients([FromQuery] string ingredient)
+        {
+            var cocktails = await this.cocktailService
+                .GetAllCocktailsByIngredientDTO(ingredient);
+
+            var cocktailsVM = new List<CocktailViewModel>();
+            foreach (var cocktail in cocktails)
+            {
+                cocktailsVM.Add(this.cocktailViewModelMapper.MapFromDTO(cocktail));
+            }
+
+            return PartialView("_SearchCoctailPartial", cocktailsVM);
+        }
+
         public IActionResult Privacy()
         {
             return View();
