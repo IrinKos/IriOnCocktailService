@@ -1,0 +1,37 @@
+﻿@model IReadOnlyCollection<BarViewModel>
+@{
+    ViewData["Title"] = "_SearchPartial";
+}
+
+<div class="row">
+    @foreach (var bar in Model)
+    {
+        <div class="bar-info">
+            <div class="col">
+                <div class="card-deck" style="height: 300px;">
+                    <div class="card bg-black-only">
+                        <img data-toggle="tooltip" data-placement="top" title="@bar.Name" class="card-img-top" src="@Html.DisplayFor(modelItem => bar.PictureURL)" alt="Bar Pic">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">
+                                <strong>@Html.DisplayFor(modelItem => bar.Name)</strong>
+                                <br />
+                                @for (int i = 0; i < bar.Rating; i++)
+                                {
+                                    <img src="~/lib/images/christmas_star.png" alt="Star" width="20">
+                                }
+                            </h5>
+                            <p class="card-text text-center">
+                                <span class="font-weight-bold text-white">Address: </span>
+                                <br />
+                                <span>@Html.DisplayFor(modelItem => bar.Address)</span>
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+            </div>
+        </div>
+    }
+</div>

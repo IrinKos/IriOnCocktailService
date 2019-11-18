@@ -4,3 +4,25 @@
 $(function () {
     $('[data-toggle="tooltip"]').tooltip();
 });
+
+const serverResponseHandler = (serverData) => {
+    //console.log(serverData);
+    if (serverData) {
+        $('#put-the-bars-here').html(serverData);
+        //$('#put-the-cocktails-here').html(serverData);
+        $("#bar-partial").hide();
+        $("#cocktail-partial").hide();
+    }
+};
+
+$('#search-text').on('keyup', function () {
+    console.log($(this).val());
+});
+
+$('#load-button').click(function () {
+    const searchText = $('#search-text').val();
+   //$.get('/Home/Bars?name=' + searchText, serverResponseHandler);
+   //$.get('/Home/BarsAddress?address=' + searchText, serverResponseHandler);
+   //$.get('/Home/Cocktails?name=' + searchText, serverResponseHandler);
+    $.get('/Home/CocktailsIngredients?ingredient=' + searchText, serverResponseHandler);
+});

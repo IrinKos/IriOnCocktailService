@@ -103,6 +103,32 @@ namespace IriOnCocktailService.ServiceLayer.Services
             return cocktails;
         }
 
+        public async Task<ICollection<CocktailDTO>> GetAllCocktailsByNameDTO(string name)
+        {
+            var cocktails = await this.context.Cocktails
+                .Include(c => c.CocktailIngredients)
+                    .ThenInclude(ci => ci.Ingredient)
+                .Include(c => c.Ratings)
+                .Where(c => c.NotAvailable == false && c.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+                .ToListAsync();
+
+            return cocktails.Select(this.mapper.MapFrom).ToList(); 
+        }
+
+        public async Task<ICollection<CocktailDTO>> GetAllCocktailsByIngredientDTO(string ingredient)
+        {
+            var ingr = await this.context.Cocktails.
+                Include(c => c.CocktailIngredients)
+                    .ThenInclude(ci => ci.Ingredient)
+                .Include(c => c.Ratings)
+                .Where(c => c.CocktailIngredients
+                    .Where(ci=>ci.CocktailId==c.Id)
+                .Select(ci=>ci.Ingredient.Name.ToLower())
+                .Contains(ingredient.ToLower())).ToListAsync();
+
+            return ingr.Select(this.mapper.MapFrom).ToList();
+        }
+
         public async Task<CommentDTO> CocktailCommentAsync(CommentDTO barCommentDTO)
         {
             var barComment = this.cocktailCommentMapper.MapFrom(barCommentDTO);

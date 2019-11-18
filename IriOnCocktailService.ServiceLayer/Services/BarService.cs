@@ -71,6 +71,41 @@ namespace IriOnCocktailService.ServiceLayer.Services
             return barDTO;
         }
 
+        public async Task<IReadOnlyCollection<BarDTO>> GetBarsByNameAsync(string name) 
+        {
+            var bars = await this.context.Bars
+                .Include(b => b.BarRatings)
+                .Include(b => b.BarComments)
+                .Include(b => b.CocktailBars)
+                .Where(b => b.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+                .ToListAsync();
+
+            var barsDTO = new List<BarDTO>();
+            foreach (var bar in bars)
+            {
+                barsDTO.Add(this.mapper.MapFrom(bar));
+            }
+
+            return barsDTO;
+        }
+
+        public async Task<IReadOnlyCollection<BarDTO>> GetBarsByAddressAsync(string address)
+        { 
+            var bars = await this.context.Bars
+                .Include(b => b.BarRatings)
+                .Include(b => b.BarComments)
+                .Include(b => b.CocktailBars)
+                .Where(b => b.Address.Contains(address, StringComparison.OrdinalIgnoreCase))
+                .ToListAsync();
+
+            var barsDTO = new List<BarDTO>();
+            foreach (var bar in bars)
+            {
+                barsDTO.Add(this.mapper.MapFrom(bar));
+            }
+
+            return barsDTO;
+        }
         public async Task<ICollection<BarDTO>> GetBarsAsync()
         {
             var bars = await this.context.Bars
