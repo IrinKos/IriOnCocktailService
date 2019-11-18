@@ -8,7 +8,7 @@ using System.Text;
 namespace IriOnCocktailService.ServiceLayer.DTOMappers
 {
     public class BarCommentDTOMapper : IDTOServiceMapper<BarComment, CommentDTO>,
-                                       IDTOServiceMapper< CommentDTO, BarComment>
+                                       IDTOServiceMapper<CommentDTO, BarComment>
     {
         public BarComment MapFrom(CommentDTO barCommentDTO)
         {
@@ -22,7 +22,12 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
 
         public CommentDTO MapFrom(BarComment entity)
         {
-            throw new NotImplementedException();
+            return new CommentDTO()
+            {
+                BarId=entity.BarId,
+                Comment=entity.Description,
+                UserId=entity.UserId,
+            };
         }
 
     }

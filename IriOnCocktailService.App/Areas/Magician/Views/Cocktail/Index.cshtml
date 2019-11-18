@@ -12,10 +12,10 @@
         if (item.NotAvailable == false)
         {
 
-            <div class="col-sm-3">
+            <div class="col-sm-3" style="height:auto">
                 <div class="card-deck">
                     <div class="card bg-black-only">
-                        <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.PictureURL)" alt="Bar Pic">
+                        <img src="@item.PictureURL" class="card-img-top" alt="Bar Pic">
                         <div class="card-body">
                             <h5 class="card-title text-center">
                                 <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
@@ -26,7 +26,7 @@
                                 }
                             </h5>
                             <p class="card-text text-center">
-                                @for (int i = 0; i < Model.Cocktails.First().Ingredients.Count; i++)
+                                @for (int i = 0; i < item.Ingredients.Count; i++)
                                 {
 
                                     <div>

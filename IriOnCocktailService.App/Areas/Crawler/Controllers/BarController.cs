@@ -78,5 +78,16 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
 
             return Ok();
         }
+        [HttpGet]
+        public async Task<IActionResult> GetComments(string barId)
+        {
+            //    //CommentViewModel barCommentViewModel
+            //    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            //    var commentDTOs = this.barService.GetAllForBarComments(barId);
+            //    var barRatingDTO = this.barRatingMapper.MapFromViewModel(barRatingViewModel);
+            //    await this.barService.BarRatingAsync(barRatingDTO);
+            await Task.Delay(0);
+            return Ok();
+        }
     }
 }

@@ -42,6 +42,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
             var cocktail = new Cocktail
             {
                 Name = cocktailDTO.Name,
+                PicUrl=cocktailDTO.PicUrl
             };
 
             await this.context.Cocktails.AddAsync(cocktail);

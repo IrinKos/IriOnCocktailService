@@ -6,6 +6,7 @@ using IriOnCocktailService.ServiceLayer.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +19,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
         private readonly IDTOServiceMapper<BarDTO, Bar> mapperFromEntity;
         private readonly IDTOServiceMapper<ICollection<Bar>,ICollection<BarDTO>> barsMapper;
         private readonly IDTOServiceMapper<CommentDTO, BarComment> barCommentMapper;
+        private readonly IDTOServiceMapper<BarComment, CommentDTO> barCommentDTOMapper;
         private readonly IDTOServiceMapper<RatingDTO, BarRating> barRatingMapper;
 
         public BarService(IriOnCocktailServiceDbContext context, 
@@ -25,6 +27,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
                          IDTOServiceMapper<BarDTO, Bar> mapperFromEntity,
                          IDTOServiceMapper<ICollection<Bar>, ICollection<BarDTO>> barsMapper,
                          IDTOServiceMapper<CommentDTO, BarComment> barCommentMapper,
+                         IDTOServiceMapper<BarComment, CommentDTO> barCommentDTOMapper,
                          IDTOServiceMapper<RatingDTO, BarRating> barRatingMapper)
         {
             this.context = context;
@@ -32,6 +35,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
             this.mapperFromEntity = mapperFromEntity;
             this.barsMapper = barsMapper;
             this.barCommentMapper = barCommentMapper;
+            this.barCommentDTOMapper = barCommentDTOMapper;
             this.barRatingMapper = barRatingMapper;
         }
 
@@ -124,6 +128,13 @@ namespace IriOnCocktailService.ServiceLayer.Services
             await this.context.SaveChangesAsync();
 
             return barRatingDTO;
+        }
+        public ICollection<CommentDTO> GetAllForBarComments(string barId)
+        {
+            var comments = this.context.BarComments.Where(bc => bc.BarId == barId);
+            var commentDTOs = comments.Select(c => this.barCommentDTOMapper.MapFrom(c));
+
+            return commentDTOs.ToList();
         }
     }
 }
