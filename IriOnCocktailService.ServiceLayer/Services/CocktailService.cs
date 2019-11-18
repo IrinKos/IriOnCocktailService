@@ -17,19 +17,23 @@ namespace IriOnCocktailService.ServiceLayer.Services
         private readonly IriOnCocktailServiceDbContext context;
         private readonly ICocktailIngredientService cocktailIngredientService;
         private readonly IDTOServiceMapper<Cocktail, CocktailDTO> mapper;
+
         private readonly IDTOServiceMapper<CommentDTO, CocktailComment> cocktailCommentMapper;
+        private readonly IDTOServiceMapper<Cocktail, AddCocktailDTO> addCocktailMapper;
         private readonly IDTOServiceMapper<RatingDTO, CocktailRating> cocktailRatingMapper;
 
         public CocktailService(IriOnCocktailServiceDbContext context,
                                ICocktailIngredientService cocktailIngredientService,
                                IDTOServiceMapper<Cocktail, CocktailDTO> mapper,
                                IDTOServiceMapper<CommentDTO, CocktailComment> cocktailCommentMapper,
+                               IDTOServiceMapper<Cocktail, AddCocktailDTO> addCocktailMapper,
                                IDTOServiceMapper<RatingDTO, CocktailRating> cocktailRatingMapper)
         {
             this.context = context;
             this.cocktailIngredientService = cocktailIngredientService;
             this.mapper = mapper;
             this.cocktailCommentMapper = cocktailCommentMapper;
+            this.addCocktailMapper = addCocktailMapper;
             this.cocktailRatingMapper = cocktailRatingMapper;
         }
 
@@ -38,6 +42,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
             var cocktail = new Cocktail
             {
                 Name = cocktailDTO.Name,
+                PicUrl=cocktailDTO.PicUrl
             };
 
             await this.context.Cocktails.AddAsync(cocktail);
@@ -115,6 +120,37 @@ namespace IriOnCocktailService.ServiceLayer.Services
             await this.context.SaveChangesAsync();
 
             return cocktailRatingDTO;
+        }
+        public async Task<ICollection<AddCocktailDTO>> GetAllContainedCocktailsDTO(string barId)
+        {
+            var cocktails = new List<Cocktail>();
+
+            var containedCocktails = await this.context.CocktailBars.Where(cb => cb.BarId == barId).Select(cb => cb.CocktailId).ToListAsync();
+
+            foreach (var item in containedCocktails)
+            {
+                var cocktailToBeAdded = this.context.Cocktails.FirstOrDefault(x => x.Id == item);
+                if(cocktailToBeAdded !=null)
+                cocktails.Add(cocktailToBeAdded);
+            }
+            var cocktailsDTO = cocktails.Select(x => this.addCocktailMapper.MapFrom(x)).ToList();
+            return cocktailsDTO;
+        }
+        public async Task<ICollection<AddCocktailDTO>> GetAllNotContainedCocktailsDTO(string barId)
+        {
+            var cocktails = await this.context.Cocktails
+                .Include(c=>c.Ratings)
+                .Include(c=>c.CocktailIngredients)
+                .ToListAsync();
+
+            var containedCocktails = await this.context.CocktailBars.Where(cb => cb.BarId == barId).Select(cb => cb.CocktailId).ToListAsync();
+            foreach (var item in containedCocktails)
+            {
+                var cocktailToBeRemoved = this.context.Cocktails.FirstOrDefault(x => x.Id == item);
+            cocktails.Remove(cocktailToBeRemoved);
+            }
+            var cocktailsDTO = cocktails.Select(x => this.addCocktailMapper.MapFrom(x)).ToList();
+            return cocktailsDTO;
         }
     }
 }

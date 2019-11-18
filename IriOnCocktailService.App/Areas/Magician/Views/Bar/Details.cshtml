@@ -53,13 +53,10 @@
             @Html.DisplayFor(model => model.NotAvailable)
         </dd>
     </dl>
-    <div id="cocktailsToAdd">
-        <select class="js-example-basic-multiple form-control text-black" multiple="multiple">
-            <option class="text-black" value="value">text</option>
-            <option class="text-black" value="value">2</option>
-            <option class="text-black" value="value">text3</option>
-        </select>
-    </div>
+    <ul>
+    </ul>
+    <select id="cocktailsToAdd" class="js-example-basic-multiple form-control " multiple="multiple">
+    </select>
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
@@ -74,13 +71,25 @@
         });
     </script>
     <script>
-    $("#cocktailToAdd").click(function () {
+        $("#cocktailToAdd").click(function () {
+            $(".select2-container").show() ;
+            $.getJSON('@Url.Action("CocktailsToAdd", "Cocktail", new { area = "Magician"})', function (result) {
+                var options = $("#cocktailsToAdd");
+                //don't forget error handling!
+                $.each(result, function (item) {
+                    options.append(`<option value = "${result[item].value}">${result[item].text}</option>`)
+                    //options.append($("<option />").val(item.value).text(item.text));
+                });
+            });
+        });
+       //var funcForCocktails =
+    @*$("#cocktailToAdd").click(function () {
         $.ajax({
             type: "GET",
             url: '@Url.Action("CocktailsToAdd", "Cocktail", new { area = "Magician"})',
             dataType: "json",
             success: function (response) {
-                console.log(response);
+                console.log(response);*@
                 //    $('.teams').html('');
                 //    for (var i = 0; i < response.length; i++) {
                 //        $('.teams').append('<h1 align="left">' + response[i].teamName + '</h1>'
@@ -103,9 +112,9 @@
                 //    alert(response.responseText);
 
 
-            }
-        });
-    });
+    //        }
+    //    });
+    //});
 
     </script>
 }

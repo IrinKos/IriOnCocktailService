@@ -12,6 +12,8 @@ namespace IriOnCocktailService.ServiceLayer.DTOS
         public string BarPicUrl { get; set; }
         public List<BarRating> BarRatings { get; set; }
         public List<BarComment> BarComments { get; set; }
+        public List<CocktailBar> BarAvailableCocktails { get; set; }
+        public List<CocktailBar> BarNotAvailableCocktails { get; set; }
         public bool BarNotAvailable { get; set; }
 
         //public List<string> BarComments { get; set; }

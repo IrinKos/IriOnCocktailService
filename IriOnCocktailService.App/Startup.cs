@@ -76,6 +76,7 @@ namespace IriOnCocktailService.App
             services.AddScoped<IIngredientService, IngredientService>();
             services.AddScoped<ICocktailService, CocktailService>();
             services.AddScoped<ICocktailIngredientService, CocktailIngredientService>();
+            services.AddScoped<IBarCocktailsService, BarCocktailsService>();
 
         }
 

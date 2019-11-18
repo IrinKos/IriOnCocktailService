@@ -32,6 +32,7 @@
                     <option data-unit="@item.UnitType" data-name="@item.Name" id="@item.Id" onclick="Find(this.id)" value="@item.Id">@item.Name</option>
                 }
             </datalist>*@
+                <span>Ingredients</span>
                 <select id="myList" asp-for="CocktailName">
                     <option value="Select ingredient" disabled="disabled" selected="selected"></option>
                     @foreach (var item in Model.AllAllIngredients)
@@ -147,7 +148,7 @@
                     name: selectedItem[0].value,
                 };
                 $('#selectedIngredients').append(`
-                                 <li>${ingrClass.name} - ${quantity.val()} (${ingrUnit.val()}) <button id = "${ingrClass.name}" >Remove</button></li>
+                                 <li data-ingrid='${ingrClass.IngredientId}'>${ingrClass.name} - ${quantity.val()} (${ingrUnit.val()}) <button class="remove-ingr-btn">Remove</button></li>
                                                                              `);
                 selectedItem.attr("disabled", false);
                 e.selectedIndex = "0";
@@ -162,6 +163,14 @@
                         <input  name="specificIngredients[${i}].IngredientId" value = "${specificIngredients[i].IngredientId}" class="form-control">`;
                     $('#specIng').append(a);
                 }
+            })
+
+            $('#selectedIngredients').on('click', '.remove-ingr-btn', function (e) {
+                const $parent = $(e.currentTarget).closest('li');
+                const id = $parent.data('ingrid');
+                $parent.remove();
+
+                specificIngredients = specificIngredients.filter(ingr => ingr.IngredientId !== id);
             })
         })
 
