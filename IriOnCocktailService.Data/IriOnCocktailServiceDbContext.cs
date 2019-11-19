@@ -126,6 +126,11 @@ namespace IriOnCocktailService.Data
                 .WithOne(comment => comment.Bar)
                 .HasForeignKey(comment => comment.BarId);
 
+            builder.Entity<BarRating>()
+                .HasKey(br => new { br.UserId, br.BarId });
+
+            builder.Entity<CocktailRating>()
+                .HasKey(br => new { br.UserId, br.CocktailId });
             //builder.Entity<Bar>()
             //    .HasMany(bar => bar.BarRatings)
             //    .WithOne(rating => rating.Bar)

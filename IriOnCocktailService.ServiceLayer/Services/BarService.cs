@@ -163,12 +163,25 @@ namespace IriOnCocktailService.ServiceLayer.Services
 
             return barRatingDTO;
         }
-        public ICollection<CommentDTO> GetAllForBarComments(string barId)
+        public async Task<ICollection<CommentDTO>> GetAllCommentsForBar(string barId)
         {
-            var comments = this.context.BarComments.Where(bc => bc.BarId == barId);
+            var comments = this.context.BarComments
+                .Include(bc=>bc.User)
+                .Where(bc => bc.BarId == barId);
             var commentDTOs = comments.Select(c => this.barCommentDTOMapper.MapFrom(c));
 
-            return commentDTOs.ToList();
+            return await commentDTOs.ToListAsync();
         }
+        //public async Task<ICollection<CommentDTO>> GetAllCocktailsForBar(string barId)
+        //{
+        //    var comments = this.context.Cocktails
+        //        .Include(bc => bc.Ratings)
+        //        .Include(c => c.CocktailIngredients)
+        //            .ThenInclude(ci => ci.Ingredient)
+        //        .Include(c => c.CocktailBars);
+        //    var commentDTOs = comments.Select(c => this.barCommentDTOMapper.MapFrom(c));
+        //    //todo fix
+        //    return await commentDTOs.ToListAsync();
+        //}
     }
 }

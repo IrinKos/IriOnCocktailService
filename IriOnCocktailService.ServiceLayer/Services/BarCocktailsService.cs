@@ -19,29 +19,35 @@ namespace IriOnCocktailService.ServiceLayer.Services
 
         public async Task Add(List<string> cocktails, string barId)
         {
-            foreach (var item in cocktails)
+            if (cocktails != null)
             {
-                var cocktailBar = new CocktailBar
+                foreach (var item in cocktails)
                 {
-                    BarId = barId,
-                    CocktailId = item,
-                };
-                await this.context.CocktailBars.AddAsync(cocktailBar);
+                    var cocktailBar = new CocktailBar
+                    {
+                        BarId = barId,
+                        CocktailId = item,
+                    };
+                    await this.context.CocktailBars.AddAsync(cocktailBar);
+                }
+                await this.context.SaveChangesAsync();
             }
-            await this.context.SaveChangesAsync();
         }
         public async Task Remove(List<string> cocktails, string barId)
         {
-            foreach (var item in cocktails)
+            if (cocktails != null)
             {
-                var cocktailBar = new CocktailBar
+                foreach (var item in cocktails)
                 {
-                    BarId = barId,
-                    CocktailId = item,
-                };
-                this.context.CocktailBars.Remove(cocktailBar);
+                    var cocktailBar = new CocktailBar
+                    {
+                        BarId = barId,
+                        CocktailId = item,
+                    };
+                    this.context.CocktailBars.Remove(cocktailBar);
+                }
+                await this.context.SaveChangesAsync();
             }
-            await this.context.SaveChangesAsync();
         }
     }
 }
