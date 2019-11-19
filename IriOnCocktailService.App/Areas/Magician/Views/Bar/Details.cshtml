@@ -1,4 +1,4 @@
-﻿@model IriOnCocktailService.App.Areas.Magician.Models.DisplayBarsViewModel
+﻿@model IriOnCocktailService.App.Areas.Magician.Models.BarDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -54,67 +54,14 @@
         </dd>
     </dl>
     <ul>
+        @foreach (var item in Model.Comments)
+        {
+        <li>@item.Username: @item.Comment</li>
+        }
     </ul>
-    <select id="cocktailsToAdd" class="js-example-basic-multiple form-control " multiple="multiple">
-    </select>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <button id="cocktailToAdd">Add Cocktail</button>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })
 
     <a asp-action="Index">Back to List</a>
 </div>
-@section Scripts{
-    <script>
-        $(document).ready(function () {
-            $('.js-example-basic-multiple').select2();
-        });
-    </script>
-    <script>
-        $("#cocktailToAdd").click(function () {
-            $(".select2-container").show() ;
-            $.getJSON('@Url.Action("CocktailsToAdd", "Cocktail", new { area = "Magician"})', function (result) {
-                var options = $("#cocktailsToAdd");
-                //don't forget error handling!
-                $.each(result, function (item) {
-                    options.append(`<option value = "${result[item].value}">${result[item].text}</option>`)
-                    //options.append($("<option />").val(item.value).text(item.text));
-                });
-            });
-        });
-       //var funcForCocktails =
-    @*$("#cocktailToAdd").click(function () {
-        $.ajax({
-            type: "GET",
-            url: '@Url.Action("CocktailsToAdd", "Cocktail", new { area = "Magician"})',
-            dataType: "json",
-            success: function (response) {
-                console.log(response);*@
-                //    $('.teams').html('');
-                //    for (var i = 0; i < response.length; i++) {
-                //        $('.teams').append('<h1 align="left">' + response[i].teamName + '</h1>'
-                //            + '<div class = "line"></div>')
-                //        if (undefined !== response[i].teamPlayers && response[i].teamPlayers.length) {
-                //            for (var y = 0; y < response[i].teamPlayers.length; y++) {
-                //                $('.teams').append('<h4 align="left">' + response[i].teamPlayers[y] + '</h4>')
-                //            }
-                //        } else {
-                //            $('.teams').append('<h4 align="left">' + "No team" + '</h4>')
-                //        };
-                //    };
-                //    //console.log(response);
-                //},
-                //failure: function (response) {
-                //    alert(response.responseText);
-                //},
-                //error: function (response) {
-                //    console.log(response);
-                //    alert(response.responseText);
-
-
-    //        }
-    //    });
-    //});
-
-    </script>
-}

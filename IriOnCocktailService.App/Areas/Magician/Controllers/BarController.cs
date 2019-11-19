@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IriOnCocktailService.App.Areas.Crawler.Models;
 using IriOnCocktailService.App.Areas.Magician.Models;
 using IriOnCocktailService.App.Infrasturcture.Mappers.Contracts;
 using IriOnCocktailService.ServiceLayer.DTOS;
@@ -22,10 +23,10 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         private readonly IDTOMapper<CreateBarViewModel, BarDTO> barDTOMapper;
         private readonly IViewModelMapper<BarDTO, CreateBarViewModel> createBarViewModelMapper;
         private readonly IViewModelMapper<BarDTO, DisplayBarsViewModel> barViewModelMapper;
+        private readonly IViewModelMapper<BarDTO, BarDetailsViewModel> barDetailsMapper;
+        private readonly IViewModelMapper<CommentDTO, CommentViewModel> commentMapper;
         private readonly IViewModelMapper<ICollection<BarDTO>, CollectionViewModel> collectionMapper;
         private readonly IViewModelMapper<BarDTO, AddCocktailsToBarViewModel> barCocktailsMapper;
-
-        //private readonly IViewModelMapper<BarDTO, DeleteBarViewModel> deleteBarViewModelMapper;
 
         public BarController(IBarService barService,
                              ICocktailService cocktailService,
@@ -33,9 +34,9 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
                              IDTOMapper<CreateBarViewModel,BarDTO> barDTOMapper,
                              IViewModelMapper<BarDTO, CreateBarViewModel> createBarViewModelMapper,
                              IViewModelMapper<BarDTO, DisplayBarsViewModel> barViewModelMapper,
-                             IViewModelMapper<BarDTO, AddCocktailsToBarViewModel> barCocktailsMapper,
+                             IViewModelMapper<BarDTO, BarDetailsViewModel> barDetailsMapper,
+                             IViewModelMapper<CommentDTO, CommentViewModel> commentMapper,
                              IViewModelMapper<ICollection<BarDTO>, CollectionViewModel> collectionMapper)
-                            // IViewModelMapper<BarDTO,DeleteBarViewModel> deleteBarViewModelMapper,
         {
             this.barService = barService;
             this.cocktailService = cocktailService;
@@ -43,9 +44,9 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             this.barDTOMapper = barDTOMapper;
             this.createBarViewModelMapper = createBarViewModelMapper;
             this.barViewModelMapper = barViewModelMapper;
-            this.barCocktailsMapper = barCocktailsMapper;
+            this.barDetailsMapper = barDetailsMapper;
+            this.commentMapper = commentMapper;
             this.collectionMapper = collectionMapper;
-          //  this.deleteBarViewModelMapper = deleteBarViewModelMapper;
         }
 
         [HttpGet]
@@ -66,7 +67,10 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         public async Task<IActionResult> Details(string Id)
         {
             var barDTO = await this.barService.GetBarAsync(Id);
-            var barViewModel = this.barViewModelMapper.MapFromDTO(barDTO);
+            var barViewModel = this.barDetailsMapper.MapFromDTO(barDTO);
+            var barCommentDTOs = await this.barService.GetAllCommentsForBar(Id);
+
+            barViewModel.Comments = barCommentDTOs.Select(c => this.commentMapper.MapFromDTO(c));
 
             return View(barViewModel);
         }
@@ -124,9 +128,6 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         [HttpGet]
         public async Task<IActionResult> ModifyBarCocktails(string Id)
         {
-            //var barDTO = await this.barService.GetBarAsync(Id);
-            //var cocktails = await cocktailService.GetAllCocktailsDTO();
-            //var filteredCocktails = cocktails;
             
             var barViewModel = new AddCocktailsToBarViewModel
             {
@@ -143,8 +144,8 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         {
             await barCockailService.Add(viewModel.SelectedCocktails, viewModel.BarId);
             await barCockailService.Remove(viewModel.UnSelectedCocktails, viewModel.BarId);
-            await Task.Delay(0);
-            return Ok();
+
+            return Redirect("/Bar/Details/"+viewModel.BarId);
         }
     }
 }

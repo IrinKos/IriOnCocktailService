@@ -58,6 +58,8 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
         [HttpPost]
         public async Task<IActionResult> Comment(CommentViewModel barCommentViewModel)
         {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            barCommentViewModel.UserId = userId;
             var barCommentDTO = this.barCommentMapper.MapFromViewModel(barCommentViewModel);
             await this.barService.BarCommentAsync(barCommentDTO);
 
