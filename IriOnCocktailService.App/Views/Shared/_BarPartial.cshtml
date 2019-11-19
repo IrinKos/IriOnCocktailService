@@ -10,8 +10,8 @@
     {
         if (item.NotAvailable == false)
         {
-            <div class="col-8 col-sm-6 mb-5">
-                <div class="card-deck" style="height: 300px;">
+            <div class="col-8 col-sm-6 mb-5 mt-3">
+                <div class="card-deck" style="height: 500px;">
                     <div class="card bg-black-only">
                         <img data-toggle="tooltip" data-placement="top" title="@item.Name" class="card-img-top" src="@Html.DisplayFor(modelItem => item.PictureURL)" alt="Bar Pic">
                         <div class="card-body">
@@ -30,6 +30,18 @@
                             </p>
                         </div>
                         <div class="card-footer">
+                            <a id="bar-buttonE" asp-action="Rating" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                                <span data-title="Rate it!">
+                                    <img src="~/lib/images/RateIt.png" alt="RateIt" width="20"> Rate it!
+                                    <img src="~/lib/images/RateIt.png" alt="RateIt" width="20">
+                                </span>
+                            </a>
+                            <a id="bar-buttonE" asp-action="Details" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                                <span data-title="Read More Info">
+                                    <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25"> Read More Info!
+                                    <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25">
+                                </span>
+                            </a>
                         </div>
                     </div>
                 </div>

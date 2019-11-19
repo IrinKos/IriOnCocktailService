@@ -11,8 +11,8 @@
         if (item.NotAvailable == false)
         {
 
-            <div class="col-4 col-sm-6 mb-5">
-                <div class="card-deck" style="height: 580px">
+            <div class="col-4 col-sm-6  mb-5 mt-3">
+                <div class="card-deck" style="height: 500px">
                     <div class="card bg-black-only">
                         <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.PictureURL)">
                         <div class="card-body">
@@ -30,14 +30,14 @@
                                 {
 
                                     @Html.DisplayFor(modelItem => item.Ingredients[i].Name)
-                                    if (Model.Cocktails.First().Ingredients.Count - 1 != i)
+                                    if (Model.Cocktails.First().Ingredients.Count-1  != i)
                                     {
                                         <span>,</span>
                                     }
                                 }
                             </p>
                         </div>
-                        @*<div class="card-footer">
+                        <div class="card-footer">
                                 <a id="bar-buttonE" asp-action="Rating" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
                                     <span data-title="Rate it!">
                                         <img src="~/lib/images/RateIt.png" alt="RateIt" width="20"> Rate it!
@@ -50,7 +50,7 @@
                                         <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25">
                                     </span>
                                 </a>
-                            </div>*@
+                            </div>
                     </div>
                 </div>
             </div>

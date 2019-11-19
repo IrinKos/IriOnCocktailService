@@ -5,14 +5,26 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip();
 });
 
-const serverResponseHandler = (serverData) => {
+const barServerResponseHandler = (serverData) => {
     //console.log(serverData);
     if (serverData) {
-        $('#put-the-bars-here').html(serverData);
+        $('#put-the-bars-here').html(`<h1 class="text-center bg-black mb-5">Serached Bars!</h1>` + serverData);
         //$('#put-the-cocktails-here').html(serverData);
         $("#bar-partial").hide();
         $("#cocktail-partial").hide();
     }
+};
+
+const cocktailServerResponseHandler = (serverData) => {
+    //console.log(serverData);
+    if (serverData) {
+        //$('#put-the-bars-here').html(serverData);
+        $('#put-the-cocktails-here').html(`<h1 class="text-center bg-black mt-5">Serached Cocktails!</h1>` + serverData);
+        $("#bar-partial").hide();
+        $("#cocktail-partial").hide();
+    }
+    //serverData = '<h3 class="text-center bg-white text-black-50">No cocktails found!</h3>'
+    //$('#put-the-cocktails-here').html(`<h1 class="text-center bg-black mt-5">Serached cocktails!</h1>` + serverData);
 };
 
 $('#search-text').on('keyup', function () {
@@ -21,8 +33,8 @@ $('#search-text').on('keyup', function () {
 
 $('#load-button').click(function () {
     const searchText = $('#search-text').val();
-   //$.get('/Home/Bars?name=' + searchText, serverResponseHandler);
-   //$.get('/Home/BarsAddress?address=' + searchText, serverResponseHandler);
-   //$.get('/Home/Cocktails?name=' + searchText, serverResponseHandler);
-    $.get('/Home/CocktailsIngredients?ingredient=' + searchText, serverResponseHandler);
+    $.get('/Home/Bars?name=' + searchText, barServerResponseHandler);
+    $.get('/Home/BarsAddress?address=' + searchText, barServerResponseHandler);
+    $.get('/Home/Cocktails?name=' + searchText, cocktailServerResponseHandler);
+    $.get('/Home/CocktailsIngredients?ingredient=' + searchText, cocktailServerResponseHandler);
 });
