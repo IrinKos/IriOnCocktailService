@@ -19,6 +19,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
         private readonly IDTOServiceMapper<Cocktail, CocktailDTO> mapper;
 
         private readonly IDTOServiceMapper<CommentDTO, CocktailComment> cocktailCommentMapper;
+        private readonly IDTOServiceMapper<CocktailComment, CommentDTO> cocktailCommentDTOMapper; 
         private readonly IDTOServiceMapper<Cocktail, AddCocktailDTO> addCocktailMapper;
         private readonly IDTOServiceMapper<RatingDTO, CocktailRating> cocktailRatingMapper;
 
@@ -26,6 +27,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
                                ICocktailIngredientService cocktailIngredientService,
                                IDTOServiceMapper<Cocktail, CocktailDTO> mapper,
                                IDTOServiceMapper<CommentDTO, CocktailComment> cocktailCommentMapper,
+                               IDTOServiceMapper<CocktailComment, CommentDTO> cocktailCommentDTOMapper,
                                IDTOServiceMapper<Cocktail, AddCocktailDTO> addCocktailMapper,
                                IDTOServiceMapper<RatingDTO, CocktailRating> cocktailRatingMapper)
         {
@@ -33,6 +35,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
             this.cocktailIngredientService = cocktailIngredientService;
             this.mapper = mapper;
             this.cocktailCommentMapper = cocktailCommentMapper;
+            this.cocktailCommentDTOMapper = cocktailCommentDTOMapper;
             this.addCocktailMapper = addCocktailMapper;
             this.cocktailRatingMapper = cocktailRatingMapper;
         }
@@ -157,6 +160,17 @@ namespace IriOnCocktailService.ServiceLayer.Services
 
             return cocktailRatingDTO;
         }
+
+        public async Task<ICollection<CommentDTO>> GetAllCommentsForCoctail(string cocktailId)
+        {
+            var comments = this.context.CocktailComments
+                .Include(bc => bc.User)
+                .Where(bc => bc.CocktailId == cocktailId);
+            var commentDTOs = comments.Select(c => this.cocktailCommentDTOMapper.MapFrom(c));
+
+            return await commentDTOs.ToListAsync();
+        }
+
         public async Task<ICollection<AddCocktailDTO>> GetAllContainedCocktailsDTO(string barId)
         {
             var cocktails = new List<Cocktail>();

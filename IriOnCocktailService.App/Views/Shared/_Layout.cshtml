@@ -34,8 +34,16 @@
                 <li class="menu-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
                 <li class="menu-item"><a asp-controller="About" asp-action="Index">About</a></li>
                 <li class="menu-item"><a asp-controller="Bar" asp-action="Index">Bars</a></li>
+                @*<li>
+                    <div id="search-form">
+                        <input id="search-text" placeholder="Search...">
+                        <button id="load-button" class="bg-transparent border-0 hide">
+                            <i id="search-fa" class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </li>*@
                 <li class="menu-item"><a asp-controller="Cocktail" asp-action="Index">Cocktails</a></li>
-                <li class="menu-item"><a href="#0">Contact</a></li>
+                @*<li class="menu-item"><a href="#0">Contact</a></li>*@
                 <partial name="_LoginPartial" />
             </ol>
             <ol class="pt-4">

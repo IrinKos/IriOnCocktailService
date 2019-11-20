@@ -1,20 +1,21 @@
-﻿@model IndexViewModel
+﻿@model IReadOnlyCollection<BarViewModel>
 @*Crawler*@
 @{
     ViewData["Title"] = "Index";
 }
 
-
 <div class="row">
-    @foreach (var item in Model.Bars)
+    @{ var counter = 5; }
+    @foreach (var item in Model)
     {
         if (item.NotAvailable == false)
         {
-            <div class="col-8 col-sm-6 mb-5">
+
+            <div class="col-sm-3">
                 <div class="card-deck">
                     <div class="card bg-black-only">
                         <img data-toggle="tooltip" data-placement="top" title="@item.Name" class="card-img-top" src="@Html.DisplayFor(modelItem => item.PictureURL)" alt="Bar Pic">
-                        <div class="card-body" style="height: 150px">
+                        <div class="card-body">
                             <h5 class="card-title text-center">
                                 <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
                                 <br />
@@ -27,6 +28,11 @@
                                 <span class="font-weight-bold text-white">Address: </span>
                                 <br />
                                 <span>@Html.DisplayFor(modelItem => item.Address)</span>
+                                <br />
+                                <br />
+                                <span class="font-weight-bold text-white">Phone number: </span>
+                                <br />
+                                <span>@Html.DisplayFor(modelItem => item.PhoneNumber)</span>
                             </p>
                         </div>
                         <div class="card-footer">
@@ -36,7 +42,7 @@
                                     <img src="~/lib/images/RateIt.png" alt="RateIt" width="20">
                                 </span>
                             </a>*@
-                            <a id="bar-buttonD" asp-action="Details" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
+                            <a id="bar-buttonD" asp-action="Details" asp-route-id="@item.Id">
                                 <span data-title="Read More Info">
                                     <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25"> Read More Info!
                                     <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25">
@@ -47,6 +53,12 @@
                 </div>
                 <p></p>
             </div>
+            if (counter % 4 == 0)
+            {
+            @:</div><div class="row">
+                counter = 0;
+            }
+            counter++;
         }
     }
 </div>

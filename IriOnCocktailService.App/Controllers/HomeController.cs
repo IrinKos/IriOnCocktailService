@@ -45,7 +45,7 @@ namespace IriOnCocktailService.App.Controllers
             barsViewModel = barsViewModel
                 .OrderByDescending(b => b.Rating)
                     .ThenBy(b => b.Name)
-                .Take(4)
+                .Take(6)
                 .ToList();
 
             var cocktailsDTO = await this.cocktailService.GetAllCocktailsDTO();
@@ -57,7 +57,7 @@ namespace IriOnCocktailService.App.Controllers
             cocktailsViewModel = cocktailsViewModel
                 .OrderByDescending(c => c.Rating)
                     .ThenBy(c => c.Name)
-                .Take(4)
+                .Take(6)
                 .ToList();
 
             var viewModel = new IndexViewModel();

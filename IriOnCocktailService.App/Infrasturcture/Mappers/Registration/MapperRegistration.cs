@@ -34,8 +34,10 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers.Registration
 
 
             services.AddSingleton <IViewModelMapper<CommentDTO, CommentViewModel>, BarCommentViewModelMapper>();
+            services.AddSingleton <IViewModelMapper<CommentDTO, IriOnCocktailService.App.Models.CommentViewModel>, BarCommentVMMapper>();
             //BarComment VM to DTO
             services.AddSingleton <IDTOMapper<CommentViewModel, CommentDTO>, BarCommentViewModelMapper>();
+            services.AddSingleton <IDTOMapper<IriOnCocktailService.App.Models.CommentViewModel, CommentDTO>, BarCommentVMMapper>();
 
             //Collection DTO to VM
             services.AddSingleton <IViewModelMapper<ICollection<BarDTO>, CollectionViewModel>, CollectionViewModelMapper>();
