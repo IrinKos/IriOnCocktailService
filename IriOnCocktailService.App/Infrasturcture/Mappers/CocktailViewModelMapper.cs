@@ -19,7 +19,8 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
                 PictureURL = dto.PicUrl,
                 Rating = dto.Rating,
                 NotAvailable = dto.NotAvailable,
-                Ingredients = dto.Ingredients
+                Ingredients = dto.Ingredients,
+                //Comments = dto.
             };
         }
     }

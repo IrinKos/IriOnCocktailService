@@ -14,5 +14,6 @@ namespace IriOnCocktailService.App.Models
         public decimal Rating { get; set; }
         public List<CocktailIngredientDTO> Ingredients { get; set; }
         public bool NotAvailable { get; set; }
+        public IEnumerable<CommentViewModel> Comments { get; set; }
     }
 }

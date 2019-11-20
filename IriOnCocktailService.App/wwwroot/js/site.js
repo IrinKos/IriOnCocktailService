@@ -40,3 +40,7 @@ $('#load-button').click(function () {
     $.get('/Home/Cocktails?name=' + searchText, cocktailServerResponseHandler);
     $.get('/Home/CocktailsIngredients?ingredient=' + searchText, cocktailServerResponseHandler);
 });
+
+function moreInfo() {
+    $('#more-info').show()
+}

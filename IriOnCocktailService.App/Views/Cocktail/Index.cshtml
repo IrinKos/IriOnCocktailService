@@ -4,56 +4,68 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="row">
+    @{ var counter = 5; }
+    @foreach (var item in Model)
+    {
+        if (item.NotAvailable == false)
+        {
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PictureURL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rating)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NotAvailable)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PictureURL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NotAvailable)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            <div class="col-sm-3" style="height:auto">
+                <div class="card-deck">
+                    <div class="card bg-black-only">
+                        <img src="@item.PictureURL" class="card-img-top" alt="Bar Pic">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">
+                                <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
+                                <br />
+                                @for (int i = 0; i < @item.Rating; i++)
+                                {
+                                    <img src="~/lib/images/christmas_star.png" alt="Star" width="20">
+                                }
+                            </h5>
+                            <p class="card-text text-center">
+                                @for (int i = 0; i < 2; i++)
+                                {
+
+                                    <div>
+                                        @Html.DisplayFor(modelItem => item.Ingredients[i].Name) -
+                                        @Html.DisplayFor(modelItem => item.Ingredients[i].Quantity)
+                                        @Html.DisplayFor(modelItem => item.Ingredients[i].Type)
+                                    </div>
+                                }
+                                <span class="text-white-50">...Read more info</span>
+                                @*<a id="view-more" onclick="moreInfo()">...</a>
+                                    @for (int i = 2; i < item.Ingredients.Count; i++)
+                                    {
+
+                                        <div id="more-info" class="display: d-none">
+                                            @Html.DisplayFor(modelItem => item.Ingredients[i].Name) -
+                                            @Html.DisplayFor(modelItem => item.Ingredients[i].Quantity)
+                                            @Html.DisplayFor(modelItem => item.Ingredients[i].Type)
+                                        </div>
+                                    }*@
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <a id="bar-buttonD" asp-action="Details" asp-route-id="@item.Id">
+                                <span data-title="Get More Info">
+                                    <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25"> Get More Info!
+                                    <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25">
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p></p>
+            if (counter % 4 == 0)
+            {
+            @:</div><div class="row">
+                counter = 0;
+            }
+            counter++;
+
+        }
+    }
+</div>
