@@ -63,7 +63,7 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
             var barCommentDTO = this.barCommentMapper.MapFromViewModel(barCommentViewModel);
             await this.barService.BarCommentAsync(barCommentDTO);
 
-            return Ok();
+            return Redirect("/Bar/Details/" + barCommentViewModel.Id);
         }
         [HttpGet]
         public IActionResult Rating()
@@ -78,7 +78,7 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
             var barRatingDTO = this.barRatingMapper.MapFromViewModel(barRatingViewModel);
             await this.barService.BarRatingAsync(barRatingDTO);
 
-            return Ok();
+            return Redirect("/Bar/Details/" + barRatingViewModel.Id);
         }
         [HttpGet]
         public async Task<IActionResult> GetComments(string barId)

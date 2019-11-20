@@ -16,6 +16,6 @@ namespace IriOnCocktailService.App.Areas.Magician.Models
         public decimal Rating { get; set; }
         public bool NotAvailable { get; set; }
         public IEnumerable<CommentViewModel> Comments { get; set; }
-        public IEnumerable<DisplayCocktailViewModel> Cocktails { get; set; }
+        public IEnumerable<BarCocktailsViewModel> Cocktails { get; set; }
     }
 }

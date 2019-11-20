@@ -56,9 +56,16 @@
     <ul>
         @foreach (var item in Model.Comments)
         {
-        <li>@item.Username: @item.Comment</li>
+            <li>@item.Username: @item.Comment</li>
         }
     </ul>
+    <ul>
+        @foreach (var item in Model.Cocktails)
+        {
+            <li>@item.Name: @item.PicUrl</li>
+        }
+    </ul>
+
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })

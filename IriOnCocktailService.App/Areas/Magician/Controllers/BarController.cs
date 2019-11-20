@@ -24,6 +24,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         private readonly IViewModelMapper<BarDTO, CreateBarViewModel> createBarViewModelMapper;
         private readonly IViewModelMapper<BarDTO, DisplayBarsViewModel> barViewModelMapper;
         private readonly IViewModelMapper<BarDTO, BarDetailsViewModel> barDetailsMapper;
+        private readonly IViewModelMapper<AddCocktailDTO, BarCocktailsViewModel> displayCocktailMapper;
         private readonly IViewModelMapper<CommentDTO, CommentViewModel> commentMapper;
         private readonly IViewModelMapper<ICollection<BarDTO>, CollectionViewModel> collectionMapper;
         private readonly IViewModelMapper<BarDTO, AddCocktailsToBarViewModel> barCocktailsMapper;
@@ -35,6 +36,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
                              IViewModelMapper<BarDTO, CreateBarViewModel> createBarViewModelMapper,
                              IViewModelMapper<BarDTO, DisplayBarsViewModel> barViewModelMapper,
                              IViewModelMapper<BarDTO, BarDetailsViewModel> barDetailsMapper,
+                             IViewModelMapper<AddCocktailDTO, BarCocktailsViewModel> displayCocktailMapper,
                              IViewModelMapper<CommentDTO, CommentViewModel> commentMapper,
                              IViewModelMapper<ICollection<BarDTO>, CollectionViewModel> collectionMapper)
         {
@@ -45,6 +47,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             this.createBarViewModelMapper = createBarViewModelMapper;
             this.barViewModelMapper = barViewModelMapper;
             this.barDetailsMapper = barDetailsMapper;
+            this.displayCocktailMapper = displayCocktailMapper;
             this.commentMapper = commentMapper;
             this.collectionMapper = collectionMapper;
         }
@@ -69,8 +72,10 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             var barDTO = await this.barService.GetBarAsync(Id);
             var barViewModel = this.barDetailsMapper.MapFromDTO(barDTO);
             var barCommentDTOs = await this.barService.GetAllCommentsForBar(Id);
+            var barCocktailsDTOs = await this.cocktailService.GetAllContainedCocktailsDTO(Id);
 
             barViewModel.Comments = barCommentDTOs.Select(c => this.commentMapper.MapFromDTO(c));
+            barViewModel.Cocktails = barCocktailsDTOs.Select(bc => this.displayCocktailMapper.MapFromDTO(bc));
 
             return View(barViewModel);
         }
@@ -104,7 +109,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             await this.barService.DeleteBarAsync(Id);
 
             //TODO remove ok
-            return Ok();
+            return Redirect("/Bar/Index");
         }
 
         [HttpGet]
@@ -123,7 +128,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             await barService.EditBarAsync(barDTO);
 
             //TODO remove ok
-            return Ok();
+            return Redirect("/Bar/Index");
         }
         [HttpGet]
         public async Task<IActionResult> ModifyBarCocktails(string Id)
