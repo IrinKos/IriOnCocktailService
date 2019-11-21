@@ -41,6 +41,14 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
             return View(viewModel);
         }
         [HttpGet]
+        public async Task<IActionResult> Details(string Id)
+        {
+            var cocktailDTO = await this.cocktailService.GetCocktailDTO(Id);
+            //var cocktailViewModel = this.barViewModelMapper.MapFromDTO(cocktailDTO);
+
+            return View(/*cocktailViewModel*/);
+        }
+        [HttpGet]
         public IActionResult Comment()
         {
             return View();

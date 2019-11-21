@@ -11,6 +11,7 @@ namespace IriOnCocktailService.Data.Entities
         public string Name { get; set; }
         public string PicUrl { get; set; }
         public bool NotAvailable { get; set; } 
+        public string Motto { get; set; }
 
         public ICollection<CocktailComment> Comments { get; set; }
         public ICollection<CocktailRating> Ratings { get; set; }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IriOnCocktailService.Data.Migrations
 {
     [DbContext(typeof(IriOnCocktailServiceDbContext))]
-    [Migration("20191115005703_Initial")]
-    partial class Initial
+    [Migration("20191121174952_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,8 @@ namespace IriOnCocktailService.Data.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired();
+
+                    b.Property<string>("Motto");
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -142,6 +144,8 @@ namespace IriOnCocktailService.Data.Migrations
 
                     b.Property<string>("BarId");
 
+                    b.Property<DateTime>("CreatedOn");
+
                     b.Property<string>("Description");
 
                     b.Property<bool>("IsDeleted");
@@ -159,23 +163,20 @@ namespace IriOnCocktailService.Data.Migrations
 
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.BarRating", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("UserId");
 
                     b.Property<string>("BarId");
+
+                    b.Property<string>("Id");
 
                     b.Property<bool>("IsDeleted");
 
                     b.Property<decimal>("Rate")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "BarId");
 
                     b.HasIndex("BarId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("BarRatings");
                 });
@@ -184,6 +185,8 @@ namespace IriOnCocktailService.Data.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Motto");
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -216,6 +219,8 @@ namespace IriOnCocktailService.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("CocktailId");
+
+                    b.Property<DateTime>("CreatedOn");
 
                     b.Property<string>("Description");
 
@@ -250,23 +255,20 @@ namespace IriOnCocktailService.Data.Migrations
 
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.CocktailRating", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("UserId");
 
                     b.Property<string>("CocktailId");
+
+                    b.Property<string>("Id");
 
                     b.Property<bool>("IsDeleted");
 
                     b.Property<decimal>("Rate")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "CocktailId");
 
                     b.HasIndex("CocktailId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("CocktailRatings");
                 });
@@ -442,33 +444,6 @@ namespace IriOnCocktailService.Data.Migrations
                             Name = "Olive",
                             UnitType = 2
                         });
-                });
-
-            modelBuilder.Entity("IriOnCocktailService.Data.Entities.Rating", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("BarId");
-
-                    b.Property<string>("CocktailId");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<decimal>("Rate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BarId");
-
-                    b.HasIndex("CocktailId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Rating");
                 });
 
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.User", b =>
@@ -655,11 +630,13 @@ namespace IriOnCocktailService.Data.Migrations
                 {
                     b.HasOne("IriOnCocktailService.Data.Entities.Bar", "Bar")
                         .WithMany("BarRatings")
-                        .HasForeignKey("BarId");
+                        .HasForeignKey("BarId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("IriOnCocktailService.Data.Entities.User", "User")
                         .WithMany("BarRatings")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.CocktailBar", b =>
@@ -703,26 +680,13 @@ namespace IriOnCocktailService.Data.Migrations
                 {
                     b.HasOne("IriOnCocktailService.Data.Entities.Cocktail", "Cocktail")
                         .WithMany("Ratings")
-                        .HasForeignKey("CocktailId");
+                        .HasForeignKey("CocktailId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("IriOnCocktailService.Data.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("IriOnCocktailService.Data.Entities.Rating", b =>
-                {
-                    b.HasOne("IriOnCocktailService.Data.Entities.Bar", "Bar")
-                        .WithMany()
-                        .HasForeignKey("BarId");
-
-                    b.HasOne("IriOnCocktailService.Data.Entities.Cocktail", "Cocktail")
-                        .WithMany()
-                        .HasForeignKey("CocktailId");
-
-                    b.HasOne("IriOnCocktailService.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.User", b =>

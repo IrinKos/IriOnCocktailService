@@ -9,7 +9,8 @@ namespace IriOnCocktailService.Data.Entities
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public string PicUrl { get; set; }
-        public bool NotAvailable { get; set; } 
+        public bool NotAvailable { get; set; }
+        public string Motto { get; set; }
 
         public ICollection<BarComment> BarComments { get; set; }
         public ICollection<BarRating> BarRatings { get; set; }

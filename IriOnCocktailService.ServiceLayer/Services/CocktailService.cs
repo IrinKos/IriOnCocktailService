@@ -64,10 +64,10 @@ namespace IriOnCocktailService.ServiceLayer.Services
         {
             var cocktail = await this.context.Cocktails
                 .Include(c => c.CocktailIngredients)
+                    .ThenInclude(ci=>ci.Ingredient)
                 .Include(c => c.CocktailBars)
                 .Include(c => c.Comments)
                 .Include(c => c.Ratings)
-                    .ThenInclude(r => r.Rate)
                 .SingleOrDefaultAsync(c => c.Id == id && c.NotAvailable == false);
 
             if (cocktail == null || cocktail.NotAvailable == true)

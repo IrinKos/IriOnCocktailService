@@ -205,11 +205,6 @@ namespace IriOnCocktailService.Data
                 .Property(ingredient => ingredient.UnitType)
                 .IsRequired();
 
-            // Rating
-            builder.Entity<Rating>()
-                .Property(rating => rating.Rate)
-                .HasColumnType("decimal(18,2)");
-
             // BarRating
             builder.Entity<BarRating>()
                 .Property(br => br.Rate)

@@ -27,6 +27,7 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
                 BarId = entity.CocktailId,
                 Comment = entity.Description,
                 UserId = entity.UserId,
+                Username=entity.User.UserName
             };
         }
     }

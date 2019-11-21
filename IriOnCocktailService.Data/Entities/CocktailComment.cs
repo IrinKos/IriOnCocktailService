@@ -9,6 +9,7 @@ namespace IriOnCocktailService.Data.Entities
         public string Id { get; set; }
         public string Description { get; set; }
         public bool IsDeleted { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         public string CocktailId { get; set; }
         public Cocktail Cocktail { get; set; }

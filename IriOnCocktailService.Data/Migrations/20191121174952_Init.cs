@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IriOnCocktailService.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,7 +31,8 @@ namespace IriOnCocktailService.Data.Migrations
                     Address = table.Column<string>(nullable: false),
                     PhoneNumber = table.Column<string>(nullable: true),
                     PicUrl = table.Column<string>(nullable: true),
-                    NotAvailable = table.Column<bool>(nullable: false)
+                    NotAvailable = table.Column<bool>(nullable: false),
+                    Motto = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -45,7 +46,8 @@ namespace IriOnCocktailService.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     PicUrl = table.Column<string>(nullable: true),
-                    NotAvailable = table.Column<bool>(nullable: false)
+                    NotAvailable = table.Column<bool>(nullable: false),
+                    Motto = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -260,6 +262,7 @@ namespace IriOnCocktailService.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
                     BarId = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
@@ -284,27 +287,27 @@ namespace IriOnCocktailService.Data.Migrations
                 name: "BarRatings",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    BarId = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: false),
+                    Id = table.Column<string>(nullable: true),
                     Rate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    BarId = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true)
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BarRatings", x => x.Id);
+                    table.PrimaryKey("PK_BarRatings", x => new { x.UserId, x.BarId });
                     table.ForeignKey(
                         name: "FK_BarRatings_Bars_BarId",
                         column: x => x.BarId,
                         principalTable: "Bars",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_BarRatings_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -314,6 +317,7 @@ namespace IriOnCocktailService.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
                     CocktailId = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
@@ -338,78 +342,44 @@ namespace IriOnCocktailService.Data.Migrations
                 name: "CocktailRatings",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    CocktailId = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: false),
+                    Id = table.Column<string>(nullable: true),
                     Rate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    CocktailId = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true)
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CocktailRatings", x => x.Id);
+                    table.PrimaryKey("PK_CocktailRatings", x => new { x.UserId, x.CocktailId });
                     table.ForeignKey(
                         name: "FK_CocktailRatings_Cocktails_CocktailId",
                         column: x => x.CocktailId,
                         principalTable: "Cocktails",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CocktailRatings_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Rating",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Rate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    BarId = table.Column<string>(nullable: true),
-                    CocktailId = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Rating", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Rating_Bars_BarId",
-                        column: x => x.BarId,
-                        principalTable: "Bars",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Rating_Cocktails_CocktailId",
-                        column: x => x.CocktailId,
-                        principalTable: "Cocktails",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Rating_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "Bars",
-                columns: new[] { "Id", "Address", "Name", "NotAvailable", "PhoneNumber", "PicUrl" },
+                columns: new[] { "Id", "Address", "Motto", "Name", "NotAvailable", "PhoneNumber", "PicUrl" },
                 values: new object[,]
                 {
-                    { "56d9e733-b150-45c4-8b87-f5a5e31bc23b", "Neofit Rilski 70 str.", "Camino Piano Bar", false, "0899 121 219", "https://www.bar.bg/img/entities/391/1460717100_200_piano-bar-Camino-sofia-215-x-130.jpg" },
-                    { "5182e54c-ed6f-487f-b205-75649ef9ea2e", "Arsenalski 2 bul.", "Cache", false, "089 446 4169", "https://www.bar.bg/img/entities/392/1460818909_200_cache---215-x-130.jpg" },
-                    { "b14aaaf8-5cf8-4c3d-b082-e18afa02f563", "Vitosha 16 str.", "Sinatra", false, "087 676 7647", "https://www.bar.bg/img/entities/445/1495540391_200_Social-cafe-sofia-logo-215-x-130-jpeg.jpg" },
-                    { "2600172c-9d3e-4143-850e-aeb80e2a1276", "Bitolya 2 str.", "Ginger", false, "087 733 7337", "https://www.bar.bg/img/entities/309/1542618320_200_1-ginger%20sofia%20215-x-130%20logo.png" },
-                    { "0086952e-e33e-4daa-a678-d715afb9ce92", "Malko Tarnovo 1 str.", "After Five", false, "0889 044 124", "https://www.bar.bg/img/entities/514/1542282680_200_1-after%20five%20drink%20bar%20sofia%20215-x-130.jpg" },
-                    { "091bf67e-532c-498e-9a40-5f625ccee2e2", "Angel Kanchev 1 str.", "Public Bar", false, "088 433 3781", "https://www.bar.bg/img/entities/443/1495046748_200_public-bar-sofia--215-x-130.png" },
-                    { "d886baac-17e6-49dd-93ec-b5ecadc14e06", "Moskovska 6A str.", "Tobacco Garden Bar", false, "0884 600 044", "https://www.bar.bg/img/entities/399/1465626692_200_Tobacco-garden-bar-sofia-215-x-130.png" },
-                    { "6e1ce019-108e-4ded-b308-486831d19e08", "Lege 8 str.", "Magnito", false, "0888 144 777", "https://www.bar.bg/img/entities/334/1505111472_200_magnito-sofia-215-x-130.png" },
-                    { "cdb2058c-0600-497d-b48d-f89d8cb4aaed", "Aksakov 18 str.", "Motto", false, "02 987 27 23", "https://www.bar.bg/img/entities/344/image344_thumb.jpg" },
-                    { "648ba3bd-70ae-4277-aa40-2da5ab120fa9", "Nikola Vaptsarov 35 bul", "The Corner", false, "0884 555 444", "https://www.bar.bg/img/entities/301/1509363711_200_LOGO_The-Corner-Sofia-2017---215-x-130.jpg" }
+                    { "56d9e733-b150-45c4-8b87-f5a5e31bc23b", "Neofit Rilski 70 str.", null, "Camino Piano Bar", false, "0899 121 219", "https://www.bar.bg/img/entities/391/1460717100_200_piano-bar-Camino-sofia-215-x-130.jpg" },
+                    { "5182e54c-ed6f-487f-b205-75649ef9ea2e", "Arsenalski 2 bul.", null, "Cache", false, "089 446 4169", "https://www.bar.bg/img/entities/392/1460818909_200_cache---215-x-130.jpg" },
+                    { "b14aaaf8-5cf8-4c3d-b082-e18afa02f563", "Vitosha 16 str.", null, "Sinatra", false, "087 676 7647", "https://www.bar.bg/img/entities/445/1495540391_200_Social-cafe-sofia-logo-215-x-130-jpeg.jpg" },
+                    { "2600172c-9d3e-4143-850e-aeb80e2a1276", "Bitolya 2 str.", null, "Ginger", false, "087 733 7337", "https://www.bar.bg/img/entities/309/1542618320_200_1-ginger%20sofia%20215-x-130%20logo.png" },
+                    { "0086952e-e33e-4daa-a678-d715afb9ce92", "Malko Tarnovo 1 str.", null, "After Five", false, "0889 044 124", "https://www.bar.bg/img/entities/514/1542282680_200_1-after%20five%20drink%20bar%20sofia%20215-x-130.jpg" },
+                    { "091bf67e-532c-498e-9a40-5f625ccee2e2", "Angel Kanchev 1 str.", null, "Public Bar", false, "088 433 3781", "https://www.bar.bg/img/entities/443/1495046748_200_public-bar-sofia--215-x-130.png" },
+                    { "d886baac-17e6-49dd-93ec-b5ecadc14e06", "Moskovska 6A str.", null, "Tobacco Garden Bar", false, "0884 600 044", "https://www.bar.bg/img/entities/399/1465626692_200_Tobacco-garden-bar-sofia-215-x-130.png" },
+                    { "6e1ce019-108e-4ded-b308-486831d19e08", "Lege 8 str.", null, "Magnito", false, "0888 144 777", "https://www.bar.bg/img/entities/334/1505111472_200_magnito-sofia-215-x-130.png" },
+                    { "cdb2058c-0600-497d-b48d-f89d8cb4aaed", "Aksakov 18 str.", null, "Motto", false, "02 987 27 23", "https://www.bar.bg/img/entities/344/image344_thumb.jpg" },
+                    { "648ba3bd-70ae-4277-aa40-2da5ab120fa9", "Nikola Vaptsarov 35 bul", null, "The Corner", false, "0884 555 444", "https://www.bar.bg/img/entities/301/1509363711_200_LOGO_The-Corner-Sofia-2017---215-x-130.jpg" }
                 });
 
             migrationBuilder.InsertData(
@@ -501,11 +471,6 @@ namespace IriOnCocktailService.Data.Migrations
                 column: "BarId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BarRatings_UserId",
-                table: "BarRatings",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CocktailBars_BarId",
                 table: "CocktailBars",
                 column: "BarId");
@@ -529,26 +494,6 @@ namespace IriOnCocktailService.Data.Migrations
                 name: "IX_CocktailRatings_CocktailId",
                 table: "CocktailRatings",
                 column: "CocktailId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CocktailRatings_UserId",
-                table: "CocktailRatings",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Rating_BarId",
-                table: "Rating",
-                column: "BarId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Rating_CocktailId",
-                table: "Rating",
-                column: "CocktailId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Rating_UserId",
-                table: "Rating",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -587,13 +532,10 @@ namespace IriOnCocktailService.Data.Migrations
                 name: "CocktailRatings");
 
             migrationBuilder.DropTable(
-                name: "Rating");
+                name: "Bars");
 
             migrationBuilder.DropTable(
                 name: "Ingredients");
-
-            migrationBuilder.DropTable(
-                name: "Bars");
 
             migrationBuilder.DropTable(
                 name: "Cocktails");

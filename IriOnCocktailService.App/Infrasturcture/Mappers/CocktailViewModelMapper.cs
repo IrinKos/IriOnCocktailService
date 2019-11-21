@@ -20,7 +20,6 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
                 Rating = dto.Rating,
                 NotAvailable = dto.NotAvailable,
                 Ingredients = dto.Ingredients,
-                //Comments = dto.
             };
         }
     }
