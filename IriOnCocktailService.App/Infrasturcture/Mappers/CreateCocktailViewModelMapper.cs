@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IriOnCocktailService.App.Infrasturcture.Mappers
 {
-    public class CreateCocktailViewModelMapper : IDTOMapper<CreateCocktailViewModel, Cocktail>
+    public class CreateCocktailViewModelMapper : IDTOMapper<CreateCocktailViewModel, CocktailDTO>
     {
         private readonly IDTOMapper<AddIngredientToCocktailViewModel, CocktailIngredientDTO> mapper;
 
@@ -17,16 +17,16 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
             this.mapper = mapper;
         }
 
-        public CreateCocktailViewModel MapFromDTO(Cocktail cocktailDTO)
+        public CreateCocktailViewModel MapFromDTO(CocktailDTO cocktailDTO)
         {
             return new CreateCocktailViewModel
             {
                 
             };
         }
-        public Cocktail MapFromViewModel(CreateCocktailViewModel viewModel)
+        public CocktailDTO MapFromViewModel(CreateCocktailViewModel viewModel)
         {
-            return new Cocktail
+            return new CocktailDTO
             {
                 Name = viewModel.CocktailName,
                 PicUrl = viewModel.PicUrl,

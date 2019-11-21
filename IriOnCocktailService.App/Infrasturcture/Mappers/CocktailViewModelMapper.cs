@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace IriOnCocktailService.App.Infrasturcture.Mappers
 {
-    public class CocktailViewModelMapper : IViewModelMapper<Cocktail, CocktailViewModel>
+    public class CocktailViewModelMapper : IViewModelMapper<CocktailDTO, CocktailViewModel>
     {
-        public CocktailViewModel MapFromDTO(Cocktail dto)
+        public CocktailViewModel MapFromDTO(CocktailDTO dto)
         {
             return new CocktailViewModel
             {

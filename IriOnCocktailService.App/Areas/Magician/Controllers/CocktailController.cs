@@ -17,16 +17,16 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
     {
         private readonly ICocktailService cocktailService;
         private readonly IIngredientService ingredientService;
-        private readonly IDTOMapper<CreateCocktailViewModel, Cocktail> createCocktailMapper;
-        private readonly IViewModelMapper<Cocktail, DisplayCocktailViewModel> displayCocktailMapper;
-        private readonly IViewModelMapper<ICollection<Cocktail>, CollectionViewModel> collectionMapper;
+        private readonly IDTOMapper<CreateCocktailViewModel, CocktailDTO> createCocktailMapper;
+        private readonly IViewModelMapper<CocktailDTO, DisplayCocktailViewModel> displayCocktailMapper;
+        private readonly IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel> collectionMapper;
         private readonly IViewModelMapper<IngredientDTO, CreateIngredientViewModel> ingredientMapper;
 
         public CocktailController(ICocktailService cocktailService,
                                   IIngredientService ingredientService,
-                                  IDTOMapper<CreateCocktailViewModel, Cocktail> createCocktailMapper,
-                                  IViewModelMapper<Cocktail, DisplayCocktailViewModel> displayCocktailMapper,
-                                  IViewModelMapper<ICollection<Cocktail>, CollectionViewModel> collectionMapper,
+                                  IDTOMapper<CreateCocktailViewModel, CocktailDTO> createCocktailMapper,
+                                  IViewModelMapper<CocktailDTO, DisplayCocktailViewModel> displayCocktailMapper,
+                                  IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel> collectionMapper,
                                   IViewModelMapper<IngredientDTO, CreateIngredientViewModel> ingredientMapper)
         {
             this.cocktailService = cocktailService;

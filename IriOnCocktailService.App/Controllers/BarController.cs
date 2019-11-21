@@ -15,12 +15,12 @@ namespace IriOnCocktailService.App.Controllers
         private readonly IBarService barService;
         private readonly ICocktailService cocktailService;
         private readonly IViewModelMapper<BarDTO, BarViewModel> barViewModelMapper;
-        private readonly IViewModelMapper<Cocktail, CocktailViewModel> cocktailViewModelMapper;
+        private readonly IViewModelMapper<CocktailDTO, CocktailViewModel> cocktailViewModelMapper;
         private readonly IViewModelMapper<CommentDTO, CommentViewModel> commentMapper;
 
         public BarController(IBarService barService, ICocktailService cocktailService,
                               IViewModelMapper<BarDTO, BarViewModel> barViewModelMapper,
-                              IViewModelMapper<Cocktail, CocktailViewModel> cocktailViewModelMapper,
+                              IViewModelMapper<CocktailDTO, CocktailViewModel> cocktailViewModelMapper,
                               IViewModelMapper<CommentDTO, CommentViewModel> commentMapper)
         {
             this.barService = barService;

@@ -16,19 +16,19 @@ namespace IriOnCocktailService.ServiceLayer.Services
     {
         private readonly IriOnCocktailServiceDbContext context;
         private readonly ICocktailIngredientService cocktailIngredientService;
-        private readonly IDTOServiceMapper<Data.Entities.Cocktail, DTOS.Cocktail> mapper;
+        private readonly IDTOServiceMapper<Cocktail, CocktailDTO> mapper;
 
         private readonly IDTOServiceMapper<CommentDTO, CocktailComment> cocktailCommentMapper;
         private readonly IDTOServiceMapper<CocktailComment, CommentDTO> cocktailCommentDTOMapper; 
-        private readonly IDTOServiceMapper<Data.Entities.Cocktail, AddCocktailDTO> addCocktailMapper;
+        private readonly IDTOServiceMapper<Cocktail, AddCocktailDTO> addCocktailMapper;
         private readonly IDTOServiceMapper<RatingDTO, CocktailRating> cocktailRatingMapper;
 
         public CocktailService(IriOnCocktailServiceDbContext context,
                                ICocktailIngredientService cocktailIngredientService,
-                               IDTOServiceMapper<Data.Entities.Cocktail, DTOS.Cocktail> mapper,
+                               IDTOServiceMapper<Cocktail, CocktailDTO> mapper,
                                IDTOServiceMapper<CommentDTO, CocktailComment> cocktailCommentMapper,
                                IDTOServiceMapper<CocktailComment, CommentDTO> cocktailCommentDTOMapper,
-                               IDTOServiceMapper<Data.Entities.Cocktail, AddCocktailDTO> addCocktailMapper,
+                               IDTOServiceMapper<Cocktail, AddCocktailDTO> addCocktailMapper,
                                IDTOServiceMapper<RatingDTO, CocktailRating> cocktailRatingMapper)
         {
             this.context = context;
@@ -40,24 +40,27 @@ namespace IriOnCocktailService.ServiceLayer.Services
             this.cocktailRatingMapper = cocktailRatingMapper;
         }
 
-        public async Task<DTOS.Cocktail> CreateCocktail(DTOS.Cocktail cocktailDTO)
+        public async Task<CocktailDTO> CreateCocktail(CocktailDTO cocktailDTO)
         {
-            var cocktail = new Data.Entities.Cocktail
+            var cocktail = new Cocktail
             {
                 Name = cocktailDTO.Name,
-                PicUrl= cocktailDTO.PicUrl
+                PicUrl=cocktailDTO.PicUrl
             };
 
             await this.context.Cocktails.AddAsync(cocktail);
             await this.context.SaveChangesAsync();
-
-            cocktailDTO.Ingredients.ForEach(cdto => cdto.CocktailId = cocktail.Id);
+            //cocktailDTO.Ingredients.Select(cdto => cdto.CocktailId = cocktail.Id);
+            foreach (var item in cocktailDTO.Ingredients)
+            {
+                item.CocktailId = cocktail.Id;
+            }
             await cocktailIngredientService.CreateCocktailIngredient(cocktailDTO.Ingredients);
 
             return cocktailDTO;
         }
 
-        public async Task<DTOS.Cocktail> GetCocktailDTO(string id)
+        public async Task<CocktailDTO> GetCocktailDTO(string id)
         {
             var cocktail = await this.context.Cocktails
                 .Include(c => c.CocktailIngredients)
@@ -75,7 +78,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
             return cocktailDTO;
         }
 
-        public async Task<Data.Entities.Cocktail> GetCocktail(string id)
+        public async Task<Cocktail> GetCocktail(string id)
         {
             var cocktail = await this.context.Cocktails
                 .Include(c => c.CocktailIngredients)
@@ -90,7 +93,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
             return cocktail;
         }
 
-        public async Task<ICollection<DTOS.Cocktail>> GetAllCocktailsDTO()
+        public async Task<ICollection<CocktailDTO>> GetAllCocktailsDTO()
         {
             var cocktails = await this.context.Cocktails
                 .Include(c=>c.CocktailIngredients)
@@ -103,7 +106,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
             return cocktails;
         }
 
-        public async Task<ICollection<DTOS.Cocktail>> GetAllCocktailsByNameDTO(string name)
+        public async Task<ICollection<CocktailDTO>> GetAllCocktailsByNameDTO(string name)
         {
             var cocktails = await this.context.Cocktails
                 .Include(c => c.CocktailIngredients)
@@ -115,7 +118,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
             return cocktails.Select(this.mapper.MapFrom).ToList(); 
         }
 
-        public async Task<ICollection<DTOS.Cocktail>> GetAllCocktailsByIngredientDTO(string ingredient)
+        public async Task<ICollection<CocktailDTO>> GetAllCocktailsByIngredientDTO(string ingredient)
         {
             //var ingr = await this.context.Cocktails.
             //    Include(c => c.CocktailIngredients)
@@ -132,7 +135,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
 
             ingredients.ForEach(i => list.AddRange(this.context.CocktailIngredients.Where(c => c.IngredientId == i.Id)));
 
-            var cocktails = new List<Data.Entities.Cocktail>();
+            var cocktails = new List<Cocktail>();
 
             list.ForEach(u => cocktails.AddRange(this.context.Cocktails.Include(c => c.Ratings).Where(c => c.Id == u.CocktailId)));
 
@@ -170,7 +173,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
 
         public async Task<ICollection<AddCocktailDTO>> GetAllContainedCocktailsDTO(string barId)
         {
-            var cocktails = new List<Data.Entities.Cocktail>();
+            var cocktails = new List<Cocktail>();
 
             var containedCocktails = await this.context.CocktailBars.Where(cb => cb.BarId == barId).Select(cb => cb.CocktailId).ToListAsync();
 

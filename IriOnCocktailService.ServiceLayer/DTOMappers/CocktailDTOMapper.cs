@@ -8,8 +8,7 @@ using System.Text;
 
 namespace IriOnCocktailService.ServiceLayer.DTOMappers
 {
-    public class CocktailDTOMapper : IDTOServiceMapper<Data.Entities.Cocktail, DTOS.Cocktail>,
-                                     IDTOServiceMapper<DTOS.Cocktail, DTOS.Cocktail>
+    public class CocktailDTOMapper : IDTOServiceMapper<Cocktail, CocktailDTO>
     {
         private readonly IDTOServiceMapper<CocktailIngredient, CocktailIngredientDTO> mapper;
 
@@ -17,9 +16,9 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
         {
             this.mapper = mapper;
         }
-        public Cocktail MapFrom(Data.Entities.Cocktail entity)
+        public CocktailDTO MapFrom(Cocktail entity)
         {
-            return new DTOS.Cocktail
+            return new CocktailDTO
             {
                 Id = entity.Id,
                 Name = entity.Name,

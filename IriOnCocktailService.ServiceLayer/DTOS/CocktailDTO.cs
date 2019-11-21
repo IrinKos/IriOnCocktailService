@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IriOnCocktailService.ServiceLayer.DTOS
 {
-    public class Cocktail
+    public class CocktailDTO
     {
         public string Id { get; set; }
         public string Name { get; set; }

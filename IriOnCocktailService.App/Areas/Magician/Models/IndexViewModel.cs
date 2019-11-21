@@ -9,6 +9,6 @@ namespace IriOnCocktailService.App.Areas.Magician.Models
     public class IndexViewModel
     {
         public List<BarDTO> Bars { get; set; }
-        public List<Cocktail> Cocktails { get; set; }
+        public List<CocktailDTO> Cocktails { get; set; }
     }
 }

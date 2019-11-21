@@ -16,12 +16,12 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
     public class CocktailController : Controller
     {
         private readonly ICocktailService cocktailService;
-        private readonly IViewModelMapper<ICollection<Cocktail>, CollectionViewModel> collectionMapper;
+        private readonly IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel> collectionMapper;
         private readonly IDTOMapper<CommentViewModel, CommentDTO> cocktailCommentMapper;
         private readonly IDTOMapper<RatingViewModel, RatingDTO> cocktailRatingMapper;
 
         public CocktailController(ICocktailService cocktailService,
-                             IViewModelMapper<ICollection<Cocktail>, CollectionViewModel> collectionMapper,
+                             IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel> collectionMapper,
                              IDTOMapper<CommentViewModel, CommentDTO> cocktailCommentMapper,
                              IDTOMapper<RatingViewModel, RatingDTO> cocktailRatingMapper
                              )
