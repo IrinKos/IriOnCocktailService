@@ -64,3 +64,66 @@
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>
 </div>
+
+<div id="container">
+
+    <!-- Start	Product details -->
+    <div class="product-details">
+
+        <!-- 	Product Name -->
+        <h1>@Model.Name</h1>
+        <!-- 		<span class="hint new">New</span> -->
+        <!-- 		<span class="hint free-shipping">Free Shipping</span> -->
+        <!-- 		the Product rating -->
+        <div>
+            @for (int i = 0; i < @Model.Rating; i++)
+            {
+                <img src="~/lib/images/christmas_star.png" alt="Star" width="20">
+            }
+        </div>
+
+
+        <!-- The most important information about the product -->
+        <p class="information">" Especially good for container gardening, the Angelonia will keep blooming all summer even if old flowers are removed. Once tall enough to cut, bring them inside and you'll notice a light scent that some say is reminiscent of apples. "</p>
+
+
+
+        <!-- 		Control -->
+        <div class="control">
+
+            <!-- Start Button buying -->
+            <button class="btn">
+                <!-- 		the Price -->
+                <span class="price">49 $</span>
+                <!-- 		shopping cart icon-->
+                <span class="shopping-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+                <!-- 		Buy Now / ADD to Cart-->
+                <span class="buy">Buy Now</span>
+            </button>
+            <!-- End Button buying -->
+
+        </div>
+
+    </div>
+
+    <!-- 	End	Product details   -->
+    <!-- 	Start product image & Information -->
+
+    <div class="product-image">
+
+        <img id="img" src="@Model.PictureURL" alt="Omar Dsoky">
+
+        <!-- 	product Information-->
+        <div class="info">
+            <h2>The Description</h2>
+            <ul>
+                <br/>
+                <li><strong>Address: </strong>@Model.Address</li>
+                <li><strong>Phone Number: </strong>@Model.PhoneNumber</li>
+            </ul>
+        </div>
+    </div>
+    <!--  End product image  -->
+
+
+</div>

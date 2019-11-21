@@ -41,6 +41,6 @@ $('#load-button').click(function () {
     $.get('/Home/CocktailsIngredients?ingredient=' + searchText, cocktailServerResponseHandler);
 });
 
-function moreInfo() {
-    $('#more-info').show()
-}
+//function moreInfo() {
+//    $('#more-info').show()
+//}
