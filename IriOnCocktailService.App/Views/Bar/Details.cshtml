@@ -89,20 +89,12 @@
 
 
         <!-- 		Control -->
-        <div class="control">
-
-            <!-- Start Button buying -->
-            <button class="btn">
-                <!-- 		the Price -->
-                <span class="price">49 $</span>
-                <!-- 		shopping cart icon-->
-                <span class="shopping-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-                <!-- 		Buy Now / ADD to Cart-->
-                <span class="buy">Buy Now</span>
-            </button>
-            <!-- End Button buying -->
-
-        </div>
+        <a id="bar-buttonD" class="m-md-5" @*asp-action="Details" asp-route-id="@item.Id"*@>
+            <span data-title="Comments!">
+                <img src="~/lib/images/GreenFlask.png" alt="Details" width="20"> Comments!
+                <img src="~/lib/images/GreenFlask.png" alt="Details" width="20">
+            </span>
+        </a>
 
     </div>
 

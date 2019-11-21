@@ -18,14 +18,14 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers.Registration
             services.AddSingleton <IViewModelMapper<BarDTO, BarDetailsViewModel>, BarDetailsViewModelMapper> ();
             services.AddSingleton <IViewModelMapper<BarDTO, DisplayBarsViewModel>, DisplayBarsViewModelMapper> ();
             services.AddSingleton <IViewModelMapper<BarDTO, IriOnCocktailService.App.Models.BarViewModel>, BarViewModelMapper> ();
-            services.AddSingleton<IViewModelMapper<CocktailDTO, IriOnCocktailService.App.Models.CocktailViewModel>, CocktailViewModelMapper>();
+            services.AddSingleton<IViewModelMapper<Cocktail, IriOnCocktailService.App.Models.CocktailViewModel>, CocktailViewModelMapper>();
             services.AddSingleton <IViewModelMapper<BarDTO, AddCocktailsToBarViewModel>, AddCocktailsToBarViewModelMapper> ();
-            services.AddSingleton <IViewModelMapper<CocktailDTO, DisplayCocktailViewModel>, DisplayCocktailViewModelMapper> ();
-            services.AddSingleton <IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel>, CollectionViewModelMapper> ();
+            services.AddSingleton <IViewModelMapper<Cocktail, DisplayCocktailViewModel>, DisplayCocktailViewModelMapper> ();
+            services.AddSingleton <IViewModelMapper<ICollection<Cocktail>, CollectionViewModel>, CollectionViewModelMapper> ();
 
 
             //
-            services.AddSingleton <IDTOMapper<CreateCocktailViewModel, CocktailDTO>, CreateCocktailViewModelMapper> ();
+            services.AddSingleton <IDTOMapper<CreateCocktailViewModel, Cocktail>, CreateCocktailViewModelMapper> ();
 
 
             services.AddSingleton <IDTOMapper<RatingViewModel, RatingDTO> ,BarRatingViewModelMapper> ();

@@ -354,3 +354,6 @@ healthchecksdb
 MigrationBackup/
 
 # End of https://www.gitignore.io/api/visualstudio
+/IriOnCocktailService.ServiceTests/IriOnCocktailService.ServiceTests.csproj
+/IriOnCocktailService.ServiceTests/TestUtilities.cs
+/IriOnCocktailService.ServiceTests/CocktailServiceTests/CreateCocktail_Should.cs

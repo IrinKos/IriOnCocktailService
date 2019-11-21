@@ -7,19 +7,19 @@ using System.Linq;
 namespace IriOnCocktailService.App.Infrasturcture.Mappers
 {
     public class CollectionViewModelMapper : IViewModelMapper<ICollection<BarDTO>, CollectionViewModel>,
-        IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel>
+        IViewModelMapper<ICollection<Cocktail>, CollectionViewModel>
     {
         private readonly IViewModelMapper<BarDTO, DisplayBarsViewModel> displayBarMapper;
-        private readonly IViewModelMapper<CocktailDTO, DisplayCocktailViewModel> displayCocktailMapper;
+        private readonly IViewModelMapper<Cocktail, DisplayCocktailViewModel> displayCocktailMapper;
 
         public CollectionViewModelMapper(IViewModelMapper<BarDTO, DisplayBarsViewModel> displayBarMapper,
-                                        IViewModelMapper<CocktailDTO, DisplayCocktailViewModel> displayCocktailMapper)
+                                        IViewModelMapper<Cocktail, DisplayCocktailViewModel> displayCocktailMapper)
         {
             this.displayBarMapper = displayBarMapper;
             this.displayCocktailMapper = displayCocktailMapper;
         }
 
-        public CollectionViewModel MapFromDTO(ICollection<CocktailDTO> dto)
+        public CollectionViewModel MapFromDTO(ICollection<Cocktail> dto)
         {
             return new CollectionViewModel
             {
