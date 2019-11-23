@@ -36,7 +36,8 @@ namespace IriOnCocktailService.Data.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<string>("PicUrl");
+                    b.Property<string>("PicUrl")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -47,6 +48,7 @@ namespace IriOnCocktailService.Data.Migrations
                         {
                             Id = "56d9e733-b150-45c4-8b87-f5a5e31bc23b",
                             Address = "Neofit Rilski 70 str.",
+                            Motto = "Here’s to what I won’t remember.",
                             Name = "Camino Piano Bar",
                             NotAvailable = false,
                             PhoneNumber = "0899 121 219",
@@ -56,6 +58,7 @@ namespace IriOnCocktailService.Data.Migrations
                         {
                             Id = "cdb2058c-0600-497d-b48d-f89d8cb4aaed",
                             Address = "Aksakov 18 str.",
+                            Motto = "It’s not just a bar, it’s a destination!",
                             Name = "Motto",
                             NotAvailable = false,
                             PhoneNumber = "02 987 27 23",
@@ -65,6 +68,7 @@ namespace IriOnCocktailService.Data.Migrations
                         {
                             Id = "6e1ce019-108e-4ded-b308-486831d19e08",
                             Address = "Lege 8 str.",
+                            Motto = "Keep Calm and Party On.",
                             Name = "Magnito",
                             NotAvailable = false,
                             PhoneNumber = "0888 144 777",
@@ -74,6 +78,7 @@ namespace IriOnCocktailService.Data.Migrations
                         {
                             Id = "d886baac-17e6-49dd-93ec-b5ecadc14e06",
                             Address = "Moskovska 6A str.",
+                            Motto = "Less thinking more drinking.",
                             Name = "Tobacco Garden Bar",
                             NotAvailable = false,
                             PhoneNumber = "0884 600 044",
@@ -83,6 +88,7 @@ namespace IriOnCocktailService.Data.Migrations
                         {
                             Id = "648ba3bd-70ae-4277-aa40-2da5ab120fa9",
                             Address = "Nikola Vaptsarov 35 bul",
+                            Motto = "Old school bar for the modern man.",
                             Name = "The Corner",
                             NotAvailable = false,
                             PhoneNumber = "0884 555 444",
@@ -92,6 +98,7 @@ namespace IriOnCocktailService.Data.Migrations
                         {
                             Id = "0086952e-e33e-4daa-a678-d715afb9ce92",
                             Address = "Malko Tarnovo 1 str.",
+                            Motto = "Shut up and drink.",
                             Name = "After Five",
                             NotAvailable = false,
                             PhoneNumber = "0889 044 124",
@@ -101,6 +108,7 @@ namespace IriOnCocktailService.Data.Migrations
                         {
                             Id = "2600172c-9d3e-4143-850e-aeb80e2a1276",
                             Address = "Bitolya 2 str.",
+                            Motto = "The luck is gone, the brain is shot, but the liquor we still got.",
                             Name = "Ginger",
                             NotAvailable = false,
                             PhoneNumber = "087 733 7337",
@@ -110,6 +118,7 @@ namespace IriOnCocktailService.Data.Migrations
                         {
                             Id = "b14aaaf8-5cf8-4c3d-b082-e18afa02f563",
                             Address = "Vitosha 16 str.",
+                            Motto = "The problem with the world is that everyone is a few drinks behind.",
                             Name = "Sinatra",
                             NotAvailable = false,
                             PhoneNumber = "087 676 7647",
@@ -119,6 +128,7 @@ namespace IriOnCocktailService.Data.Migrations
                         {
                             Id = "5182e54c-ed6f-487f-b205-75649ef9ea2e",
                             Address = "Arsenalski 2 bul.",
+                            Motto = "Hiding from wife.",
                             Name = "Cache",
                             NotAvailable = false,
                             PhoneNumber = "089 446 4169",
@@ -128,6 +138,7 @@ namespace IriOnCocktailService.Data.Migrations
                         {
                             Id = "091bf67e-532c-498e-9a40-5f625ccee2e2",
                             Address = "Angel Kanchev 1 str.",
+                            Motto = "What happens at the reception stays at the reception.",
                             Name = "Public Bar",
                             NotAvailable = false,
                             PhoneNumber = "088 433 3781",
@@ -191,11 +202,86 @@ namespace IriOnCocktailService.Data.Migrations
 
                     b.Property<bool>("NotAvailable");
 
-                    b.Property<string>("PicUrl");
+                    b.Property<string>("PicUrl")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
                     b.ToTable("Cocktails");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "26531c92-59cd-4503-86c9-17ab02d0e4c1",
+                            Motto = "H.L Mencken called the Martini \"the only American invention as perfect as the sonnet\".",
+                            Name = "Dry Martini",
+                            NotAvailable = false,
+                            PicUrl = "https://www.bascofinefoods.com/spanish-recipes-wpfiles/wp-content/uploads/2015/07/dry_martini_recipe-e1505646628151.jpg"
+                        },
+                        new
+                        {
+                            Id = "11b8db86-d375-4cde-81c5-66be2938acdd",
+                            Motto = "Due to Roosevelt`s Good Neighbour policy (which opened up trade with Cuba, Latin America and the Carribean) rum became easily obtainable in the 1940S and this helped drive the popularity of the daiquiri in the US.",
+                            Name = "Daiquiri",
+                            NotAvailable = false,
+                            PicUrl = "https://www.thespruceeats.com/thmb/XmHuAIwiqm_YMOsF6lmFCswLYt4=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/hemingway-daiquiri-recipe-760527-Hero-5bbfa3c2c9e77c0052b8b7d2.jpg"
+                        },
+                        new
+                        {
+                            Id = "77c8a1f5-66f6-4c5d-b06d-1ad0cdd1097d",
+                            Motto = "Coffee is the second most traded commodity on earth.",
+                            Name = "Esspresso Martini",
+                            NotAvailable = false,
+                            PicUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcI5X1cmG98KMGYLkMkls8vGbKLdBkSTJf8JsM6m9oMatX6TBI&s"
+                        },
+                        new
+                        {
+                            Id = "ff98b546-3f4d-486c-acaf-6da5a2d1f4fc",
+                            Motto = "The name references the combinations age, as it is perhaps the first drink to be called a cocktail.",
+                            Name = "Old Fashioned",
+                            NotAvailable = false,
+                            PicUrl = "http://res.cloudinary.com/hjqklbxsu/image/upload/f_auto,fl_lossy,q_auto/v1536680101/social-share/JDSB_OldFashioned_DigitalRecipePost.jpg"
+                        },
+                        new
+                        {
+                            Id = "42cd2509-9e0d-4451-b20b-4822931ac723",
+                            Motto = "The Cosmopolitan gained significant popularity in the 1990s partly due to the fact that Sarah Jessica Parkers character, Carrie Bradshaw, in the hit televsion programme, \"Sex in the City\", often ordered the drink.",
+                            Name = "Cosmopolitan",
+                            NotAvailable = false,
+                            PicUrl = "https://peopledotcom.files.wordpress.com/2018/02/unknown-12.jpeg"
+                        },
+                        new
+                        {
+                            Id = "da9ef59d-7f71-4631-bda5-878e410c4e7f",
+                            Motto = "The White Russian is the favourite drink of Jeffrey \"The Dude\" Lebowski, the main character of the 1998 film, \"The Big Lebowski\".",
+                            Name = "White Russian",
+                            NotAvailable = false,
+                            PicUrl = "https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555340239/shape/mentalfloss/istock_000065613079_small.jpg"
+                        },
+                        new
+                        {
+                            Id = "957de258-83ae-4314-a015-6014a3f312d5",
+                            Motto = "B-52 carries up to 70,000 pounds of weapons.",
+                            Name = "B-52",
+                            NotAvailable = false,
+                            PicUrl = "https://casaveneracion.com/wp-content/uploads/2010/09/absinthe-b55.jpg"
+                        },
+                        new
+                        {
+                            Id = "aa0976da-4b5a-4b80-b7d0-c456c6be594d",
+                            Motto = "Some cocktail experts argue that rye whisky makes the best Manhattans, as opposed to Bourbon",
+                            Name = "Manhattan",
+                            NotAvailable = false,
+                            PicUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQstaIovPmxlc5PnPTQ4n4P2kWnWv3ImmqiCSWKoswE5oSk2Nva&s"
+                        },
+                        new
+                        {
+                            Id = "4fae34e6-e1a1-462b-9e52-9e851079b41e",
+                            Motto = "In the 2006 movie \"Miami Vice\" lead character Crockett is seen drinking a Mojito from the bartender in the very first scene.",
+                            Name = "Mojito",
+                            NotAvailable = false,
+                            PicUrl = "https://www.thespruceeats.com/thmb/uph9GgtfGnN3rlLSEaP1WhYI2Ag=/1000x562/smart/filters:no_upscale()/mojito-5a8f339fba61770036ec61d8.jpg"
+                        });
                 });
 
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.CocktailBar", b =>
@@ -249,6 +335,212 @@ namespace IriOnCocktailService.Data.Migrations
                     b.HasIndex("IngredientId");
 
                     b.ToTable("CocktailIngredients");
+
+                    b.HasData(
+                        new
+                        {
+                            CocktailId = "26531c92-59cd-4503-86c9-17ab02d0e4c1",
+                            IngredientId = "8a26e862-811d-4053-bb2d-59587bb48188",
+                            Quantity = "60"
+                        },
+                        new
+                        {
+                            CocktailId = "26531c92-59cd-4503-86c9-17ab02d0e4c1",
+                            IngredientId = "6c9dea74-cb47-4d4a-81ec-c21b1aec70ee",
+                            Quantity = "60"
+                        },
+                        new
+                        {
+                            CocktailId = "77c8a1f5-66f6-4c5d-b06d-1ad0cdd1097d",
+                            IngredientId = "dff51835-fdd3-4695-9954-28da0435ac7a",
+                            Quantity = "37"
+                        },
+                        new
+                        {
+                            CocktailId = "77c8a1f5-66f6-4c5d-b06d-1ad0cdd1097d",
+                            IngredientId = "703d3be1-ce27-483b-ad61-130b5500d368",
+                            Quantity = "12"
+                        },
+                        new
+                        {
+                            CocktailId = "77c8a1f5-66f6-4c5d-b06d-1ad0cdd1097d",
+                            IngredientId = "42304a2b-6806-4c5d-80a2-a2a50ae21b70",
+                            Quantity = "30"
+                        },
+                        new
+                        {
+                            CocktailId = "77c8a1f5-66f6-4c5d-b06d-1ad0cdd1097d",
+                            IngredientId = "7aff3750-c7bd-412b-b869-f28f3d44d046",
+                            Quantity = "12"
+                        },
+                        new
+                        {
+                            CocktailId = "77c8a1f5-66f6-4c5d-b06d-1ad0cdd1097d",
+                            IngredientId = "3caa9be9-e557-40b6-a9fe-f31bdadcdb2f",
+                            Quantity = "3"
+                        },
+                        new
+                        {
+                            CocktailId = "11b8db86-d375-4cde-81c5-66be2938acdd",
+                            IngredientId = "96d08841-a7ed-4eca-9f3f-72c2a777a167",
+                            Quantity = "50"
+                        },
+                        new
+                        {
+                            CocktailId = "11b8db86-d375-4cde-81c5-66be2938acdd",
+                            IngredientId = "416809dc-3855-4bbf-8341-f3b4811d90bd",
+                            Quantity = "7.5"
+                        },
+                        new
+                        {
+                            CocktailId = "11b8db86-d375-4cde-81c5-66be2938acdd",
+                            IngredientId = "d12faec1-8f1d-41b8-ab00-5aa9e8f9c7cb",
+                            Quantity = "25"
+                        },
+                        new
+                        {
+                            CocktailId = "ff98b546-3f4d-486c-acaf-6da5a2d1f4fc",
+                            IngredientId = "416809dc-3855-4bbf-8341-f3b4811d90bd",
+                            Quantity = "5"
+                        },
+                        new
+                        {
+                            CocktailId = "ff98b546-3f4d-486c-acaf-6da5a2d1f4fc",
+                            IngredientId = "e75bf641-54f4-474f-a7d7-3faaaf53759a",
+                            Quantity = "50"
+                        },
+                        new
+                        {
+                            CocktailId = "ff98b546-3f4d-486c-acaf-6da5a2d1f4fc",
+                            IngredientId = "42252d46-40cc-48b5-b594-3a7ec63ba985",
+                            Quantity = "1"
+                        },
+                        new
+                        {
+                            CocktailId = "ff98b546-3f4d-486c-acaf-6da5a2d1f4fc",
+                            IngredientId = "7d2c7d7d-4836-4b7a-8806-874bfe63fabf",
+                            Quantity = "1"
+                        },
+                        new
+                        {
+                            CocktailId = "42cd2509-9e0d-4451-b20b-4822931ac723",
+                            IngredientId = "d6d57e51-bc61-4c4c-87cc-2a3cd7e440b5",
+                            Quantity = "37 1/2"
+                        },
+                        new
+                        {
+                            CocktailId = "42cd2509-9e0d-4451-b20b-4822931ac723",
+                            IngredientId = "348b2dfc-9b80-4e6c-9709-e25a25195530",
+                            Quantity = "12 1/2"
+                        },
+                        new
+                        {
+                            CocktailId = "42cd2509-9e0d-4451-b20b-4822931ac723",
+                            IngredientId = "a5d0b498-9470-4281-93f0-d38f3e456d8a",
+                            Quantity = "30"
+                        },
+                        new
+                        {
+                            CocktailId = "42cd2509-9e0d-4451-b20b-4822931ac723",
+                            IngredientId = "7aff3750-c7bd-412b-b869-f28f3d44d046",
+                            Quantity = "12 1/2"
+                        },
+                        new
+                        {
+                            CocktailId = "da9ef59d-7f71-4631-bda5-878e410c4e7f",
+                            IngredientId = "dcb14d4d-6329-4641-bdd1-b02b7174ddcf",
+                            Quantity = "37 1/2"
+                        },
+                        new
+                        {
+                            CocktailId = "da9ef59d-7f71-4631-bda5-878e410c4e7f",
+                            IngredientId = "85ee0d01-72fe-4fea-a1e8-3a31471110cf",
+                            Quantity = "25"
+                        },
+                        new
+                        {
+                            CocktailId = "da9ef59d-7f71-4631-bda5-878e410c4e7f",
+                            IngredientId = "1adb7444-06eb-42a2-9783-98788907bfa6",
+                            Quantity = "15"
+                        },
+                        new
+                        {
+                            CocktailId = "da9ef59d-7f71-4631-bda5-878e410c4e7f",
+                            IngredientId = "faeb50b9-c23f-4cc3-b8ed-f41f8d19eb38",
+                            Quantity = "15"
+                        },
+                        new
+                        {
+                            CocktailId = "da9ef59d-7f71-4631-bda5-878e410c4e7f",
+                            IngredientId = "3caa9be9-e557-40b6-a9fe-f31bdadcdb2f",
+                            Quantity = "1"
+                        },
+                        new
+                        {
+                            CocktailId = "957de258-83ae-4314-a015-6014a3f312d5",
+                            IngredientId = "85ee0d01-72fe-4fea-a1e8-3a31471110cf",
+                            Quantity = "10"
+                        },
+                        new
+                        {
+                            CocktailId = "957de258-83ae-4314-a015-6014a3f312d5",
+                            IngredientId = "f885192f-3a79-4109-aa1d-313d5ee2291a",
+                            Quantity = "10"
+                        },
+                        new
+                        {
+                            CocktailId = "957de258-83ae-4314-a015-6014a3f312d5",
+                            IngredientId = "348b2dfc-9b80-4e6c-9709-e25a25195530",
+                            Quantity = "10"
+                        },
+                        new
+                        {
+                            CocktailId = "aa0976da-4b5a-4b80-b7d0-c456c6be594d",
+                            IngredientId = "e75bf641-54f4-474f-a7d7-3faaaf53759a",
+                            Quantity = "50"
+                        },
+                        new
+                        {
+                            CocktailId = "aa0976da-4b5a-4b80-b7d0-c456c6be594d",
+                            IngredientId = "e66d1721-8b0b-4d52-b71d-48a0e171ecfc",
+                            Quantity = "10"
+                        },
+                        new
+                        {
+                            CocktailId = "aa0976da-4b5a-4b80-b7d0-c456c6be594d",
+                            IngredientId = "f6b8ead2-9bcb-437f-a079-2270a628512e",
+                            Quantity = "10"
+                        },
+                        new
+                        {
+                            CocktailId = "aa0976da-4b5a-4b80-b7d0-c456c6be594d",
+                            IngredientId = "42252d46-40cc-48b5-b594-3a7ec63ba985",
+                            Quantity = "2"
+                        },
+                        new
+                        {
+                            CocktailId = "4fae34e6-e1a1-462b-9e52-9e851079b41e",
+                            IngredientId = "599b0c7d-2c10-431b-b986-296df0a888b5",
+                            Quantity = "8"
+                        },
+                        new
+                        {
+                            CocktailId = "4fae34e6-e1a1-462b-9e52-9e851079b41e",
+                            IngredientId = "7aff3750-c7bd-412b-b869-f28f3d44d046",
+                            Quantity = "10"
+                        },
+                        new
+                        {
+                            CocktailId = "4fae34e6-e1a1-462b-9e52-9e851079b41e",
+                            IngredientId = "96d08841-a7ed-4eca-9f3f-72c2a777a167",
+                            Quantity = "50"
+                        },
+                        new
+                        {
+                            CocktailId = "4fae34e6-e1a1-462b-9e52-9e851079b41e",
+                            IngredientId = "d12faec1-8f1d-41b8-ab00-5aa9e8f9c7cb",
+                            Quantity = "25"
+                        });
                 });
 
             modelBuilder.Entity("IriOnCocktailService.Data.Entities.CocktailRating", b =>
@@ -441,6 +733,230 @@ namespace IriOnCocktailService.Data.Migrations
                             IsDeleted = false,
                             Name = "Olive",
                             UnitType = 2
+                        },
+                        new
+                        {
+                            Id = "dff51835-fdd3-4695-9954-28da0435ac7a",
+                            IsDeleted = false,
+                            Name = "Vanila Vodka",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "703d3be1-ce27-483b-ad61-130b5500d368",
+                            IsDeleted = false,
+                            Name = "Kahlua",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "42304a2b-6806-4c5d-80a2-a2a50ae21b70",
+                            IsDeleted = false,
+                            Name = "Esspresso",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "7aff3750-c7bd-412b-b869-f28f3d44d046",
+                            IsDeleted = false,
+                            Name = "Sugar Syrop",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "3caa9be9-e557-40b6-a9fe-f31bdadcdb2f",
+                            IsDeleted = false,
+                            Name = "Coffee Beans",
+                            UnitType = 2
+                        },
+                        new
+                        {
+                            Id = "96d08841-a7ed-4eca-9f3f-72c2a777a167",
+                            IsDeleted = false,
+                            Name = "White rum",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "599b0c7d-2c10-431b-b986-296df0a888b5",
+                            IsDeleted = false,
+                            Name = "Mint Leaves",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "d12faec1-8f1d-41b8-ab00-5aa9e8f9c7cb",
+                            IsDeleted = false,
+                            Name = "Lime Juice",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "2a1498fb-00ce-4363-af6c-2ade242ce8bf",
+                            IsDeleted = false,
+                            Name = "Mint sprigs",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "416809dc-3855-4bbf-8341-f3b4811d90bd",
+                            IsDeleted = false,
+                            Name = "Sugar",
+                            UnitType = 3
+                        },
+                        new
+                        {
+                            Id = "e75bf641-54f4-474f-a7d7-3faaaf53759a",
+                            IsDeleted = false,
+                            Name = "Bourbon",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "42252d46-40cc-48b5-b594-3a7ec63ba985",
+                            IsDeleted = false,
+                            Name = "Angostura Bitters",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "7d2c7d7d-4836-4b7a-8806-874bfe63fabf",
+                            IsDeleted = false,
+                            Name = "Orange Bitters",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "d6d57e51-bc61-4c4c-87cc-2a3cd7e440b5",
+                            IsDeleted = false,
+                            Name = "Citrus Vodka",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "348b2dfc-9b80-4e6c-9709-e25a25195530",
+                            IsDeleted = false,
+                            Name = "Triple Sec",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "a5d0b498-9470-4281-93f0-d38f3e456d8a",
+                            IsDeleted = false,
+                            Name = "Cranberry Juice",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "85ee0d01-72fe-4fea-a1e8-3a31471110cf",
+                            IsDeleted = false,
+                            Name = "Coffee Liqueur",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "1adb7444-06eb-42a2-9783-98788907bfa6",
+                            IsDeleted = false,
+                            Name = "Cream",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "faeb50b9-c23f-4cc3-b8ed-f41f8d19eb38",
+                            IsDeleted = false,
+                            Name = "Milk",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "bec1efc2-cfc4-4297-9353-e2d90cedbcfc",
+                            IsDeleted = false,
+                            Name = "Pineapple Juice",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "c6b27053-e9f4-4907-a618-81410763ef65",
+                            IsDeleted = false,
+                            Name = "Coconut Cream",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "2ca0b8ed-3d8f-4a91-a3b3-c55a4e947a56",
+                            IsDeleted = false,
+                            Name = "Simple Syrup",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "1f1fbb0a-35a5-4ae5-b17a-5a5e1393f674",
+                            IsDeleted = false,
+                            Name = "Dark Rum",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "e66d1721-8b0b-4d52-b71d-48a0e171ecfc",
+                            IsDeleted = false,
+                            Name = "Sweet Vermouth",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "f6b8ead2-9bcb-437f-a079-2270a628512e",
+                            IsDeleted = false,
+                            Name = "Dry Vermouth",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "26848428-7ed4-4aa7-96b0-75f72bf90285",
+                            IsDeleted = false,
+                            Name = "Gomme Syrup",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "dddb8073-93b0-43dc-889c-d83dd3c7ffe8",
+                            IsDeleted = false,
+                            Name = "Amaretto",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "b9ba6611-eeab-45ae-9b94-399c1ce2b541",
+                            IsDeleted = false,
+                            Name = "Egg-White",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "2ca497aa-5518-4282-9e17-eb976cbd9728",
+                            IsDeleted = false,
+                            Name = "Bacardi Rum",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "cda1210e-5bfd-4314-aa3a-359f37f8e3ea",
+                            IsDeleted = false,
+                            Name = "Strawberry Liqueur",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "f885192f-3a79-4109-aa1d-313d5ee2291a",
+                            IsDeleted = false,
+                            Name = "Cream Liqueur",
+                            UnitType = 1
+                        },
+                        new
+                        {
+                            Id = "f11fa0c5-0203-486b-9592-21f7aa58d6b2",
+                            IsDeleted = false,
+                            Name = "Irish Cream Liqueur",
+                            UnitType = 1
                         });
                 });
 

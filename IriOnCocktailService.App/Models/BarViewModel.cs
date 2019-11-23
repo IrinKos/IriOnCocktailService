@@ -14,6 +14,7 @@ namespace IriOnCocktailService.App.Models
         public string PhoneNumber { get; set; }
         public decimal Rating { get; set; }
         public bool NotAvailable { get; set; }
+        public string Motto { get; set; }
         public IEnumerable<CommentViewModel> Comments { get; set; }
         public IEnumerable<CocktailViewModel> Cocktails { get; set; }
     }

@@ -10,6 +10,7 @@ namespace IriOnCocktailService.ServiceLayer.DTOS
         public string BarAddress { get; set; }
         public string BarPhoneNumber { get; set; }
         public string BarPicUrl { get; set; }
+        public string Motto { get; set; }
         public List<BarRating> BarRatings { get; set; }
         public List<BarComment> BarComments { get; set; }
         public List<CocktailBar> BarAvailableCocktails { get; set; }

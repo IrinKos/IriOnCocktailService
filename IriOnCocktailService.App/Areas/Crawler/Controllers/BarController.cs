@@ -60,6 +60,7 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             barCommentViewModel.UserId = userId;
+            barCommentViewModel.CreatedOn = DateTime.Now.ToString();
             var barCommentDTO = this.barCommentMapper.MapFromViewModel(barCommentViewModel);
             await this.barService.BarCommentAsync(barCommentDTO);
 

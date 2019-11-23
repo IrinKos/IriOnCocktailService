@@ -94,7 +94,7 @@ ol {
     }
 
     .menu > ol:first-child > .menu-item:nth-of-type(5) > a:before {
-        content: "Contact"
+        content: "Cocktails"
     }
 
     .menu > ol:first-child > .menu-item:nth-of-type(6) > a:before {

@@ -17,6 +17,7 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
                 BarId = barCommentDTO.BarId,
                 Description = barCommentDTO.Comment,
                 UserId = barCommentDTO.UserId,
+                CreatedOn = DateTime.Parse(barCommentDTO.CreatedOn)
             };
         }
 
@@ -27,7 +28,8 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
                 BarId=entity.BarId,
                 Comment=entity.Description,
                 UserId=entity.UserId,
-                Username=entity.User.UserName
+                Username=entity.User.UserName,
+                CreatedOn = entity.CreatedOn.ToString()
             };
         }
 

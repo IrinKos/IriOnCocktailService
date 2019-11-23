@@ -18,7 +18,8 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
                 Comment = dto.Comment,
                 UserId = dto.UserId,
                 Id = dto.BarId,
-                Username = dto.Username
+                Username = dto.Username,
+                CreatedOn = dto.CreatedOn
             };
         }
 
@@ -28,7 +29,8 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
             {
                 BarId = viewModel.Id,
                 UserId = viewModel.UserId,
-                Comment = viewModel.Comment
+                Comment = viewModel.Comment,
+                CreatedOn = viewModel.CreatedOn
             };
         }
     }

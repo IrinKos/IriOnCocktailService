@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+@*<h1>Details</h1>
 
 <div>
     <h4>BarViewModel</h4>
@@ -52,9 +52,9 @@
                 }
                 else
                 {
-                <span>
-                    @item.Name,
-                </span>
+                    <span>
+                        @item.Name,
+                    </span>
                 }
             }
         </dd>
@@ -65,8 +65,96 @@
             <li>@item.Username: @item.Comment</li>
         }
     </ul>
-</div>
-<div>
+
+</div>*@
+@*<div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>
+</div>*@
+<div class="container">
+    <div id="container" style="width: 100%">
+        <div class="product-details">
+            <h1>@Model.Name</h1>
+            <div>
+                @for (int i = 0; i < @Model.Rating; i++)
+                {
+                    <img src="~/lib/images/christmas_star.png" alt="Star" width="20">
+                }
+            </div>
+            <br />
+            <br />
+            <br />
+            @if (Model.Motto == null)
+            {
+                <p class="information pb-5">No Motto available</p>
+            }
+            else
+            {
+                <p class="information pb-5">"@Model.Motto"</p>
+            }
+            @*<a id="show-comments" class="m-md-auto pt-5 bar-buttonD" asp-action="GetComments" asp-route-id="@Model.Id">
+                    <span data-title="Comments!">
+                        <img src="~/lib/images/BookComment.png" alt="Details" width="20"> Comments!
+                        <img src="~/lib/images/BookComment.png" alt="Details" width="20">
+                    </span>
+                </a>
+                <a id="hide-comments" class="m-md-auto pt-5 bar-buttonD" style="display: none" asp-action="GetComments" asp-route-id="@Model.Id">
+                    <span data-title="Hide comments!">
+                        <img src="~/lib/images/BookComment.png" alt="Details" width="20"> Hide comment!
+                        <img src="~/lib/images/BookComment.png" alt="Details" width="20">
+                    </span>
+                </a>*@
+        </div>
+        <div class="product-image">
+            <img id="img" src="@Model.PictureURL" alt="Omar Dsoky">
+            <div class="info">
+                <h2>The Ingredients</h2>
+                <ul>
+                    @*<li><strong>Address: </strong>@Model.Address</li>
+        <li><strong>Phone Number: </strong>@Model.PhoneNumber</li>*@
+                    @foreach (var item in Model.Ingredients)
+                    {
+                        if (item == Model.Ingredients.Last())
+                        {
+                            <li>@item.Name</li>
+                        }
+                        else
+                        {
+                            <li>@item.Name,</li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="div-comments" class="bg-black">
+        <h3 class="font-italic font-weight-light">Comments!</h3>
+        @if (Model.Comments.Any())
+        {
+            @foreach (var item in Model.Comments)
+            {
+                <div class="text-muted">
+                    <div class="text-left ml-3"> @item.Username</div>  <div class="text-right mt-n4 mr-3"> on @item.CreatedOn</div>
+                </div>
+                <p class="text-left ml-5" id="comments">
+                    @item.Comment
+                </p>
+                <hr class="bg-white" />
+            }
+        }
+        else
+        {
+            <h4 class="text-left ml-3 text-muted" id="comments">
+                No comments yet!
+            </h4>
+        }
+    </div>
+    <div>
+        <a class="bar-buttonE mt-5" asp-action="Index">
+            <span data-title="Back to List!">
+                <img src="~/lib/images/BookComment.png" alt="Details" width="20"> Back to List!
+                <img src="~/lib/images/BookComment.png" alt="Details" width="20">
+            </span>
+        </a>
+    </div>
 </div>

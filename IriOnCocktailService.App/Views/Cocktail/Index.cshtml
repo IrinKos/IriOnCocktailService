@@ -11,10 +11,10 @@
         if (item.NotAvailable == false)
         {
 
-            <div class="col-sm-3" style="height:auto">
+            <div class="col-sm-3 pb-3" >
                 <div class="card-deck">
                     <div class="card bg-black-only">
-                        <img src="@item.PictureURL" class="card-img-top" alt="Bar Pic">
+                        <img src="@item.PictureURL" class="card-img-top" alt="Bar Pic" style="width: 100%; height:140px">
                         <div class="card-body">
                             <h5 class="card-title text-center">
                                 <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
@@ -29,9 +29,9 @@
                                 {
 
                                     <div>
-                                        @Html.DisplayFor(modelItem => item.Ingredients[i].Name) -
-                                        @Html.DisplayFor(modelItem => item.Ingredients[i].Quantity)
-                                        @Html.DisplayFor(modelItem => item.Ingredients[i].Type)
+                                        @Html.DisplayFor(modelItem => item.Ingredients[i].Name) 
+                                        @*@Html.DisplayFor(modelItem => item.Ingredients[i].Quantity)
+                                        @Html.DisplayFor(modelItem => item.Ingredients[i].Type)*@
                                     </div>
                                 }
                                 <span class="text-white " id="@item.Id" onclick="testing(this.id)">...@*Read more info*@</span>

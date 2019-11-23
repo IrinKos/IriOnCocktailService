@@ -1,0 +1,83 @@
+﻿@model IEnumerable<IriOnCocktailService.App.Models.CommentViewModel>
+
+@{
+    ViewData["Title"] = "GetComments";
+}
+
+@*<h1>GetComments</h1>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedOn)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@
+
+<div id="div-comments" class="bg-black" @*style="display: none"*@>
+    <h3 class="font-italic font-weight-light">Comments!</h3>
+    @if (Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            <div class="text-muted">
+                <div class="text-left ml-3"> @item.Username</div>  <div class="text-right mt-n4 mr-3"> on @item.CreatedOn</div>
+            </div>
+            <h6 class="text-left ml-3" id="comments">
+                @item.Comment
+            </h6>
+            <hr class="bg-white" />
+        }
+    }
+    else
+    {
+        <h4 class="text-left ml-3 text-muted" id="comments">
+            No comments yet!
+        </h4>
+    }
+</div>
+

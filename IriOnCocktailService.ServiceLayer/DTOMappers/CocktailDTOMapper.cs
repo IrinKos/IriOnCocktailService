@@ -24,6 +24,7 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
                 Name = entity.Name,
                 PicUrl = entity.PicUrl,
                 NotAvailable = entity.NotAvailable,
+                Motto = entity.Motto,
                 Ingredients = entity.CocktailIngredients.Where(ingr => ingr.CocktailId == entity.Id).Select(x => this.mapper.MapFrom(x)).ToList(),
                 Rating = entity.Ratings.Where(br => br.CocktailId == entity.Id).Any() ? entity.Ratings.Where(br => br.CocktailId == entity.Id).Average(g => g.Rate) : 0,
             };

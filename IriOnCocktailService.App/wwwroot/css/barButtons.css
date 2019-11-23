@@ -80,3 +80,85 @@
         transform: translate3d(0px,0px,-30px) rotateX(90deg);
     }
 
+/*-------------------------------------------------------------------------------------*/
+.bar-buttonD {
+    display: inline-block;
+    /*position: absolute;*/
+    overflow: hidden;
+    left: 40%;
+    top: 40%;
+    width: 200px;
+    perspective: 400px;
+    background-color: transparent;
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(255,255,255,0.3)));
+}
+
+    .bar-buttonD span {
+        display: block;
+        position: relative;
+        transition: 0.3s ease-in-out all;
+        transform-origin: 50% 0;
+        transform-style: preserve-3d;
+        background-color: white;
+        color: black;
+        width: 100%;
+    }
+
+        .bar-buttonD span:after {
+            display: block;
+            content: attr(data-title);
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: 0.3s ease-in-out all;
+            transform-origin: 50% 0;
+            transform: translate3d(0px,105%,0px) rotateX(-90deg);
+            background-color: black;
+            color: white;
+            width: 100%;
+        }
+
+    .bar-buttonD:hover span {
+        transform: translate3d(0px,0px,-30px) rotateX(90deg);
+    }
+/*-------------------------------------------------------------------------------------*/
+.bar-buttonE {
+    display: inline-block;
+    /*position: absolute;*/
+    overflow: hidden;
+    left: 40%;
+    top: 40%;
+    width: 200px;
+    perspective: 400px;
+    background-color: transparent;
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(255,255,255,0.3)));
+}
+
+    .bar-buttonE span {
+        display: block;
+        position: relative;
+        transition: 0.3s ease-in-out all;
+        transform-origin: 50% 0;
+        transform-style: preserve-3d;
+        background-color: white;
+        color: black;
+        width: 100%;
+    }
+
+        .bar-buttonE span:after {
+            display: block;
+            content: attr(data-title);
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: 0.3s ease-in-out all;
+            transform-origin: 50% 0;
+            transform: translate3d(0px,105%,0px) rotateX(-90deg);
+            background-color: black;
+            color: white;
+            width: 100%;
+        }
+
+    .bar-buttonE:hover span {
+        transform: translate3d(0px,0px,-30px) rotateX(90deg);
+    }

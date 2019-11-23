@@ -56,5 +56,14 @@ namespace IriOnCocktailService.App.Controllers
 
             return View(barViewModel);
         }
+        [HttpGet]
+        public async Task<IActionResult> GetComments(string id) 
+        {
+            var barCommentDTOs = await this.barService.GetAllCommentsForBar(id);
+            var commentViewModels = barCommentDTOs.Select(x => this.commentMapper.MapFromDTO(x));
+
+            return View("GetComments", commentViewModels);
+            //return Json(commentViewModels);
+        }
     }
 }

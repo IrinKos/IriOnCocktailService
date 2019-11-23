@@ -3,19 +3,57 @@
     ViewData["Title"] = "_SearchPartial";
 }
 
+@*<div class="row">
+        @foreach (var bar in Model)
+        {
+            <div class="bar-info">
+                <div class="col">
+                    <div class="card-deck" style="height: 300px;">
+                        <div class="card bg-black-only">
+                            <img data-toggle="tooltip" data-placement="top" title="@bar.Name" class="card-img-top" src="@Html.DisplayFor(modelItem => bar.PictureURL)" alt="Bar Pic">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">
+                                    <strong>@Html.DisplayFor(modelItem => bar.Name)</strong>
+                                    <br />
+                                    @for (int i = 0; i < bar.Rating; i++)
+                                    {
+                                        <img src="~/lib/images/christmas_star.png" alt="Star" width="20">
+                                    }
+                                </h5>
+                                <p class="card-text text-center">
+                                    <span class="font-weight-bold text-white">Address: </span>
+                                    <br />
+                                    <span>@Html.DisplayFor(modelItem => bar.Address)</span>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+                    <p></p>
+                </div>
+            </div>
+        }
+    </div>*@
+
 <div class="row">
-    @foreach (var bar in Model)
+    @{ var counter = 5; }
+    @foreach (var item in Model)
     {
-        <div class="bar-info">
-            <div class="col">
-                <div class="card-deck" style="height: 300px;">
+        if (item.NotAvailable == false)
+        {
+
+            <div class="col-sm-3" @*style="height: 460px"*@>
+                <div class="card-deck">
                     <div class="card bg-black-only">
-                        <img data-toggle="tooltip" data-placement="top" title="@bar.Name" class="card-img-top" src="@Html.DisplayFor(modelItem => bar.PictureURL)" alt="Bar Pic">
+                        <img data-toggle="tooltip" data-placement="top" title="@item.Name"
+                             class="card-img-top" src="@Html.DisplayFor(modelItem => item.PictureURL)"
+                             alt="Bar Pic" style="width: 100%; height:140px">
                         <div class="card-body">
                             <h5 class="card-title text-center">
-                                <strong>@Html.DisplayFor(modelItem => bar.Name)</strong>
+                                <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
                                 <br />
-                                @for (int i = 0; i < bar.Rating; i++)
+                                @for (int i = 0; i < @item.Rating; i++)
                                 {
                                     <img src="~/lib/images/christmas_star.png" alt="Star" width="20">
                                 }
@@ -23,15 +61,32 @@
                             <p class="card-text text-center">
                                 <span class="font-weight-bold text-white">Address: </span>
                                 <br />
-                                <span>@Html.DisplayFor(modelItem => bar.Address)</span>
+                                <span>@Html.DisplayFor(modelItem => item.Address)</span>
+                                <br />
+                                <br />
+                                <span class="font-weight-bold text-white">Phone number: </span>
+                                <br />
+                                <span>@Html.DisplayFor(modelItem => item.PhoneNumber)</span>
                             </p>
                         </div>
                         <div class="card-footer">
+                            <a id="bar-buttonD" asp-action="Details" asp-route-id="@item.Id">
+                                <span data-title="Read More Info">
+                                    <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25"> Read More Info!
+                                    <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25">
+                                </span>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <p></p>
             </div>
-        </div>
+            if (counter % 4 == 0)
+            {
+            @:</div><div class="row">
+                counter = 0;
+            }
+            counter++;
+        }
     }
 </div>

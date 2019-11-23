@@ -12,6 +12,7 @@ namespace IriOnCocktailService.App.Models
         public string Name { get; set; }
         public string PictureURL { get; set; }
         public decimal Rating { get; set; }
+        public string Motto { get; set; }
         public List<CocktailIngredientDTO> Ingredients { get; set; }
         public bool NotAvailable { get; set; }
         public IEnumerable<CommentViewModel> Comments { get; set; }
