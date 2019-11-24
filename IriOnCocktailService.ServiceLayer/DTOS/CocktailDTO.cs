@@ -11,8 +11,9 @@ namespace IriOnCocktailService.ServiceLayer.DTOS
         public string Name { get; set; }
         public string PicUrl { get; set; }
         public decimal Rating { get; set; }
-        public List<CocktailIngredientDTO> Ingredients { get; set; }
         public bool NotAvailable { get; set; }
+        public string Motto { get; set; }
+        public List<CocktailIngredientDTO> Ingredients { get; set; }
         public ICollection<CocktailComment> Comments { get; set; }
     }
 }
