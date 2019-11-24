@@ -14,5 +14,6 @@ namespace IriOnCocktailService.ServiceLayer.Services
 
         // Cocktails
         public const string UnavailableCocktail = "The cocktail does not exist";
+        public const string NoCocktailsFound = "No cocktails found";
     }
 }

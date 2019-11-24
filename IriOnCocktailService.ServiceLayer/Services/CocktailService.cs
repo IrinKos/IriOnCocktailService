@@ -17,6 +17,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
         private readonly IriOnCocktailServiceDbContext context;
         private readonly ICocktailIngredientService cocktailIngredientService;
         private readonly IDTOServiceMapper<Cocktail, CocktailDTO> mapper;
+        private readonly IDTOServiceMapper<CocktailDTO, Cocktail> cocktailMapper;
 
         private readonly IDTOServiceMapper<CommentDTO, CocktailComment> cocktailCommentMapper;
         private readonly IDTOServiceMapper<CocktailComment, CommentDTO> cocktailCommentDTOMapper; 
@@ -26,6 +27,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
         public CocktailService(IriOnCocktailServiceDbContext context,
                                ICocktailIngredientService cocktailIngredientService,
                                IDTOServiceMapper<Cocktail, CocktailDTO> mapper,
+                               IDTOServiceMapper<CocktailDTO, Cocktail> cocktailMapper,
                                IDTOServiceMapper<CommentDTO, CocktailComment> cocktailCommentMapper,
                                IDTOServiceMapper<CocktailComment, CommentDTO> cocktailCommentDTOMapper,
                                IDTOServiceMapper<Cocktail, AddCocktailDTO> addCocktailMapper,
@@ -34,6 +36,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
             this.context = context;
             this.cocktailIngredientService = cocktailIngredientService;
             this.mapper = mapper;
+            this.cocktailMapper = cocktailMapper;
             this.cocktailCommentMapper = cocktailCommentMapper;
             this.cocktailCommentDTOMapper = cocktailCommentDTOMapper;
             this.addCocktailMapper = addCocktailMapper;
@@ -42,19 +45,16 @@ namespace IriOnCocktailService.ServiceLayer.Services
 
         public async Task<CocktailDTO> CreateCocktail(CocktailDTO cocktailDTO)
         {
-            var cocktail = new Cocktail
+            if(cocktailDTO==null)
             {
-                Name = cocktailDTO.Name,
-                PicUrl=cocktailDTO.PicUrl
-            };
+                throw new ArgumentNullException("");
+            }
+            var cocktail = this.cocktailMapper.MapFrom(cocktailDTO);
 
             await this.context.Cocktails.AddAsync(cocktail);
             await this.context.SaveChangesAsync();
-            //cocktailDTO.Ingredients.Select(cdto => cdto.CocktailId = cocktail.Id);
-            foreach (var item in cocktailDTO.Ingredients)
-            {
-                item.CocktailId = cocktail.Id;
-            }
+
+            cocktailDTO.Ingredients.ForEach(cdto => cdto.CocktailId = cocktail.Id);
             await cocktailIngredientService.CreateCocktailIngredient(cocktailDTO.Ingredients);
 
             return cocktailDTO;
@@ -103,6 +103,11 @@ namespace IriOnCocktailService.ServiceLayer.Services
                 .Select(c => this.mapper.MapFrom(c))
                 .ToListAsync();
 
+            if(cocktails.Count == 0)
+            {
+                throw new ArgumentNullException(GlobalConstants.NoCocktailsFound);
+            }
+
             return cocktails;
         }
 
@@ -114,6 +119,11 @@ namespace IriOnCocktailService.ServiceLayer.Services
                 .Include(c => c.Ratings)
                 .Where(c => c.NotAvailable == false && c.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
                 .ToListAsync();
+
+            if(cocktails.Count()==0)
+            {
+                throw new ArgumentException(GlobalConstants.NoCocktailsFound);
+            }
 
             return cocktails.Select(this.mapper.MapFrom).ToList(); 
         }
