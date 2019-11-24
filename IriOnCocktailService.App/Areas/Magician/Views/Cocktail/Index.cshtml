@@ -5,6 +5,73 @@
 }
 
 
+@*<div class="row">
+        @{ var counter = 5; }
+        @foreach (var item in Model.Cocktails)
+        {
+            if (item.NotAvailable == false)
+            {
+
+                <div class="col-sm-3" style="height:auto">
+                    <div class="card-deck">
+                        <div class="card bg-black-only">
+                            <img src="@item.PictureURL" class="card-img-top" alt="Bar Pic">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">
+                                    <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
+                                    <br />
+                                    @for (int i = 0; i < @item.Rating; i++)
+                                    {
+                                        <img src="~/lib/images/christmas_star.png" alt="Star" width="20">
+                                    }
+                                </h5>
+                                <p class="card-text text-center">
+                                    @for (int i = 0; i < item.Ingredients.Count; i++)
+                                    {
+
+                                        <div>
+                                            @Html.DisplayFor(modelItem => item.Ingredients[i].Name) -
+                                            @Html.DisplayFor(modelItem => item.Ingredients[i].Quantity)
+                                            @Html.DisplayFor(modelItem => item.Ingredients[i].Type)
+                                        </div>
+                                    }
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <a id="bar-buttonD" asp-action="Edit" asp-route-id="@item.Id">
+                                    <span data-title="Edit!">
+                                        <img src="~/lib/images/YellowFlask.png" alt="Edit" width="20"> Edit!
+                                        <img src="~/lib/images/YellowFlask.png" alt="Edit" width="20">
+                                    </span>
+                                </a>
+                                <a id="bar-buttonE" asp-action="Delete" asp-route-id="@item.Id">
+                                    <span data-title="Delete!">
+                                        <img src="~/lib/images/RedFlask.png" alt="Delete" width="20"> Delete!
+                                        <img src="~/lib/images/RedFlask.png" alt="Delete" width="20">
+                                    </span>
+                                </a>
+                                <a id="bar-buttonD" asp-action="Details" asp-route-id="@item.Id">
+                                    <span data-title="Details!">
+                                        <img src="~/lib/images/GreenFlask.png" alt="Details" width="20"> Details!
+                                        <img src="~/lib/images/GreenFlask.png" alt="Details" width="20">
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+                if (counter % 4 == 0)
+                {
+                @:</div><div class="row">
+                    counter = 0;
+                }
+                counter++;
+
+            }
+        }
+    </div>*@
+
 <div class="row">
     @{ var counter = 5; }
     @foreach (var item in Model.Cocktails)
@@ -12,11 +79,11 @@
         if (item.NotAvailable == false)
         {
 
-            <div class="col-sm-3" style="height:auto">
+            <div class="col-sm-3 pb-3">
                 <div class="card-deck">
                     <div class="card bg-black-only">
-                        <img src="@item.PictureURL" class="card-img-top" alt="Bar Pic">
-                        <div class="card-body">
+                        <img src="@item.PictureURL" class="card-img-top" alt="Bar Pic" style="width: 100%; height:140px">
+                        <div class="card-body" style="height: 200px">
                             <h5 class="card-title text-center">
                                 <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
                                 <br />
@@ -38,8 +105,6 @@
                             </p>
                         </div>
                         <div class="card-footer">
-
-                            @*<small class="text-muted">Last updated 3 mins ago</small>*@
                             <a id="bar-buttonD" asp-action="Edit" asp-route-id="@item.Id">
                                 <span data-title="Edit!">
                                     <img src="~/lib/images/YellowFlask.png" alt="Edit" width="20"> Edit!
