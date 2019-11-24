@@ -6,17 +6,22 @@
 
 
 <div class="bg-black" style="width: 60%; margin-left: 225px; margin-top: 50px;">
+    <p class="login-text">
+        <span>
+            <img src="~/lib/images/Bars.png" alt="CreateBar" width="50" style="border-radius: 50%;">
+        </span>
+    </p>
     <form asp-action="Create">
         <h3>Create Bar!</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             @*<b><label asp-for="BarName" class="control-label"></label></b>*@
-            <input asp-for="BarName" id="magic-input" class="form-control"  placeholder="Bar Name"/>
+            <input asp-for="BarName" id="magic-input" class="form-control" placeholder="Bar Name" />
             <span asp-validation-for="BarName" class="text-danger"></span>
         </div>
         <div class="form-group">
             @*<b><label asp-for="BarAddress" class="control-label"></label></b>*@
-            <input asp-for="BarAddress" id="magic-input" class="form-control" placeholder="Bar Address"/> 
+            <input asp-for="BarAddress" id="magic-input" class="form-control" placeholder="Bar Address" />
             <span asp-validation-for="BarAddress" class="text-danger"></span>
         </div>
         <div class="form-group">
@@ -29,17 +34,21 @@
             <input asp-for="BarPicUrl" id="magic-input" class="form-control" placeholder="Picture url" />
             <span asp-validation-for="BarPicUrl" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <button type="submit" class="bar-buttonE border-0 mt-4">
+        <div class="form-group mt-4">
+            <button type="submit" class="bar-buttonE border-0">
                 <span data-title="Create Bar!">
-                    <img src="~/lib/images/GreenFlask.png" alt="Details" width="20"> Create Bar!
-                    <img src="~/lib/images/GreenFlask.png" alt="Details" width="20">
+                    <img src="~/lib/images/createBar.png" alt="CreateBar" width="30"> Create Bar!
+                    <img src="~/lib/images/createBar.png" alt="CreateBar" width="30">
                 </span>
             </button>
-            <a asp-action="Index">
-                <img src="~/lib/images/BackToListRedTrans.png" alt="BackToList" width="100">
-            </a>
+
         </div>
+        <a asp-action="Index" class="bar-buttonE ">
+            <span data-title="Back to List!">
+                <img src="~/lib/images/backArrow.png" alt="CreateBar" width="22"> Back to List!
+                <img src="~/lib/images/backArrow.png" alt="CreateBar" width="22">
+            </span>
+        </a>
     </form>
 </div>
 

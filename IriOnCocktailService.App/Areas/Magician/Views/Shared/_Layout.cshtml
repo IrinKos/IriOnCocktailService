@@ -25,6 +25,9 @@
 
 
     <link rel="stylesheet" href="~/css/create-form.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/css/select2.min.css">
 </head>
@@ -40,6 +43,7 @@
                     <ol class="sub-menu">
                         <li class="menu-item"><a asp-area="Magician" asp-controller="Bar" asp-action="Index">List Bars</a></li>
                         <li class="menu-item"><a asp-area="Magician" asp-controller="Bar" asp-action="Create">Create Bar</a></li>
+                        <li class="menu-item"><a asp-area="Magician" asp-controller="Bar" asp-action="ModifyBarCocktails">Add cocktail to bar</a></li>
                     </ol>
                 </li>
                 <li>
@@ -64,7 +68,6 @@
                         <li class="menu-item"><a asp-area="Magician" asp-controller="Ingredient" asp-action="Create">Create Ingredient</a></li>
                     </ol>
                 </li>
-                <li class="menu-item"><a href="#0">Contact</a></li>
                 <li class="menu-item">
                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                         <button id="logout" type="submit" class="bg-black">Logout</button>

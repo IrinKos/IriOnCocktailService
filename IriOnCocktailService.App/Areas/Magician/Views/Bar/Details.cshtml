@@ -61,7 +61,14 @@
     </ul>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })
+    <a asp-action="Edit" asp-route-id="@Model.Id">
+        EDIT
+    </a>
+    <a asp-action="ModifyBarCocktails" asp-route-id="@Model.Id">
+        Add/Remove Cocktails
+    </a>
+    @*@Html.ActionLink("Edit", "Edit", "Bar", Model.Id)
+        @Html.ActionLink("Add/Remove Cocktails", "ModifyBarCocktails", "Bar", Model.Id)*@
 
     <a asp-action="Index">Back to List</a>
 </div>

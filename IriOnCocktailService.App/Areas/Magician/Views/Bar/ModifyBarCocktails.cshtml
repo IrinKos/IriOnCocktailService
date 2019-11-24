@@ -3,24 +3,30 @@
     ViewData["Title"] = "ModifyBarCocktails";
 }
 
-<h1>ModifyBarCocktails</h1>
+<h1>@*TODO*@</h1>
 
-<div class="row text-white">
-    <div class="col-md-4">
-        <form method="post" asp-area="Magician" asp-controller="Bar" asp-action="ModifyBarCocktails">
+<div class="bg-black" style="width: 60%; margin-left: 225px; margin-top: 50px;">
+    <div>
+        <p class="login-text">
+            <span>
+                <img src="~/lib/images/Bars.png" alt="CreateBar" width="50" style="border-radius: 50%;">
+            </span>
+        </p>
+        <form class="form-group" id="magic-input" method="post" asp-area="Magician" asp-controller="Bar" asp-action="ModifyBarCocktails">
+            <h3>Create Bar!</h3>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="SelectedCocktails" class="control-label">Add Cocktails</label>
                 <select asp-for="SelectedCocktails" asp-items="@Model.CocktailsToAdd" class="js-example-basic-multiple form-control " multiple="multiple">
-                    <option disabled selected value="">Choose an option</option>
+                    <option disabled value="">Add Cocktails</option>
                 </select>
                 <span asp-validation-for="CocktailsToAdd" class="text-danger"></span>
             </div>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UnSelectedCocktails" class="control-label">Remove Cocktails</label>
-                <select asp-for="UnSelectedCocktails" asp-items="@Model.CocktailsToRemove" class="js-example-basic-multiple form-control " multiple="multiple">
-                    <option disabled selected value="">Choose an option</option>
+                <select asp-for="UnSelectedCocktails" asp-items="@Model.CocktailsToRemove" class="js-example-basic-multiple form-control" multiple="multiple">
+                    <option disabled value="">Remove Cocktails</option>
                 </select>
                 <span asp-validation-for="CocktailsToRemove" class="text-danger"></span>
             </div>
@@ -36,7 +42,7 @@
 @section Scripts{
 <script>
     $(document).ready(function () {
-    $('.js-example-basic-multiple').select2();
+        $('.js-example-basic-multiple').select2();
 });
 </script>
 }
