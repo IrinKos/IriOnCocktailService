@@ -15,19 +15,19 @@
     </p>
     <div>
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
+            <h4>Create a New Account.</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <input asp-for="Input.Username" id="my-login" class="form-control" placeholder="Username" />
+                <input asp-for="Input.Username" id="magic-input" class="form-control" placeholder="Username" />
                 <span asp-validation-for="Input.Username" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input asp-for="Input.Password" id="my-login" class="form-control" placeholder="Password" />
+                <input asp-for="Input.Password" id="magic-input" class="form-control" placeholder="Password" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input asp-for="Input.ConfirmPassword" id="my-login" class="form-control" placeholder="Comfirm passwor" />
+                <input asp-for="Input.ConfirmPassword" id="magic-input" class="form-control" placeholder="Comfirm passwor" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <button type="submit" class="bar-buttonE border-0 mt-4 mb-3">

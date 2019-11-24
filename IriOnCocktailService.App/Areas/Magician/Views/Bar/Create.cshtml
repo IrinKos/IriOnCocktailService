@@ -4,47 +4,42 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<div class="col-md-4">
+<div class="bg-black" style="width: 60%; margin-left: 225px; margin-top: 50px;">
     <form asp-action="Create">
+        <h3>Create Bar!</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <b><label asp-for="BarName" class="control-label"></label></b>
-            <input asp-for="BarName" class="form-control" />
+            @*<b><label asp-for="BarName" class="control-label"></label></b>*@
+            <input asp-for="BarName" id="magic-input" class="form-control"  placeholder="Bar Name"/>
             <span asp-validation-for="BarName" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <b><label asp-for="BarAddress" class="control-label"></label></b>
-            <input asp-for="BarAddress" class="form-control" />
+            @*<b><label asp-for="BarAddress" class="control-label"></label></b>*@
+            <input asp-for="BarAddress" id="magic-input" class="form-control" placeholder="Bar Address"/> 
             <span asp-validation-for="BarAddress" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <b><label asp-for="BarPhoneNumber" class="control-label"></label></b>
-            <input asp-for="BarPhoneNumber" class="form-control" />
+            @*<b><label asp-for="BarPhoneNumber" class="control-label"></label></b>*@
+            <input asp-for="BarPhoneNumber" id="magic-input" class="form-control" placeholder="Phone Number" />
             <span asp-validation-for="BarPhoneNumber" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <b><label asp-for="BarPicUrl" class="control-label"></label></b>
-            <input asp-for="BarPicUrl" class="form-control" />
+            @*<b><label asp-for="BarPicUrl" class="control-label"></label></b>*@
+            <input asp-for="BarPicUrl" id="magic-input" class="form-control" placeholder="Picture url" />
             <span asp-validation-for="BarPicUrl" class="text-danger"></span>
         </div>
-        <div>
-
-            @using (Html.BeginForm("FileUpload", "Home", FormMethod.Post,
-                              new { enctype = "multipart/form-data" }))
-            {
-                <label for="file">Upload Image:</label>
-                <input type="file" name="file" id="file" style="width: 100%;" />
-                <input type="submit" value="Upload" class="submit" />
-            }
+        <div class="form-group">
+            <button type="submit" class="bar-buttonE border-0 mt-4">
+                <span data-title="Create Bar!">
+                    <img src="~/lib/images/GreenFlask.png" alt="Details" width="20"> Create Bar!
+                    <img src="~/lib/images/GreenFlask.png" alt="Details" width="20">
+                </span>
+            </button>
+            <a asp-action="Index">
+                <img src="~/lib/images/BackToListRedTrans.png" alt="BackToList" width="100">
+            </a>
         </div>
-        <button type="submit" class="btn btn-secondary bg-white border-0 float-md-left ">
-            <img class="d-flex ml-1" src="~/lib/images/CreateNewGreenTrans.png" alt="CreateNew" width="100">
-        </button>
-        <a asp-action="Index">
-            <img src="~/lib/images/BackToListRedTrans.png" alt="BackToList" width="100">
-        </a>
     </form>
 </div>
 

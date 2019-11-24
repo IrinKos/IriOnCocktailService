@@ -38,7 +38,7 @@ $('#load-button').click(function () {
     $.get('/Home/BarsAddress?address=' + searchText, barServerResponseHandler);
     $.get('/Home/Cocktails?name=' + searchText, cocktailServerResponseHandler);
     $.get('/Home/CocktailsIngredients?ingredient=' + searchText, cocktailServerResponseHandler);
-});
+});              
 
 //function moreInfo() {
 //    $('#more-info').show()

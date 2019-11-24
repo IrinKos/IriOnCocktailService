@@ -52,7 +52,7 @@ namespace IriOnCocktailService.Data.Migrations
                             Name = "Camino Piano Bar",
                             NotAvailable = false,
                             PhoneNumber = "0899 121 219",
-                            PicUrl = "https://www.bar.bg/img/entities/391/1460717100_200_piano-bar-Camino-sofia-215-x-130.jpg"
+                            PicUrl = "https://www.bar.bg/img/entities/391/thumbnails/1460717284_thumbnail_piano%20Bar%20Camino%20Sofia%20Bar.bg%20%20%286%29.jpg"
                         },
                         new
                         {
@@ -62,7 +62,7 @@ namespace IriOnCocktailService.Data.Migrations
                             Name = "Motto",
                             NotAvailable = false,
                             PhoneNumber = "02 987 27 23",
-                            PicUrl = "https://www.bar.bg/img/entities/344/image344_thumb.jpg"
+                            PicUrl = "https://www.bar.bg/img/entities/344/thumbnails/1460948353_thumbnail_Motto%20Sofia%20bar%20and%20dinner%20%289%29.jpg"
                         },
                         new
                         {
@@ -72,7 +72,7 @@ namespace IriOnCocktailService.Data.Migrations
                             Name = "Magnito",
                             NotAvailable = false,
                             PhoneNumber = "0888 144 777",
-                            PicUrl = "https://www.bar.bg/img/entities/334/1505111472_200_magnito-sofia-215-x-130.png"
+                            PicUrl = "https://www.bar.bg/img/entities/334/12.jpg"
                         },
                         new
                         {
@@ -82,7 +82,7 @@ namespace IriOnCocktailService.Data.Migrations
                             Name = "Tobacco Garden Bar",
                             NotAvailable = false,
                             PhoneNumber = "0884 600 044",
-                            PicUrl = "https://www.bar.bg/img/entities/399/1465626692_200_Tobacco-garden-bar-sofia-215-x-130.png"
+                            PicUrl = "https://www.bar.bg/img/entities/399/thumbnails/1465627827_thumbnail_Tobacco%20by%20night%20%281%29.jpg"
                         },
                         new
                         {
@@ -92,7 +92,7 @@ namespace IriOnCocktailService.Data.Migrations
                             Name = "The Corner",
                             NotAvailable = false,
                             PhoneNumber = "0884 555 444",
-                            PicUrl = "https://www.bar.bg/img/entities/301/1509363711_200_LOGO_The-Corner-Sofia-2017---215-x-130.jpg"
+                            PicUrl = "https://www.bar.bg/img/entities/301/thumbnails/1465991940_thumbnail_The%20corner%20sofia%20%285%29.JPG"
                         },
                         new
                         {
@@ -102,7 +102,7 @@ namespace IriOnCocktailService.Data.Migrations
                             Name = "After Five",
                             NotAvailable = false,
                             PhoneNumber = "0889 044 124",
-                            PicUrl = "https://www.bar.bg/img/entities/514/1542282680_200_1-after%20five%20drink%20bar%20sofia%20215-x-130.jpg"
+                            PicUrl = "https://www.bar.bg/img/entities/514/thumbnails/1542282996_thumbnail_45587111_10155553340756402_8161139793200152576_o.jpg"
                         },
                         new
                         {
@@ -112,7 +112,7 @@ namespace IriOnCocktailService.Data.Migrations
                             Name = "Ginger",
                             NotAvailable = false,
                             PhoneNumber = "087 733 7337",
-                            PicUrl = "https://www.bar.bg/img/entities/309/1542618320_200_1-ginger%20sofia%20215-x-130%20logo.png"
+                            PicUrl = "https://www.bar.bg/img/entities/309/thumbnails/1543487164_thumbnail_46508867_945234368933866_6411033979784265728_o.jpg"
                         },
                         new
                         {
@@ -122,7 +122,7 @@ namespace IriOnCocktailService.Data.Migrations
                             Name = "Sinatra",
                             NotAvailable = false,
                             PhoneNumber = "087 676 7647",
-                            PicUrl = "https://www.bar.bg/img/entities/445/1495540391_200_Social-cafe-sofia-logo-215-x-130-jpeg.jpg"
+                            PicUrl = "https://scontent.fsof10-1.fna.fbcdn.net/v/t1.0-9/69596049_2511881822225915_3748776760234213376_o.jpg?_nc_cat=106&_nc_ohc=tXMpZ5pg5EsAQm6ITiX6rG7SzNUjVkk6VofwaXC1Qg2DMgADPB9ShY55Q&_nc_ht=scontent.fsof10-1.fna&oh=5481adeb4d42c82c2e7e31e9fd8e0180&oe=5E8147BB"
                         },
                         new
                         {
@@ -132,7 +132,7 @@ namespace IriOnCocktailService.Data.Migrations
                             Name = "Cache",
                             NotAvailable = false,
                             PhoneNumber = "089 446 4169",
-                            PicUrl = "https://www.bar.bg/img/entities/392/1460818909_200_cache---215-x-130.jpg"
+                            PicUrl = "https://www.bar.bg/img/entities/392/thumbnails/1460819224_thumbnail_Bar%20Cache%20Sofia%20opening%20%281%29.jpg"
                         },
                         new
                         {
@@ -142,7 +142,7 @@ namespace IriOnCocktailService.Data.Migrations
                             Name = "Public Bar",
                             NotAvailable = false,
                             PhoneNumber = "088 433 3781",
-                            PicUrl = "https://www.bar.bg/img/entities/443/1495046748_200_public-bar-sofia--215-x-130.png"
+                            PicUrl = "https://www.bar.bg/img/entities/443/thumbnails/1495192251_thumbnail_public%20bar%20sofia%20special%20moments%20%283%29.jpg"
                         });
                 });
 
