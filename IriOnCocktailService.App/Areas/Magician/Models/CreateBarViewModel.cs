@@ -15,3 +15,4 @@ namespace IriOnCocktailService.App.Areas.Magician.Models
         public bool BarNotAvailable { get; set; }
     }
 }
+

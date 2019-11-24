@@ -29,7 +29,7 @@
         <nav class="menu mb-5">
             <ol>
                 <li class="menu-item"><a asp-area="Magician" asp-controller="Home" asp-action="Index">Home</a></li>
-                <li class="menu-item"><a href="#0">About</a></li>
+                <li class="menu-item"><a asp-area="Magician" asp-controller="About" asp-action="Index">About</a></li>
                 <li class="menu-item">
                     <a href="#0">Bars</a>
                     <ol class="sub-menu">
@@ -71,9 +71,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - IriOnCocktailService.App - <a asp-area="Magician" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top footer text-muted" style="position: fixed; left: 0; bottom: 0; width: 100%;">
+        <div class="container-fluid text-white text-decoration-none bg-black">
+            &copy; CopyRight IriOnWebDesignStudios_AllRigtsReserved.Where(AboutUs => AboutUs.<b><a class="text-white" asp-area="" asp-controller="About" asp-action="Index">ClickHere</a></b>)
         </div>
     </footer>
 

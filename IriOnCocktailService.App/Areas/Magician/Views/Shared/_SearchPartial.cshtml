@@ -1,24 +1,49 @@
 ﻿@model IReadOnlyCollection<BarViewModel>
-@*Crawler*@
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "_SearchPartial";
 }
 
 @*<div class="row">
-    <div class="col-sm-12">
-        <div id="put-the-bars-here"></div>
-    </div>
-</div>*@
+        @foreach (var bar in Model)
+        {
+            <div class="bar-info">
+                <div class="col">
+                    <div class="card-deck" style="height: 300px;">
+                        <div class="card bg-black-only">
+                            <img data-toggle="tooltip" data-placement="top" title="@bar.Name" class="card-img-top" src="@Html.DisplayFor(modelItem => bar.PictureURL)" alt="Bar Pic">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">
+                                    <strong>@Html.DisplayFor(modelItem => bar.Name)</strong>
+                                    <br />
+                                    @for (int i = 0; i < bar.Rating; i++)
+                                    {
+                                        <img src="~/lib/images/christmas_star.png" alt="Star" width="20">
+                                    }
+                                </h5>
+                                <p class="card-text text-center">
+                                    <span class="font-weight-bold text-white">Address: </span>
+                                    <br />
+                                    <span>@Html.DisplayFor(modelItem => bar.Address)</span>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+                    <p></p>
+                </div>
+            </div>
+        }
+    </div>*@
 
-
-<div class="row" id="hide-bars">
+<div class="row">
     @{ var counter = 5; }
     @foreach (var item in Model)
     {
         if (item.NotAvailable == false)
         {
 
-            <div class="col-sm-3">
+            <div class="col-sm-3" @*style="height: 460px"*@>
                 <div class="card-deck">
                     <div class="card bg-black-only">
                         <img data-toggle="tooltip" data-placement="top" title="@item.Name"
@@ -45,12 +70,6 @@
                             </p>
                         </div>
                         <div class="card-footer">
-                            @*<a id="bar-buttonE" asp-action="Rating" asp-route-id="@item.Id" target="_blank" rel="nofollow noopener">
-                                    <span data-title="Rate it!">
-                                        <img src="~/lib/images/RateIt.png" alt="RateIt" width="20"> Rate it!
-                                        <img src="~/lib/images/RateIt.png" alt="RateIt" width="20">
-                                    </span>
-                                </a>*@
                             <a id="bar-buttonD" asp-action="Details" asp-route-id="@item.Id">
                                 <span data-title="Read More Info">
                                     <img src="~/lib/images/Magic-Hat-Transparent.png" alt="RateIt" width="25"> Read More Info!

@@ -26,7 +26,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         private readonly IViewModelMapper<BarDTO, BarDetailsViewModel> barDetailsMapper;
         private readonly IViewModelMapper<CommentDTO, CommentViewModel> commentMapper;
         private readonly IViewModelMapper<ICollection<BarDTO>, CollectionViewModel> collectionMapper;
-        private readonly IViewModelMapper<BarDTO, AddCocktailsToBarViewModel> barCocktailsMapper;
+        //private readonly IViewModelMapper<BarDTO, AddCocktailsToBarViewModel> barCocktailsMapper;
 
         public BarController(IBarService barService,
                              ICocktailService cocktailService,

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IriOnCocktailService.App.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,5 +15,8 @@ namespace IriOnCocktailService.App.Areas.Magician.Models
         public string PhoneNumber { get; set; }
         public decimal Rating { get; set; }
         public bool NotAvailable { get; set; }
+        public string Motto { get; set; }
+        public IEnumerable<CommentViewModel> Comments { get; set; }
+        public IEnumerable<DisplayCocktailViewModel> Cocktails { get; set; }
     }
 }

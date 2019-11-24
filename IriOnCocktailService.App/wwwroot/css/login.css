@@ -1,0 +1,12 @@
+﻿#my-login {
+    background: transparent;
+    text-align: center;
+    border: 0;
+    border-bottom: 3px double;
+    color: white;
+    width: 60%;
+    margin-left: 135px;
+}
+.fa-stack-1x {
+    color: black;
+}

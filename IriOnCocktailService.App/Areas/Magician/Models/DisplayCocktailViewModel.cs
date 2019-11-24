@@ -1,4 +1,5 @@
-﻿using IriOnCocktailService.ServiceLayer.DTOS;
+﻿using IriOnCocktailService.App.Models;
+using IriOnCocktailService.ServiceLayer.DTOS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace IriOnCocktailService.App.Areas.Magician.Models
         public decimal Rating { get; set; }
         public List<CocktailIngredientDTO> Ingredients { get; set; }
         public bool NotAvailable { get; set; }
+        public IEnumerable<CommentViewModel> Comments { get; set; }
     }
 }

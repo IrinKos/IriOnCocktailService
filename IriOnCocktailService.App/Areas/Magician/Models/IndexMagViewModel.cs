@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace IriOnCocktailService.App.Areas.Magician.Models
 {
-    public class IndexViewModel
+    public class IndexMagViewModel 
     {
-        public List<BarDTO> Bars { get; set; }
-        public List<CocktailDTO> Cocktails { get; set; }
+        public List<DisplayBarsViewModel> Bars { get; set; }
+        public List<DisplayCocktailViewModel> Cocktails { get; set; }
     }
 }
