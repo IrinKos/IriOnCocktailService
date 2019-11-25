@@ -7,12 +7,14 @@ using IriOnCocktailService.App.Infrasturcture.Mappers.Contracts;
 using IriOnCocktailService.ServiceLayer.DTOS;
 using IriOnCocktailService.ServiceLayer.Services;
 using IriOnCocktailService.ServiceLayer.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace IriOnCocktailService.App.Areas.Magician.Controllers
 {
     [Area("Magician")]
+    [Authorize(Roles = "CocktailMagician")]
     public class CocktailController : Controller
     {
         private readonly ICocktailService cocktailService;

@@ -1,9 +1,7 @@
-﻿@model  IriOnCocktailService.App.Areas.Magician.Models.AddCocktailsToBarViewModel
+﻿@model IriOnCocktailService.App.Areas.Magician.Models.AddCocktailsToBarViewModel
 @{
     ViewData["Title"] = "ModifyBarCocktails";
 }
-
-<h1>@Model.BarName</h1>
 
 <div class="bg-black" style="width: 60%; margin-left: 225px; margin-top: 50px;">
     <div>
@@ -13,8 +11,9 @@
             </span>
         </p>
         <form class="form-group" id="magic-input" method="post" asp-area="Magician" asp-controller="Bar" asp-action="ModifyBarCocktails">
-            <h3>Create Bar!</h3>
+            <h3>Add or Remove Cocktails from <b>@Model.BarName</b>!</h3>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <br />
             <div class="form-group">
                 <label asp-for="SelectedCocktails" class="control-label">Add Cocktails</label>
                 <select asp-for="SelectedCocktails" asp-items="@Model.CocktailsToAdd" class="js-example-basic-multiple form-control " multiple="multiple">
@@ -45,9 +44,10 @@
     </div>
 </div>
 @section Scripts{
-<script>
-    $(document).ready(function () {
-        $('.js-example-basic-multiple').select2();
-});
-</script>
+    <script>
+        $(document).ready(function () {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>
 }
+

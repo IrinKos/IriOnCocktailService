@@ -4,59 +4,76 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>CreateCocktailIngredientViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="bg-black" style="width: 60%; margin-left: 225px; margin-top: 50px;">
+    <div>
+        <p class="login-text">
+            <span>
+                <img src="~/lib/images/MagicFlaskIcon.png" alt="CreateBar" width="50" style="border-radius: 50%;background-color: white ">
+            </span>
+        </p>
         <form asp-action="Create">
+            <h3>Create Cocktail!</h3>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="CocktailName" class="control-label"></label>
-                <input asp-for="CocktailName" class="form-control" />
+                <input asp-for="CocktailName" id="magic-input" class="form-control" placeholder="Cocktail Name" />
                 <span asp-validation-for="CocktailName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PicUrl" class="control-label"></label>
-                <input asp-for="PicUrl" class="form-control" />
+                <input asp-for="PicUrl" id="magic-input" class="form-control" placeholder="Cocktail Picture Url" />
                 <span asp-validation-for="PicUrl" class="text-danger"></span>
             </div>
             <div class="form-group" id="add-here">
                 <input style="display:none" id="qwe" />
                 @*<datalist id="ingr">
-                <option selected disabled value="">Select ingredient</option>
-                @foreach (var item in Model.AllAllIngredients)
-                {
-                    //<div class="neshto" value="@item.Text" id="@item.Value"></div>
-                    <option data-unit="@item.UnitType" data-name="@item.Name" id="@item.Id" onclick="Find(this.id)" value="@item.Id">@item.Name</option>
-                }
-            </datalist>*@
+                        <option selected disabled value="">Select ingredient</option>
+                        @foreach (var item in Model.AllAllIngredients)
+                        {
+                            //<div class="neshto" value="@item.Text" id="@item.Value"></div>
+                            <option data-unit="@item.UnitType" data-name="@item.Name" id="@item.Id" onclick="Find(this.id)" value="@item.Id">@item.Name</option>
+                        }
+                    </datalist>*@
+                <br />
                 <span>Ingredients</span>
-                <select id="myList" asp-for="CocktailName">
+                <br />
+                <select id="myList" asp-for="CocktailName" style="background-color: black; color: white">
                     <option value="Select ingredient" disabled="disabled" selected="selected"></option>
                     @foreach (var item in Model.AllAllIngredients)
                     {
                         <option data-unit="@item.UnitType" value="@item.Name" id="@item.Id">@item.Name</option>
                     }
                 </select>
-                <input id="quantityField" style="display:none" name="Quantity" value="" placeholder="Insert quantity value here..." />
-                <input id="unitOfIngredient" disabled="disabled" style="display:none" name="Unit type" value="" />
-                <input id="specIng" asp-for="SpecificIngredients" type="hidden" name="name" value="" />
+                <input id="quantityField" style="display:none; background-color: black; color: white" name="Quantity" value="" placeholder="Insert quantity value here..." />
+                <input id="unitOfIngredient" disabled="disabled" style="display:none; background-color: black; color: white" name="Unit type" value="" />
+                <input id="specIng" asp-for="SpecificIngredients" type="hidden" name="name" value="" style="background-color: black; color: white" />
             </div>
+
+            <br />
             <div class="form-group">
-                <input id="sub" type="submit" value="Create" class="btn btn-primary" />
+                <button id="sub" type="submit" value="Create" class="bar-buttonE border-0" style="width: 200px">
+                    <span data-title="Create cocktail!">
+                        <img src="~/lib/images/GreenFlask.png" alt="CreateBar" width="30"> Create cocktail!
+                        <img src="~/lib/images/GreenFlask.png" alt="CreateBar" width="30">
+                    </span>
+                </button>
+                <button asp-action="Index" class="bar-buttonE border-0 text-decoration-none" style="width: 200px">
+                    <span data-title="Back to List">
+                        <img src="~/lib/images/RedFlask.png" alt="CreateBar" width="30"> Back to List!
+                        <img src="~/lib/images/RedFlask.png" alt="CreateBar" width="30">
+                    </span>
+                </button>
             </div>
+
+
         </form>
-            <ul id="selectedIngredients" name="Ingredients"></ul>
-        <button id="addingredient" style="display:none">butonchence</button>
+        <ul id="selectedIngredients" name="Ingredients"></ul>
+        <button id="addingredient" class="bar-buttonE border-0" style="display:none; width: 200px">
+            <span data-title="Add Ingredient!">
+                <img src="~/lib/images/PurpleFlasc.png" alt="CreateBar" width="30"> Add Ingredient!
+                <img src="~/lib/images/PurpleFlasc.png" alt="CreateBar" width="30">
+            </span>
+        </button>
     </div>
-</div>
-<button id="test">Click me</button>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-<div>
 </div>
 
 @section Scripts {

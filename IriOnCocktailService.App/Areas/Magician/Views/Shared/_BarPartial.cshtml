@@ -37,19 +37,19 @@
                             </p>
                         </div>
                         <div class="card-footer">
-                            <a id="bar-buttonD" asp-action="Edit" asp-route-id="@item.Id">
+                            <a id="bar-buttonD" asp-controller="Bar" asp-action="Edit" asp-route-id="@item.Id">
                                 <span data-title="Edit!">
                                     <img src="~/lib/images/YellowFlask.png" alt="Edit" width="20"> Edit!
                                     <img src="~/lib/images/YellowFlask.png" alt="Edit" width="20">
                                 </span>
                             </a>
-                            <a id="bar-buttonE" asp-action="Delete" asp-route-id="@item.Id">
+                            <a id="bar-buttonE" asp-controller="Bar" asp-action="Delete" asp-route-id="@item.Id">
                                 <span data-title="Delete!">
                                     <img src="~/lib/images/RedFlask.png" alt="Delete" width="20"> Delete!
                                     <img src="~/lib/images/RedFlask.png" alt="Delete" width="20">
                                 </span>
                             </a>
-                            <a id="bar-buttonD" asp-action="Details" asp-route-id="@item.Id">
+                            <a id="bar-buttonD" asp-controller="Bar" asp-action="Details" asp-route-id="@item.Id">
                                 <span data-title="Details!">
                                     <img src="~/lib/images/GreenFlask.png" alt="Details" width="20"> Details!
                                     <img src="~/lib/images/GreenFlask.png" alt="Details" width="20">

@@ -7,6 +7,7 @@ using IriOnCocktailService.App.Infrasturcture.Mappers.Contracts;
 using IriOnCocktailService.Data.Entities;
 using IriOnCocktailService.ServiceLayer.DTOS;
 using IriOnCocktailService.ServiceLayer.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace IriOnCocktailService.App.Areas.Magician.Controllers
 {
     [Area("Magician")]
+    [Authorize(Roles = "CocktailMagician")]
     public class UserController : Controller
     {
         private readonly UserManager<User> userManager;
