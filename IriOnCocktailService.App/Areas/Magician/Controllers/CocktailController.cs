@@ -92,6 +92,20 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             //TODO remove ok
             return Ok();
         }
+        [HttpGet]
+        public async Task<IActionResult> Delete(string Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            await this.cocktailService.DeleteCocktailAsync(Id);
+
+            //TODO remove ok
+            return RedirectToAction("Index", "Bar");
+        }
+
         [HttpPost]
         public async Task<string> SetIngredientUnit(string id)
         {

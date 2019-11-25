@@ -22,5 +22,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
         //Mapper
         public const string IncorrectMapping = "There was an error with the mapper";
 
+        //List
+        public const string NoElementsFound = "There were no elements found in {0}";
     }
 }
