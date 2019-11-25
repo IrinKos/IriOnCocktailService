@@ -133,35 +133,39 @@ namespace IriOnCocktailService.ServiceLayer.Services
 
             cocktail.Name = cocktailDTO.Name;
             cocktail.PicUrl = cocktailDTO.PicUrl;
+            cocktail.Motto = cocktailDTO.Motto;
 
             this.context.Cocktails.Update(cocktail);
             await this.context.SaveChangesAsync();
 
             return cocktailDTO;
         }
-
-        public async Task<ICollection<CocktailDTO>> GetAllCocktailsByIngredientDTO(string ingredient)
+        public async Task DeleteCocktailAsync(string Id)
         {
-            var ingr = await this.context.Cocktails.
+            var cocktail = await GetCocktail(Id);
+            cocktail.NotAvailable = true;
+
+            this.context.Cocktails.Update(cocktail);
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task<ICollection<CocktailDTO>> GetAllCocktailsByIngredientDTO(string ingredient)//vodk
+        {
+            var ingr = await this.context.Ingredients.Where(i => i.Name.ToLower().Contains(ingredient)).ToListAsync();
+            var cocktailsss = new List<Cocktail>();
+            
+            foreach (var item in ingr)
+            {
+                cocktailsss.AddRange( await this.context.Cocktails.
                 Include(c => c.CocktailIngredients)
                     .ThenInclude(ci => ci.Ingredient)
                 .Include(c => c.Ratings)
                 .Where(c => c.CocktailIngredients
-                    .Where(ci => ci.CocktailId == c.Id)
-                .Select(ci => ci.Ingredient.Name.ToLower())
-                .Contains(ingredient.ToLower())).ToListAsync();
+                    .Where(ci => ci.CocktailId == c.Id).Select(ci => ci.Ingredient.Name.ToLower())
+                .Contains(item.Name.ToLower())).ToListAsync());
+            }
 
-            //var ingredients = await this.context.Ingredients.Where(u => u.Name.ToLower().Contains(ingredient.ToLower())).ToListAsync();
-
-            //var list = new List<CocktailIngredient>();
-
-            //ingredients.ForEach(i => list.AddRange(this.context.CocktailIngredients.Where(c => c.IngredientId == i.Id)));
-
-            //var cocktails = new List<Cocktail>();
-
-            //list.ForEach(u => cocktails.AddRange(this.context.Cocktails.Include(c => c.Ratings).Where(c => c.Id == u.CocktailId)));
-
-            return ingr.Select(this.mapper.MapFrom).ToList();
+            return cocktailsss.Select(this.mapper.MapFrom).ToList();
         }
 
         public async Task<CommentDTO> CocktailCommentAsync(CommentDTO barCommentDTO)
@@ -190,7 +194,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
             return cocktailRatingDTO;
         }
 
-        public async Task<ICollection<CommentDTO>> GetAllCommentsForCoctail(string cocktailId)
+        public async Task<ICollection<CommentDTO>> GetAllCommentsForCocktail(string cocktailId)
         {
             var comments = this.context.CocktailComments
                 .Include(bc => bc.User)
