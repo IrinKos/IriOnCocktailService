@@ -104,7 +104,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             await this.barService.DeleteBarAsync(Id);
 
             //TODO remove ok
-            return Ok();
+            return RedirectToAction("Index", "Bar");
         }
 
         [HttpGet]
@@ -123,7 +123,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             await barService.EditBarAsync(barDTO);
 
             //TODO remove ok
-            return Ok();
+            return RedirectToAction("Index", "Bar");
         }
         [HttpGet]
         public async Task<IActionResult> ModifyBarCocktails(string Id)

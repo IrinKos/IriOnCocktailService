@@ -3,37 +3,47 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+@*<h1>Edit</h1>
 
 <h4>Bar</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<hr />*@
+<div class="bg-black" style="width: 60%; margin-left: 225px; margin-top: 50px;">
+    <div>
+        <p class="login-text">
+            <span>
+                <img src="~/lib/images/Bars.png" alt="CreateBar" width="50" style="border-radius: 50%;">
+            </span>
+        </p>
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BarId" />
             <div class="form-group">
-                <label asp-for="BarName" class="control-label"></label>
-                <input asp-for="BarName" class="form-control" />
+                <label asp-for="BarName" class="control-label text-muted"></label>
+                <input asp-for="BarName" id="magic-input" class="form-control" />
                 <span asp-validation-for="BarName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BarAddress" class="control-label"></label>
-                <input asp-for="BarAddress" class="form-control" />
+                <label asp-for="BarAddress" class="control-label text-muted"></label>
+                <input asp-for="BarAddress" id="magic-input" class="form-control" />
                 <span asp-validation-for="BarAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BarPhoneNumber" class="control-label"></label>
-                <input asp-for="BarPhoneNumber" class="form-control" />
+                <label asp-for="BarPhoneNumber" class="control-label text-muted"></label>
+                <input asp-for="BarPhoneNumber" id="magic-input" class="form-control" />
                 <span asp-validation-for="BarPhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BarPicUrl" class="control-label"></label>
-                <input asp-for="BarPicUrl" class="form-control" />
+                <label asp-for="BarPicUrl" class="control-label text-muted"></label>
+                <input asp-for="BarPicUrl" id="magic-input" class="form-control" />
                 <span asp-validation-for="BarPicUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <button type="submit" class="bar-buttonE border-0">
+                    <span data-title="Edit Bar!">
+                        <img src="~/lib/images/createBar.png" alt="CreateBar" width="30"> Edit Bar!
+                        <img src="~/lib/images/createBar.png" alt="CreateBar" width="30">
+                    </span>
+                </button>
             </div>
         </form>
     </div>
