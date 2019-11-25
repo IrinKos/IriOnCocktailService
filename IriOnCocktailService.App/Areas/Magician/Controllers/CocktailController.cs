@@ -18,6 +18,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         private readonly ICocktailService cocktailService;
         private readonly IIngredientService ingredientService;
         private readonly IDTOMapper<CreateCocktailViewModel, CocktailDTO> createCocktailMapper;
+        private readonly IViewModelMapper<CocktailDTO, CreateCocktailViewModel> createCocktailMapperToVM;
         private readonly IViewModelMapper<CocktailDTO, DisplayCocktailViewModel> displayCocktailMapper;
         private readonly IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel> collectionMapper;
         private readonly IViewModelMapper<IngredientDTO, CreateIngredientViewModel> ingredientMapper;
@@ -26,6 +27,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
                                   IIngredientService ingredientService,
                                   IDTOMapper<CreateCocktailViewModel, CocktailDTO> createCocktailMapper,
                                   IViewModelMapper<CocktailDTO, DisplayCocktailViewModel> displayCocktailMapper,
+                                  IViewModelMapper<CocktailDTO, CreateCocktailViewModel> createCocktailMapperToVM,
                                   IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel> collectionMapper,
                                   IViewModelMapper<IngredientDTO, CreateIngredientViewModel> ingredientMapper)
         {
@@ -33,6 +35,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             this.ingredientService = ingredientService;
             this.createCocktailMapper = createCocktailMapper;
             this.displayCocktailMapper = displayCocktailMapper;
+            this.createCocktailMapperToVM = createCocktailMapperToVM;
             this.collectionMapper = collectionMapper;
             this.ingredientMapper = ingredientMapper;
         }
@@ -69,6 +72,24 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             var dto = this.createCocktailMapper.MapFromViewModel(viewModel);
             await this.cocktailService.CreateCocktail(dto);
 
+            return Ok();
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(string Id)
+        {
+            var barDTO = await this.cocktailService.GetCocktailDTO(Id);
+            var barVM = this.createCocktailMapperToVM.MapFromDTO(barDTO);
+
+            return View(barVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(CreateCocktailViewModel viewModel)
+        {
+            var cocktailDTO = this.createCocktailMapper.MapFromViewModel(viewModel);
+            await cocktailService.EditCocktailAsync(cocktailDTO);
+
+            //TODO remove ok
             return Ok();
         }
         [HttpPost]

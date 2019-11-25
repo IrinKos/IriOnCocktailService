@@ -1,12 +1,8 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
-
-//$(document).ready(function () {
-//    $('.js-example-basic-multiple').select2();
-//});
-
-//$("#e2").select2();
-
+$(document).ready(function () {
+    $('.js-example-basic-multiple').select2();
+});
 $(function () {
     $('[data-toggle="tooltip"]').tooltip();
 });
@@ -16,7 +12,6 @@ const barServerResponseHandler = (serverData) => {
         $('#put-the-bars-here').html(`<h1 class="text-center bg-black mb-5">Serached Bars!</h1>` + serverData);
         $("#bar-partial").hide();
         $("#cocktail-partial").hide();
-        //$("#hide-bars").hide();
     }
 };
 
@@ -28,17 +23,26 @@ const cocktailServerResponseHandler = (serverData) => {
     }
 };
 
+$('#load-button').on('click', function () {
+    ime();
+})
 $('#search-text').on('keyup', function () {
     console.log($(this).val());
 });
+document.onkeyup = function (e) {
+    if (e.which == 13) {
+        ime();
+    }
+}
 
-$('#load-button').click(function () {
+
+function ime() {
     const searchText = $('#search-text').val();
     $.get('/Home/Bars?name=' + searchText, barServerResponseHandler);
     $.get('/Home/BarsAddress?address=' + searchText, barServerResponseHandler);
     $.get('/Home/Cocktails?name=' + searchText, cocktailServerResponseHandler);
     $.get('/Home/CocktailsIngredients?ingredient=' + searchText, cocktailServerResponseHandler);
-});              
+};
 
 //function moreInfo() {
 //    $('#more-info').show()

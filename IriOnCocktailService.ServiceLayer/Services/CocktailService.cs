@@ -47,7 +47,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
         {
             if(cocktailDTO==null)
             {
-                throw new ArgumentNullException("");
+                throw new ArgumentException("The parameter is null");
             }
             var cocktail = this.cocktailMapper.MapFrom(cocktailDTO);
 
@@ -127,6 +127,18 @@ namespace IriOnCocktailService.ServiceLayer.Services
 
             return cocktails.Select(this.mapper.MapFrom).ToList(); 
         }
+        public async Task<CocktailDTO> EditCocktailAsync(CocktailDTO cocktailDTO)
+        {
+            var cocktail = await GetCocktail(cocktailDTO.Id);
+
+            cocktail.Name = cocktailDTO.Name;
+            cocktail.PicUrl = cocktailDTO.PicUrl;
+
+            this.context.Cocktails.Update(cocktail);
+            await this.context.SaveChangesAsync();
+
+            return cocktailDTO;
+        }
 
         public async Task<ICollection<CocktailDTO>> GetAllCocktailsByIngredientDTO(string ingredient)
         {
@@ -155,7 +167,10 @@ namespace IriOnCocktailService.ServiceLayer.Services
         public async Task<CommentDTO> CocktailCommentAsync(CommentDTO barCommentDTO)
         {
             var barComment = this.cocktailCommentMapper.MapFrom(barCommentDTO);
-
+            if(barComment==null)
+            {
+                throw new ArgumentException(GlobalConstants.IncorrectMapping);
+            }
             await this.context.CocktailComments.AddAsync(barComment);
             await this.context.SaveChangesAsync();
 
@@ -165,6 +180,10 @@ namespace IriOnCocktailService.ServiceLayer.Services
         {
             var cocktailRating = this.cocktailRatingMapper.MapFrom(cocktailRatingDTO);
 
+            if(cocktailRating == null)
+            {
+                throw new ArgumentNullException(GlobalConstants.InvalidComment);
+            }
             await this.context.CocktailRatings.AddAsync(cocktailRating);
             await this.context.SaveChangesAsync();
 

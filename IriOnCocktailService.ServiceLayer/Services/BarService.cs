@@ -17,12 +17,12 @@ namespace IriOnCocktailService.ServiceLayer.Services
         private readonly IriOnCocktailServiceDbContext context;
         private readonly IDTOServiceMapper<Bar, BarDTO> mapper;
         private readonly IDTOServiceMapper<BarDTO, Bar> mapperFromEntity;
-        private readonly IDTOServiceMapper<ICollection<Bar>,ICollection<BarDTO>> barsMapper;
+        private readonly IDTOServiceMapper<ICollection<Bar>, ICollection<BarDTO>> barsMapper;
         private readonly IDTOServiceMapper<CommentDTO, BarComment> barCommentMapper;
         private readonly IDTOServiceMapper<BarComment, CommentDTO> barCommentDTOMapper;
         private readonly IDTOServiceMapper<RatingDTO, BarRating> barRatingMapper;
 
-        public BarService(IriOnCocktailServiceDbContext context, 
+        public BarService(IriOnCocktailServiceDbContext context,
                          IDTOServiceMapper<Bar, BarDTO> mapper,
                          IDTOServiceMapper<BarDTO, Bar> mapperFromEntity,
                          IDTOServiceMapper<ICollection<Bar>, ICollection<BarDTO>> barsMapper,
@@ -71,7 +71,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
             return barDTO;
         }
 
-        public async Task<IReadOnlyCollection<BarDTO>> GetBarsByNameAsync(string name) 
+        public async Task<IReadOnlyCollection<BarDTO>> GetBarsByNameAsync(string name)
         {
             var bars = await this.context.Bars
                 .Include(b => b.BarRatings)
@@ -90,7 +90,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
         }
 
         public async Task<IReadOnlyCollection<BarDTO>> GetBarsByAddressAsync(string address)
-        { 
+        {
             var bars = await this.context.Bars
                 .Include(b => b.BarRatings)
                 .Include(b => b.BarComments)
@@ -112,6 +112,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
                 .Include(b => b.BarRatings)
                 .Include(b => b.BarComments)
                 .Include(b => b.CocktailBars)
+                .Where(b=>b.NotAvailable==false)
                 .ToListAsync();
             var barsDTOs = this.barsMapper.MapFrom(bars);
             return barsDTOs;
@@ -166,11 +167,15 @@ namespace IriOnCocktailService.ServiceLayer.Services
         public async Task<ICollection<CommentDTO>> GetAllCommentsForBar(string barId)
         {
             var comments = this.context.BarComments
-                .Include(bc=>bc.User)
+                .Include(bc => bc.User)
                 .Where(bc => bc.BarId == barId);
             var commentDTOs = comments.Select(c => this.barCommentDTOMapper.MapFrom(c));
 
             return await commentDTOs.ToListAsync();
+        }
+        public async Task<string> GetNameForBarById(string barId)
+        {
+            return (await this.context.Bars.FirstOrDefaultAsync(b => b.Id == barId)).Name;
         }
         //public async Task<ICollection<CommentDTO>> GetAllCocktailsForBar(string barId)
         //{

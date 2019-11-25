@@ -9,6 +9,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Models
     public class AddCocktailsToBarViewModel
     {
         public string BarId { get; set; }
+        public string BarName { get; set; }
         public IEnumerable<SelectListItem> CocktailsToAdd { get; set; }
         public IEnumerable<SelectListItem> CocktailsToRemove { get; set; }
         public List<string> SelectedCocktails { get; set; }
