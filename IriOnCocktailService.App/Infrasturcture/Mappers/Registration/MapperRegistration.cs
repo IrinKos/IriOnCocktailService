@@ -15,46 +15,47 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers.Registration
         public static IServiceCollection AddVMCustomMapper(this IServiceCollection services)
         {
             //
-            services.AddSingleton <IViewModelMapper<BarDTO, BarDetailsViewModel>, BarDetailsViewModelMapper> ();
-            services.AddSingleton <IViewModelMapper<BarDTO, DisplayBarsViewModel>, DisplayBarsViewModelMapper> ();
-            services.AddSingleton <IViewModelMapper<BarDTO, IriOnCocktailService.App.Models.BarViewModel>, BarViewModelMapper> ();
+            services.AddSingleton<IViewModelMapper<BarDTO, BarDetailsViewModel>, BarDetailsViewModelMapper>();
+            services.AddSingleton<IViewModelMapper<CocktailDTO, CreateCocktailViewModel>,CreateCocktailViewModelMapper>();
+            services.AddSingleton<IViewModelMapper<BarDTO, DisplayBarsViewModel>, DisplayBarsViewModelMapper>();
+            services.AddSingleton<IViewModelMapper<BarDTO, IriOnCocktailService.App.Models.BarViewModel>, BarViewModelMapper>();
             services.AddSingleton<IViewModelMapper<CocktailDTO, IriOnCocktailService.App.Models.CocktailViewModel>, CocktailViewModelMapper>();
-            services.AddSingleton <IViewModelMapper<BarDTO, AddCocktailsToBarViewModel>, AddCocktailsToBarViewModelMapper> ();
-            services.AddSingleton <IViewModelMapper<CocktailDTO, DisplayCocktailViewModel>, DisplayCocktailViewModelMapper> ();
-            services.AddSingleton <IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel>, CollectionViewModelMapper> ();
+            services.AddSingleton<IViewModelMapper<BarDTO, AddCocktailsToBarViewModel>, AddCocktailsToBarViewModelMapper>();
+            services.AddSingleton<IViewModelMapper<CocktailDTO, DisplayCocktailViewModel>, DisplayCocktailViewModelMapper>();
+            services.AddSingleton<IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel>, CollectionViewModelMapper>();
 
 
             //
-            services.AddSingleton <IDTOMapper<CreateCocktailViewModel, CocktailDTO>, CreateCocktailViewModelMapper> ();
+            services.AddSingleton<IDTOMapper<CreateCocktailViewModel, CocktailDTO>, CreateCocktailViewModelMapper>();
 
 
-            services.AddSingleton <IDTOMapper<RatingViewModel, RatingDTO> ,BarRatingViewModelMapper> ();
+            services.AddSingleton<IDTOMapper<RatingViewModel, RatingDTO>, BarRatingViewModelMapper>();
             //
-            services.AddSingleton <IDTOMapper<AddIngredientToCocktailViewModel, CocktailIngredientDTO>, AddIngredientToCocktailViewModelMapper> ();
+            services.AddSingleton<IDTOMapper<AddIngredientToCocktailViewModel, CocktailIngredientDTO>, AddIngredientToCocktailViewModelMapper>();
 
 
-            services.AddSingleton <IViewModelMapper<CommentDTO, CommentViewModel>, BarCommentViewModelMapper>();
-            services.AddSingleton <IViewModelMapper<CommentDTO, IriOnCocktailService.App.Models.CommentViewModel>, BarCommentVMMapper>();
+            services.AddSingleton<IViewModelMapper<CommentDTO, CommentViewModel>, BarCommentViewModelMapper>();
+            services.AddSingleton<IViewModelMapper<CommentDTO, IriOnCocktailService.App.Models.CommentViewModel>, BarCommentVMMapper>();
             //BarComment VM to DTO
-            services.AddSingleton <IDTOMapper<CommentViewModel, CommentDTO>, BarCommentViewModelMapper>();
-            services.AddSingleton <IDTOMapper<IriOnCocktailService.App.Models.CommentViewModel, CommentDTO>, BarCommentVMMapper>();
+            services.AddSingleton<IDTOMapper<CommentViewModel, CommentDTO>, BarCommentViewModelMapper>();
+            services.AddSingleton<IDTOMapper<IriOnCocktailService.App.Models.CommentViewModel, CommentDTO>, BarCommentVMMapper>();
 
             //Collection DTO to VM
-            services.AddSingleton <IViewModelMapper<ICollection<BarDTO>, CollectionViewModel>, CollectionViewModelMapper>();
+            services.AddSingleton<IViewModelMapper<ICollection<BarDTO>, CollectionViewModel>, CollectionViewModelMapper>();
 
             //User VM to DTO
-            services.AddSingleton <IDTOMapper<ChangeRoleViewModel, UserDTO>, ChangeRoleViewModelMapper>();
+            services.AddSingleton<IDTOMapper<ChangeRoleViewModel, UserDTO>, ChangeRoleViewModelMapper>();
 
             //Bar DTO to VM
-            services.AddSingleton < IViewModelMapper<BarDTO, CreateBarViewModel>, CreateBarViewModelMapper>();
-            services.AddSingleton < IViewModelMapper<BarDTO, DeleteBarViewModel>, DeleteBarViewModelMapper>();
+            services.AddSingleton<IViewModelMapper<BarDTO, CreateBarViewModel>, CreateBarViewModelMapper>();
+            services.AddSingleton<IViewModelMapper<BarDTO, DeleteBarViewModel>, DeleteBarViewModelMapper>();
             // Bar VM to DTO
-            services.AddSingleton < IDTOMapper<CreateBarViewModel, BarDTO>, CreateBarViewModelMapper>();
+            services.AddSingleton<IDTOMapper<CreateBarViewModel, BarDTO>, CreateBarViewModelMapper>();
 
             // Ingredient DTO to VM
-            services.AddSingleton < IViewModelMapper<IngredientDTO, CreateIngredientViewModel>, CreateIngredientViewModelMapper>();
+            services.AddSingleton<IViewModelMapper<IngredientDTO, CreateIngredientViewModel>, CreateIngredientViewModelMapper>();
             // Ingredient VM to DTO
-            services.AddSingleton < IDTOMapper<CreateIngredientViewModel, IngredientDTO>, CreateIngredientViewModelMapper>();;
+            services.AddSingleton<IDTOMapper<CreateIngredientViewModel, IngredientDTO>, CreateIngredientViewModelMapper>(); ;
 
 
             return services;

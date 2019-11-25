@@ -15,13 +15,13 @@ using System.Threading.Tasks;
 namespace IriOnCocktailService.ServiceTests.CocktailServiceTests
 {
     [TestClass]
-    public class CreateCocktail_Should
+    public class CocktailCommentAsync_Should
     {
         [TestMethod]
-        public async Task CreateCocktailCorrectly()
+        public async Task CocktailCommentAsyncAddCorectly()
         {
             //Arrange
-            var options = TestUtilities.GetOptions(nameof(CreateCocktailCorrectly));
+            var options = TestUtilities.GetOptions(nameof(CocktailCommentAsyncAddCorectly));
 
             var ingredientServiceMock = new Mock<ICocktailIngredientService>();
             var cocktailMapperToDTOMock = new Mock<IDTOServiceMapper<CocktailDTO, Cocktail>>();
@@ -31,30 +31,28 @@ namespace IriOnCocktailService.ServiceTests.CocktailServiceTests
             var addCocktailMapperMock = new Mock<IDTOServiceMapper<Cocktail, AddCocktailDTO>>();
             var cocktailRatingToDTOMock = new Mock<IDTOServiceMapper<RatingDTO, CocktailRating>>();
 
-            var cocktailDTOMock = new Mock<CocktailDTO>();
-            var cocktailIngredientDTOMock = new Mock<List<CocktailIngredientDTO>>();
-            var cocktailMock = new Mock<Cocktail>();
-            cocktailDTOMock.Object.Ingredients = cocktailIngredientDTOMock.Object;
             //Act
-            cocktailMapperToDTOMock.Setup(m => m.MapFrom(It.IsAny<CocktailDTO>())).Returns(cocktailMock.Object);
+            var cocktailCommentDTO = new CocktailComment();
+            var CommentDTOMock = new Mock<CommentDTO>();
+            commentMapperToDTOMock.Setup(m => m.MapFrom(It.IsAny<CommentDTO>())).Returns(cocktailCommentDTO);
 
             using (var actContext = new IriOnCocktailServiceDbContext(options))
             {
                 var sut = new CocktailService(actContext, ingredientServiceMock.Object, cocktailMapperMock.Object, cocktailMapperToDTOMock.Object, commentMapperToDTOMock.Object, commentMapperMock.Object, addCocktailMapperMock.Object, cocktailRatingToDTOMock.Object);
 
-                await sut.CreateCocktail(cocktailDTOMock.Object);
+                await sut.CocktailCommentAsync(CommentDTOMock.Object);
             }
 
             using (var assertContext = new IriOnCocktailServiceDbContext(options))
             {
-                Assert.AreEqual(1, assertContext.Cocktails.Count());
+                Assert.AreEqual(1, assertContext.CocktailComments.Count());
             }
         }
         [TestMethod]
-        public async Task CreateCocktail_ThrowWhenDTOIsNull()
+        public async Task CocktailCommentAsync_ThrowsWhenNull()
         {
             //Arrange
-            var options = TestUtilities.GetOptions(nameof(CreateCocktail_ThrowWhenDTOIsNull));
+            var options = TestUtilities.GetOptions(nameof(CocktailCommentAsync_ThrowsWhenNull));
 
             var ingredientServiceMock = new Mock<ICocktailIngredientService>();
             var cocktailMapperToDTOMock = new Mock<IDTOServiceMapper<CocktailDTO, Cocktail>>();
@@ -64,33 +62,15 @@ namespace IriOnCocktailService.ServiceTests.CocktailServiceTests
             var addCocktailMapperMock = new Mock<IDTOServiceMapper<Cocktail, AddCocktailDTO>>();
             var cocktailRatingToDTOMock = new Mock<IDTOServiceMapper<RatingDTO, CocktailRating>>();
 
-            using (var actContext = new IriOnCocktailServiceDbContext(options))
-            {
-                var sut = new CocktailService(actContext, ingredientServiceMock.Object, cocktailMapperMock.Object, cocktailMapperToDTOMock.Object, commentMapperToDTOMock.Object, commentMapperMock.Object, addCocktailMapperMock.Object, cocktailRatingToDTOMock.Object);
-
-                await Assert.ThrowsExceptionAsync<ArgumentException>(() => sut.CreateCocktail(null));
-            }
-        }
-        [TestMethod]
-        public async Task CreateCocktail_ThrowCorrectMsgWhenDTOIsNull()
-        {
-            //Arrange
-            var options = TestUtilities.GetOptions(nameof(CreateCocktail_ThrowCorrectMsgWhenDTOIsNull));
-
-            var ingredientServiceMock = new Mock<ICocktailIngredientService>();
-            var cocktailMapperToDTOMock = new Mock<IDTOServiceMapper<CocktailDTO, Cocktail>>();
-            var cocktailMapperMock = new Mock<IDTOServiceMapper<Cocktail, CocktailDTO>>();
-            var commentMapperToDTOMock = new Mock<IDTOServiceMapper<CommentDTO, CocktailComment>>();
-            var commentMapperMock = new Mock<IDTOServiceMapper<CocktailComment, CommentDTO>>();
-            var addCocktailMapperMock = new Mock<IDTOServiceMapper<Cocktail, AddCocktailDTO>>();
-            var cocktailRatingToDTOMock = new Mock<IDTOServiceMapper<RatingDTO, CocktailRating>>();
+            //Act
+            var CommentDTOMock = new Mock<CommentDTO>();
+            //commentMapperToDTOMock.Setup(m => m.MapFrom(It.IsAny<CommentDTO>())).Returns(null);
 
             using (var actContext = new IriOnCocktailServiceDbContext(options))
             {
                 var sut = new CocktailService(actContext, ingredientServiceMock.Object, cocktailMapperMock.Object, cocktailMapperToDTOMock.Object, commentMapperToDTOMock.Object, commentMapperMock.Object, addCocktailMapperMock.Object, cocktailRatingToDTOMock.Object);
-                
-                var exception = await Assert.ThrowsExceptionAsync<ArgumentException>(() => sut.CreateCocktail(null));
-                Assert.AreEqual("The parameter is null", exception.Message);
+
+                await Assert.ThrowsExceptionAsync<ArgumentException>(() => sut.CocktailCommentAsync(CommentDTOMock.Object));
             }
         }
     }

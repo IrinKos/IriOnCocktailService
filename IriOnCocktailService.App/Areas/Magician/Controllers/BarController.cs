@@ -131,6 +131,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             
             var barViewModel = new AddCocktailsToBarViewModel
             {
+                BarName=await this.barService.GetNameForBarById(Id),
                 BarId=Id,
                 CocktailsToAdd = (await this.cocktailService.GetAllNotContainedCocktailsDTO(Id)).Select(x=> new SelectListItem(x.Name,x.Id)),
                 CocktailsToRemove = (await this.cocktailService.GetAllContainedCocktailsDTO(Id)).Select(x => new SelectListItem(x.Name, x.Id))

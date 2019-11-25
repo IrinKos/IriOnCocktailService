@@ -125,7 +125,7 @@
                     name: selectedItem[0].value,
                 };
                 $('#selectedIngredients').append(`
-                                 <li data-ingrid='${ingrClass.IngredientId}'>${ingrClass.name} - ${quantity.val()} (${ingrUnit.val()}) <button class="remove-ingr-btn">Remove</button></li>
+                                 <li data-ingrid='${ingrClass.IngredientId}'>${ingrClass.name}@Model.Id - ${quantity.val()} (${ingrUnit.val()}) <button class="remove-ingr-btn">Remove</button></li>
                                                                              `);
                 selectedItem.attr("disabled", false);
                 e.selectedIndex = "0";

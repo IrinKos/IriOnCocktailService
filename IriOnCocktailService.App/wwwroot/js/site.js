@@ -29,17 +29,26 @@ const cocktailServerResponseHandler = (serverData) => {
     //$('#put-the-cocktails-here').html(`<h1 class="text-center bg-black mt-5">Serached cocktails!</h1>` + serverData);
 };
 
+$('#load-button').on('click', function () {
+    ime();
+})
 $('#search-text').on('keyup', function () {
     console.log($(this).val());
 });
+document.onkeyup = function (e) {
+    if (e.which == 13) {
+        ime();
+    }
+}
 
-$('#load-button').click(function () {
+
+function ime() {
     const searchText = $('#search-text').val();
     $.get('/Home/Bars?name=' + searchText, barServerResponseHandler);
     $.get('/Home/BarsAddress?address=' + searchText, barServerResponseHandler);
     $.get('/Home/Cocktails?name=' + searchText, cocktailServerResponseHandler);
     $.get('/Home/CocktailsIngredients?ingredient=' + searchText, cocktailServerResponseHandler);
-});
+};
 
 //function moreInfo() {
 //    $('#more-info').show()
