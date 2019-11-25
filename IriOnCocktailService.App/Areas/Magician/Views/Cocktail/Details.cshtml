@@ -1,4 +1,4 @@
-﻿@model IriOnCocktailService.App.Areas.Magician.Models.CreateCocktailViewModel
+﻿@model CocktailViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -17,16 +17,16 @@
             @Html.DisplayFor(model => model.Id)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CocktailName)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CocktailName)
+            @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PicUrl)
+            @Html.DisplayNameFor(model => model.PictureURL)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PicUrl)
+            @Html.DisplayFor(model => model.PictureURL)
         </dd>
     </dl>
 </div>
