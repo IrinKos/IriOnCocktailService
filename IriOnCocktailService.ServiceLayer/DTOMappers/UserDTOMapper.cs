@@ -13,7 +13,8 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
         {
             return new UserDTO()
             {
-
+                Name=entity.UserName,
+                Id=entity.Id
             };
         }
     }

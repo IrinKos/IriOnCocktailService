@@ -9,5 +9,6 @@ namespace IriOnCocktailService.ServiceLayer.Services.Contracts
     {
         Task<IList<string>> GetAllRoles();
         Task<User> ChangeRole(UserDTO userDTO);
+        Task<IEnumerable<UserDTO>> GetAllUsers();
     }
 }
