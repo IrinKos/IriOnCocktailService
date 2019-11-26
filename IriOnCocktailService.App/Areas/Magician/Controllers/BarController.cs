@@ -25,6 +25,8 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         private readonly IViewModelMapper<BarDTO, DisplayBarsViewModel> barViewModelMapper;
         private readonly IViewModelMapper<BarDTO, BarDetailsViewModel> barDetailsMapper;
         private readonly IViewModelMapper<CommentDTO, CommentViewModel> commentMapper;
+        private readonly IViewModelMapper<AddCocktailDTO, CocktailsForBarViewModel> cocktailsForBarMapper;
+        
         private readonly IViewModelMapper<ICollection<BarDTO>, CollectionViewModel> collectionMapper;
         //private readonly IViewModelMapper<BarDTO, AddCocktailsToBarViewModel> barCocktailsMapper;
 
@@ -35,6 +37,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
                              IViewModelMapper<BarDTO, CreateBarViewModel> createBarViewModelMapper,
                              IViewModelMapper<BarDTO, DisplayBarsViewModel> barViewModelMapper,
                              IViewModelMapper<BarDTO, BarDetailsViewModel> barDetailsMapper,
+                             IViewModelMapper<AddCocktailDTO, CocktailsForBarViewModel> cocktailsForBarMapper,
                              IViewModelMapper<CommentDTO, CommentViewModel> commentMapper,
                              IViewModelMapper<ICollection<BarDTO>, CollectionViewModel> collectionMapper)
         {
@@ -45,6 +48,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             this.createBarViewModelMapper = createBarViewModelMapper;
             this.barViewModelMapper = barViewModelMapper;
             this.barDetailsMapper = barDetailsMapper;
+            this.cocktailsForBarMapper = cocktailsForBarMapper;
             this.commentMapper = commentMapper;
             this.collectionMapper = collectionMapper;
         }
@@ -69,8 +73,10 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             var barDTO = await this.barService.GetBarAsync(Id);
             var barViewModel = this.barDetailsMapper.MapFromDTO(barDTO);
             var barCommentDTOs = await this.barService.GetAllCommentsForBar(Id);
+            var barCocktailDTOs = await cocktailService.GetAllContainedCocktailsDTO(Id);
 
             barViewModel.Comments = barCommentDTOs.Select(c => this.commentMapper.MapFromDTO(c));
+            barViewModel.Cocktails = barCocktailDTOs.Select(bc => cocktailsForBarMapper.MapFromDTO(bc));
 
             return View(barViewModel);
         }

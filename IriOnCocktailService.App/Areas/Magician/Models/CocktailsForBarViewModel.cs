@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace IriOnCocktailService.ServiceLayer.DTOS
+namespace IriOnCocktailService.App.Areas.Magician.Models
 {
-    public class AddCocktailDTO
+    public class CocktailsForBarViewModel
     {
         public string Id { get; set; }
         public string Name { get; set; }
