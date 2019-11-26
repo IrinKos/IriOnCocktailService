@@ -18,8 +18,8 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers.Registration
             services.AddSingleton<IViewModelMapper<BarDTO, BarDetailsViewModel>, BarDetailsViewModelMapper>();
             services.AddSingleton<IViewModelMapper<CocktailDTO, CreateCocktailViewModel>,CreateCocktailViewModelMapper>();
             services.AddSingleton<IViewModelMapper<BarDTO, DisplayBarsViewModel>, DisplayBarsViewModelMapper>();
-            services.AddSingleton<IViewModelMapper<BarDTO, IriOnCocktailService.App.Models.BarViewModel>, BarViewModelMapper>();
-            services.AddSingleton<IViewModelMapper<CocktailDTO, IriOnCocktailService.App.Models.CocktailViewModel>, CocktailViewModelMapper>();
+            services.AddSingleton<IViewModelMapper<BarDTO, Models.BarViewModel>, BarViewModelMapper>();
+            services.AddSingleton<IViewModelMapper<CocktailDTO, Models.CocktailViewModel>, CocktailViewModelMapper>();
             services.AddSingleton<IViewModelMapper<BarDTO, AddCocktailsToBarViewModel>, AddCocktailsToBarViewModelMapper>();
             services.AddSingleton<IViewModelMapper<CocktailDTO, DisplayCocktailViewModel>, DisplayCocktailViewModelMapper>();
             services.AddSingleton<IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel>, CollectionViewModelMapper>();
@@ -35,10 +35,10 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers.Registration
 
 
             services.AddSingleton<IViewModelMapper<CommentDTO, CommentViewModel>, BarCommentViewModelMapper>();
-            services.AddSingleton<IViewModelMapper<CommentDTO, IriOnCocktailService.App.Models.CommentViewModel>, BarCommentVMMapper>();
+            services.AddSingleton<IViewModelMapper<CommentDTO, Models.CommentViewModel>, BarCommentVMMapper>();
             //BarComment VM to DTO
             services.AddSingleton<IDTOMapper<CommentViewModel, CommentDTO>, BarCommentViewModelMapper>();
-            services.AddSingleton<IDTOMapper<IriOnCocktailService.App.Models.CommentViewModel, CommentDTO>, BarCommentVMMapper>();
+            services.AddSingleton<IDTOMapper<Models.CommentViewModel, CommentDTO>, BarCommentVMMapper>();
 
             //Collection DTO to VM
             services.AddSingleton<IViewModelMapper<ICollection<BarDTO>, CollectionViewModel>, CollectionViewModelMapper>();

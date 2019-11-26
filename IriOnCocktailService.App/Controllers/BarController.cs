@@ -16,17 +16,20 @@ namespace IriOnCocktailService.App.Controllers
         private readonly ICocktailService cocktailService;
         private readonly IViewModelMapper<BarDTO, BarViewModel> barViewModelMapper;
         private readonly IViewModelMapper<CocktailDTO, CocktailViewModel> cocktailViewModelMapper;
+       // private readonly IViewModelMapper<AddCocktailDTO, CocktailViewModel> barCocktailsMapper;
         private readonly IViewModelMapper<CommentDTO, CommentViewModel> commentMapper;
 
         public BarController(IBarService barService, ICocktailService cocktailService,
                               IViewModelMapper<BarDTO, BarViewModel> barViewModelMapper,
                               IViewModelMapper<CocktailDTO, CocktailViewModel> cocktailViewModelMapper,
+                              //IViewModelMapper<AddCocktailDTO, CocktailViewModel> barCocktailsMapper,
                               IViewModelMapper<CommentDTO, CommentViewModel> commentMapper)
         {
             this.barService = barService;
             this.cocktailService = cocktailService;
             this.barViewModelMapper = barViewModelMapper;
             this.cocktailViewModelMapper = cocktailViewModelMapper;
+            //this.barCocktailsMapper = barCocktailsMapper;
             this.commentMapper = commentMapper;
         }
         [HttpGet]
@@ -53,6 +56,7 @@ namespace IriOnCocktailService.App.Controllers
             var barCommentDTOs = await this.barService.GetAllCommentsForBar(id);
 
             barViewModel.Comments = barCommentDTOs.Select(c => this.commentMapper.MapFromDTO(c));
+            //barViewModel.Cocktails = barCocktailDTOs.Select(c => this.barCocktailsMapper.MapFromDTO(c));
 
             return View(barViewModel);
         }
