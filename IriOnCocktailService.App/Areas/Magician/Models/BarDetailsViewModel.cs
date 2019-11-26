@@ -17,6 +17,6 @@ namespace IriOnCocktailService.App.Areas.Magician.Models
         public bool NotAvailable { get; set; }
         public string Motto { get; set; }
         public IEnumerable<CommentViewModel> Comments { get; set; }
-        public IEnumerable<CocktailsForBarViewModel> Cocktails { get; set; }
+        public IList<CocktailsForBarViewModel> Cocktails { get; set; }
     }
 }

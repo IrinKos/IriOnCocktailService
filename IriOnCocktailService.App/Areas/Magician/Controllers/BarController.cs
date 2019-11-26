@@ -76,7 +76,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             var barCocktailDTOs = await cocktailService.GetAllContainedCocktailsDTO(Id);
 
             barViewModel.Comments = barCommentDTOs.Select(c => this.commentMapper.MapFromDTO(c));
-            barViewModel.Cocktails = barCocktailDTOs.Select(bc => cocktailsForBarMapper.MapFromDTO(bc));
+            barViewModel.Cocktails = barCocktailDTOs.Select(bc => cocktailsForBarMapper.MapFromDTO(bc)).ToList();
 
             return View(barViewModel);
         }
@@ -110,9 +110,9 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             await this.barService.DeleteBarAsync(Id);
 
             //TODO remove ok
-            return RedirectToAction("Index", "Bar");
+            //return RedirectToAction("Index", "Bar");
             //return PartialView("_TestPartial");
-            //return View();
+            return View();
         }
 
         [HttpGet]
