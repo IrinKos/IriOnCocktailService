@@ -15,6 +15,7 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
             {
                 Id=entity.Id,
                 Name=entity.Name,
+                PicUrl=entity.PicUrl,
             };
         }
     }
