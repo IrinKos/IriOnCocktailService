@@ -45,7 +45,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
                 .SingleOrDefaultAsync(i => i.Id == ingredientId && i.IsDeleted == false);
 
             if (ingredient == null)
-                throw new ArgumentNullException(GlobalConstants.UnavailbleIngredient);
+                throw new ArgumentException(GlobalConstants.UnavailbleIngredient);
             if (ingredient.IsDeleted == true)
                 throw new ArgumentException(GlobalConstants.DeletedIngredient);
 
@@ -75,7 +75,10 @@ namespace IriOnCocktailService.ServiceLayer.Services
                 .Select(i => this.mapper.MapFrom(i))
                 .OrderBy( i => i.Name)
                 .ToListAsync();
-
+            if(ingredients==null ||ingredients.Count==0)
+            {
+                throw new ArgumentException(GlobalConstants.NoIngredientsFound);
+            }
             return ingredients;
         }
 
