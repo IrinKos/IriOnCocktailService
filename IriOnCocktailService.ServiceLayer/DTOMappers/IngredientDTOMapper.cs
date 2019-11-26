@@ -25,10 +25,8 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
         {
             return new Ingredient
             {
-                Id = ingredientDTO.Id,
                 Name = ingredientDTO.Name,
-                UnitType = (Unit)Enum.Parse(typeof(Unit), ingredientDTO.UnitType),
-                IsDeleted = ingredientDTO.IsDeleted
+                UnitType = (Unit)Enum.Parse(typeof(Unit), ingredientDTO.UnitType)
             };
         }
     }
