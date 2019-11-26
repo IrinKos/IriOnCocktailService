@@ -26,6 +26,7 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
                 Name = dto.BarName,
                 PhoneNumber=dto.BarPhoneNumber,
                 PictureURL=dto.BarPicUrl,
+                Motto = dto.Motto,
                 Rating = dto.BarRatings.Any(br => br.BarId == dto.BarId) ? dto.BarRatings.Where(br => br.BarId == dto.BarId).Average(g => g.Rate) : 0,
             };
         }

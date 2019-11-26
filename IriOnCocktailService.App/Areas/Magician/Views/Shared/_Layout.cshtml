@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="~/css/About.css" />
     <link rel="stylesheet" href="~/css/searchBar.css" />
     <link rel="stylesheet" href="~/css/login.css" />
+    <link rel="stylesheet" href="~/css/details.css" />
 
 
     <link rel="stylesheet" href="~/css/create-form.css" />
@@ -81,7 +82,10 @@
     </header>
     <div class="container">
         <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
+        <main role="main" @*class="pb-3"*@>
+            <div>
+                <h3 class="text-center font-italic" style="margin-top: -40px;">Hello, @this.User.Identity.Name</h3>
+            </div>
             @RenderBody()
         </main>
     </div>

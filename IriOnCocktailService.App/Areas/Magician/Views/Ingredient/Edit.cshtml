@@ -4,31 +4,40 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
 
-<h4>CreateIngredientViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="bg-black" style="width: 60%; margin-left: 225px; margin-top: 50px;">
+    <div>
+        <p class="login-text">
+            <span>
+                <img src="~/lib/images/Ingredient.png" alt="CreateBar" width="50" style="border-radius: 50%;background-color: white">
+            </span>
+        </p>
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
+                <label asp-for="UnitType" class="control-label text-muted">Edit Unit Type for <b>@Model.Name</b></label>
+                @*<input asp-for="UnitType" class="form-control" />*@
+                <select asp-for="UnitType" class="form-control" style="background-color: black; color: white; width: 400px; margin-left: 135px;">
+                    <option disabled selected value="">Choose Unit Type</option>
+                    <option id="magic-input" value="Ml">Ml</option>
+                    <option id="magic-input" value="Quantity">Quantity</option>
+                    <option id="magic-input" value="Gr">Gr</option>
+                </select>
+                <span asp-validation-for="UnitType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                @*<label asp-for="Name" class="control-label"></label>*@
+                <input asp-for="Name" id="magic-input" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
-                </label>
-            </div>
+            
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <button type="submit" value="Save" class="bar-buttonE border-0">
+                    <span data-title="Edit Cocktail!">
+                        <img src="~/lib/images/dropper.png" alt="CreateBar" width="30"> Edit Cocktail!
+                        <img src="~/lib/images/dropper.png" alt="CreateBar" width="30">
+                    </span>
+                </button>
             </div>
         </form>
     </div>

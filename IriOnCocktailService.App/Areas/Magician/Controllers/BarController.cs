@@ -105,6 +105,8 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
 
             //TODO remove ok
             return RedirectToAction("Index", "Bar");
+            //return PartialView("_TestPartial");
+            //return View();
         }
 
         [HttpGet]

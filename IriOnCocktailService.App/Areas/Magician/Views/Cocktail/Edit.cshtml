@@ -16,23 +16,23 @@
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="CocktailName" class="control-label text-muted"></label>
+                    <label asp-for="CocktailName" class="control-label text-muted">Edit Name for <b>@Model.CocktailName</b></label>
                     <input asp-for="CocktailName" id="magic-input" class="form-control" />
                     <span asp-validation-for="CocktailName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="PicUrl" class="control-label text-muted"></label>
+                    <label asp-for="PicUrl" class="control-label text-muted">Edit @Model.CocktailName's Picture Url</label>
                     <input asp-for="PicUrl" id="magic-input" class="form-control" />
                     <span asp-validation-for="PicUrl" class="text-danger"></span>
                 </div>
-                <br/>
+                <br />
                 <div class="form-group">
                     <button type="submit" value="Save" class="bar-buttonE border-0">
-                            <span data-title="Edit Cocktail!">
-                                <img src="~/lib/images/PurpleFlasc.png" alt="CreateBar" width="30"> Edit Cocktail!
-                                <img src="~/lib/images/PurpleFlasc.png" alt="CreateBar" width="30">
-                            </span>
-                        </button>
+                        <span data-title="Edit Cocktail!">
+                            <img src="~/lib/images/PurpleFlasc.png" alt="CreateBar" width="30"> Edit Cocktail!
+                            <img src="~/lib/images/PurpleFlasc.png" alt="CreateBar" width="30">
+                        </span>
+                    </button>
                 </div>
             </form>
         </div>
