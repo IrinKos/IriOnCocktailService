@@ -36,15 +36,26 @@
                 </div>
             </div>
         </div>
-        <div>
-            @foreach (var item in Model.Cocktails)
+        @*<div>
+            <h3 class="font-italic font-weight-light">Cocktails!</h3>
+            @if (Model.Cocktails.Any())
             {
-            <h1>
-                @item.Name
-            </h1>
-            <img src="@item.PicUrl">
+                @foreach (var item in Model.Cocktails)
+                {
+                    
+                    <p class="text-left ml-5" id="comments">
+                        @item.Name
+                    </p>
+                    <hr class="bg-white" />
+                }
             }
-        </div>
+            else
+            {
+                <h4 class="text-left ml-3 text-muted" id="comments">
+                    No comments yet!
+                </h4>
+            }
+        </div>*@
         <div id="div-comments" class="bg-black">
             <h3 class="font-italic font-weight-light">Comments!</h3>
             @if (Model.Comments.Any())
@@ -67,7 +78,7 @@
                 </h4>
             }
         </div>
-        @*<div id="div-comments" class="bg-black">
+        <div id="div-comments" class="bg-black">
             <h3 class="font-italic font-weight-light">Cocktails!</h3>
             @if (Model.Cocktails.Any())
             {
@@ -85,13 +96,19 @@
                     No comments yet!
                 </h4>
             }
-        </div>*@
-        <div>
-            <a class="bar-buttonE mt-5" asp-action="Index">
-                <span data-title="Back to List!">
-                    <img src="~/lib/images/BookComment.png" alt="Details" width="20"> Back to List!
-                    <img src="~/lib/images/BookComment.png" alt="Details" width="20">
-                </span>
-            </a>
         </div>
+    <div>
+        <a class="bar-buttonE mt-5" asp-action="Index">
+            <span data-title="Back to List!">
+                <img src="~/lib/images/BookComment.png" alt="Details" width="20"> Back to List!
+                <img src="~/lib/images/BookComment.png" alt="Details" width="20">
+            </span>
+        </a>
+        <a class="bar-buttonE mt-5" asp-action="ModifyBarCocktails" asp-route-id="@Model.Id">
+            <span data-title="Back to List!">
+                <img src="~/lib/images/BookComment.png" alt="Details" width="20"> Add cocktail to bar!
+                <img src="~/lib/images/BookComment.png" alt="Details" width="20">
+            </span>
+        </a>
+    </div>
     </div>

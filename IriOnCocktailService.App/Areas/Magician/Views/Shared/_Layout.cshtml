@@ -46,14 +46,10 @@
                         <li class="menu-item"><a asp-area="Magician" asp-controller="Bar" asp-action="Create">Create Bar</a></li>
                     </ol>
                 </li>
-                <li>
-                    <div id="search-form">
-                        <input id="search-text" placeholder="Search...">
-                        <button id="load-button" class="bg-transparent border-0 hide">
-                            <i id="search-fa" class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </li>
+                @*<li>
+
+        </li>*@
+                <li class="menu-item"><a asp-area="Magician" asp-controller="User" asp-action="Index">Users</a></li>
                 <li class="menu-item">
                     <a href="#0">Cocktails</a>
                     <ol class="sub-menu">
@@ -75,7 +71,12 @@
                 </li>
             </ol>
         </nav>
-
+        <div id="search-form" style="margin-top: -20px;">
+            <input id="search-text" placeholder="Search...">
+            <button id="load-button" class="bg-transparent border-0 hide">
+                <i id="search-fa" class="fa fa-search"></i>
+            </button>
+        </div>
         <!-- This is not part of Pen -->
         <a class="me" href="https://codepen.io/uzcho_/pens/popular/?grid_type=list" target="_blank" style="color:#000"></a>
 
@@ -84,7 +85,7 @@
         <partial name="_CookieConsentPartial" />
         <main role="main" @*class="pb-3"*@>
             <div>
-                <h3 class="text-center font-italic" style="margin-top: -40px;">Hello, @this.User.Identity.Name</h3>
+                <h3 class="text-center font-italic" style="margin-top: -30px;">Hello, @this.User.Identity.Name</h3>
             </div>
             @RenderBody()
         </main>

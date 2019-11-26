@@ -1,5 +1,6 @@
 ﻿using IriOnCocktailService.Data;
 using IriOnCocktailService.Data.Entities;
+using IriOnCocktailService.ServiceLayer.DTOMappers.Contracts;
 using IriOnCocktailService.ServiceLayer.DTOS;
 using IriOnCocktailService.ServiceLayer.Services.Contracts;
 using Microsoft.AspNetCore.Identity;
@@ -17,11 +18,13 @@ namespace IriOnCocktailService.ServiceLayer.Services
     {
         private readonly IriOnCocktailServiceDbContext context;
         private readonly UserManager<User> userManager;
+        private readonly IDTOServiceMapper<User, UserDTO> userDTOMapper;
 
-        public RoleService(IriOnCocktailServiceDbContext context, UserManager<User> roleManager)
+        public RoleService(IriOnCocktailServiceDbContext context, UserManager<User> roleManager, IDTOServiceMapper<User, UserDTO> userDTOMapper)
         {
             this.context = context;
             this.userManager = roleManager;
+            this.userDTOMapper = userDTOMapper;
         }
 
         public async Task<IList<string>> GetAllRoles()
@@ -38,6 +41,11 @@ namespace IriOnCocktailService.ServiceLayer.Services
             await userManager.AddToRoleAsync(user, dto.NewRole);
 
             return user;
+        }
+
+        public async Task<IEnumerable<UserDTO>> GetAllUsers()
+        {
+            return (await this.context.Users.ToListAsync()).Select(u=>userDTOMapper.MapFrom(u)).ToList();
         }
     }
 }
