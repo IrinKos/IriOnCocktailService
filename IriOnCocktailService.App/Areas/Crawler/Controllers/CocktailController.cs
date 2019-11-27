@@ -8,11 +8,13 @@ using IriOnCocktailService.App.Areas.Magician.Models;
 using IriOnCocktailService.App.Infrasturcture.Mappers.Contracts;
 using IriOnCocktailService.ServiceLayer.DTOS;
 using IriOnCocktailService.ServiceLayer.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IriOnCocktailService.App.Areas.Crawler.Controllers
 {
     [Area("Crawler")]
+    [Authorize(Roles = "BarCrawler")]
     public class CocktailController : Controller
     {
         private readonly ICocktailService cocktailService;

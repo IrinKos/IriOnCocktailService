@@ -8,29 +8,43 @@ using IriOnCocktailService.App.Areas.Magician.Models;
 using IriOnCocktailService.App.Infrasturcture.Mappers.Contracts;
 using IriOnCocktailService.ServiceLayer.DTOS;
 using IriOnCocktailService.ServiceLayer.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IriOnCocktailService.App.Areas.Crawler.Controllers
 {
     [Area("Crawler")]
+    [Authorize(Roles = "BarCrawler")]
     public class BarController : Controller
     {
         private readonly IBarService barService;
+        private readonly ICocktailService cocktailService;
         private readonly IViewModelMapper<ICollection<BarDTO>, CollectionViewModel> collectionMapper;
         private readonly IViewModelMapper<BarDTO, DisplayBarsViewModel> barViewModelMapper;
         private readonly IDTOMapper<CommentViewModel, CommentDTO> barCommentMapper;
+        private readonly IViewModelMapper<CommentDTO, CommentViewModel> commentMapper;
+        private readonly IViewModelMapper<AddCocktailDTO, CocktailsForBarViewModel> cocktailsForBarMapper;
+        private readonly IViewModelMapper<BarDTO, BarDetailsViewModel> barDetailsMapper;
         private readonly IDTOMapper<RatingViewModel, RatingDTO> barRatingMapper;
 
         public BarController(IBarService barService,
+                             ICocktailService cocktailService,
                              IViewModelMapper<ICollection<BarDTO>, CollectionViewModel> collectionMapper,
                              IViewModelMapper<BarDTO,DisplayBarsViewModel> barViewModelMapper,
-                             IDTOMapper<CommentViewModel, CommentDTO> barCommentMapper,
+                             IDTOMapper<CommentViewModel, CommentDTO> barCommentMapper, 
+                             IViewModelMapper<CommentDTO, CommentViewModel> commentMapper,
+                             IViewModelMapper<AddCocktailDTO, CocktailsForBarViewModel> cocktailsForBarMapper,
+                             IViewModelMapper<BarDTO, BarDetailsViewModel> barDetailsMapper,
                              IDTOMapper<RatingViewModel, RatingDTO> barRatingMapper)
         {
             this.barService = barService;
+            this.cocktailService = cocktailService;
             this.collectionMapper = collectionMapper;
             this.barViewModelMapper = barViewModelMapper;
             this.barCommentMapper = barCommentMapper;
+            this.commentMapper = commentMapper;
+            this.cocktailsForBarMapper = cocktailsForBarMapper;
+            this.barDetailsMapper = barDetailsMapper;
             this.barRatingMapper = barRatingMapper;
         }
 
@@ -46,7 +60,13 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
         public async Task<IActionResult> Details(string Id)
         {
             var barDTO = await this.barService.GetBarAsync(Id);
-            var barViewModel = this.barViewModelMapper.MapFromDTO(barDTO);
+            var barViewModel = this.barDetailsMapper.MapFromDTO(barDTO);
+
+            var commentsDTO = await barService.GetAllCommentsForBar(Id);
+            var cocktailsDTO = await cocktailService.GetAllContainedCocktailsDTO(Id);
+
+            barViewModel.Comments = commentsDTO.Select(c=> commentMapper.MapFromDTO(c));
+            barViewModel.Cocktails = cocktailsDTO.Select(c => cocktailsForBarMapper.MapFromDTO(c)).ToList();
 
             return View(barViewModel);
         }
@@ -79,7 +99,7 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
             var barRatingDTO = this.barRatingMapper.MapFromViewModel(barRatingViewModel);
             await this.barService.BarRatingAsync(barRatingDTO);
 
-            return Ok();
+            return RedirectToAction("Index","Bar");
         }
         [HttpGet]
         public async Task<IActionResult> GetComments(string barId)

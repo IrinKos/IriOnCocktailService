@@ -154,7 +154,7 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             await barCockailService.Add(viewModel.SelectedCocktails, viewModel.BarId);
             await barCockailService.Remove(viewModel.UnSelectedCocktails, viewModel.BarId);
 
-            return Redirect("/Bar/Details/"+viewModel.BarId);
+            return Redirect("~/Magician/Bar/Details/" + viewModel.BarId);
         }
     }
 }

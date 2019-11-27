@@ -55,11 +55,63 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
                 .Take(6)
                 .ToList();
 
-            var viewModel = new IndexMagViewModel();
+            var viewModel = new IndexMagViewModel(); 
             viewModel.Bars = barsViewModel;
             viewModel.Cocktails = cocktailsViewModel;
 
             return View(viewModel);
+        }
+        public async Task<IActionResult> Bars([FromQuery] string name)
+        {
+            var bars = await this.barService
+                .GetBarsByNameAsync(name);
+
+            var barsVM = new List<DisplayBarsViewModel>();
+            foreach (var bar in bars)
+            {
+                barsVM.Add(this.barViewModelMapper.MapFromDTO(bar));
+            }
+
+            return PartialView("_SearchPartial", barsVM);
+        }
+        public async Task<IActionResult> BarsAddress([FromQuery] string address)
+        {
+            var bars = await this.barService.GetBarsByAddressAsync(address);
+
+            var barsVM = new List<DisplayBarsViewModel>();
+            foreach (var bar in bars)
+            {
+                barsVM.Add(this.barViewModelMapper.MapFromDTO(bar));
+            }
+
+            return PartialView("_SearchPartial", barsVM);
+        }
+
+        public async Task<IActionResult> Cocktails([FromQuery] string name)
+        {
+            var cocktails = await this.cocktailService
+                .GetAllCocktailsByNameDTO(name);
+
+            var cocktailsVM = new List<DisplayCocktailViewModel>();
+            foreach (var cocktail in cocktails)
+            {
+                cocktailsVM.Add(this.cocktailViewModelMapper.MapFromDTO(cocktail));
+            }
+
+            return PartialView("_SearchCoctailPartial", cocktailsVM);
+        }
+        public async Task<IActionResult> CocktailsIngredients([FromQuery] string ingredient)
+        {
+            var cocktails = await this.cocktailService
+                .GetAllCocktailsByIngredientDTO(ingredient);
+
+            var cocktailsVM = new List<DisplayCocktailViewModel>();
+            foreach (var cocktail in cocktails)
+            {
+                cocktailsVM.Add(this.cocktailViewModelMapper.MapFromDTO(cocktail));
+            }
+
+            return PartialView("_SearchCoctailPartial", cocktailsVM);
         }
     }
 }

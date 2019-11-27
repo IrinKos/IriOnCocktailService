@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="~/css/tables.css" />
     <link rel="stylesheet" href="~/css/create-form.css" />
     <link rel="stylesheet" href="~/css/searchBar.css" />
+    <link rel="stylesheet" href="~/css/About.css" />
+    <link rel="stylesheet" href="~/css/details.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 </head>
@@ -31,44 +33,40 @@
         <nav class="menu pb-5">
             <ol>
                 <li class="menu-item"><a asp-area="Crawler" asp-controller="Home" asp-action="Index">Home</a></li>
-                <li class="menu-item"><a href="#0">About</a></li>
+                <li class="menu-item"><a asp-area="Crawler" asp-controller="About" asp-action="Index">About</a></li>
                 <li class="menu-item">
-                    <a href="#0">Bars</a>
-                    <ol class="sub-menu">
+                    <a asp-area="Crawler" asp-controller="Bar" asp-action="Index">Bars</a>
+                    @*<ol class="sub-menu">
                         <li class="menu-item"><a asp-area="Crawler" asp-controller="Bar" asp-action="Index">List Bars</a></li>
-                    </ol>
+                    </ol>*@
                 </li>
                 <li class="menu-item">
-                    <a href="#0">Cocktails</a>
-                    <ol class="sub-menu">
+                   <a href="#0">Cocktails</a>
+                     @*<ol class="sub-menu">
                         <li class="menu-item"><a asp-area="Crawler" asp-controller="Cocktail" asp-action="Index">List Cocktails</a></li>
-                    </ol>
+                    </ol>*@
                 </li>
-                <li class="menu-item"><a href="#0">Contact</a></li>
                 <li class="menu-item">
                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                         <button id="logout" type="submit" class="bg-black">Logout</button>
                     </form>
                 </li>
-
-            </ol>
-            <ol class="pt-4">
-                <li>
-                    <form id="search-form" action="">
-                        <input id="search-input" type="search">
-                        <i id="search-fa" class="fa fa-search"></i>
-                    </form>
-                </li>
             </ol>
         </nav>
-
-        <!-- This is not part of Pen -->
-        <a class="me" href="https://codepen.io/uzcho_/pens/popular/?grid_type=list" target="_blank" style="color:#000"></a>
+        <div id="search-form" style="margin-top: -20px;">
+            <input id="search-text" placeholder="Search...">
+            <button id="load-button" class="bg-transparent border-0 hide">
+                <i id="search-fa" class="fa fa-search"></i>
+            </button>
+        </div>
 
     </header>
     <div class="container">
         <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
+        <main role="main">
+            <div>
+                <h3 class="text-center font-italic" style="margin-top: -30px;">Hello, @this.User.Identity.Name</h3>
+            </div>
             @RenderBody()
         </main>
     </div>

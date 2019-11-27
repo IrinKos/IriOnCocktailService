@@ -14,7 +14,9 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
         {
             return new DeleteBarViewModel()
             {
-                Id=dto.BarId,
+                Id = dto.BarId,
+                Name = dto.BarName
+
             };
         }
     }
