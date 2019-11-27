@@ -7,7 +7,12 @@ namespace IriOnCocktailService.App.Areas.Magician.Models
 {
     public class CocktailDetailsViewModel
     {
-    //    public IEnumerable<CommentViewModel> Comments { get; set; }
-    //    public IEnumerable<DisplayCocktailViewModel> Cocktails { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string PictureURL { get; set; }
+        public decimal Rating { get; set; }
+        public List<CocktailIngredientDTO> Ingredients { get; set; }
+        public bool NotAvailable { get; set; }
+        public IEnumerable<CommentViewModel> Comments { get; set; }
     }
 }

@@ -73,7 +73,7 @@ namespace IriOnCocktailService.ServiceTests.CocktailServiceTests
             {
                 var sut = new CocktailService(assertContext, ingredientServiceMock.Object, cocktailMapperMock.Object, cocktailMapperToDTOMock.Object, commentMapperToDTOMock.Object, commentMapperMock.Object, addCocktailMapperMock.Object, cocktailRatingToDTOMock.Object);
 
-                var result = await sut.GetAllContainedCocktailsDTO("1");
+                var result = await sut.GetAllNotContainedCocktailsDTO("1");
                 Assert.AreEqual(1, result.Count);
             }
         }

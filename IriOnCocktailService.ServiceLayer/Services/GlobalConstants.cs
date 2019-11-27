@@ -6,6 +6,9 @@ namespace IriOnCocktailService.ServiceLayer.Services
 {
     public class GlobalConstants
     {
+        //User
+        public const string UserNotFound = "No User was found!";
+
         // Ingredient
         public const string UnavailbleIngredient = "The ingredient does not exist!";
         public const string NoIngredientsFound = "No ingredients were found!";

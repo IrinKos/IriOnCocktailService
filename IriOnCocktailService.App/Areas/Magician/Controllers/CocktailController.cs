@@ -19,10 +19,12 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
     public class CocktailController : Controller
     {
         private readonly ICocktailService cocktailService;
+        private readonly IBarService barService;
         private readonly IIngredientService ingredientService;
         private readonly IDTOMapper<CreateCocktailViewModel, CocktailDTO> createCocktailMapper;
         private readonly IViewModelMapper<CocktailDTO, CreateCocktailViewModel> createCocktailMapperToVM;
         private readonly IViewModelMapper<CocktailDTO, CocktailViewModel> cocktailViewModelMapper;
+        private readonly IViewModelMapper<BarDTO, BarsForCocktailViewModel> barsForCocktailMapper;
         private readonly IViewModelMapper<CocktailDTO, DeleteCocktailViewModel> deleteCocktailMapper;
         private readonly IViewModelMapper<CommentDTO, CommentViewModel> commentMapper;
         private readonly IViewModelMapper<CocktailDTO, DisplayCocktailViewModel> displayCocktailMapper;
@@ -30,22 +32,26 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
         private readonly IViewModelMapper<IngredientDTO, CreateIngredientViewModel> ingredientMapper;
 
         public CocktailController(ICocktailService cocktailService,
+                                  IBarService barService,
                                   IIngredientService ingredientService,
                                   IDTOMapper<CreateCocktailViewModel, CocktailDTO> createCocktailMapper,
                                   IViewModelMapper<CocktailDTO, DisplayCocktailViewModel> displayCocktailMapper,
                                   IViewModelMapper<CocktailDTO, CreateCocktailViewModel> createCocktailMapperToVM,
                                   IViewModelMapper<CocktailDTO, CocktailViewModel> cocktailViewModelMapper,
+                                  IViewModelMapper<BarDTO, BarsForCocktailViewModel> barsForCocktailMapper,
                                   IViewModelMapper<CocktailDTO, DeleteCocktailViewModel> deleteCocktailMapper,
                                   IViewModelMapper<CommentDTO, CommentViewModel> commentMapper,
                                   IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel> collectionMapper,
                                   IViewModelMapper<IngredientDTO, CreateIngredientViewModel> ingredientMapper)
         {
             this.cocktailService = cocktailService;
+            this.barService = barService;
             this.ingredientService = ingredientService;
             this.createCocktailMapper = createCocktailMapper;
             this.displayCocktailMapper = displayCocktailMapper;
             this.createCocktailMapperToVM = createCocktailMapperToVM;
             this.cocktailViewModelMapper = cocktailViewModelMapper;
+            this.barsForCocktailMapper = barsForCocktailMapper;
             this.deleteCocktailMapper = deleteCocktailMapper;
             this.commentMapper = commentMapper;
             this.collectionMapper = collectionMapper;
@@ -92,8 +98,10 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             var cocktailDTO = await this.cocktailService.GetCocktailDTO(id);
             var cocktailViewModel = this.cocktailViewModelMapper.MapFromDTO(cocktailDTO);
             var cocktailCommentDTOs = await this.cocktailService.GetAllCommentsForCocktail(id);
+            var cocktailBars = await barService.GetAllBarsForCocktail(id);
 
             cocktailViewModel.Comments = cocktailCommentDTOs.Select(c => this.commentMapper.MapFromDTO(c));
+            cocktailViewModel.Bars = cocktailBars.Select(cb => this.barsForCocktailMapper.MapFromDTO(cb)).ToList();
 
             return View(cocktailViewModel);
         }

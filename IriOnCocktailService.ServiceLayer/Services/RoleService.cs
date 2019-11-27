@@ -37,6 +37,11 @@ namespace IriOnCocktailService.ServiceLayer.Services
         {
             var user = await userManager.FindByIdAsync(dto.Id);
 
+            if(user == null)
+            {
+                throw new Exception(GlobalConstants.UserNotFound);
+            }
+
             await userManager.RemoveFromRoleAsync(user, dto.CurrentRole);
             await userManager.AddToRoleAsync(user, dto.NewRole);
 

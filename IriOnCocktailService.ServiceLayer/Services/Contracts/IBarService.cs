@@ -17,5 +17,6 @@ namespace IriOnCocktailService.ServiceLayer.Services.Contracts
         Task<RatingDTO> BarRatingAsync(RatingDTO barRatingDTO);
         Task<ICollection<CommentDTO>> GetAllCommentsForBar(string barId);
         Task<string> GetNameForBarById(string barId);
+        Task<ICollection<BarDTO>> GetAllBarsForCocktail(string id);
     }
 }

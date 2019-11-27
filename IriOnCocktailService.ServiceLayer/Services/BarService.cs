@@ -177,6 +177,21 @@ namespace IriOnCocktailService.ServiceLayer.Services
         {
             return (await this.context.Bars.FirstOrDefaultAsync(b => b.Id == barId)).Name;
         }
+        public async Task<ICollection<BarDTO>> GetAllBarsForCocktail(string id)
+        {
+            var cocktailBars = this.context.CocktailBars.Where(cb => cb.CocktailId == id).Select(c=>c.BarId);
+
+            var bars = new List<Bar>();
+
+            foreach (var item in cocktailBars)
+            {
+                var bar = await this.context.Bars.FirstOrDefaultAsync(b => b.Id == item);
+
+                bars.Add(bar);
+            }
+
+            return bars.Select(b => mapper.MapFrom(b)).ToList();
+        }
         //public async Task<ICollection<CommentDTO>> GetAllCocktailsForBar(string barId)
         //{
         //    var comments = this.context.Cocktails
