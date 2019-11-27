@@ -185,7 +185,10 @@ namespace IriOnCocktailService.ServiceLayer.Services
 
             foreach (var item in cocktailBars)
             {
-                var bar = await this.context.Bars.FirstOrDefaultAsync(b => b.Id == item);
+                var bar = await this.context.Bars
+                    .Include(b=>b.BarComments)
+                    .Include(b=>b.BarRatings)
+                    .FirstOrDefaultAsync(b => b.Id == item);
 
                 bars.Add(bar);
             }

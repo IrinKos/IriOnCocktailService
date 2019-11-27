@@ -22,6 +22,52 @@
                 {
                     <p class="information pb-5">"@Model.Motto"</p>
                 }
+                <div style="margin-top: -10%"><h6 class="font-italic text-muted">Offered Cocktails:</h6></div>
+
+                <div class="bd-example" style="width: 280px;">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2000">
+                        <ol class="carousel-indicators">
+                            @for (int i = 0; i < @Model.Bars.Count(); i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <li data-target="#carouselExampleCaptions" data-slide-to="@i" class="active"></li>
+                                }
+                                else
+                                {
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
+                                }
+                            }
+                        </ol>
+                        <div class="carousel-inner" style="height: 280px;">
+                            @if (Model.Bars.Any())
+                            {
+                                @for (int i = 0; i < Model.Bars.Count(); i++)
+                                {
+                                    <div class="carousel-@(i == 1 ? "item active" : "item")">
+                                        <a asp-controller="Cocktail" asp-action="Details" asp-route-id="@Model.Bars[i].Id">
+                                            <img class="d-block w-100" src="@Model.Bars[i].PicUrl" alt="title" style="border: 5px solid; color: black">
+                                        </a>
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h2 class="bg-black" style="opacity: 0.8; color: white;">
+
+                                                @Model.Bars[i].Name
+                                            </h2>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="product-image">
                 <img id="img" src="@Model.PictureURL" alt="Omar Dsoky">
@@ -44,6 +90,10 @@
             </div>
         </div>
         <div id="div-comments" class="bg-black">
+            @foreach (var item in Model.Bars)
+            {
+                <span>@item.Name - @item.PicUrl</span>
+            }
             <h3 class="font-italic font-weight-light">Comments!</h3>
             @if (Model.Comments.Any())
             {

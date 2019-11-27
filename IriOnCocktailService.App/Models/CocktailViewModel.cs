@@ -16,7 +16,7 @@ namespace IriOnCocktailService.App.Models
         public string Motto { get; set; }
         public List<CocktailIngredientDTO> Ingredients { get; set; }
         public bool NotAvailable { get; set; }
-        public IEnumerable<CommentViewModel> Comments { get; set; }
-        public ICollection<BarsForCocktailViewModel> Bars { get; set; }
+        public IList<CommentViewModel> Comments { get; set; }
+        public IList<BarsForCocktailViewModel> Bars { get; set; }
     }
 }

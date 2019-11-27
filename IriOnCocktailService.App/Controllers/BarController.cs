@@ -58,7 +58,7 @@ namespace IriOnCocktailService.App.Controllers
             var barCocktailDTOs = await cocktailService.GetAllContainedCocktailsDTO(id);
 
             barViewModel.Comments = barCommentDTOs.Select(c => this.commentMapper.MapFromDTO(c));
-            barViewModel.Cocktails = barCocktailDTOs.Select(c => this.cocktailsForBarMapper.MapFromDTO(c));
+            barViewModel.Cocktails = barCocktailDTOs.Select(c => this.cocktailsForBarMapper.MapFromDTO(c)).ToList();
 
             return View(barViewModel);
         }

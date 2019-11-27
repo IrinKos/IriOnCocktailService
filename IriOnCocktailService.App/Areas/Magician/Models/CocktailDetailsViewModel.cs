@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IriOnCocktailService.App.Areas.Crawler.Models;
+using IriOnCocktailService.ServiceLayer.DTOS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
