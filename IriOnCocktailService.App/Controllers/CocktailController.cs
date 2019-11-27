@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IriOnCocktailService.App.Areas.Magician.Models;
 using IriOnCocktailService.App.Infrasturcture.Mappers.Contracts;
 using IriOnCocktailService.App.Models;
 using IriOnCocktailService.ServiceLayer.DTOS;
@@ -12,16 +13,21 @@ namespace IriOnCocktailService.App.Controllers
 {
     public class CocktailController : Controller
     {
+        private readonly IBarService barService;
         private readonly ICocktailService cocktailService;
+        private readonly IViewModelMapper<BarDTO, BarsForCocktailViewModel> barsForCocktailMapper;
         private readonly IViewModelMapper<CocktailDTO, CocktailViewModel> cocktailViewModelMapper;
         private readonly IViewModelMapper<CommentDTO, CommentViewModel> commentMapper;
 
         public CocktailController(IBarService barService, ICocktailService cocktailService,
                               IViewModelMapper<BarDTO, BarViewModel> barViewModelMapper,
+                                  IViewModelMapper<BarDTO, BarsForCocktailViewModel> barsForCocktailMapper,
                               IViewModelMapper<CocktailDTO, CocktailViewModel> cocktailViewModelMapper,
                               IViewModelMapper<CommentDTO, CommentViewModel> commentMapper)
         {
+            this.barService = barService;
             this.cocktailService = cocktailService;
+            this.barsForCocktailMapper = barsForCocktailMapper;
             this.cocktailViewModelMapper = cocktailViewModelMapper;
             this.commentMapper = commentMapper;
         }
@@ -50,8 +56,10 @@ namespace IriOnCocktailService.App.Controllers
             var cocktailDTO = await this.cocktailService.GetCocktailDTO(id);
             var cocktailViewModel = this.cocktailViewModelMapper.MapFromDTO(cocktailDTO);
             var cocktailCommentDTOs = await this.cocktailService.GetAllCommentsForCocktail(id);
+            var cocktailBars = await barService.GetAllBarsForCocktail(id);
 
-            cocktailViewModel.Comments = cocktailCommentDTOs.Select(c => this.commentMapper.MapFromDTO(c)).ToList();
+            cocktailViewModel.Comments = cocktailCommentDTOs.Select(c => this.commentMapper.MapFromDTO(c));
+            cocktailViewModel.Bars = cocktailBars.Select(cb => this.barsForCocktailMapper.MapFromDTO(cb)).ToList();
 
             return View(cocktailViewModel);
         }
