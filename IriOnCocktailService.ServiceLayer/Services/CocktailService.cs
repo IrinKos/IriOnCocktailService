@@ -212,7 +212,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
 
             foreach (var item in containedCocktails)
             {
-                var cocktailToBeAdded = this.context.Cocktails.FirstOrDefault(x => x.Id == item);
+                var cocktailToBeAdded = this.context.Cocktails.FirstOrDefault(x => x.Id == item && x.NotAvailable==false);
                 if(cocktailToBeAdded !=null)
                 cocktails.Add(cocktailToBeAdded);
             }
@@ -224,6 +224,7 @@ namespace IriOnCocktailService.ServiceLayer.Services
             var cocktails = await this.context.Cocktails
                 .Include(c=>c.Ratings)
                 .Include(c=>c.CocktailIngredients)
+                .Where(c=>c.NotAvailable==false)
                 .ToListAsync();
 
             var containedCocktails = await this.context.CocktailBars.Where(cb => cb.BarId == barId).Select(cb => cb.CocktailId).ToListAsync();
