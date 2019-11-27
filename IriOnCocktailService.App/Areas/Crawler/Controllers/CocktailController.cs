@@ -18,17 +18,30 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
     public class CocktailController : Controller
     {
         private readonly ICocktailService cocktailService;
+        private readonly IBarService barService;
+        private readonly IViewModelMapper<CocktailDTO, App.Models.CocktailViewModel> cocktailViewModelMapper;
+        private readonly IViewModelMapper<CommentDTO, App.Models.CommentViewModel> commentMapper;
+        private readonly IViewModelMapper<BarDTO, BarsForCocktailViewModel> barsForCocktailMapper;
         private readonly IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel> collectionMapper;
         private readonly IDTOMapper<CommentViewModel, CommentDTO> cocktailCommentMapper;
         private readonly IDTOMapper<RatingViewModel, RatingDTO> cocktailRatingMapper;
 
         public CocktailController(ICocktailService cocktailService,
+                                  IBarService barService,
+                                  IViewModelMapper<CocktailDTO, App.Models.CocktailViewModel> cocktailViewModelMapper,
+                                  IViewModelMapper<CommentDTO, App.Models.CommentViewModel> commentMapper,
+                                  IViewModelMapper<BarDTO, BarsForCocktailViewModel> barsForCocktailMapper,
+
                              IViewModelMapper<ICollection<CocktailDTO>, CollectionViewModel> collectionMapper,
                              IDTOMapper<CommentViewModel, CommentDTO> cocktailCommentMapper,
                              IDTOMapper<RatingViewModel, RatingDTO> cocktailRatingMapper
                              )
         {
             this.cocktailService = cocktailService;
+            this.barService = barService;
+            this.cocktailViewModelMapper = cocktailViewModelMapper;
+            this.commentMapper = commentMapper;
+            this.barsForCocktailMapper = barsForCocktailMapper;
             this.collectionMapper = collectionMapper;
             this.cocktailCommentMapper = cocktailCommentMapper;
             this.cocktailRatingMapper = cocktailRatingMapper;
@@ -43,12 +56,17 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
             return View(viewModel);
         }
         [HttpGet]
-        public async Task<IActionResult> Details(string Id)
+        public async Task<IActionResult> Details(string id)
         {
-            var cocktailDTO = await this.cocktailService.GetCocktailDTO(Id);
-            //var cocktailViewModel = this.barViewModelMapper.MapFromDTO(cocktailDTO);
+            var cocktailDTO = await this.cocktailService.GetCocktailDTO(id);
+            var cocktailViewModel = this.cocktailViewModelMapper.MapFromDTO(cocktailDTO);
+            var cocktailCommentDTOs = await this.cocktailService.GetAllCommentsForCocktail(id);
+            var cocktailBars = await barService.GetAllBarsForCocktail(id);
 
-            return View(/*cocktailViewModel*/);
+            cocktailViewModel.Comments = cocktailCommentDTOs.Select(c => this.commentMapper.MapFromDTO(c));
+            cocktailViewModel.Bars = cocktailBars.Select(cb => this.barsForCocktailMapper.MapFromDTO(cb)).ToList();
+
+            return View(cocktailViewModel);
         }
         [HttpGet]
         public IActionResult Comment()
