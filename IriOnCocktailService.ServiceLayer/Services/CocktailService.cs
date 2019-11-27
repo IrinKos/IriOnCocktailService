@@ -228,11 +228,13 @@ namespace IriOnCocktailService.ServiceLayer.Services
                 .ToListAsync();
 
             var containedCocktails = await this.context.CocktailBars.Where(cb => cb.BarId == barId).Select(cb => cb.CocktailId).ToListAsync();
+
             foreach (var item in containedCocktails)
             {
                 var cocktailToBeRemoved = this.context.Cocktails.FirstOrDefault(x => x.Id == item);
                 cocktails.Remove(cocktailToBeRemoved);
             }
+
             var cocktailsDTO = cocktails.Select(x => this.addCocktailMapper.MapFrom(x)).ToList();
             return cocktailsDTO;
         }
