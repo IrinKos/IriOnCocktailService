@@ -4,39 +4,32 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    @*<thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-        </tr>
-    </thead>*@
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @item.Name
-                </td>
-                <td>
-                    @item.CurrentRole
-                </td>
-                <td>
-                    @*@Html.ActionLink("Change Role", "Promote", @item.Id)*@
-                    <a id="bar-buttonD" asp-action="Promote" asp-route-id="@item.Id">
-                        <span data-title="Change Role!">
-                            <img src="~/lib/images/YellowFlask.png" alt="BackToList" width="20"> Change Role!
-                            <img src="~/lib/images/YellowFlask.png" alt="BackToList" width="20">
-                        </span>
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<section>
+    <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0" class="table-hover">
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="font-weight-bold">
+                            <img src="~/lib/images/6f0ccde53695b.png" alt="BackToList" width="30">
+                            @item.Name
+                        </td>
+                        <td class="font-weight-bold">
+                            @item.CurrentRole
+                        </td>
+                        <td>
+                            @*@Html.ActionLink("Change Role", "Promote", @item.Id)*@
+                            <a id="bar-buttonD" asp-action="Promote" asp-route-id="@item.Id">
+                                <span data-title="Change Role!">
+                                    <img src="~/lib/images/Magic-Hat-Transparent.png" alt="BackToList" width="20"> Change Role!
+                                    <img src="~/lib/images/Magic-Hat-Transparent.png" alt="BackToList" width="20">
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

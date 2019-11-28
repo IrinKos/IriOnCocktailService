@@ -3,6 +3,22 @@
 @{
     ViewData["Title"] = "Details";
 }
+<div class="d-flex justify-content-center">
+    <a class="bar-buttonE" asp-action="Index">
+        <span data-title="Back to List!">
+            <img src="~/lib/images/backArrow.png" alt="Details" width="20"> Back to List!
+            <img src="~/lib/images/backArrow.png" alt="Details" width="20">
+        </span>
+    </a>
+</div>
+<div class="d-flex justify-content-center mt-2">
+    <a class="bar-buttonE d-flex justify-content-center" asp-area="Magician" asp-controller="Bar" asp-action="ModifyBarCocktails" asp-route-id="@Model.Id">
+        <span data-title="Add cocktail to bar!">
+            <img src="~/lib/images/PurpleFlasc.png" alt="Details" width="20"> Add cocktail to bar!
+            <img src="~/lib/images/PurpleFlasc.png" alt="Details" width="20">
+        </span>
+    </a>
+</div>
 <div class="container" style="margin-top: -50px">
     <div id="container" style="width: 100%">
         <div class="product-details">
@@ -23,7 +39,7 @@
             }
             <br />
             <div style="margin-top: -10%"><h6 class="font-italic text-muted">Offered Cocktails:</h6></div>
-            
+
             <div class="bd-example" style="width: 280px;">
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2000">
                     <ol class="carousel-indicators">
@@ -55,7 +71,7 @@
                                         </h2>
                                     </div>
                                 </div>
-                            }   
+                            }
                         }
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -80,53 +96,7 @@
             </div>
         </div>
     </div>
-    @*Carousel*@
-
-    @*<div class="bd-example" style="width: 400px; margin-left: 31%; margin-top: -50px">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2000">
-                <ol class="carousel-indicators">
-                    @for (int i = 0; i < @Model.Cocktails.Count(); i++)
-                    {
-                        if (i == 0)
-                        {
-                            <li data-target="#carouselExampleCaptions" data-slide-to="@i" class="active"></li>
-                        }
-                        else
-                        {
-                            <li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
-                        }
-                    }
-                </ol>
-                <div class="carousel-inner" style="height: 280px;">
-                    @if (Model.Cocktails.Any())
-                    {
-                        @for (int i = 0; i < Model.Cocktails.Count(); i++)
-                        {
-                            <div class="carousel-@(i == 1 ? "item active" : "item")">
-                                <a asp-controller="Cocktail" asp-action="Details" asp-route-id="@Model.Cocktails[i].Id">
-                                    <img class="d-block w-100" src="@Model.Cocktails[i].PicUrl" alt="title" style="border: 5px solid; color: black">
-                                </a>
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h2 class="bg-black" style="opacity: 0.8; color: white;">
-
-                                        @Model.Cocktails[i].Name
-                                    </h2>
-                                </div>
-                            </div>
-                        }
-                    }
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </div>*@
-    <div id="div-comments" class="bg-black">
+    <div id="div-comments" class="bg-black" style="margin-top: -5%">
         <h3 class="font-italic font-weight-light">Comments!</h3>
         @if (Model.Comments.Any())
         {
@@ -148,18 +118,5 @@
             </h4>
         }
     </div>
-    <div>
-        <a class="bar-buttonE mt-5" asp-action="Index">
-            <span data-title="Back to List!">
-                <img src="~/lib/images/BookComment.png" alt="Details" width="20"> Back to List!
-                <img src="~/lib/images/BookComment.png" alt="Details" width="20">
-            </span>
-        </a>
-        <a class="bar-buttonE mt-5" asp-area="Magician" asp-controller="Bar" asp-action="ModifyBarCocktails" asp-route-id="@Model.Id">
-            <span data-title="Add cocktail to bar!">
-                <img src="~/lib/images/BookComment.png" alt="Details" width="20"> Add cocktail to bar!
-                <img src="~/lib/images/BookComment.png" alt="Details" width="20">
-            </span>
-        </a>
-    </div>
+
 </div>
