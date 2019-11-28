@@ -11,10 +11,10 @@
     }
 
     .containerEmoji {
-        background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/concrete-texture.png");
+        /*background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/concrete-texture.png");*/
         display: flex;
         flex-wrap: wrap;
-        height: 100vh;
+        /*height: 100vh;*/
         align-items: center;
         justify-content: center;
         padding: 0 20px;
@@ -139,13 +139,15 @@
     }
 </style>
 
-<h1>CreateRating</h1>
-
-<h4>RatingViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="bg-black" style="width: 60%; margin-left: 225px; margin-top: 20px;">
+    <div>
+        <p class="login-text">
+            <span>
+                <img src="~/lib/images/like.png" alt="CreateBar" width="50" style="border-radius: 50%;background-color: white">
+            </span>
+        </p>
         <form asp-action="Rating">
+            <h3>Rating for Bar!</h3>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <div class="containerEmoji">
@@ -254,8 +256,19 @@
                 </div>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <button type="submit" class="bar-buttonE border-0">
+                    <span data-title="Create reating!">
+                        <img src="~/lib/images/createBar.png" alt="CreateBar" width="30"> Create Rating!
+                        <img src="~/lib/images/createBar.png" alt="CreateBar" width="30">
+                    </span>
+                </button>
             </div>
+            <a asp-action="Index" class="bar-buttonE ">
+                <span data-title="Back to List!">
+                    <img src="~/lib/images/backArrow.png" alt="CreateBar" width="22"> Back to List!
+                    <img src="~/lib/images/backArrow.png" alt="CreateBar" width="22">
+                </span>
+            </a>
         </form>
     </div>
 </div>

@@ -82,7 +82,7 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
             var barCommentDTO = this.cocktailCommentMapper.MapFromViewModel(cocktailCommentViewModel);
             await this.cocktailService.CocktailCommentAsync(barCommentDTO);
 
-            return Ok();
+            return RedirectToAction("Index","Cocktail");
         }
         [HttpGet]
         public IActionResult Rating()
