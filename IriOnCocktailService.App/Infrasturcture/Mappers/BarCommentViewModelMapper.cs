@@ -19,7 +19,7 @@ namespace IriOnCocktailService.App.Infrasturcture.Mappers
                 UserId =dto.UserId,
                 Id =dto.BarId,
                 Username=dto.Username,
-                
+                CreatedOn=dto.CreatedOn
             };
         }
 

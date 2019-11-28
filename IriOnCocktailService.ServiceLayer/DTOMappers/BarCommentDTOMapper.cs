@@ -25,6 +25,7 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
         {
             return new CommentDTO()
             {
+                Name=entity.Bar.Name,
                 BarId=entity.BarId,
                 Comment=entity.Description,
                 UserId=entity.UserId,

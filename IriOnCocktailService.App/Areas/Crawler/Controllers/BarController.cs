@@ -30,8 +30,8 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
         public BarController(IBarService barService,
                              ICocktailService cocktailService,
                              IViewModelMapper<ICollection<BarDTO>, CollectionViewModel> collectionMapper,
-                             IViewModelMapper<BarDTO,DisplayBarsViewModel> barViewModelMapper,
-                             IDTOMapper<CommentViewModel, CommentDTO> barCommentMapper, 
+                             IViewModelMapper<BarDTO, DisplayBarsViewModel> barViewModelMapper,
+                             IDTOMapper<CommentViewModel, CommentDTO> barCommentMapper,
                              IViewModelMapper<CommentDTO, CommentViewModel> commentMapper,
                              IViewModelMapper<AddCocktailDTO, CocktailsForBarViewModel> cocktailsForBarMapper,
                              IViewModelMapper<BarDTO, BarDetailsViewModel> barDetailsMapper,
@@ -65,15 +65,18 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
             var commentsDTO = await barService.GetAllCommentsForBar(Id);
             var cocktailsDTO = await cocktailService.GetAllContainedCocktailsDTO(Id);
 
-            barViewModel.Comments = commentsDTO.Select(c=> commentMapper.MapFromDTO(c));
+            barViewModel.Comments = commentsDTO.Select(c => commentMapper.MapFromDTO(c));
             barViewModel.Cocktails = cocktailsDTO.Select(c => cocktailsForBarMapper.MapFromDTO(c)).ToList();
 
             return View(barViewModel);
         }
         [HttpGet]
-        public IActionResult Comment()
+        public async Task<IActionResult> Comment(string id)
         {
-            return View();
+            var viewModel = new CommentViewModel();
+            viewModel.Name = await this.barService.GetNameForBarById(id);
+
+            return View(viewModel);
         }
         [HttpPost]
         public async Task<IActionResult> Comment(CommentViewModel barCommentViewModel)
@@ -87,9 +90,12 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
             return Ok();
         }
         [HttpGet]
-        public IActionResult Rating()
+        public async Task<IActionResult> Rating(string id)
         {
-            return View();
+            var viewModel = new RatingViewModel();
+            viewModel.Name = await barService.GetNameForBarById(id);
+
+            return View(viewModel);
         }
         [HttpPost]
         public async Task<IActionResult> Rating(RatingViewModel barRatingViewModel)
@@ -99,7 +105,7 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
             var barRatingDTO = this.barRatingMapper.MapFromViewModel(barRatingViewModel);
             await this.barService.BarRatingAsync(barRatingDTO);
 
-            return RedirectToAction("Index","Bar");
+            return RedirectToAction("Index", "Bar");
         }
         [HttpGet]
         public async Task<IActionResult> GetComments(string barId)

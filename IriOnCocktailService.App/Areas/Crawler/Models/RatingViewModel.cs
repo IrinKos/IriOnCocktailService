@@ -12,5 +12,6 @@ namespace IriOnCocktailService.App.Areas.Crawler.Models
         public string UserId { get; set; }
         [Range(0,5)]
         public decimal Rate { get; set; }
+        public string Name { get; set; }
     }
 }

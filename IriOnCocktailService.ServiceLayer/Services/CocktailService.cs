@@ -238,5 +238,10 @@ namespace IriOnCocktailService.ServiceLayer.Services
             var cocktailsDTO = cocktails.Select(x => this.addCocktailMapper.MapFrom(x)).ToList();
             return cocktailsDTO;
         }
+
+        public async Task<string> GetNameForCocktailById(string id)
+        {
+            return (await this.context.Cocktails.FirstOrDefaultAsync(c=>c.Id==id)).Name;
+        }
     }
 }

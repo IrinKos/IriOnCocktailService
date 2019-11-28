@@ -69,9 +69,12 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
             return View(cocktailViewModel);
         }
         [HttpGet]
-        public IActionResult Comment()
+        public async Task<IActionResult> Comment(string id)
         {
-            return View();
+            var viewModel = new CommentViewModel();
+            viewModel.Name = await cocktailService.GetNameForCocktailById(id);
+
+            return View(viewModel);
         }
         [HttpPost]
         public async Task<IActionResult> Comment(CommentViewModel cocktailCommentViewModel)
@@ -85,9 +88,12 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
             return Ok();
         }
         [HttpGet]
-        public IActionResult Rating()
+        public async Task<IActionResult> Rating(string id)
         {
-            return View();
+            var viewModel = new CommentViewModel();
+            viewModel.Name = await cocktailService.GetNameForCocktailById(id);
+
+            return View(viewModel);
         }
         [HttpPost]
         public async Task<IActionResult> Rating(RatingViewModel cocktailRatingViewModel)

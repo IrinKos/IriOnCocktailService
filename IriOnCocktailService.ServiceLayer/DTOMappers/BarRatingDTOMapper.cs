@@ -18,6 +18,5 @@ namespace IriOnCocktailService.ServiceLayer.DTOMappers
                 UserId=barRatingDTO.UserId,
             };
         }
-
     }
 }
