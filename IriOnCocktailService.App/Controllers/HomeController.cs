@@ -1,8 +1,10 @@
 ﻿using IriOnCocktailService.App.Infrasturcture.Mappers.Contracts;
 using IriOnCocktailService.App.Models;
+using IriOnCocktailService.Data.Entities;
 using IriOnCocktailService.ServiceLayer.DTOS;
 using IriOnCocktailService.ServiceLayer.Services;
 using IriOnCocktailService.ServiceLayer.Services.Contracts;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,15 +18,18 @@ namespace IriOnCocktailService.App.Controllers
         private readonly IBarService barService;
         private readonly ICocktailService cocktailService;
         private readonly IViewModelMapper<BarDTO, BarViewModel> barViewModelMapper;
+        private readonly SignInManager<User> signInManager;
         private readonly IViewModelMapper<CocktailDTO, CocktailViewModel> cocktailViewModelMapper;
 
         public HomeController(IBarService barService, ICocktailService cocktailService,
-                              IViewModelMapper<BarDTO, BarViewModel> barViewModelMapper, 
+                              IViewModelMapper<BarDTO, BarViewModel> barViewModelMapper,
+                              SignInManager<User> signInManager,
                               IViewModelMapper<CocktailDTO, CocktailViewModel> cocktailViewModelMapper)
         {
             this.barService = barService;
             this.cocktailService = cocktailService;
             this.barViewModelMapper = barViewModelMapper;
+            this.signInManager = signInManager;
             this.cocktailViewModelMapper = cocktailViewModelMapper;
         }
 
@@ -119,6 +124,25 @@ namespace IriOnCocktailService.App.Controllers
             }
 
             return PartialView("_SearchCoctailPartial", cocktailsVM);
+        }
+
+        [HttpGet]
+        public async Task Logout()
+        {
+            await signInManager.SignOutAsync();
+        }
+        [HttpGet]
+        public async Task<IActionResult> PageNotFound()
+        {
+            if(this.User.IsInRole("CocktailMagician"))
+            {
+                return Redirect("~/Magician/Home/PageNotFound");
+            }
+            if (this.User.IsInRole("BarCrawler"))
+            {
+                return Redirect("~/Crawler/Home/PageNotFound");
+            }
+            return View();
         }
 
         public IActionResult Privacy()

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using IriOnCocktailService.App.Areas.Magician.Models;
 using IriOnCocktailService.App.Infrasturcture.Mappers.Contracts;
+using IriOnCocktailService.Data.Entities;
 using IriOnCocktailService.ServiceLayer.DTOS;
 using IriOnCocktailService.ServiceLayer.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IriOnCocktailService.App.Areas.Magician.Controllers
@@ -15,20 +17,21 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
     [Authorize(Roles = "CocktailMagician")]
     public class HomeController : Controller
     {
+        private readonly SignInManager<User> signInManager;
         private readonly IBarService barService;
         private readonly ICocktailService cocktailService;
         private readonly IViewModelMapper<BarDTO, DisplayBarsViewModel> barViewModelMapper;
         private readonly IViewModelMapper<CocktailDTO, DisplayCocktailViewModel> cocktailViewModelMapper;
 
-        public HomeController(IBarService barService, ICocktailService cocktailService,
-                              IViewModelMapper<BarDTO, DisplayBarsViewModel> barViewModelMapper,
-                              IViewModelMapper<CocktailDTO, DisplayCocktailViewModel> cocktailViewModelMapper)
+        public HomeController(SignInManager<User> signInManager, IBarService barService, ICocktailService cocktailService, IViewModelMapper<BarDTO, DisplayBarsViewModel> barViewModelMapper, IViewModelMapper<CocktailDTO, DisplayCocktailViewModel> cocktailViewModelMapper)
         {
+            this.signInManager = signInManager;
             this.barService = barService;
             this.cocktailService = cocktailService;
             this.barViewModelMapper = barViewModelMapper;
             this.cocktailViewModelMapper = cocktailViewModelMapper;
         }
+
         public async Task<IActionResult> Index()
         {
             var barsDTO = await this.barService.GetBarsAsync();
@@ -112,6 +115,11 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             }
 
             return PartialView("_SearchCoctailPartial", cocktailsVM);
+        }
+        [HttpGet]
+        public async Task<IActionResult> PageNotFound()
+        {
+            return View();
         }
     }
 }

@@ -113,5 +113,10 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
 
             return PartialView("_SearchCoctailPartial", cocktailsVM);
         }
+        [HttpGet]
+        public async Task<IActionResult> PageNotFound()
+        {
+            return View();
+        }
     }
 }

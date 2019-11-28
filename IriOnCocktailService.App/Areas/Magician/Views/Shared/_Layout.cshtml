@@ -65,9 +65,9 @@
                     </ol>
                 </li>
                 <li class="menu-item">
-                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                        <button id="logout" type="submit" class="bg-black">Logout</button>
-                    </form>
+                    @*<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">*@
+                        <a id="logout"  class="bg-black">Logout</a>
+                    @*</form>*@
                 </li>
             </ol>
         </nav>
@@ -116,6 +116,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="~/js/select2.min.js"></script>
     <script src="~/js/site.js"></script>
+    <script src="~/js/logout.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

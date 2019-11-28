@@ -19,6 +19,7 @@ using IriOnCocktailService.App.Infrasturcture.Mappers.Registration;
 using IriOnCocktailService.ServiceLayer.DTOMappers.Registration;
 using IriOnCocktailService.ServiceLayer.Services;
 using IriOnCocktailService.ServiceLayer.Services.Contracts;
+using IriOnCocktailService.App.Infrasturcture.Middlewares;
 
 namespace IriOnCocktailService.App
 {
@@ -101,6 +102,8 @@ namespace IriOnCocktailService.App
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseMiddleware<PageNotFound>();
 
             app.UseAuthentication();
 
