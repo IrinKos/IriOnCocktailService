@@ -129,6 +129,7 @@ ol {
     .menu > ol:first-child > .menu-item:nth-of-type(3):hover > a:after,
     .menu > ol:first-child > .menu-item:nth-of-type(4):hover > a:after,
     .menu > ol:first-child > .menu-item:nth-of-type(5):hover > a:after,
+    .menu > ol:first-child > .menu-item:nth-of-type(8):hover > a:after,
     .menu > ol:first-child > .menu-item:nth-of-type(7):hover > a:after {
         content: "\0025B4";
         color: #000;

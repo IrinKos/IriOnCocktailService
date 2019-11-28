@@ -67,6 +67,8 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             //{
             //    cocktailsViewModel.Add(displayCocktailMapper.MapFromDTO(cocktailsVM));
             //}
+            cocktailsViewModel.Cocktails = cocktailsViewModel.Cocktails.OrderByDescending(c => c.Rating).ToList();
+
             return View(cocktailsViewModel);
         }
         public async Task<IActionResult> Create()

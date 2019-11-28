@@ -53,6 +53,7 @@ namespace IriOnCocktailService.App.Areas.Crawler.Controllers
         {
             var barsDto = await this.barService.GetBarsAsync();
             var viewModel = this.collectionMapper.MapFromDTO(barsDto);
+            viewModel.Bars = viewModel.Bars.OrderByDescending(b => b.Rating).ToList();
 
             return View(viewModel);
         }

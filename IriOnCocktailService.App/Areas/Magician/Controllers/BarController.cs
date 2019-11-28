@@ -64,7 +64,8 @@ namespace IriOnCocktailService.App.Areas.Magician.Controllers
             {
                 barsViewModel.Add(barViewModelMapper.MapFromDTO(bar));
             }
-            //return View(viewModel);
+            viewModel.Bars = viewModel.Bars.OrderByDescending(b => b.Rating).ToList();
+
             return View(viewModel);
         }
         [HttpGet]
