@@ -4,221 +4,119 @@
     ViewData["Title"] = "Details";
 }
 
-@*<h1>Details</h1>
-
-<div>
-    <h4>DisplayBarsViewModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PictureURL)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PictureURL)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Rating)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Rating)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NotAvailable)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NotAvailable)
-        </dd>
-    </dl>
+<div class="d-flex justify-content-center" style="margin-top: -3%">
+    <a class="bar-buttonE mt-5" asp-action="Index">
+        <span data-title="Back to List!">
+            <img src="~/lib/images/backArrow.png" alt="Details" width="20"> Back to List!
+            <img src="~/lib/images/backArrow.png" alt="Details" width="20">
+        </span>
+    </a>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
-<div>
-
-</div>*@
-
-    <div class="container" style="margin-top: -50px">
-        <div id="container" style="width: 100%">
-            <div class="product-details">
-                <h1 style="margin-top: -30px">@Model.Name</h1>
-                <div>
-                    @for (int i = 0; i < @Model.Rating; i++)
-                    {
-                        <img src="~/lib/images/christmas_star.png" alt="Star" width="20">
-                    }
-                </div>
-                @if (Model.Motto == null)
+<div class="container" style="margin-top: -50px">
+    <div id="container" style="width: 100%">
+        <div class="product-details">
+            <h1 style="margin-top: -30px">@Model.Name</h1>
+            <div>
+                @for (int i = 0; i < @Model.Rating; i++)
                 {
-                    <p class="information pb-5">No Motto available</p>
+                    <img src="~/lib/images/christmas_star.png" alt="Star" width="20">
                 }
-                else
-                {
-                    <p class="information pb-2">"@Model.Motto"</p>
-                }
-                <br />
-                <div style="margin-top: -10%"><h6 class="font-italic text-muted">Offered Cocktails:</h6></div>
-
-                <div class="bd-example" style="width: 280px;">
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2000">
-                        <ol class="carousel-indicators">
-                            @for (int i = 0; i < @Model.Cocktails.Count(); i++)
-                            {
-                                if (i == 0)
-                                {
-                                    <li data-target="#carouselExampleCaptions" data-slide-to="@i" class="active"></li>
-                                }
-                                else
-                                {
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
-                                }
-                            }
-                        </ol>
-                        <div class="carousel-inner" style="height: 280px;">
-                            @if (Model.Cocktails.Any())
-                            {
-                                @for (int i = 0; i < Model.Cocktails.Count(); i++)
-                                {
-                                    <div class="carousel-@(i == 1 ? "item active" : "item")">
-                                        <a asp-controller="Cocktail" asp-action="Details" asp-route-id="@Model.Cocktails[i].Id">
-                                            <img class="d-block w-100" src="@Model.Cocktails[i].PicUrl" alt="title" style="border: 5px solid; color: black">
-                                        </a>
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <h2 class="bg-black" style="opacity: 0.8; color: white;">
-
-                                                @Model.Cocktails[i].Name
-                                            </h2>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
             </div>
-            <div class="product-image">
-                <img id="img" src="@Model.PictureURL" alt="Omar Dsoky">
-                <div class="info">
-                    <h2>The Description</h2>
-                    <ul>
-                        <li><strong>Address: </strong>@Model.Address</li>
-                        <li><strong>Phone Number: </strong>@Model.PhoneNumber</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        @*Carousel*@
-
-        @*<div class="bd-example" style="width: 400px; margin-left: 31%; margin-top: -50px">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2000">
-                <ol class="carousel-indicators">
-                    @for (int i = 0; i < @Model.Cocktails.Count(); i++)
-                    {
-                        if (i == 0)
-                        {
-                            <li data-target="#carouselExampleCaptions" data-slide-to="@i" class="active"></li>
-                        }
-                        else
-                        {
-                            <li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
-                        }
-                    }
-                </ol>
-                <div class="carousel-inner" style="height: 280px;">
-                    @if (Model.Cocktails.Any())
-                    {
-                        @for (int i = 0; i < Model.Cocktails.Count(); i++)
-                        {
-                            <div class="carousel-@(i == 1 ? "item active" : "item")">
-                                <a asp-controller="Cocktail" asp-action="Details" asp-route-id="@Model.Cocktails[i].Id">
-                                    <img class="d-block w-100" src="@Model.Cocktails[i].PicUrl" alt="title" style="border: 5px solid; color: black">
-                                </a>
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h2 class="bg-black" style="opacity: 0.8; color: white;">
-
-                                        @Model.Cocktails[i].Name
-                                    </h2>
-                                </div>
-                            </div>
-                        }
-                    }
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </div>*@
-        <div id="div-comments" class="bg-black">
-            <h3 class="font-italic font-weight-light">Comments!</h3>
-            @if (Model.Comments.Any())
+            @if (Model.Motto == null)
             {
-                @foreach (var item in Model.Comments)
-                {
-                    <div class="text-muted">
-                        <div class="text-left ml-3"> @item.Username</div>  <div class="text-right mt-n4 mr-3"> on @item.CreatedOn</div>
-                    </div>
-                    <p class="text-left ml-5" id="comments">
-                        @item.Comment
-                    </p>
-                    <hr class="bg-white" />
-                }
+                <p class="information">No Motto available</p>
             }
             else
             {
-                <h4 class="text-left ml-3 text-muted" id="comments">
-                    No comments yet!
-                </h4>
+                <p class="information pb-2">"@Model.Motto"</p>
             }
+            <br />
+            <div style="margin-top: -10%"><h6 class="font-italic text-muted">Offered Cocktails:</h6></div>
+
+            <div class="bd-example" style="width: 280px;">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2000">
+                    <ol class="carousel-indicators">
+                        @for (int i = 0; i < @Model.Cocktails.Count(); i++)
+                        {
+                            if (i == 0)
+                            {
+                                <li data-target="#carouselExampleCaptions" data-slide-to="@i" class="active"></li>
+                            }
+                            else
+                            {
+                                <li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
+                            }
+                        }
+                    </ol>
+                    <div class="carousel-inner" style="height: 280px;">
+                        @if (Model.Cocktails.Any())
+                        {
+                            @for (int i = 0; i < Model.Cocktails.Count(); i++)
+                            {
+                                <div class="carousel-@(i == 1 ? "item active" : "item")">
+                                    <a asp-controller="Cocktail" asp-action="Details" asp-route-id="@Model.Cocktails[i].Id">
+                                        <img class="d-block w-100" src="@Model.Cocktails[i].PicUrl" alt="title" style="border: 5px solid; color: black">
+                                    </a>
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h2 class="bg-black" style="opacity: 0.8; color: white;">
+
+                                            @Model.Cocktails[i].Name
+                                        </h2>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div>
-            <a class="bar-buttonE mt-5" asp-action="Index">
-                <span data-title="Back to List!">
-                    <img src="~/lib/images/BookComment.png" alt="Details" width="20"> Back to List!
-                    <img src="~/lib/images/BookComment.png" alt="Details" width="20">
-                </span>
-            </a>
-            <a class="bar-buttonE mt-5" asp-area="Magician" asp-controller="Bar" asp-action="ModifyBarCocktails" asp-route-id="@Model.Id">
-                <span data-title="Add cocktail to bar!">
-                    <img src="~/lib/images/BookComment.png" alt="Details" width="20"> Add cocktail to bar!
-                    <img src="~/lib/images/BookComment.png" alt="Details" width="20">
-                </span>
-            </a>
+        <div class="product-image">
+            <img id="img" src="@Model.PictureURL" alt="Omar Dsoky">
+            <div class="info">
+                <h2>The Description</h2>
+                <ul>
+                    <li><strong>Address: </strong>@Model.Address</li>
+                    <li><strong>Phone Number: </strong>@Model.PhoneNumber</li>
+                </ul>
+            </div>
         </div>
     </div>
+    <div id="div-comments" class="bg-black" style="margin-top: -5%">
+        <h3 class="font-italic font-weight-light">Comments!</h3>
+        @if (Model.Comments.Any())
+        {
+            @foreach (var item in Model.Comments)
+            {
+                <div class="text-muted">
+                    <div class="text-left ml-3"> @item.Username</div>  <div class="text-right mt-n4 mr-3"> on @item.CreatedOn</div>
+                </div>
+                <p class="text-left ml-5" id="comments">
+                    @item.Comment
+                </p>
+                <hr class="bg-white" />
+            }
+        }
+        else
+        {
+            <h4 class="text-left ml-3 text-muted" id="comments">
+                No comments yet!
+            </h4>
+        }
+    </div>
+</div>
+<div class="d-flex justify-content-center" style="margin-top: -3%">
+    <a class="bar-buttonE mt-5" asp-action="Comment" asp-route-id="@Model.Id">
+        <span data-title="Leave Your comment!">
+            <img src="~/lib/images/BookComment.png" alt="Details" width="20"> Leave Your comment!
+            <img src="~/lib/images/BookComment.png" alt="Details" width="20">
+        </span>
+    </a>
+</div>
